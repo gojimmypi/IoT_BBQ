@@ -17,3 +17,11 @@ http://benlo.com/esp8266/
 
 You can read more about NodeLUA here: https://nodelua.org/
 
+Next, you will need a MAX6675 Module + K Type Thermocouple Temperature Sensor like this one: 
+
+http://www.ebay.com/itm/400798924042
+
+see this respository for spec sheet on MAX6675, or visit 
+
+https://datasheets.maximintegrated.com/
+
