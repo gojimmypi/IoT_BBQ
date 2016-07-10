@@ -29,5 +29,6 @@ Note that for connection to the ESP8266, you'll need to pull CS down to ground w
 
 I soldered a resistor on the board between those pins.
 
+![soldered resistor](https://github.com/gojimmypi/IoT_BBQ/blob/master/resistor.JPG)
 
 
