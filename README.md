@@ -35,4 +35,12 @@ I soldered a resistor on the board between those pins.
 
 ![soldered resistor](https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/resistor.jpg)
 
+Once everything is connected, setup ESP8266 to connect to WiFi. 
+
+wifi.setmode(wifi.STATION)
+wifi.sta.config("yourWiFiName","yourWifFiPassword")
+wifi.sta.connect()
+
+Consider security issues of hard coding password. You can configure once & ESP8266 will remember after reboot.
+
 
