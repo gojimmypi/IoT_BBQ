@@ -25,3 +25,9 @@ see this respository for spec sheet on MAX6675, or visit
 
 https://datasheets.maximintegrated.com/
 
+Note that for connection to the ESP8266, you'll need to pull CS down to ground with a 10k resistor so the ESP8266 will boot.
+
+I soldered a resistor on the board between those pins.
+
+
+
