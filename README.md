@@ -7,9 +7,13 @@ http://www.ebay.com/itm/400999083640
 
 Note it has a CH340G USB chip, so works well with Windows 10
 
+![Windows Device Manager](https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/Windows10_DeviceManager_CH340.JPG)
+
 Next, download flasher from https://github.com/nodemcu/nodemcu-flasher
 
-In the \Resources\Binaries directory, there are Lua formware images (one support floats, the other only ints)
+In the \Resources\Binaries directory, there are Lua firmware images (one support floats, the other only ints)
+
+![config setting](https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/Programmer_Config.jpg)
 
 Once you've uploaded the image, this tool can be helpful for getting Lua code onto your device:
 
