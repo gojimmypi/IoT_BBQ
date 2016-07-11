@@ -45,4 +45,14 @@ wifi.sta.connect()
 
 Consider security issues of hard coding password. You can configure once & ESP8266 will remember after reboot.
 
+Next, find your device on the local network segment. For this, I use fing:
+
+https://play.google.com/store/apps/details?id=com.overlook.android.fing&hl=en
+
+![fing](https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/fing.jpg)
+
+Once you find the device, click on it, and scan for open ports. You should have port 80 open:
+
+![fing scan](https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/fing-scan.jpg)
+
 
