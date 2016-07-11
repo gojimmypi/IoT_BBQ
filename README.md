@@ -55,4 +55,8 @@ Once you find the device, click on it, and scan for open ports. You should have 
 
 ![fing scan](https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/fing-scan.jpg)
 
+If you found the ESP8266 on your network, upload the thermocouple.lua file:
+
+![thermocouple.lua upload](https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/upload_thermocouple.jpg)
+
 
