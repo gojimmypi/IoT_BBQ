@@ -1,5 +1,5 @@
 # IoT_BBQ
-ESP8266 Based Temperature and Propane Tank Weight Project
+ESP8266 Based Grill Temperature and Propane Tank Weight Project
 
 First you need a NodeMCU ESP8266 like this one:
 
@@ -37,9 +37,11 @@ I soldered a resistor on the board between those pins.
 
 Once everything is connected, setup ESP8266 to connect to WiFi. 
 
+```Lua
 wifi.setmode(wifi.STATION)
 wifi.sta.config("yourWiFiName","yourWifFiPassword")
 wifi.sta.connect()
+```
 
 Consider security issues of hard coding password. You can configure once & ESP8266 will remember after reboot.
 
