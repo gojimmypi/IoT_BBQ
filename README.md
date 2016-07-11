@@ -35,6 +35,10 @@ I soldered a resistor on the board between those pins.
 
 ![soldered resistor](https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/resistor.jpg)
 
+Connect your thermocouple to the ESP8266 (see pics for pinout)
+
+![board wiring](https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/board.jpg)
+
 Once everything is connected, setup ESP8266 to connect to WiFi. 
 
 ```Lua
