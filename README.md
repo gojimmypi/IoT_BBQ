@@ -59,4 +59,16 @@ If you found the ESP8266 on your network, upload the thermocouple.lua file:
 
 ![thermocouple.lua upload](https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/upload_thermocouple.jpg)
 
+If everything is working, you'll see the temperature on your phone! (temperature shown in Celsius)
+
+![webpage sample]( https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/webpage.jpg)
+
+Next weekend, I will work on adding the weight sensor. I used one like this:
+
+20KG Scale Load Cell Weight Weighing Sensor +HX711 Weighing Sensors AD Module 
+
+http://www.ebay.com/itm/281916193412
+
+feedback, comments, suggestions? contact me at gmail or twitter.
+
 
