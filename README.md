@@ -35,6 +35,10 @@ I soldered a resistor on the board between those pins.
 
 ![soldered resistor](https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/resistor.jpg)
 
+Connect your thermocouple to the ESP8266 (see pics for pinout)
+
+![board wiring](https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/board.jpg)
+
 Once everything is connected, setup ESP8266 to connect to WiFi. 
 
 ```Lua
@@ -58,5 +62,19 @@ Once you find the device, click on it, and scan for open ports. You should have 
 If you found the ESP8266 on your network, upload the thermocouple.lua file:
 
 ![thermocouple.lua upload](https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/upload_thermocouple.jpg)
+
+If everything is working, you'll see the temperature on your phone! (temperature shown in Celsius)
+
+![webpage sample]( https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/webpage.jpg)
+
+Load the file in init.lua to maintain web server operations after a reboot. I found that it is best to delete the init.lua file, reboot, then load a fresh init.lua when making changes. Again, fing is handy for detecting port 80 being open or not.
+
+Next weekend, I will work on adding the weight sensor. I used one like this:
+
+20KG Scale Load Cell Weight Weighing Sensor +HX711 Weighing Sensors AD Module 
+
+http://www.ebay.com/itm/281916193412
+
+feedback, comments, suggestions? contact me at gmail or twitter.
 
 
