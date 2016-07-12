@@ -67,6 +67,8 @@ If everything is working, you'll see the temperature on your phone! (temperature
 
 ![webpage sample]( https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/webpage.jpg)
 
+Load the file in init.lua to maintain web server operations after a reboot. I found that it is best to delete the init.lua file, reboot, then load a fresh init.lua when making changes. Again, fing is handy for detecting port 80 being open or not.
+
 Next weekend, I will work on adding the weight sensor. I used one like this:
 
 20KG Scale Load Cell Weight Weighing Sensor +HX711 Weighing Sensors AD Module 
