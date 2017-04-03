@@ -1,0 +1,29 @@
+Ai-Thinker Technology Co. Ltd.
+
+ready
+
+ ets Jan  8 2013,rst cause:2, boot mode:(3,7)
+
+load 0x40100000, len 1856, room 16 
+tail 0
+chksum 0x63
+load 0x3ffe8000, len 776, room 8 
+tail 0
+chksum 0x02
+load 0x3ffe8310, len 552, room 8 
+tail 0
+chksum 0x79
+csum 0x79
+
+2nd boot version : 1.5
+  SPI Speed      : 40MHz
+  SPI Mode       : QIO
+  SPI Flash Size & Map: 32Mbit(512KB+512KB)
+jump to run user1 @ 1000
+
+rf[112] : 03
+rf[113] : 00
+rf[114] : 01
+
+SDK ver: 1.5.4(baaeaebb) compiled @ May 17 2016 19:23:54
+phy ver: 972, pp ver: 10.1

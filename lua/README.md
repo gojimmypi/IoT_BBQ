@@ -15,12 +15,6 @@ In the \Resources\Binaries directory, there are Lua firmware images (one support
 
 ![config setting](https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/Programmer_Config.jpg)
 
-
-Inspiration:
-http://hackaday.com/2015/06/28/wirelessly-weighting-plants-with-the-esp8266/
-
-
-
 Once you've uploaded the image, this tool can be helpful for getting Lua code onto your device:
 
 http://benlo.com/esp8266/ 
