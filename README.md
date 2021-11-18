@@ -1,3 +1,37 @@
+
+The Imaginary Embedded System that does not exist for the _Making Embedded Systems_ class is the Barbeque Grill 
+monitoring system project started (and abandoned) 5 years ago as noted below that was intially tinkered with using
+an ESP8266 an the `LUA` language, but never completed. 
+
+The `IoT_BBQ` system is a monitoring device to primarily measure the weight of the propane tank to ensure that
+when it is time to cook, that the fuel supply is not nearly empty. Having an electronic scale monitoring the weight
+is much more precise, accurate, and convenient as compared to the mechanical spring scales. A custom solution is also 
+needed as the amount of available physical space is so limited, that even a bathroom scale is not practical for both 
+size and viewing angle.
+
+A premium version of this system will also include internal grill box temperature, as well as various atmospheric sensors, 
+such as ambient temperature and pressure. 
+
+Some sort of information display will be needed: either a local LCD panel and/or a web interface.
+
+Components needed include:
+
+- Controller board
+- Power Supply
+- Load cell (weight sensor)
+- Temperature sensor
+- Other atmospheric sensors
+- Enclosure
+- Mounting hardware
+
+# Diagram:
+
+![image](https://user-images.githubusercontent.com/13059545/142352018-6cc0b29a-dc3a-40f1-bdc3-9d5999a4fc22.png)
+
+
+
+My original README follows:
+
 # IoT_BBQ
 ESP8266 Based Grill Temperature and Propane Tank Weight Project
 
