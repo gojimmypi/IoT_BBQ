@@ -18,11 +18,14 @@ Components needed include:
 
 - Controller board
 - Power Supply
-- Load cell (weight sensor)
+- Load cell (weight sensor) such as the [SparkFun HX711](https://www.sparkfun.com/products/13879) with this sample [Arduino Library](https://github.com/bogde/HX711). See also [non-arduino](https://github.com/nimaltd/HX711)
+, and [ST forum](https://community.st.com/s/question/0D50X0000AusvItSQI/trying-to-interface-with-an-hx711-load-cell-amp)
 - Temperature sensor
 - Other atmospheric sensors
 - Enclosure
 - Mounting hardware
+
+Yes, the [ST USB Driver](https://www.st.com/en/development-tools/stsw-link009.html) needs to be installed manually.
 
 # Diagram:
 
