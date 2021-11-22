@@ -44,13 +44,13 @@ http://www.ebay.com/itm/400999083640
 
 Note it has a CH340G USB chip, so works well with Windows 10
 
-![Windows Device Manager](https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/Windows10_DeviceManager_CH340.JPG)
+![Windows Device Manager](https://github.com/gojimmypi/IoT_BBQ/blob/main/pics/Windows10_DeviceManager_CH340.JPG)
 
 Next, download flasher from https://github.com/nodemcu/nodemcu-flasher
 
 In the \Resources\Binaries directory, there are Lua firmware images (one support floats, the other only ints)
 
-![config setting](https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/Programmer_Config.jpg)
+![config setting](https://github.com/gojimmypi/IoT_BBQ/blob/main/pics/Programmer_Config.jpg)
 
 Once you've uploaded the image, this tool can be helpful for getting Lua code onto your device:
 
@@ -70,11 +70,11 @@ Note that for connection to the ESP8266, you'll need to pull CS down to ground w
 
 I soldered a resistor on the board between those pins.
 
-![soldered resistor](https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/resistor.jpg)
+![soldered resistor](https://github.com/gojimmypi/IoT_BBQ/blob/main/pics/resistor.jpg)
 
 Connect your thermocouple to the ESP8266 (see pics for pinout)
 
-![board wiring](https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/board.jpg)
+![board wiring](https://github.com/gojimmypi/IoT_BBQ/blob/main/pics/board.jpg)
 
 Once everything is connected, setup ESP8266 to connect to WiFi. 
 
@@ -90,19 +90,19 @@ Next, find your device on the local network segment. For this, I use fing:
 
 https://play.google.com/store/apps/details?id=com.overlook.android.fing&hl=en
 
-![fing](https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/fing.jpg)
+![fing](https://github.com/gojimmypi/IoT_BBQ/blob/main/pics/fing.jpg)
 
 Once you find the device, click on it, and scan for open ports. You should have port 80 open:
 
-![fing scan](https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/fing-scan.jpg)
+![fing scan](https://github.com/gojimmypi/IoT_BBQ/blob/main/pics/fing-scan.jpg)
 
 If you found the ESP8266 on your network, upload the thermocouple.lua file:
 
-![thermocouple.lua upload](https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/upload_thermocouple.jpg)
+![thermocouple.lua upload](https://github.com/gojimmypi/IoT_BBQ/blob/main/pics/upload_thermocouple.jpg)
 
 If everything is working, you'll see the temperature on your phone! (temperature shown in Celsius)
 
-![webpage sample]( https://github.com/gojimmypi/IoT_BBQ/blob/master/pics/webpage.jpg)
+![webpage sample]( https://github.com/gojimmypi/IoT_BBQ/blob/main/pics/webpage.jpg)
 
 Load the file in init.lua to maintain web server operations after a reboot. I found that it is best to delete the init.lua file, reboot, then load a fresh init.lua when making changes. Again, fing is handy for detecting port 80 being open or not.
 
