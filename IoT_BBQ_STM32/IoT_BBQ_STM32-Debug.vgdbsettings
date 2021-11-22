@@ -44,6 +44,7 @@
     <ShowMessageAfterExecuting>true</ShowMessageAfterExecuting>
   </CustomShortcuts>
   <UserDefinedVariables />
+  <ImportedPropertySheets />
   <CodeSense>
     <Enabled>Unknown</Enabled>
     <ExtraSettings>
@@ -56,6 +57,8 @@
       <Enabled>false</Enabled>
     </CodeAnalyzerSettings>
   </CodeSense>
+  <Configurations />
+  <ProgramArgumentsSuggestions />
   <Debug xsi:type="com.visualgdb.debug.embedded">
     <AdditionalStartupCommands />
     <AdditionalGDBSettings>
@@ -94,7 +97,7 @@
     <DebugMethod>
       <ID>com.sysprogs.arm.openocd.st</ID>
       <Configuration xsi:type="com.visualgdb.edp.openocd.settings">
-        <CommandLine>-f interface/stlink-dap.cfg --set "CHIPNAME $$SYS:MCU_ID$$Xx" -f target/stm32l4x.cfg -c init -c "reset init"</CommandLine>
+        <CommandLine>--set "CHIPNAME $$SYS:MCU_ID$$Xx" -f interface/stlink-dap.cfg -c "adapter speed 4000" -f target/stm32l4x.cfg -c init -c "reset init"</CommandLine>
         <ExtraParameters>
           <Frequency xsi:nil="true" />
           <BoostedFrequency xsi:nil="true" />
