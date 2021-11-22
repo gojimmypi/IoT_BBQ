@@ -57,15 +57,34 @@ int main(void)
 	HAL_Init();  
 	
 	__GPIOD_CLK_ENABLE();
-	GPIO_InitTypeDef GPIO_InitStructure;
 
-	GPIO_InitStructure.Pin = GPIO_PIN_12 | GPIO_PIN_13;
+    __GPIOA_CLK_ENABLE();
+    __GPIOB_CLK_ENABLE();
 
-	GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_HIGH;
-	GPIO_InitStructure.Pull = GPIO_NOPULL;
-	HAL_GPIO_Init(GPIOD, &GPIO_InitStructure);
+//    __HAL_RCC_GPIOA_CLK_ENABLE();
+//    __HAL_RCC_GPIOB_CLK_ENABLE();
 
+	GPIO_InitTypeDef GPIO_InitStructureA;
+
+    GPIO_InitStructureA.Pin = GPIO_PIN_5;
+
+    GPIO_InitStructureA.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStructureA.Speed = GPIO_SPEED_FREQ_HIGH;
+    GPIO_InitStructureA.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStructureA);
+
+    
+    GPIO_InitTypeDef GPIO_InitStructureB;
+
+    GPIO_InitStructureB.Pin = GPIO_PIN_14;
+
+    GPIO_InitStructureB.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStructureB.Speed = GPIO_SPEED_FREQ_HIGH;
+    GPIO_InitStructureB.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStructureB);
+
+    
+    
 	/* Thread 1 definition */
 	osThreadDef(LED1, LED_Thread1, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
   
@@ -103,10 +122,10 @@ static void LED_Thread1(void const *argument)
   
 	for (;;)
 	{
-		HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
 		osDelay(2000);
 		
-		HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 		osThreadSuspend(LEDThread2Handle);
 		osDelay(2000);
 		
@@ -126,7 +145,7 @@ static void LED_Thread2(void const *argument)
   
 	for (;;)
 	{
-		HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13);
+		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
 		osDelay(200);
 	}
 }
