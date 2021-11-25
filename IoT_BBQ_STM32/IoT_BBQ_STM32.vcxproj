@@ -40,7 +40,21 @@
     <ToolchainVersion>10.3.1/10.2.90/r1</ToolchainVersion>
     <MCUPropertyListFile>$(ProjectDir)stm32.props</MCUPropertyListFile>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:/Users/gojimmypi/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/CMSIS_HAL/Device/ST/STM32F1xx/Include;C:/Users/gojimmypi/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc;C:/Users/gojimmypi/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/VendorSamples/F1/Projects/STM3210C_EVAL/Applications/FatFs/FatFs_uSD/Inc;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DEBUG=1;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions />
+      <CLanguageStandard />
+      <CPPLanguageStandard />
+    </ClCompile>
+    <Link>
+      <LibrarySearchDirectories>%(Link.LibrarySearchDirectories)</LibrarySearchDirectories>
+      <AdditionalLibraryNames>%(Link.AdditionalLibraryNames)</AdditionalLibraryNames>
+      <AdditionalLinkerInputs>%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
+      <LinkerScript />
+      <AdditionalOptions />
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
   </ItemGroup>
@@ -48,8 +62,10 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="HX711.cpp" />
     <ClCompile Include="IoT_BBQ_STM32.c" />
     <ClCompile Include="system_stm32l4xx.c" />
+    <ClCompile Include="wiring_shift.c" />
     <None Include="stm32.props" />
     <ClCompile Include="$(BSP_ROOT)\STM32L4xxxx\StartupFiles\startup_stm32l475xx.c" />
     <None Include="$(BSP_ROOT)\FreeRTOS\License\license.txt" />
@@ -168,6 +184,8 @@
     <ClCompile Include="$(BSP_ROOT)\STM32L4xxxx\STM32L4xx_HAL_Driver\Src\stm32l4xx_ll_usart.c" />
     <ClCompile Include="$(BSP_ROOT)\STM32L4xxxx\STM32L4xx_HAL_Driver\Src\stm32l4xx_ll_utils.c" />
     <ClInclude Include="FreeRTOSConfig.h" />
+    <ClInclude Include="DWT_STM32_DELAY.h" />
+    <ClInclude Include="HX711.h" />
     <ClInclude Include="stm32l4xx_hal_conf.h" />
     <ClInclude Include="$(BSP_ROOT)\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.h" />
     <ClInclude Include="$(BSP_ROOT)\FreeRTOS\Source\include\croutine.h" />

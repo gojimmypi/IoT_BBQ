@@ -891,5 +891,19 @@
     <None Include="stm32.xml">
       <Filter>VisualGDB settings</Filter>
     </None>
+    <ClCompile Include="HX711.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="wiring_shift.c">
+      <Filter>Header files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HX711.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="DWT_STM32_DELAY.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
