@@ -1,3 +1,4 @@
+
 #include <sys/_stdint.h>
 #include <stm32l4xx_hal.h>
 
@@ -8,6 +9,9 @@
  *
  * MIT License
  * (c) 2018 Bogdan Necula
+ *
+ * adapted to stm32l4xx_hal 
+ * by gojimmypi 2021
  *
 **/
 #ifndef HX711_h

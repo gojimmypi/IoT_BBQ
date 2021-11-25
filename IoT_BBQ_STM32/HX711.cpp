@@ -5,6 +5,9 @@
  *
  * MIT License
  * (c) 2018 Bogdan Necula
+ * 
+ * adapted to stm32l4xx_hal 
+ * by gojimmypi 2021
  *
 **/
 #include "HX711.h"
@@ -80,14 +83,32 @@ void HX711::begin(byte dout, byte pd_sck, byte gain) {
     PD_SCK = pd_sck;
     DOUT = dout;
 
-    pinMode(PD_SCK, OUTPUT);
-    pinMode(DOUT, DOUT_MODE);
+    // pinMode(PD_SCK, OUTPUT);
+    GPIO_InitTypeDef GPIO_InitStructureA;
+    GPIO_InitStructureA.Pin = PD_SCK;
 
+    GPIO_InitStructureA.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStructureA.Speed = GPIO_SPEED_FREQ_HIGH;
+    GPIO_InitStructureA.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStructureA);
+
+    
+    // pinMode(DOUT, DOUT_MODE);
+    GPIO_InitTypeDef GPIO_InitStructureAout;
+    GPIO_InitStructureAout.Pin = dout;
+
+    GPIO_InitStructureAout.Mode = GPIO_MODE_INPUT;
+    GPIO_InitStructureAout.Speed = GPIO_SPEED_FREQ_HIGH;
+    GPIO_InitStructureAout.Pull = GPIO_NOPULL; // TODO or perhaps with pullup?
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStructureAout);
+
+    
     set_gain(gain);
 }
 
 bool HX711::is_ready() {
-    return digitalRead(DOUT) == LOW;
+    // return digitalRead(DOUT) == LOW;
+    return HAL_GPIO_ReadPin(GPIOA, DOUT) == LOW;
 }
 
 void HX711::set_gain(byte gain) {
@@ -104,6 +125,9 @@ void HX711::set_gain(byte gain) {
     }
 
 }
+
+uint8_t shiftIn(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder); // see https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/Arduino.h
+
 
 long HX711::read() {
 
@@ -165,7 +189,7 @@ long HX711::read() {
 
 #ifdef IS_FREE_RTOS
         // End of critical section.
-        portEXIT_CRITICAL(&mux);
+        // portEXIT_CRITICAL(&mux);
 
 #elif HAS_ATOMIC_BLOCK
     }
@@ -221,11 +245,13 @@ bool HX711::wait_ready_retry(int retries, unsigned long delay_ms) {
 bool HX711::wait_ready_timeout(unsigned long timeout, unsigned long delay_ms) {
     // Wait for the chip to become ready until timeout.
     // https://github.com/bogde/HX711/pull/96
-    unsigned long millisStarted = millis();
-    while (millis() - millisStarted < timeout) {
+    unsigned long millisStarted = 0;
+    unsigned long millis = 0;
+    while (millis - millisStarted < timeout) {
         if (is_ready()) {
             return true;
         }
+        millis += 1000 * delay_ms;
         DWT_Delay_us(1000 * delay_ms);  // delay(delay_ms);
     }
     return false;
