@@ -1,3 +1,6 @@
+#include <sys/_stdint.h>
+#include <stm32l4xx_hal.h>
+
 /**
  *
  * HX711 library for Arduino
@@ -10,14 +13,17 @@
 #ifndef HX711_h
 #define HX711_h
 
-#if ARDUINO >= 100
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
+#define byte uint8_t 
+#define INPUT             0x00
+#define OUTPUT            0x01
+#define LSBFIRST 0
+#define MSBFIRST 1
+#define HIGH 0x1
+#define LOW  0x0
 
 class HX711
 {
+
 private:
     byte PD_SCK; // Power Down and Serial Clock Input Pin
     byte DOUT; // Serial Data Output Pin

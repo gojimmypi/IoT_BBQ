@@ -7,8 +7,8 @@
  * (c) 2018 Bogdan Necula
  *
 **/
-#include <Arduino.h>
 #include "HX711.h"
+#include "DWT_STM32_DELAY.h"
 
 // TEENSYDUINO has a port of Dean Camera's ATOMIC_BLOCK macros for AVR to ARM Cortex M3.
 #define HAS_ATOMIC_BLOCK (defined(ARDUINO_ARCH_AVR) || defined(TEENSYDUINO))
@@ -76,6 +76,7 @@ HX711::~HX711() {
 }
 
 void HX711::begin(byte dout, byte pd_sck, byte gain) {
+
     PD_SCK = pd_sck;
     DOUT = dout;
 
@@ -127,8 +128,8 @@ long HX711::read() {
     // state after the sequence completes, insuring that the entire read-and-gain-set
     // sequence is not interrupted.  The macro has a few minor advantages over bracketing
     // the sequence between `noInterrupts()` and `interrupts()` calls.
-#if HAS_ATOMIC_BLOCK
-    ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
+#ifdef HAS_ATOMIC_BLOCK
+    // ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
 
 #elif IS_FREE_RTOS
         // Begin of critical section.
@@ -138,7 +139,6 @@ long HX711::read() {
         // context switches and servicing of ISRs during a critical section.
         portMUX_TYPE mux = portMUX_INITIALIZER_UNLOCKED;
         portENTER_CRITICAL(&mux);
-
 #else
         // Disable interrupts.
         noInterrupts();
@@ -151,17 +151,19 @@ long HX711::read() {
 
         // Set the channel and the gain factor for the next reading using the clock pin.
         for (unsigned int i = 0; i < GAIN; i++) {
-            digitalWrite(PD_SCK, HIGH);
-#if ARCH_ESPRESSIF
-            delayMicroseconds(1);
+            HAL_GPIO_WritePin(GPIOA, PD_SCK, GPIO_PIN_SET); // digitalWrite(PD_SCK, HIGH);
+            
+#ifdef ARCH_ESPRESSIF
+            DWT_Delay_us(1);  // delayMicroseconds(1);
 #endif
-            digitalWrite(PD_SCK, LOW);
-#if ARCH_ESPRESSIF
-            delayMicroseconds(1);
+            HAL_GPIO_WritePin(GPIOA, PD_SCK, GPIO_PIN_RESET); // digitalWrite(PD_SCK, LOW);
+
+#ifdef ARCH_ESPRESSIF
+            DWT_Delay_us(1); // delayMicroseconds(1);
 #endif
         }
 
-#if IS_FREE_RTOS
+#ifdef IS_FREE_RTOS
         // End of critical section.
         portEXIT_CRITICAL(&mux);
 
@@ -197,7 +199,7 @@ void HX711::wait_ready(unsigned long delay_ms) {
     while (!is_ready()) {
         // Probably will do no harm on AVR but will feed the Watchdog Timer (WDT) on ESP.
         // https://github.com/bogde/HX711/issues/73
-        delay(delay_ms);
+        DWT_Delay_us(1000 * delay_ms); // delay(delay_ms);
     }
 }
 
@@ -210,7 +212,7 @@ bool HX711::wait_ready_retry(int retries, unsigned long delay_ms) {
         if (is_ready()) {
             return true;
         }
-        delay(delay_ms);
+        DWT_Delay_us(1000 * delay_ms); // delay(delay_ms);
         count++;
     }
     return false;
@@ -224,7 +226,7 @@ bool HX711::wait_ready_timeout(unsigned long timeout, unsigned long delay_ms) {
         if (is_ready()) {
             return true;
         }
-        delay(delay_ms);
+        DWT_Delay_us(1000 * delay_ms);  // delay(delay_ms);
     }
     return false;
 }
@@ -235,7 +237,7 @@ long HX711::read_average(byte times) {
         sum += read();
         // Probably will do no harm on AVR but will feed the Watchdog Timer (WDT) on ESP.
         // https://github.com/bogde/HX711/issues/73
-        delay(0);
+        DWT_Delay_us(1); // delay(0);
     }
     return sum / times;
 }
@@ -270,10 +272,11 @@ long HX711::get_offset() {
 }
 
 void HX711::power_down() {
-    digitalWrite(PD_SCK, LOW);
-    digitalWrite(PD_SCK, HIGH);
+    
+    HAL_GPIO_WritePin(GPIOA, PD_SCK, GPIO_PIN_RESET); // digitalWrite(PD_SCK, LOW);
+    HAL_GPIO_WritePin(GPIOA, PD_SCK, GPIO_PIN_SET); // digitalWrite(PD_SCK, HIGH);
 }
 
 void HX711::power_up() {
-    digitalWrite(PD_SCK, LOW);
+    HAL_GPIO_WritePin(GPIOA, PD_SCK, GPIO_PIN_RESET); // digitalWrite(PD_SCK, LOW);
 }
