@@ -1,33 +1,35 @@
 /**
-  ******************************************************************************
-  * @file    FreeRTOS/FreeRTOS_ThreadCreation/Src/main.c
-  * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    25-May-2015
-  * @brief   Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
-  *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  *
-  ******************************************************************************
-  */
+******************************************************************************
+* @file    FreeRTOS/FreeRTOS_ThreadCreation/Src/main.c
+* @author  MCD Application Team
+* @version V1.2.2
+* @date    25-May-2015
+* @brief   Main program body
+******************************************************************************
+* @attention
+*
+* <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+*
+* Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
+* You may not use this file except in compliance with the License.
+* You may obtain a copy of the License at:
+*
+*        http://www.st.com/software_license_agreement_liberty_v2
+*
+* Unless required by applicable law or agreed to in writing, software 
+* distributed under the License is distributed on an "AS IS" BASIS, 
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+******************************************************************************
+*/
 
 /* Includes ------------------------------------------------------------------*/
 #include <stm32l4xx_hal.h>
 #include <../CMSIS_RTOS/cmsis_os.h>
+#include "startup.h"
+#include "task_weight_monitor.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -76,20 +78,38 @@ int main(void)
     
     GPIO_InitTypeDef GPIO_InitStructureB;
 
-    GPIO_InitStructureB.Pin = GPIO_PIN_14;
+    GPIO_InitStructureB.Pin = GPIO_PIN_14 | GPIO_PIN_8;
 
     GPIO_InitStructureB.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStructureB.Speed = GPIO_SPEED_FREQ_HIGH;
     GPIO_InitStructureB.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStructureB);
 
+    GPIO_InitStructureB.Pin = GPIO_PIN_9;
+    GPIO_InitStructureB.Mode = GPIO_MODE_INPUT;
+    GPIO_InitStructureB.Speed = GPIO_SPEED_FREQ_HIGH;
+    GPIO_InitStructureB.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStructureB);
     
     
+    /* Thread 1 definition */
+    // the macro gives a compiler warning in C++
+    // osThreadDef(LED1, LED_Thread1, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
+//    char* LED1_threadname = (char*)"LED1";
+//    const osThreadDef_t os_thread_def_LED1 = { LED1_threadname, LED_Thread2, osPriorityNormal, 0, configMINIMAL_STACK_SIZE };
+ 
+    
+    /*  Thread 2 definition */
+    // the macro gives a compiler warning in C++  // osThreadDef(LED2, LED_Thread2, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
+//    char* LED2_threadname = (char*)"LED2";
+//    const osThreadDef_t os_thread_def_LED2 = { LED2_threadname, LED_Thread2, osPriorityNormal, 0, configMINIMAL_STACK_SIZE };
+
     /* Thread 1 definition */
     osThreadDef(LED1, LED_Thread1, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
   
     /*  Thread 2 definition */
-    osThreadDef(LED2, LED_Thread2, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
+    osThreadDef(LED2, LED_Thread2, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);    
+    
   
     /* Start thread 1 */
     LEDThread1Handle = osThreadCreate(osThread(LED1), NULL);
@@ -129,6 +149,8 @@ static void LED_Thread1(void const *argument)
         osDelay(2000);
 		
         osThreadResume(LEDThread2Handle);
+        
+        theScaleTask();
     }
 }
 
