@@ -42,9 +42,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="IoT_BBQ_STM32.c">
-      <Filter>Source files</Filter>
-    </ClCompile>
     <ClCompile Include="system_stm32l4xx.c">
       <Filter>Source files</Filter>
     </ClCompile>
@@ -891,18 +888,27 @@
     <None Include="stm32.xml">
       <Filter>VisualGDB settings</Filter>
     </None>
-    <ClCompile Include="HX711.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
     <ClCompile Include="wiring_shift.c">
       <Filter>Header files</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="startup.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="HX711.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HX711.h">
+    <ClInclude Include="DWT_STM32_DELAY.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="DWT_STM32_DELAY.h">
+    <ClInclude Include="startup.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="HX711.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>
