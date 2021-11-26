@@ -15,10 +15,6 @@
  *
 **/
 #ifndef HX711_h
-#define HX711_h
-#ifdef __cplusplus
- extern "C" {
-#endif
      
 #define byte uint8_t 
 #define INPUT             0x00
@@ -101,8 +97,5 @@ public:
     void power_up();
 };
 
-#ifdef __cplusplus
-}
-#endif     
-     
+
 #endif /* HX711_h */
