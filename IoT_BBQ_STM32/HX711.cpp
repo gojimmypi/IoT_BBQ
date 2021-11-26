@@ -8,10 +8,11 @@
  * 
  * adapted to stm32l4xx_hal 
  * by gojimmypi 2021
- *
+ * 
 **/
 #include "HX711.h"
 #include "DWT_STM32_DELAY.h"
+#include "wiring_shift.c"
 
 // TEENSYDUINO has a port of Dean Camera's ATOMIC_BLOCK macros for AVR to ARM Cortex M3.
 #define HAS_ATOMIC_BLOCK (defined(ARDUINO_ARCH_AVR) || defined(TEENSYDUINO))
@@ -78,37 +79,38 @@ HX711::HX711() {
 HX711::~HX711() {
 }
 
-void HX711::begin(byte dout, byte pd_sck, byte gain) {
+void HX711::begin(uint16_t dout, uint16_t pd_sck, byte gain) {
 
     PD_SCK = pd_sck;
     DOUT = dout;
 
     // pinMode(PD_SCK, OUTPUT);
-    GPIO_InitTypeDef GPIO_InitStructureA;
-    GPIO_InitStructureA.Pin = PD_SCK;
+    GPIO_InitTypeDef GPIO_InitStructureB;
+    GPIO_InitStructureB.Pin = PD_SCK;
 
-    GPIO_InitStructureA.Mode = GPIO_MODE_OUTPUT_PP;
-    GPIO_InitStructureA.Speed = GPIO_SPEED_FREQ_HIGH;
-    GPIO_InitStructureA.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStructureA);
+    GPIO_InitStructureB.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStructureB.Speed = GPIO_SPEED_FREQ_HIGH;
+    GPIO_InitStructureB.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStructureB);
 
-    
-    // pinMode(DOUT, DOUT_MODE);
-    GPIO_InitTypeDef GPIO_InitStructureAout;
-    GPIO_InitStructureAout.Pin = dout;
+    GPIO_InitStructureB.Pin = GPIO_PIN_9;
+    GPIO_InitStructureB.Mode = GPIO_MODE_INPUT;
+    GPIO_InitStructureB.Speed = GPIO_SPEED_FREQ_HIGH;
+    GPIO_InitStructureB.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStructureB);
 
-    GPIO_InitStructureAout.Mode = GPIO_MODE_INPUT;
-    GPIO_InitStructureAout.Speed = GPIO_SPEED_FREQ_HIGH;
-    GPIO_InitStructureAout.Pull = GPIO_NOPULL; // TODO or perhaps with pullup?
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStructureAout);
-
+//    HAL_GPIO_WritePin(GPIOB, PD_SCK, GPIO_PIN_RESET);        
+//    HAL_GPIO_WritePin(GPIOB, PD_SCK, GPIO_PIN_SET);
+//
+//    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_RESET);        
+//    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);
     
     set_gain(gain);
 }
 
 bool HX711::is_ready() {
     // return digitalRead(DOUT) == LOW;
-    return HAL_GPIO_ReadPin(GPIOA, DOUT) == LOW;
+    return HAL_GPIO_ReadPin(GPIOB, DOUT) == LOW;
 }
 
 void HX711::set_gain(byte gain) {
@@ -126,7 +128,7 @@ void HX711::set_gain(byte gain) {
 
 }
 
-uint8_t shiftIn(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder); // see https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/Arduino.h
+uint8_t shiftIn(uint16_t dataPin, uint16_t clockPin, uint8_t bitOrder); // see https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/Arduino.h
 
 
 long HX711::read() {
@@ -175,12 +177,12 @@ long HX711::read() {
 
         // Set the channel and the gain factor for the next reading using the clock pin.
         for (unsigned int i = 0; i < GAIN; i++) {
-            HAL_GPIO_WritePin(GPIOA, PD_SCK, GPIO_PIN_SET); // digitalWrite(PD_SCK, HIGH);
+            HAL_GPIO_WritePin(GPIOB, PD_SCK, GPIO_PIN_SET); // digitalWrite(PD_SCK, HIGH);
             
 #ifdef ARCH_ESPRESSIF
             DWT_Delay_us(1);  // delayMicroseconds(1);
 #endif
-            HAL_GPIO_WritePin(GPIOA, PD_SCK, GPIO_PIN_RESET); // digitalWrite(PD_SCK, LOW);
+            HAL_GPIO_WritePin(GPIOB, PD_SCK, GPIO_PIN_RESET); // digitalWrite(PD_SCK, LOW);
 
 #ifdef ARCH_ESPRESSIF
             DWT_Delay_us(1); // delayMicroseconds(1);
@@ -299,10 +301,10 @@ long HX711::get_offset() {
 
 void HX711::power_down() {
     
-    HAL_GPIO_WritePin(GPIOA, PD_SCK, GPIO_PIN_RESET); // digitalWrite(PD_SCK, LOW);
-    HAL_GPIO_WritePin(GPIOA, PD_SCK, GPIO_PIN_SET); // digitalWrite(PD_SCK, HIGH);
+    HAL_GPIO_WritePin(GPIOB, PD_SCK, GPIO_PIN_RESET); // digitalWrite(PD_SCK, LOW);
+    HAL_GPIO_WritePin(GPIOB, PD_SCK, GPIO_PIN_SET); // digitalWrite(PD_SCK, HIGH);
 }
 
 void HX711::power_up() {
-    HAL_GPIO_WritePin(GPIOA, PD_SCK, GPIO_PIN_RESET); // digitalWrite(PD_SCK, LOW);
+    HAL_GPIO_WritePin(GPIOB, PD_SCK, GPIO_PIN_RESET); // digitalWrite(PD_SCK, LOW);
 }
