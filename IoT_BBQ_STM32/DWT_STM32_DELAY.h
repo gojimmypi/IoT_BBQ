@@ -25,7 +25,7 @@ extern "C" {
         microseconds *= (HAL_RCC_GetHCLKFreq() / 1000000);
  
         /* Delay till end */
-        while ((DWT->CYCCNT - clk_cycle_start) < microseconds) ;
+// TODO        while ((DWT->CYCCNT - clk_cycle_start) < microseconds) ;
     }
  
  
