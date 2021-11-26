@@ -28,7 +28,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include <stm32l4xx_hal.h>
 #include <../CMSIS_RTOS/cmsis_os.h>
-
+#include "startup.h"
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -76,13 +76,18 @@ int main(void)
     
     GPIO_InitTypeDef GPIO_InitStructureB;
 
-    GPIO_InitStructureB.Pin = GPIO_PIN_14;
+    GPIO_InitStructureB.Pin = GPIO_PIN_14 | GPIO_PIN_8;
 
     GPIO_InitStructureB.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStructureB.Speed = GPIO_SPEED_FREQ_HIGH;
     GPIO_InitStructureB.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStructureB);
 
+    GPIO_InitStructureB.Pin = GPIO_PIN_9;
+    GPIO_InitStructureB.Mode = GPIO_MODE_INPUT;
+    GPIO_InitStructureB.Speed = GPIO_SPEED_FREQ_HIGH;
+    GPIO_InitStructureB.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStructureB);
     
     
     /* Thread 1 definition */
@@ -97,6 +102,8 @@ int main(void)
     /* Start thread 2 */
     LEDThread2Handle = osThreadCreate(osThread(LED2), NULL);
   
+    something();
+    
     /* Start scheduler */
     osKernelStart();
 
