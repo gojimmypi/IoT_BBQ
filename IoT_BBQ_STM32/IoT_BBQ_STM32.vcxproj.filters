@@ -891,13 +891,16 @@
     <ClCompile Include="wiring_shift.c">
       <Filter>Header files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
     <ClCompile Include="startup.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
     <ClCompile Include="HX711.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="task_weight_monitor.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="_main.c">
       <Filter>Source files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -909,6 +912,9 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="HX711.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="task_weight_monitor.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

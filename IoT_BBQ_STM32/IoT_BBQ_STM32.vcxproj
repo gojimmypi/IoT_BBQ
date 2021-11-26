@@ -65,10 +65,12 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="HX711.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="startup.cpp" />
     <ClCompile Include="system_stm32l4xx.c" />
+    <ClCompile Include="task_weight_monitor.cpp" />
     <ClCompile Include="wiring_shift.c" />
+    <ClCompile Include="_main.c" />
+    <ClInclude Include="task_weight_monitor.h" />
     <None Include="stm32.props" />
     <ClCompile Include="$(BSP_ROOT)\STM32L4xxxx\StartupFiles\startup_stm32l475xx.c" />
     <None Include="$(BSP_ROOT)\FreeRTOS\License\license.txt" />
