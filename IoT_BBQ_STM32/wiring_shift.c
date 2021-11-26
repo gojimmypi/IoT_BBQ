@@ -31,45 +31,57 @@
 #define MSBFIRST 1
 
 
-uint8_t shiftIn(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder) {
+uint8_t shiftIn(uint16_t dataPin, uint16_t clockPin, uint8_t bitOrder) {
     uint8_t value = 0;
     uint8_t i;
 
     for (i = 0; i < 8; ++i) {
         //digitalWrite(clockPin, HIGH);
-        HAL_GPIO_WritePin(GPIOA, clockPin, HIGH);
+        HAL_GPIO_WritePin(GPIOB, clockPin, GPIO_PIN_SET);
         
         if (bitOrder == LSBFIRST)
             //value |= digitalRead(dataPin) << i;
-        value |= HAL_GPIO_ReadPin(GPIOA, dataPin) << i;
+        value |= HAL_GPIO_ReadPin(GPIOB, dataPin) << i;
         
         else
-            value |= HAL_GPIO_ReadPin(GPIOA, dataPin)  << (7 - i);
+            value |= HAL_GPIO_ReadPin(GPIOB, dataPin)  << (7 - i);
         // digitalWrite(clockPin, LOW);
-        HAL_GPIO_WritePin(GPIOA, clockPin, LOW);
+        HAL_GPIO_WritePin(GPIOB, clockPin, GPIO_PIN_RESET);
     }
     return value;
 }
 
-void shiftOut(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder, uint8_t val)
+GPIO_PinState PinStateOf(int v)
+{
+    if (v == 0)
+    {
+        return GPIO_PIN_RESET;
+    }
+    else
+    {
+        return GPIO_PIN_SET ;
+    }
+}
+
+void shiftOut(uint16_t dataPin, uint16_t clockPin, uint8_t bitOrder, uint8_t val)
 {
     uint8_t i;
 
     for (i = 0; i < 8; i++) {
         if (bitOrder == LSBFIRST) {
             // digitalWrite(dataPin, val & 1);
-            HAL_GPIO_WritePin(GPIOA, dataPin, val & 1);
+            HAL_GPIO_WritePin(GPIOB, dataPin, PinStateOf(val & 1));
             val >>= 1;
         }
         else {	
             // digitalWrite(dataPin, (val & 128) != 0);
-            HAL_GPIO_WritePin(GPIOA, dataPin, (val & 128) != 0);
+            HAL_GPIO_WritePin(GPIOB, dataPin, PinStateOf((val & 128) != 0));
             val <<= 1;
         }
 		
         //digitalWrite(clockPin, HIGH);
         //digitalWrite(clockPin, LOW);		
-        HAL_GPIO_WritePin(GPIOA, clockPin, HIGH);
-        HAL_GPIO_WritePin(GPIOA, clockPin, LOW);
+        HAL_GPIO_WritePin(GPIOB, clockPin, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOB, clockPin, GPIO_PIN_RESET);
     }
 }
