@@ -54,9 +54,9 @@ int main(void)
        - Set NVIC Group Priority to 4
        - Global MSP (MCU Support Package) initialization
      */
-	HAL_Init();  
-	
-	__GPIOD_CLK_ENABLE();
+    HAL_Init();  
+    
+    __GPIOD_CLK_ENABLE();
 
     __GPIOA_CLK_ENABLE();
     __GPIOB_CLK_ENABLE();
@@ -64,7 +64,7 @@ int main(void)
 //    __HAL_RCC_GPIOA_CLK_ENABLE();
 //    __HAL_RCC_GPIOB_CLK_ENABLE();
 
-	GPIO_InitTypeDef GPIO_InitStructureA;
+    GPIO_InitTypeDef GPIO_InitStructureA;
 
     GPIO_InitStructureA.Pin = GPIO_PIN_5;
 
@@ -85,30 +85,30 @@ int main(void)
 
     
     
-	/* Thread 1 definition */
-	osThreadDef(LED1, LED_Thread1, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
+    /* Thread 1 definition */
+    osThreadDef(LED1, LED_Thread1, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
   
-	 /*  Thread 2 definition */
-	osThreadDef(LED2, LED_Thread2, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
+     /*  Thread 2 definition */
+    osThreadDef(LED2, LED_Thread2, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
   
-	/* Start thread 1 */
-	LEDThread1Handle = osThreadCreate(osThread(LED1), NULL);
+    /* Start thread 1 */
+    LEDThread1Handle = osThreadCreate(osThread(LED1), NULL);
   
-	/* Start thread 2 */
-	LEDThread2Handle = osThreadCreate(osThread(LED2), NULL);
+    /* Start thread 2 */
+    LEDThread2Handle = osThreadCreate(osThread(LED2), NULL);
   
-	/* Start scheduler */
-	osKernelStart();
+    /* Start scheduler */
+    osKernelStart();
 
-	  /* We should never get here as control is now taken by the scheduler */
-	for (;;)
-		;
+      /* We should never get here as control is now taken by the scheduler */
+    for (;;)
+        ;
 }
 
 void SysTick_Handler(void)
 {
-	HAL_IncTick();
-	osSystickHandler();
+    HAL_IncTick();
+    osSystickHandler();
 }
 
 /**
@@ -118,19 +118,19 @@ void SysTick_Handler(void)
   */
 static void LED_Thread1(void const *argument)
 {
-	(void) argument;
+    (void) argument;
   
-	for (;;)
-	{
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-		osDelay(2000);
-		
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-		osThreadSuspend(LEDThread2Handle);
-		osDelay(2000);
-		
-		osThreadResume(LEDThread2Handle);
-	}
+    for (;;)
+    {
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+        osDelay(2000);
+        
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+        osThreadSuspend(LEDThread2Handle);
+        osDelay(2000);
+        
+        osThreadResume(LEDThread2Handle);
+    }
 }
 
 /**
@@ -140,14 +140,14 @@ static void LED_Thread1(void const *argument)
   */
 static void LED_Thread2(void const *argument)
 {
-	uint32_t count;
-	(void) argument;
+    uint32_t count;
+    (void) argument;
   
-	for (;;)
-	{
-		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
-		osDelay(200);
-	}
+    for (;;)
+    {
+        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
+        osDelay(200);
+    }
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -164,9 +164,9 @@ void assert_failed(uint8_t* file, uint32_t line)
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
   /* Infinite loop */
-	while (1)
-	{
-	}
+    while (1)
+    {
+    }
 }
 #endif
 
