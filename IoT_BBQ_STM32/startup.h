@@ -3,12 +3,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-   #include  "HX711.h"
-    
-    void something();
 
+    void GetScaleWeight();
     
-   void SysTick_Handler();
+    void SysTick_Handler();
     
 #ifdef __cplusplus
 }

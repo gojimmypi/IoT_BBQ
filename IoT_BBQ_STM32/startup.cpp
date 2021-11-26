@@ -1,11 +1,13 @@
 #include "startup.h"
+#include  "HX711.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-    
+
+
     HX711 scale; 
-    void something()
+    void GetScaleWeight()
     {
         scale.begin(GPIO_PIN_9, GPIO_PIN_8);
         long t = -1;
