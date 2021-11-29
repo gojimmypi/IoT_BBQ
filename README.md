@@ -1,4 +1,8 @@
 
+Project for [Making Embedded Systems](https://classpert.com/classpertx/cohorts/making-embedded-systems/dashboard?path_to_locale=en) class.
+
+See also [Assignments](./Assignments/README.md)
+
 The Imaginary Embedded System that does not exist for the _Making Embedded Systems_ class is the Barbeque Grill 
 monitoring system project started (and abandoned) 5 years ago as noted below that was intially tinkered with using
 an ESP8266 an the `LUA` language, but never completed. 
@@ -42,6 +46,15 @@ See also:
 - [Mouser B-L475E-IOT01A Data Brief ](https://www.mouser.com/datasheet/2/389/b-l475e-iot01a-1848022.pdf)
 - [Mouser Discovery Kit for IoT Node](https://www.mouser.com/pdfdocs/RS7706_IC_STM32L475E-IOT01A1_0517d.pdf) (this is the front and back of the insert card in for the shipped product)
 - [Mouser STMicroelectronics B-L475E-IOT01A Discovery Kit for IoT Node](https://www.mouser.com/new/stmicroelectronics/stm-b-l475e-iot01a-kit/)
+- [The FreeRTOS™ Reference Manual](https://www.freertos.org/fr-content-src/uploads/2018/07/FreeRTOS_Reference_Manual_V10.0.0.pdf)
+- []()
+- []()
+- [bogde/HX711](https://github.com/bogde/HX711)
+- [nimaltd/HX711](https://github.com/nimaltd/HX711/blob/master/hx711.c)
+- [ODriveRobotics Samnple Code](https://github.com/odriverobotics/ODrive/blob/master/Firmware/Drivers/STM32/stm32_system.h)
+- [RTOS Thread Management](https://www.keil.com/pack/doc/CMSIS/RTOS/html/group__CMSIS__RTOS__ThreadMgmt.html)
+
+- [Idioms for using C++ in C programs (Part 1 of 2)](http://www.olivierlanglois.net/idioms_for_using_cpp_in_c_programs.html)
 
 My original README follows:
 
