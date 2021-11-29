@@ -20,7 +20,7 @@ for your final project)
 - Create a block diagram for this program, briefly explain why you chose the platform
 and template you did, be prepared to talk about this board in Live Class
 
-~[image](./images/exercise_2_2_diagram.png)
+![image](./images/exercise_2_2_diagram.png)
 
 I chose the STM32L4 Discovery kit IoT node: [DISCO-L475VG-IOT01A (B-L475E-IOT01A)](https://os.mbed.com/platforms/ST-Discovery-L475E-IOT01A/)
 for this class as it has a wide selection of built-in perihperals, and more importantly: plenty of _sample code_.
