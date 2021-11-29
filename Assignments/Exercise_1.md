@@ -1,0 +1,1 @@
+Exercise 1 has not yet been moved from the [main README.md](../README.md) (See [Assignment Index](./README.md))
