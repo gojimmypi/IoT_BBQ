@@ -25,4 +25,4 @@ and template you did, be prepared to talk about this board in Live Class
 I chose the STM32L4 Discovery kit IoT node: [DISCO-L475VG-IOT01A (B-L475E-IOT01A)](https://os.mbed.com/platforms/ST-Discovery-L475E-IOT01A/)
 for this class as it has a wide selection of built-in perihperals, and more importantly: plenty of _sample code_.
 
-<< [Exercise 2.1](./Exercise_2_1.md) -- 
+<< [Exercise 2.1](./Exercise_2_1.md) -- [Assignments](./README.md) -- [Exercise 3a](./Exercise_3a.md)

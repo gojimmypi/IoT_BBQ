@@ -8,4 +8,4 @@ imaginative. Reality does not apply here.
 ![image](./images/initial_block_diagram.png)
 
 
-<< [Exercise 1](./Exercise_1.md) -- [Exercise 2.2](./Exercise_2_2.md) >> 
+<< [Exercise 1](./Exercise_1.md) -- [Assignments](./README.md) -- [Exercise 2.2](./Exercise_2_2.md) >> 
