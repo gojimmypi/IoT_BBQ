@@ -6,7 +6,7 @@ Look at the documents for the board you are considering for your final project (
 [ST Discovery Board](https://www.st.com/en/evaluation-tools/stm32-discovery-kits.html#products)), draw the hardware block diagram for the board. For peripherals, note the
 communication paths (SPI, I2C, etc).
 
-![B-L475E-IOT01A_block_diagram.png](./B-L475E-IOT01A_block_diagram.png)
+![B-L475E-IOT01A_block_diagram.png](./images/B-L475E-IOT01A_block_diagram.png)
 
 The board I am using is the [B-L475E-IOT01A1](https://www.mouser.com/ProductDetail/STMicroelectronics/B-L475E-IOT01A1?qs=sGAEpiMZZMug%252BNZZT2EIM4vIP4F171Wi%2F6Nv7F56rKE%3D), 
 
