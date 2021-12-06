@@ -3,4 +3,7 @@ Assignments for [Making Embedded Systems](https://classpert.com/classpertx/cohor
 - [Exercise 1](./Exercise_1.md)
 - [Exercise 2.1](./Exercise_2_1.md)
 - [Exercise 2.2](./Exercise_2_2.md)
+- [Exercise 3a](./Exercise_3a)
+- [Exercise 3b](./Exercise_3b)
+
 
