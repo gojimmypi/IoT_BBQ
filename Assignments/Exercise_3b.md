@@ -8,22 +8,22 @@ write and erase functions.
 Here is the SPI Flash information.
 https://www.digikey.com/en/products/detail/winbond-electronics/W25Q80DVSNIG-TR/5154948
 
-We are going to use ST’s Standard Peripheral Flash Driver so here is the header file for the
+We are going to use STï¿½s Standard Peripheral Flash Driver so here is the header file for the
 code you will need to simulate:
 
 https://drive.google.com/file/d/12dw-pZiKiK1vi4gv49W1x6np5uzCH_cV/view?usp=sharing
 
 Your assignment is to create a small module that compiles and runs on your computer that
 implements your flash simulator. You will also need a main file to test out your simulator.
-Important notes: You don’t need a full Flash simulator, only what is necessary to test the
-KVStore code. You aren’t writing the KVStore code. You do not need to use CPPUTest or other
+Important notes: You donï¿½t need a full Flash simulator, only what is necessary to test the
+KVStore code. You arenï¿½t writing the KVStore code. You do not need to use CPPUTest or other
 unit test framework. If you are writing more than 50 lines of code, you are going in the wrong
 direction.
 
 ### Turn in two source files (simulator and main test), and send a link to the
 
-See [_main.c](https://github.com/gojimmypi/IoT_BBQ/blob/6621adecbf72cf6e5c2363cb4012d8d7ea750011/IoT_BBQ_STM32/_main.c#L63) sample usage
-and [spi_flash.c](https://github.com/gojimmypi/IoT_BBQ/blob/d4d7fa0584ed0d7954d43e9a569e699d00902cf9/IoT_BBQ_STM32/spi_flash.c#L4) simulation.
+See [_main.c](https://github.com/gojimmypi/IoT_BBQ/blob/dd487bc2671c85065687ca90d162db7fe9e55ef7/IoT_BBQ_STM32/_main.c#L65) sample usage
+and [spi_flash.c](https://github.com/gojimmypi/IoT_BBQ/blob/dd487bc2671c85065687ca90d162db7fe9e55ef7/IoT_BBQ_STM32/spi_flash.c#L7) simulation.
 
 
 #assignment-submission channel on Discord. Make sure the files are publicly viewable.
