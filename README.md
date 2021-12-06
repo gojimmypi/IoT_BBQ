@@ -1,7 +1,7 @@
 
 Project for [Making Embedded Systems](https://classpert.com/classpertx/cohorts/making-embedded-systems/dashboard?path_to_locale=en) class.
 
-See also [Assignments](./Assignments/README.md)
+See [Assignments](./Assignments/README.md)
 
 The Imaginary Embedded System that does not exist for the _Making Embedded Systems_ class is the Barbeque Grill 
 monitoring system project started (and abandoned) 5 years ago as noted below that was intially tinkered with using
