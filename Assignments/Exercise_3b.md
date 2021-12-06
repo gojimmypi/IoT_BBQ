@@ -22,7 +22,8 @@ direction.
 
 ### Turn in two source files (simulator and main test), and send a link to the
 
-
+See [_main.c](https://github.com/gojimmypi/IoT_BBQ/blob/6621adecbf72cf6e5c2363cb4012d8d7ea750011/IoT_BBQ_STM32/_main.c#L63) sample usage
+and [spi_flash.c](https://github.com/gojimmypi/IoT_BBQ/blob/d4d7fa0584ed0d7954d43e9a569e699d00902cf9/IoT_BBQ_STM32/spi_flash.c#L4) simulation.
 
 
 #assignment-submission channel on Discord. Make sure the files are publicly viewable.
