@@ -60,21 +60,37 @@ int main(void)
     */
     HAL_Init();  
 
-    sFLASH_Init();
+    // 
+    // -------------------------------------------------------------------------
+    // flash testing for Exercise 3b
+    // -------------------------------------------------------------------------
+    //
     
+    // initialize SPI Flash
+    sFLASH_Init();
+
+    // setup some data
     uint8_t someData = 42;
     uint8_t* thisFlashData = &someData;
     uint32_t thisFlashAddress = 0x1234;
     uint32_t thisFlashTestSize;
-    
+
+    // sample write
     sFLASH_WriteBuffer(thisFlashData, thisFlashAddress, thisFlashTestSize);
 
+    // sample read
     sFLASH_ReadBuffer(thisFlashData, thisFlashAddress, thisFlashTestSize);
     
+    // sample erase
     sFLASH_EraseBulk();
     
+    // sample read after erase
     sFLASH_ReadBuffer(thisFlashData, thisFlashAddress, thisFlashTestSize);
     
+
+    // -------------------------------------------------------------------------
+    // start of regular app
+    // -------------------------------------------------------------------------
     __GPIOD_CLK_ENABLE();
 
     __GPIOA_CLK_ENABLE();
