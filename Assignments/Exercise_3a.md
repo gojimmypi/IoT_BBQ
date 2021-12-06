@@ -41,4 +41,4 @@ Look at one [application note](https://www.st.com/en/microcontrollers-microproce
 [AN5012 Analog-to-digital audio conversion example using STM32L4 Series microcontroller peripherals](https://www.st.com/resource/en/application_note/an5012-analogtodigital-audio-conversion-example-using-stm32l4-series-microcontroller-peripherals-stmicroelectronics.pdf)
 
 
-<< [Exercise 2.2](./Exercise_2_2.md) -- [Assignments](./README.md) --    
+<< [Exercise 2.2](./Exercise_2_2.md) -- [Assignments](./README.md) --  [Exercise 3b](./Exercise_3b.md)   
