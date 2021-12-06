@@ -903,6 +903,9 @@
     <ClCompile Include="_main.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="spi_flash_simulation.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DWT_STM32_DELAY.h">
@@ -915,6 +918,9 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="task_weight_monitor.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="spi_flash.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>
