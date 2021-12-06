@@ -31,6 +31,8 @@
 #include "startup.h"
 #include "task_weight_monitor.h"
 
+#include "spi_flash.h"
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -57,7 +59,22 @@ int main(void)
          - Global MSP (MCU Support Package) initialization
     */
     HAL_Init();  
-	
+
+    sFLASH_Init();
+    
+    uint8_t someData = 42;
+    uint8_t* thisFlashData = &someData;
+    uint32_t thisFlashAddress = 0x1234;
+    uint32_t thisFlashTestSize;
+    
+    sFLASH_WriteBuffer(thisFlashData, thisFlashAddress, thisFlashTestSize);
+
+    sFLASH_ReadBuffer(thisFlashData, thisFlashAddress, thisFlashTestSize);
+    
+    sFLASH_EraseBulk();
+    
+    sFLASH_ReadBuffer(thisFlashData, thisFlashAddress, thisFlashTestSize);
+    
     __GPIOD_CLK_ENABLE();
 
     __GPIOA_CLK_ENABLE();
