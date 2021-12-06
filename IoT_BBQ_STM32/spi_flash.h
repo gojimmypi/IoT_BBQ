@@ -31,16 +31,16 @@
 #define __SPI_FLASH_H
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
-#include "stm32f2xx.h"
+    /* Includes ------------------------------------------------------------------*/
+#include "stm32l4xx.h" // edited from stm32f2xx
 
-/* Exported types ------------------------------------------------------------*/
-/* Exported constants --------------------------------------------------------*/
+    /* Exported types ------------------------------------------------------------*/
+    /* Exported constants --------------------------------------------------------*/
 
-/* M25P SPI Flash supported commands */
+    /* M25P SPI Flash supported commands */
 #define sFLASH_CMD_WRITE          0x02  /* Write to Memory instruction */
 #define sFLASH_CMD_WRSR           0x01  /* Write Status Register instruction */
 #define sFLASH_CMD_WREN           0x06  /* Write enable instruction */
@@ -58,7 +58,7 @@
 #define sFLASH_M25P128_ID         0x202018
 #define sFLASH_M25P64_ID          0x202017
 
-/* M25P FLASH SPI Interface pins  */
+    /* M25P FLASH SPI Interface pins  */
 #define sFLASH_SPI                           SPI2
 #define sFLASH_SPI_CLK                       RCC_APB1Periph_SPI2
 #define sFLASH_SPI_CLK_INIT                  RCC_APB1PeriphClockCmd
@@ -85,31 +85,31 @@
 #define sFLASH_CS_GPIO_PORT                  GPIOI
 #define sFLASH_CS_GPIO_CLK                   RCC_AHB1Periph_GPIOI
 
-/* Exported macro ------------------------------------------------------------*/
-/* Select sFLASH: Chip Select pin low */
+    /* Exported macro ------------------------------------------------------------*/
+    /* Select sFLASH: Chip Select pin low */
 #define sFLASH_CS_LOW()       GPIO_ResetBits(sFLASH_CS_GPIO_PORT, sFLASH_CS_PIN)
-/* Deselect sFLASH: Chip Select pin high */
+    /* Deselect sFLASH: Chip Select pin high */
 #define sFLASH_CS_HIGH()      GPIO_SetBits(sFLASH_CS_GPIO_PORT, sFLASH_CS_PIN)
 
-/* Exported functions ------------------------------------------------------- */
+    /* Exported functions ------------------------------------------------------- */
 
-/* High layer functions  */
-void sFLASH_DeInit(void);
-void sFLASH_Init(void);
-void sFLASH_EraseSector(uint32_t SectorAddr);
-void sFLASH_EraseBulk(void);
-void sFLASH_WritePage(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
-void sFLASH_WriteBuffer(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
-void sFLASH_ReadBuffer(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead);
-uint32_t sFLASH_ReadID(void);
-void sFLASH_StartReadSequence(uint32_t ReadAddr);
+    /* High layer functions  */
+    void sFLASH_DeInit(void);
+    void sFLASH_Init(void);
+    void sFLASH_EraseSector(uint32_t SectorAddr);
+    void sFLASH_EraseBulk(void);
+    void sFLASH_WritePage(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
+    void sFLASH_WriteBuffer(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
+    void sFLASH_ReadBuffer(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead);
+    uint32_t sFLASH_ReadID(void);
+    void sFLASH_StartReadSequence(uint32_t ReadAddr);
 
-/* Low layer functions */
-uint8_t sFLASH_ReadByte(void);
-uint8_t sFLASH_SendByte(uint8_t byte);
-uint16_t sFLASH_SendHalfWord(uint16_t HalfWord);
-void sFLASH_WriteEnable(void);
-void sFLASH_WaitForWriteEnd(void);
+    /* Low layer functions */
+    uint8_t sFLASH_ReadByte(void);
+    uint8_t sFLASH_SendByte(uint8_t byte);
+    uint16_t sFLASH_SendHalfWord(uint16_t HalfWord);
+    void sFLASH_WriteEnable(void);
+    void sFLASH_WaitForWriteEnd(void);
 
 #ifdef __cplusplus
 }
