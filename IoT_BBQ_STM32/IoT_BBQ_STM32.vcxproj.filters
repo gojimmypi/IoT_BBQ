@@ -903,7 +903,7 @@
     <ClCompile Include="_main.c">
       <Filter>Source files</Filter>
     </ClCompile>
-    <ClCompile Include="spi_flash_simulation.c">
+    <ClCompile Include="spi_flash.c">
       <Filter>Source files</Filter>
     </ClCompile>
   </ItemGroup>
