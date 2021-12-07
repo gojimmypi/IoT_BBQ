@@ -26,6 +26,11 @@
   ******************************************************************************
   */
 
+
+#define is_spi_flash_simulation
+
+
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __SPI_FLASH_H
 #define __SPI_FLASH_H
