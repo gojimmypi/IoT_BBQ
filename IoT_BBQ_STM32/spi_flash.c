@@ -2,9 +2,7 @@
 
 #include "stdint.h"
 #include <stdlib.h> // needed for malloc see https://stackoverflow.com/questions/1230386/why-do-i-get-a-warning-every-time-i-use-malloc
-// #include <cstring>
-//#include <strings.h>
-//#include <string.h>
+#include <string.h>
 
 
 // define is_spi_flash_simulation when we don't actually have an spi_flash to play with
@@ -20,7 +18,8 @@ static int SimSize = 0;
 // the simulation of sFLASH_ReadBuffer just returns the value of savedValue
 void sFLASH_ReadBuffer(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead)
 {
-    pBuffer = SimulatedFlash;
+    uint8_t* res = NULL;
+    res = memcpy(pBuffer, SimulatedFlash + ReadAddr, NumByteToRead); 
 }
 
 // the simulation of sFLASH_WriteBuffer just  puts the pBuffer in our savedValue
@@ -28,6 +27,7 @@ void sFLASH_WriteBuffer(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteTo
 {
     if (pBuffer == NULL)
     {
+        // when pBuffer is NULL, that's our simulation que to use parameters as sizing
         if (IsSimInitialized == 0)
         {
             if (NumByteToWrite < 1)
@@ -46,26 +46,31 @@ void sFLASH_WriteBuffer(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteTo
     }
     else
     {
-       // our simulated flash has already been initialized
-        
-        SimulatedFlash = pBuffer;
-        // (void) memcpy((void *) SimulatedFlash, (const void *)(pBuffer), NumByteToWrite);
-        
+       // our simulated flash has already been initialized, so write our pBuffer to the simulated flash at an offset of [WriteAddr]
         uint8_t* res = NULL;
-        // res = memcpy(SimulatedFlash, pBuffer, NumByteToWrite);
+        res = memcpy(SimulatedFlash + WriteAddr, pBuffer, NumByteToWrite);
     }
 }
 
 // the simulation of sFLASH_EraseBulk clears the savedValue
 void sFLASH_EraseBulk(void)
 {
-    if (IsSimInitialized != 0) {
-        free(SimulatedFlash);
+    if (IsSimInitialized != 0)
+    {
+        // free(SimulatedFlash);
+        
+        uint8_t* res = NULL;
+        res = memset(SimulatedFlash, 0, SimSize);
     }
-    sFLASH_Init();
+    else
+    {
+        // TODO warn that flash simulation is not initialized
+    }
 }
 
-// the simuilation of sFLASH_Init calls sFLASH_EraseBulk
+// the simulation of sFLASH_Init sets flash params to uninitialized values. 
+// to set, call sFLASH_WriteBuffer with NULL buffer:
+//   sFLASH_WriteBuffer(NULL, UsingFlashAddress, MaxFlashTestSize);
 void sFLASH_Init(void)
 {
     SimSize = 0;
@@ -77,5 +82,6 @@ void sFLASH_Init(void)
 
 #else
     // actual SPI code goes here
+
     error no SPI code implemented
 #endif // not is_spi_flash_simulation

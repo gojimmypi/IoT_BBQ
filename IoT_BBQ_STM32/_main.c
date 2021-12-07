@@ -96,7 +96,7 @@ int main(void)
     
     // sample erase
     sFLASH_EraseBulk();
-    
+
     
     // sample read after erase
     sFLASH_ReadBuffer(thisFlashData, thisFlashAddress, thisFlashTestSize);
