@@ -34,11 +34,12 @@ Additionally, not there's already a built-in RC debounce at `C36`, `C37` and `R2
 
 ## Can you read that memory directly and see the button change in a debugger or by printing out the associated memory?
 
-There's a HAL function called [HAL_GPIO_ReadPin](https://github.com/gojimmypi/IoT_BBQ/blob/18babdb9736c54fd5a585352d3bb2d1d7c56bac0/IoT_BBQ_STM32/_main.c#L152) that returns a value of `GPIO_PIN_SET` ("on", which is expected, given the pullup resistor, and normally-open switch)
+There's a HAL function called [HAL_GPIO_ReadPin](https://github.com/gojimmypi/IoT_BBQ/blob/18babdb9736c54fd5a585352d3bb2d1d7c56bac0/IoT_BBQ_STM32/_main.c#L152) 
+that by default when the switch is _not_ pressed, returns a value of `GPIO_PIN_SET` ("on", which is expected, given the pullup resistor, and normally-open switch)
 
 ![GPIO_PIN_13_default_state_value.png](./images/GPIO_PIN_13_default_state_value.png)
 
-When single step debugging, and the button is then pressed, the [next HAL_GPIO_ReadPin](https://github.com/gojimmypi/IoT_BBQ/blob/18babdb9736c54fd5a585352d3bb2d1d7c56bac0/IoT_BBQ_STM32/_main.c#L156) returns a value of `GPIO_PIN_RESET`  ("off", which when pressed, pulls the line to ground)
+When single step debugging, and the button is then pressed, the [next call to HAL_GPIO_ReadPin](https://github.com/gojimmypi/IoT_BBQ/blob/18babdb9736c54fd5a585352d3bb2d1d7c56bac0/IoT_BBQ_STM32/_main.c#L156) returns a value of `GPIO_PIN_RESET`  ("off", which when pressed, pulls the line to ground)
 
 ![GPIO_PIN_13_pressed_state_value.png](./images/GPIO_PIN_13_pressed_state_value.png)
 
@@ -46,12 +47,16 @@ The code for this HAL function is found in `stm32l4xx_hal_gpio.c` and looks like
 
 ![HAL_GPIO_ReadPin_code_snippet.png](./images/HAL_GPIO_ReadPin_code_snippet.png)
 
-One _could_ read directly from `(GPIOx->IDR & GPIO_Pin)` although for code portability, it is best to use the HAL.
+One _could_ read directly from `(GPIOx->IDR & GPIO_Pin)`, although for code portability it is best to use the HAL.
 
 
 ## Turn in your code with a comment or additional file answering the questions.
 
-See [project files](), in particular, [main()](https://github.com/gojimmypi/IoT_BBQ/blob/main/IoT_BBQ_STM32/_main.c)
+See [project files](https://github.com/gojimmypi/IoT_BBQ/tree/main/IoT_BBQ_STM32), in particular, [main()](https://github.com/gojimmypi/IoT_BBQ/blob/main/IoT_BBQ_STM32/_main.c)
+
+
+** TODO permalinks above, when ready **
+
 
 
 The LED initialization looks like this:
