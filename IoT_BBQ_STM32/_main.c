@@ -105,14 +105,13 @@ int main(void)
     // -------------------------------------------------------------------------
     // start of regular app
     // -------------------------------------------------------------------------
+    __GPIOA_CLK_ENABLE(); //    __HAL_RCC_GPIOA_CLK_ENABLE();
+    __GPIOB_CLK_ENABLE(); //    __HAL_RCC_GPIOB_CLK_ENABLE();
+    __GPIOC_CLK_ENABLE();
     __GPIOD_CLK_ENABLE();
 
-    __GPIOA_CLK_ENABLE();
-    __GPIOB_CLK_ENABLE();
 
-    //    __HAL_RCC_GPIOA_CLK_ENABLE();
-    //    __HAL_RCC_GPIOB_CLK_ENABLE();
-
+    // Initialize Port A
     GPIO_InitTypeDef GPIO_InitStructureA;
 
     GPIO_InitStructureA.Pin = GPIO_PIN_5;
@@ -123,6 +122,7 @@ int main(void)
     HAL_GPIO_Init(GPIOA, &GPIO_InitStructureA);
 
     
+    // Initialize Port B
     GPIO_InitTypeDef GPIO_InitStructureB;
 
     GPIO_InitStructureB.Pin = GPIO_PIN_14 | GPIO_PIN_8;
@@ -138,6 +138,23 @@ int main(void)
     GPIO_InitStructureB.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStructureB);
     
+    // Initialize Port C
+    GPIO_InitTypeDef GPIO_InitStructureC;
+
+    GPIO_InitStructureC.Pin = GPIO_PIN_13;
+
+    GPIO_InitStructureC.Mode = GPIO_MODE_INPUT;
+    GPIO_InitStructureC.Speed = GPIO_SPEED_FREQ_HIGH;
+    GPIO_InitStructureC.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOC, &GPIO_InitStructureC);
+    
+    GPIO_PinState SwitchState;
+    SwitchState = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
+    
+    
+    
+    SwitchState = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
+
     
     /* Thread 1 definition */
     // the macro gives a compiler warning in C++

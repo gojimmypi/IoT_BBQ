@@ -25,9 +25,22 @@ found on Pin 7, Port C GPIO13:
 
 ![schematic_button_EXTI13.png](./images/schematic_button_EXTI13.png)
 
+See also the `B2` detail on page 51, noting in particular there's already a 100K pullup resistor, `R23`:
+
+![schematic_button_EXTI13_B2.png](./images/schematic_button_EXTI13_B2.png)
+
+Additionally, not there's already a built-in RC debounce at `C36`, `C37` and `R24`.
+
+
 ## Can you read that memory directly and see the button change in a debugger or by printing out the associated memory?
 
+Yes. There's a function called [HAL_GPIO_ReadPin]() that returns a value of `GPIO_PIN_SET` ("on", which is expected, given the pullup resistor, and normally-open switch)
 
+![GPIO_PIN_13_default_state_value.png](./images/GPIO_PIN_13_default_state_value.png)
+
+When the button is pressed, the [next HAL_GPIO_ReadPin]() returns a value of `GPIO_PIN_RESET`  ("off", which when pressed, pulls the line to ground)
+
+![GPIO_PIN_13_pressed_state_value.png](./images/GPIO_PIN_13_pressed_state_value.png)
 
 ## Turn in your code with a comment or additional file answering the questions.
 
@@ -61,4 +74,4 @@ The initialization looks like this:
 
 ```
 
-<< [Exercise 3b](./Exercise_3b.md) -- [Assignments](./README.md) -- [next tbd]()
+<< [Exercise 3b](./Exercise_3b.md) -- [Assignments](./README.md) -- [next tbd]() >>
