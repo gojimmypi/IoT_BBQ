@@ -82,4 +82,4 @@ and [spi_flash.c](https://github.com/gojimmypi/IoT_BBQ/blob/e4ca09b48812742fda09
 ![sFLASH_EraseBulk_before_read.png](./images/sFLASH_EraseBulk_before_read.png)
 
 
-<< [Exercise 3a](./Exercise_3a.md) -- [Assignments](./README.md) -- [next tbd]()
+<< [Exercise 3a](./Exercise_3a.md) -- [Assignments](./README.md) -- [Exercise 4](./Exercise_4.md)

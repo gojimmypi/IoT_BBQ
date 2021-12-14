@@ -1,4 +1,4 @@
-Assignments for [Making Embedded Systems](https://classpert.com/classpertx/cohorts/making-embedded-systems/dashboard?path_to_locale=en) class.
+# Assignments for [Making Embedded Systems](https://classpert.com/classpertx/cohorts/making-embedded-systems/dashboard?path_to_locale=en) class.
 
 - [Exercise 1](./Exercise_1.md)
 - [Exercise 2.1](./Exercise_2_1.md)
@@ -6,6 +6,8 @@ Assignments for [Making Embedded Systems](https://classpert.com/classpertx/cohor
 - [Exercise 3a](./Exercise_3a.md)
 - [Exercise 3b](./Exercise_3b.md)  See also [Class Materials](https://drive.google.com/drive/folders/1xk9AmmLDqESqimDk_KvxHu6KfzpaYX9M), [spi_flash.h](https://drive.google.com/file/d/12dw-pZiKiK1vi4gv49W1x6np5uzCH_cV/view)
 - [Exercise 4](./Exercise_4.md) 
+
+
 
 ## Links
 
