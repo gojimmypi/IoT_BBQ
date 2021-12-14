@@ -34,11 +34,11 @@ Additionally, not there's already a built-in RC debounce at `C36`, `C37` and `R2
 
 ## Can you read that memory directly and see the button change in a debugger or by printing out the associated memory?
 
-Yes. There's a function called [HAL_GPIO_ReadPin]() that returns a value of `GPIO_PIN_SET` ("on", which is expected, given the pullup resistor, and normally-open switch)
+Yes. There's a function called [HAL_GPIO_ReadPin](https://github.com/gojimmypi/IoT_BBQ/blob/18babdb9736c54fd5a585352d3bb2d1d7c56bac0/IoT_BBQ_STM32/_main.c#L152) that returns a value of `GPIO_PIN_SET` ("on", which is expected, given the pullup resistor, and normally-open switch)
 
 ![GPIO_PIN_13_default_state_value.png](./images/GPIO_PIN_13_default_state_value.png)
 
-When the button is pressed, the [next HAL_GPIO_ReadPin]() returns a value of `GPIO_PIN_RESET`  ("off", which when pressed, pulls the line to ground)
+When single step debugging, and the button is then pressed, the [next HAL_GPIO_ReadPin](https://github.com/gojimmypi/IoT_BBQ/blob/18babdb9736c54fd5a585352d3bb2d1d7c56bac0/IoT_BBQ_STM32/_main.c#L156) returns a value of `GPIO_PIN_RESET`  ("off", which when pressed, pulls the line to ground)
 
 ![GPIO_PIN_13_pressed_state_value.png](./images/GPIO_PIN_13_pressed_state_value.png)
 
