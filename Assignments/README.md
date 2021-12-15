@@ -17,9 +17,9 @@
 - [Mouser SPBTLE-RF](https://www.mouser.com/ProductDetail/STMicroelectronics/SPBTLE-RF?qs=k5OWtXsTJaq8f%252B3JiZyqyw%3D%3D), [Datasheet](https://www.mouser.com/datasheet/2/389/SGST_S_A0003533199_1-2576929.pdf)
 
 - [ST B-L475E-IOT01A STM32L4 Discovery kit IoT node](https://www.st.com/en/evaluation-tools/b-l475e-iot01a.html#)
-- [User Manual STM32L4 Discovery kit for the IoT node (B-L475E-IOT01A)](https://www.st.com/resource/en/user_manual/um2153-discovery-kit-for-iot-node-multichannel-communication-with-stm32l4-stmicroelectronics.pdf)
-- [Data brief ST B-L475E-IOT01A](https://www.st.com/resource/en/data_brief/b-l475e-iot01a.pdf) Discovery kit for IoT node, multi-channel communication with STM32L4
-- [STM32L475VG](https://www.st.com/en/microcontrollers-microprocessors/stm32l475vg.html#)
+- [User Manual (57 pages) STM32L4 Discovery kit for the IoT node (B-L475E-IOT01A)](https://www.st.com/resource/en/user_manual/um2153-discovery-kit-for-iot-node-multichannel-communication-with-stm32l4-stmicroelectronics.pdf)
+- [Data brief (4 pages) ST B-L475E-IOT01A](https://www.st.com/resource/en/data_brief/b-l475e-iot01a.pdf) Discovery kit for IoT node, multi-channel communication with STM32L4
+- [STM32L475VG](https://www.st.com/en/microcontrollers-microprocessors/stm32l475vg.html#), [STM32L475xx datasheet (204 pages)](https://www.st.com/resource/en/datasheet/stm32l475vg.pdf)
 - [STM32L475xx Datasheet](https://www.st.com/resource/en/datasheet/stm32l475vg.pdf)
 - [Inventek Systems ISM43362-M3G-L44-E/U Serial-to-WiFi Module](https://www.inventeksys.com/ism4336-m3g-l44-e-embedded-serial-to-wifi-module/), [ISM43362-M3G-L44 Datasheet](http://www.inventeksys.com/wp-content/uploads/ISM43362_M3G_L44_Functional_Spec.pdf)
 
@@ -31,3 +31,5 @@
 - [os.mbed.com DISCO-L475VG-IOT01A (B-L475E-IOT01A)](https://os.mbed.com/platforms/ST-Discovery-L475E-IOT01A/)
 
 - [ST community: delay in a microsecond(us)](https://community.st.com/s/question/0D50X0000BGkxmCSQR/stm32l462-delay-in-a-microsecondus)
+
+- [Everything You Never Wanted To Know About Linker Script](https://mcyoung.xyz/2021/06/01/linker-script/)
