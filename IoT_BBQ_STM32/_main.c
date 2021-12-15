@@ -43,7 +43,49 @@ osThreadId LEDThread1Handle, LEDThread2Handle;
 static void LED_Thread1(void const *argument);
 static void LED_Thread2(void const *argument);
 
+enum LED_Mode { IsBlinking, AlwaysOn, AlwaysOff };
+
+volatile static enum LED_Mode current_LED_MODE = IsBlinking; // we'll use a button to trigger an interrupt to set LED mode, starting with blinky
+
 /* Private functions ---------------------------------------------------------*/
+
+/**
+* @brief Interrupt callback for GPIOs
+*/
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    if (GPIO_Pin == GPIO_PIN_13)
+    {
+        switch (current_LED_MODE)
+        {
+        case IsBlinking:
+            current_LED_MODE = AlwaysOn;
+            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+            break;
+            
+        case AlwaysOn:
+            current_LED_MODE = AlwaysOff;
+            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+            break;
+
+        case AlwaysOff:
+            current_LED_MODE = IsBlinking;
+            break;
+            
+        default:
+            current_LED_MODE = IsBlinking;
+            break;
+        }    
+    }
+    // when done here, recall we'll return to EXTI15_10_IRQHandler()
+}
+
+// EXTI15_10_IRQHandler is a predefined name. See STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_gpio.c
+void EXTI15_10_IRQHandler(void)
+{
+    // when an interrupr occurs, we arrive here, but we need to figure out which pin triggered it.
+    HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_13);  // check to see if this is our interrupt. if so clear it and call the HAL_GPIO_EXTI_Callback(GPIO_Pin)
+}
 
 /**
   * @brief  Main program
@@ -139,15 +181,22 @@ int main(void)
     HAL_GPIO_Init(GPIOB, &GPIO_InitStructureB);
     
     // Initialize Port C
-    GPIO_InitTypeDef GPIO_InitStructureC;
+    GPIO_InitTypeDef GPIO_InitStructureC = { 0 }; 
 
     GPIO_InitStructureC.Pin = GPIO_PIN_13;
 
-    GPIO_InitStructureC.Mode = GPIO_MODE_INPUT;
-    GPIO_InitStructureC.Speed = GPIO_SPEED_FREQ_HIGH;
+    GPIO_InitStructureC.Mode = GPIO_MODE_IT_FALLING;
+    GPIO_InitStructureC.Speed = GPIO_SPEED_LOW;
     GPIO_InitStructureC.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOC, &GPIO_InitStructureC);
     
+
+    /* EXTI interrupt init*/
+    HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);    
+    
+    
+    // create a SwitchState variable to hold the result of out button press 
     GPIO_PinState SwitchState;
     SwitchState = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
     
@@ -156,17 +205,6 @@ int main(void)
     SwitchState = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
 
     
-    /* Thread 1 definition */
-    // the macro gives a compiler warning in C++
-    // osThreadDef(LED1, LED_Thread1, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
-//    char* LED1_threadname = (char*)"LED1";
-//    const osThreadDef_t os_thread_def_LED1 = { LED1_threadname, LED_Thread2, osPriorityNormal, 0, configMINIMAL_STACK_SIZE };
- 
-    
-    /*  Thread 2 definition */
-    // the macro gives a compiler warning in C++  // osThreadDef(LED2, LED_Thread2, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
-//    char* LED2_threadname = (char*)"LED2";
-//    const osThreadDef_t os_thread_def_LED2 = { LED2_threadname, LED_Thread2, osPriorityNormal, 0, configMINIMAL_STACK_SIZE };
 
     /* Thread 1 definition */
     osThreadDef(LED1, LED_Thread1, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
@@ -194,6 +232,58 @@ void SysTick_Handler(void)
     osSystickHandler();
 }
 
+//
+// Turn the LED on (unless button mode set to always off, or always on)
+//
+static void LED_ON()
+{
+    switch (current_LED_MODE)
+    {
+    case IsBlinking:
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+        break;
+
+    case AlwaysOn:
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+        break;
+
+    case AlwaysOff:
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+        break;
+            
+    default:
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+        break;
+    }       
+}
+
+
+//
+// Turn the LED off (unless button mode set to always on, or always off)
+//
+static void LED_OFF()
+{
+    switch (current_LED_MODE)
+    {
+    case IsBlinking:
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+        break;
+
+    case AlwaysOn:
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+        break;
+        
+    case AlwaysOff:
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+        break;
+            
+    default:
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+        break;
+
+    }       
+}
+
 /**
   * @brief  Toggle LED1
   * @param  thread not used
@@ -205,16 +295,39 @@ static void LED_Thread1(void const *argument)
   
     for (;;)
     {
-        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-        osDelay(2000);
-		
-        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-        osThreadSuspend(LEDThread2Handle);
-        osDelay(2000);
-		
-        osThreadResume(LEDThread2Handle);
         
-        theScaleTask();
+        switch (current_LED_MODE)
+        {
+        case IsBlinking:
+            LED_ON(); // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+            osDelay(2000);
+		
+            LED_OFF(); // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+            osThreadSuspend(LEDThread2Handle);
+            osDelay(2000);
+		
+            osThreadResume(LEDThread2Handle);
+        
+            // TODO for now, we call the scale taks during blinks
+            theScaleTask();
+
+            break;
+
+        case AlwaysOn:
+            LED_ON(); // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+            osDelay(2000);
+            break;
+
+        case AlwaysOff:
+            LED_OFF(); // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+            osThreadSuspend(LEDThread2Handle);
+            osDelay(2000);
+            break;
+            
+        default:
+            current_LED_MODE = IsBlinking;
+            break;
+        }    
     }
 }
 
@@ -230,9 +343,33 @@ static void LED_Thread2(void const *argument)
   
     for (;;)
     {
-        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
-        osDelay(200);
+        int blink_Count = 0;
+        switch (current_LED_MODE)
+        {
+        case IsBlinking:
+            blink_Count = 1;
+            break;
+            
+        case AlwaysOn:
+            blink_Count = 2;
+            break;
+
+        case AlwaysOff:
+            blink_Count = 3;
+            break;
+            
+        default:
+            blink_Count = 4;
+        }    
+
+        for (size_t i = 0; i < blink_Count; i++)
+        {
+            HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
+            osDelay(200);
+        }        
+        osDelay(2000);
     }
+    osDelay(2000);
 }
 
 #ifdef  USE_FULL_ASSERT
