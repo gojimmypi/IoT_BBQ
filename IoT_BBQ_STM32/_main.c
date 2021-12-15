@@ -83,7 +83,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 // EXTI15_10_IRQHandler is a predefined name. See STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_gpio.c
 void EXTI15_10_IRQHandler(void)
 {
-    // when an interrupr occurs, we arrive here, but we need to figure out which pin triggered it.
+    // when an interrupt occurs, we arrive here, but we need to figure out which pin triggered it.
     HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_13);  // check to see if this is our interrupt. if so clear it and call the HAL_GPIO_EXTI_Callback(GPIO_Pin)
 }
 
@@ -322,6 +322,7 @@ static void LED_Thread1(void const *argument)
             LED_OFF(); // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
             osThreadSuspend(LEDThread2Handle);
             osDelay(2000);
+            osThreadResume(LEDThread2Handle);
             break;
             
         default:
@@ -364,6 +365,8 @@ static void LED_Thread2(void const *argument)
 
         for (size_t i = 0; i < blink_Count; i++)
         {
+            HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
+            osDelay(200);
             HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
             osDelay(200);
         }        
