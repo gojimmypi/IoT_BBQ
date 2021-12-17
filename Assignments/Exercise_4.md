@@ -57,6 +57,19 @@ See [project files](https://github.com/gojimmypi/IoT_BBQ/tree/main/IoT_BBQ_STM32
 
 ** TODO permalinks above, when ready **
 
+The final version of my blinky uses the push button to control the [mode](https://github.com/gojimmypi/IoT_BBQ/blob/85dd40f15f56ba21bfe317fba5d7d07867083e23/IoT_BBQ_STM32/_main.c#L46) of the `LD2` LED: 
+
+ - `IsBlinking` alternates between [LED_ON()](https://github.com/gojimmypi/IoT_BBQ/blob/85dd40f15f56ba21bfe317fba5d7d07867083e23/IoT_BBQ_STM32/_main.c#L243) and [LED_OFF()](https://github.com/gojimmypi/IoT_BBQ/blob/85dd40f15f56ba21bfe317fba5d7d07867083e23/IoT_BBQ_STM32/_main.c#L269)
+ - `AlwaysOn`  even if the `LED_OFF()` is called, this mode ensure the `LD2` LES is [always on](https://github.com/gojimmypi/IoT_BBQ/blob/85dd40f15f56ba21bfe317fba5d7d07867083e23/IoT_BBQ_STM32/_main.c#L273).
+ - `AlwaysOff` even if the `LED_ON()` is called, this mode ensure the `LD2` LES is [always off](https://github.com/gojimmypi/IoT_BBQ/blob/85dd40f15f56ba21bfe317fba5d7d07867083e23/IoT_BBQ_STM32/_main.c#L251).
+
+ As there are 2 LEDs the blink, the other one, `LD1` is used to indicate blinky mode:
+ - `IsBlinking` - blinks once, then pauses. repeat.
+ - `AlwaysOn` - blinks twice, then pauses. repeat.
+ - `AlwaysOff` - blinks three times, then pauses. repeat.
+
+Here's a YouTube video of the blinky in action: 
+[![RTOS Blinky YouTube](https://img.youtube.com/vi/RCKf-NEh-AY/0.jpg)](https://www.youtube.com/watch?v=RCKf-NEh-AY)
 
 
 The LED initialization looks like this:
