@@ -300,13 +300,13 @@ static void LED_Thread1(void const *argument)
         {
         case IsBlinking:
             LED_ON(); // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-            osDelay(2000);
+            osDelay(555);
 		
             LED_OFF(); // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-            osThreadSuspend(LEDThread2Handle);
-            osDelay(2000);
+            //osThreadSuspend(LEDThread2Handle);
+            osDelay(555);
 		
-            osThreadResume(LEDThread2Handle);
+            //osThreadResume(LEDThread2Handle);
         
             // TODO for now, we call the scale taks during blinks
             theScaleTask();
@@ -314,15 +314,15 @@ static void LED_Thread1(void const *argument)
             break;
 
         case AlwaysOn:
-            LED_ON(); // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-            osDelay(2000);
+            LED_ON();      // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+            osDelay(2000); // no sense in runing hard the whole time if we are not blinking
             break;
 
         case AlwaysOff:
-            LED_OFF(); // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-            osThreadSuspend(LEDThread2Handle);
-            osDelay(2000);
-            osThreadResume(LEDThread2Handle);
+            LED_OFF();     // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+            //osThreadSuspend(LEDThread2Handle);
+            osDelay(2000); // no sense in runing hard the whole time if we are not blinking
+            //osThreadResume(LEDThread2Handle);
             break;
             
         default:
