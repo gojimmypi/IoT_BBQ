@@ -69,6 +69,7 @@ The final version of my blinky uses the push button to control the [mode](https:
  - `AlwaysOff` - blinks three times, then pauses. repeat.
 
 Here's a YouTube video of the blinky in action: 
+
 [![RTOS Blinky YouTube](https://img.youtube.com/vi/RCKf-NEh-AY/0.jpg)](https://www.youtube.com/watch?v=RCKf-NEh-AY)
 
 
