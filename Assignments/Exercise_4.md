@@ -1,5 +1,7 @@
 # Exercise 4: Make Blinky
 
+From [Exercise Details](https://docs.google.com/document/d/1WRuzWj_VNoX0qyKoqVu3rr-ARXuEJDw9B2tnH1ZX_uE/edit):
+
 On your final project board, make blinky for yourself. Then add a button to turn the LED on and off. 
 Bonus points for making the button cause an interrupt. Triple bonus points for debouncing the button signal.
 
@@ -29,7 +31,7 @@ See also the `B2` detail on page 51, noting in particular there's already a 100K
 
 ![schematic_button_EXTI13_B2.png](./images/schematic_button_EXTI13_B2.png)
 
-Additionally, not there's already a built-in RC debounce at `C36`, `C37` and `R24`.
+Additionally, note there's already a built-in RC debounce at `C36`, `C37` and `R24`.
 
 
 ## Can you read that memory directly and see the button change in a debugger or by printing out the associated memory?
@@ -52,16 +54,16 @@ One _could_ read directly from `(GPIOx->IDR & GPIO_Pin)`, although for code port
 
 ## Turn in your code with a comment or additional file answering the questions.
 
-See [project files](https://github.com/gojimmypi/IoT_BBQ/tree/main/IoT_BBQ_STM32), in particular, [main()](https://github.com/gojimmypi/IoT_BBQ/blob/main/IoT_BBQ_STM32/_main.c)
+See [project files](https://github.com/gojimmypi/IoT_BBQ/tree/a850251c842d0874489bd994279bdcde903882a5), in particular, [main()](https://github.com/gojimmypi/IoT_BBQ/blob/a850251c842d0874489bd994279bdcde903882a5/IoT_BBQ_STM32/_main.c#L95).
+There are 2 separate RTOS threads for controlling [LED1](https://github.com/gojimmypi/IoT_BBQ/blob/a850251c842d0874489bd994279bdcde903882a5/IoT_BBQ_STM32/_main.c#L210)
+and [LED2](https://github.com/gojimmypi/IoT_BBQ/blob/a850251c842d0874489bd994279bdcde903882a5/IoT_BBQ_STM32/_main.c#L213).
 
-
-** TODO permalinks above, when ready **
 
 The final version of my blinky uses the push button to control the [mode](https://github.com/gojimmypi/IoT_BBQ/blob/85dd40f15f56ba21bfe317fba5d7d07867083e23/IoT_BBQ_STM32/_main.c#L46) of the `LD2` LED: 
 
  - `IsBlinking` alternates between [LED_ON()](https://github.com/gojimmypi/IoT_BBQ/blob/85dd40f15f56ba21bfe317fba5d7d07867083e23/IoT_BBQ_STM32/_main.c#L243) and [LED_OFF()](https://github.com/gojimmypi/IoT_BBQ/blob/85dd40f15f56ba21bfe317fba5d7d07867083e23/IoT_BBQ_STM32/_main.c#L269)
- - `AlwaysOn`  even if the `LED_OFF()` is called, this mode ensure the `LD2` LES is [always on](https://github.com/gojimmypi/IoT_BBQ/blob/85dd40f15f56ba21bfe317fba5d7d07867083e23/IoT_BBQ_STM32/_main.c#L273).
- - `AlwaysOff` even if the `LED_ON()` is called, this mode ensure the `LD2` LES is [always off](https://github.com/gojimmypi/IoT_BBQ/blob/85dd40f15f56ba21bfe317fba5d7d07867083e23/IoT_BBQ_STM32/_main.c#L251).
+ - `AlwaysOn`  even if the `LED_OFF()` is called, this mode ensure the `LD2` LED is [always on](https://github.com/gojimmypi/IoT_BBQ/blob/85dd40f15f56ba21bfe317fba5d7d07867083e23/IoT_BBQ_STM32/_main.c#L273).
+ - `AlwaysOff` even if the `LED_ON()` is called, this mode ensure the `LD2` LED is [always off](https://github.com/gojimmypi/IoT_BBQ/blob/85dd40f15f56ba21bfe317fba5d7d07867083e23/IoT_BBQ_STM32/_main.c#L251).
 
  As there are 2 LEDs the blink, the other one, `LD1` is used to indicate blinky mode:
  - `IsBlinking` - blinks once, then pauses. repeat.
@@ -72,6 +74,24 @@ Here's a YouTube video of the blinky in action:
 
 [![RTOS Blinky YouTube](https://img.youtube.com/vi/RCKf-NEh-AY/0.jpg)](https://www.youtube.com/watch?v=RCKf-NEh-AY)
 
+
+## Discussion Points:
+
+### Why does the author use “marketing comes to you” through this chapter? How does it relate to previous chapters?
+Pretty much every programmer knows that the requirements continually evolve and change for just about every project. Embedded development is no different. 
+Often times, it is the marketing folks that have "insight" and new ideas of what consumers want.
+
+### Would you rather use a HAL or not? Why? What are the advantages either way?
+I would prefer to use a HAL unless there were memory contraints.
+The HAL will typically be larger code size, but more easily portable between different target processors.
+
+### Peer review button blinkies
+(to be done in class)
+
+### Given an input interrupt, output(s), and timers, what could you build? How many things are just a combination of these?
+Limited by the imagingation! An output could trigger anything from a simple LED to a massive solid state relay controlling high-current / high voltage systems.
+
+## Initialization:
 
 The LED initialization looks like this:
 
