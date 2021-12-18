@@ -11,25 +11,52 @@
 
 ## Links
 
-- [The FreeRTOS Reference Manual](https://www.freertos.org/fr-content-src/uploads/2018/07/FreeRTOS_Reference_Manual_V10.0.0.pdf)
-- [a-podshivalov/RIOT](https://github.com/a-podshivalov/RIOT) sample code
+Hardware
+- [STM32L4 Series](https://www.st.com/en/microcontrollers-microprocessors/stm32l4-series.html)
 - [Mouser B-L475E-IOT01A1](https://www.mouser.com/ProductDetail/stmicroelectronics/b-l475e-iot01a1/?qs=2m8Gdae5Lr3rq3rcxS2xEg%3D%3D&countrycode=US&currencycode=USD)
 - [Mouser SPBTLE-RF](https://www.mouser.com/ProductDetail/STMicroelectronics/SPBTLE-RF?qs=k5OWtXsTJaq8f%252B3JiZyqyw%3D%3D), [Datasheet](https://www.mouser.com/datasheet/2/389/SGST_S_A0003533199_1-2576929.pdf)
-
 - [ST B-L475E-IOT01A STM32L4 Discovery kit IoT node](https://www.st.com/en/evaluation-tools/b-l475e-iot01a.html#)
+
+Specifications
+
 - [User Manual (57 pages) STM32L4 Discovery kit for the IoT node (B-L475E-IOT01A)](https://www.st.com/resource/en/user_manual/um2153-discovery-kit-for-iot-node-multichannel-communication-with-stm32l4-stmicroelectronics.pdf)
 - [Data brief (4 pages) ST B-L475E-IOT01A](https://www.st.com/resource/en/data_brief/b-l475e-iot01a.pdf) Discovery kit for IoT node, multi-channel communication with STM32L4
 - [STM32L475VG](https://www.st.com/en/microcontrollers-microprocessors/stm32l475vg.html#), [STM32L475xx datasheet (204 pages)](https://www.st.com/resource/en/datasheet/stm32l475vg.pdf)
 - [STM32L475xx Datasheet](https://www.st.com/resource/en/datasheet/stm32l475vg.pdf)
+
+Peripherals
+
 - [Inventek Systems ISM43362-M3G-L44-E/U Serial-to-WiFi Module](https://www.inventeksys.com/ism4336-m3g-l44-e-embedded-serial-to-wifi-module/), [ISM43362-M3G-L44 Datasheet](http://www.inventeksys.com/wp-content/uploads/ISM43362_M3G_L44_Functional_Spec.pdf)
 
+mbed
+
+- [os.mbed.com DISCO-L475VG-IOT01A (B-L475E-IOT01A)](https://os.mbed.com/platforms/ST-Discovery-L475E-IOT01A/)
+- [sensors](https://ide.mbed.com/compiler/#nav:/DISCO_L475VG_IOT01-Sensors-BSP/main.cpp;)
+
+Visual GDB
+
+- [Creating Advanced STM32CubeMX-based Projects with VisualGDB](https://visualgdb.com/tutorials/arm/stm32/cube/advanced/)
+
+
+RTOS
+
+- [The FreeRTOS Reference Manual](https://www.freertos.org/fr-content-src/uploads/2018/07/FreeRTOS_Reference_Manual_V10.0.0.pdf)
+- [stackoverflow: What are valid values of `HAL_NVIC_SetPriority()` when using STM32 and FreeRTOS?](https://stackoverflow.com/questions/50243996/what-are-valid-values-of-hal-nvic-setpriority-when-using-stm32-and-freertos)
+
+Sample Code
+
+- [ST community: delay in a microsecond(us)](https://community.st.com/s/question/0D50X0000BGkxmCSQR/stm32l462-delay-in-a-microsecondus)
+- [a-podshivalov/RIOT](https://github.com/a-podshivalov/RIOT) sample code
 - [bogde/HX711](https://github.com/bogde/HX711/blob/master/src/HX711.cpp)
 - [ArduinoCore-samd/cores/arduino/wiring_private.h](https://github.com/arduino/ArduinoCore-samd/blob/master/cores/arduino/wiring_private.h)
 - [ArduinoCore-avr/cores/arduino/wiring_shift.c](https://github.com/arduino/ArduinoCore-avr/blob/9f8d27f09f3bbd1da1374b5549a82bda55d45d44/cores/arduino/wiring_shift.c) - original code for [shiftIn()](https://www.arduino.cc/reference/en/language/functions/advanced-io/shiftin/)
 - [logicalelegance/midifun/Core/Console/console.c](https://github.com/logicalelegance/midifun/blob/master/Core/Console/console.c)
+- [stackoverflow: STM32 HAL timer interrupt isn't triggered](https://stackoverflow.com/questions/40323461/stm32-hal-timer-interrupt-isnt-triggered)
+- [stackoverflow: STM32F3 Discovery - Implement GPIO-Interrupt](https://stackoverflow.com/questions/40057581/stm32f3-discovery-implement-gpio-interrupt)
 
-- [os.mbed.com DISCO-L475VG-IOT01A (B-L475E-IOT01A)](https://os.mbed.com/platforms/ST-Discovery-L475E-IOT01A/)
-
-- [ST community: delay in a microsecond(us)](https://community.st.com/s/question/0D50X0000BGkxmCSQR/stm32l462-delay-in-a-microsecondus)
+Other Stuff
 
 - [Everything You Never Wanted To Know About Linker Script](https://mcyoung.xyz/2021/06/01/linker-script/)
+- [Basic Concepts in Interrupts](https://web.sonoma.edu/users/f/farahman/sonoma/courses/es310/310_arm/lectures/Chapter_11_Interrupts_ARM.pdf) from [EE 310/310L: Microprocessors and System Design - Introducing ARM](https://web.sonoma.edu/users/f/farahman/sonoma/courses/es310/310_arm/)
+- [STM32Cube initialization code generator](https://www.st.com/en/development-tools/stm32cubemx.html?icmp=stm32cubemx_pron_pr-stm32cubef2_apr2014&sc=stm32cube-pr2#documentation),  specifically [STM32 configuration and initialization C code generation](https://www.st.com/resource/en/data_brief/stm32cubemx.pdf)
+
