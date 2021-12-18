@@ -66,9 +66,9 @@ The final version of my blinky uses the push button to control the [mode](https:
  - `AlwaysOff` even if the `LED_ON()` is called, this mode ensure the `LD2` LED is [always off](https://github.com/gojimmypi/IoT_BBQ/blob/85dd40f15f56ba21bfe317fba5d7d07867083e23/IoT_BBQ_STM32/_main.c#L251).
 
  As there are 2 LEDs the target blinky `LD2`, and the other, `LD1` is used to indicate blinky mode:
- - `IsBlinking` - `LD1` blinks once, then pauses. repeat; `LD2` is blinking on 555ms duration on, and 555ms off,
+ - `IsBlinking` - `LD1` blinks once, then pauses. repeat; `LD2` is blinking on 555ms duration on, and 555ms off.
  - `AlwaysOn` - `LD1` blinks twice, then pauses. repeat; `LD2` stays on.
- - `AlwaysOff` - blinks three times, then pauses. repeat; `LD2` stays off.
+ - `AlwaysOff` - `LD1` blinks three times, then pauses. repeat; `LD2` stays off.
 
 Here's a YouTube video of the blinky in action: 
 
