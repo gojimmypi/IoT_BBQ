@@ -53,10 +53,18 @@ Sample Code
 - [logicalelegance/midifun/Core/Console/console.c](https://github.com/logicalelegance/midifun/blob/master/Core/Console/console.c)
 - [stackoverflow: STM32 HAL timer interrupt isn't triggered](https://stackoverflow.com/questions/40323461/stm32-hal-timer-interrupt-isnt-triggered)
 - [stackoverflow: STM32F3 Discovery - Implement GPIO-Interrupt](https://stackoverflow.com/questions/40057581/stm32f3-discovery-implement-gpio-interrupt)
+- [STM32-libraries/Drivers/LCD/Adafruit_GFX.h](https://github.com/mindThomas/STM32-libraries/blob/master/Drivers/LCD/Adafruit_GFX.h)
 
 Other Stuff
 
+- [pinout](https://pinout.readthedocs.io/en/latest/)
+- [cmocka unit testing framework for C with support for mock objects](https://cmocka.org/)
+- [asciiflow.com](https://asciiflow.com/#/)
+- [app.diagrams.net](https://app.diagrams.net/)
+- [lucidChart Block diagram maker](https://www.lucidchart.com/pages/examples/block-diagram-maker)
+- [drawio-desktop](https://github.com/jgraph/drawio-desktop/releases/tag/v15.8.7)
 - [Everything You Never Wanted To Know About Linker Script](https://mcyoung.xyz/2021/06/01/linker-script/)
 - [Basic Concepts in Interrupts](https://web.sonoma.edu/users/f/farahman/sonoma/courses/es310/310_arm/lectures/Chapter_11_Interrupts_ARM.pdf) from [EE 310/310L: Microprocessors and System Design - Introducing ARM](https://web.sonoma.edu/users/f/farahman/sonoma/courses/es310/310_arm/)
 - [STM32Cube initialization code generator](https://www.st.com/en/development-tools/stm32cubemx.html?icmp=stm32cubemx_pron_pr-stm32cubef2_apr2014&sc=stm32cube-pr2#documentation),  specifically [STM32 configuration and initialization C code generation](https://www.st.com/resource/en/data_brief/stm32cubemx.pdf)
-
+- [hackaday stm32cubemx makes makefiles](https://hackaday.com/2017/07/15/stm32cubemx-makes-makefiles/)
+- [godbolt.org](godbolt.org)
