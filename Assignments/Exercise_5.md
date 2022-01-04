@@ -1,4 +1,4 @@
-# Exercise 5: State Machine Socumentation
+# Exercise 5: State Machine Documentation
 
 - 1 Start putting together a plan for your final project. Given the chapter, the main goal is to
 put together state machine documentation. This can be a flowchart or (preferably) a
@@ -13,7 +13,7 @@ CHOOSE\_MODE| Show Mode  |   read      |READ\_WEIGHT|         |             |   
 GOODBYE     | Save       |        BYE  |            |         |             |            | 
 RUN         |  Get Weight|  Show Weight|READ\_WEIGHT| GOODBYE | CHOOSE\_MODE|            | RUN
 TARE        | init sensor| Show Tare   |READ\_WEIGHT| GOODBYE | CHOOSE\_MODE|            | RUN
-RESET       |  clear tare|  Show Reset |CLEAR\_TARE | GOODBYE | CHOOSE\_MODE|            | RUN
+RESET       |  clear tare|  Show Reset |CLEAR\_TARE | GOODBYE | CHOOSE_MODE |            | RUN
 OFF         |            |Show Shutdown|  x         |  x      | x           |            | x    
 
 - 2 Extra credit: Al Sweigart wrote many small games in Python. They are keyboard input so
