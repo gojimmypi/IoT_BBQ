@@ -71,9 +71,7 @@ The final version of my blinky uses the push button to control the [mode](https:
  - `AlwaysOff` - `LD1` blinks three times, then pauses. repeat; `LD2` stays off.
 
 Here's a YouTube video of the blinky in action: 
-
 [![RTOS Blinky YouTube](https://img.youtube.com/vi/RCKf-NEh-AY/0.jpg)](https://www.youtube.com/watch?v=RCKf-NEh-AY)
-
 
 ## Discussion Points:
 
@@ -137,4 +135,4 @@ The Button initialization looks like this:
     GPIO_PinState SwitchState;
 ```
 
-<< [Exercise 3b](./Exercise_3b.md) -- [Assignments](./README.md) -- [next tbd]() >>
+<< [Exercise 3b](./Exercise_3b.md) -- [Assignments](./README.md) -- [Exercise 5](./Exercise_5.md) >>
