@@ -6,7 +6,7 @@ state table. You may also need to create the diagrams from Lesson 2 to flesh out
 design. Note: this design planning, thinking through the system, what you have and
 what you need. Keep in mind that these will not be the final version!
 
-**State**   |** Action **|** Display **|** Sensor **|** Off **|**   Mode  **|** Button **|** Timeout **
+**State**   | **Action** | **Display** | **Sensor** | **Off** | **Mode**    | **Button** | **Timeout**
 :----------:|:----------:|:-----------:|:----------:|:-------:|:-----------:|:----------:|:-----------:
 Start       |        init|  Hello      |READ\_WEIGHT|         |             |            | 
 CHOOSE\_MODE| Show Mode  |   read      |READ\_WEIGHT|         |             |            | 
