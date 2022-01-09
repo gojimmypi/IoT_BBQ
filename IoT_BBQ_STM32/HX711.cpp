@@ -81,25 +81,29 @@ HX711::~HX711() {
 
 void HX711::begin(uint16_t dout, uint16_t pd_sck, byte gain) {
 
-    PD_SCK = pd_sck;
-    DOUT = dout;
+    PD_SCK = GPIO_PIN_2; //  ARD.D8 = PB2  0x0004
+    DOUT = GPIO_PIN_15;  //  ARD.D9 = PA15 0x8000
 
     // pinMode(PD_SCK, OUTPUT);
     GPIO_InitTypeDef GPIO_InitStructureB;
-    GPIO_InitStructureB.Pin = PD_SCK;
+    GPIO_InitStructureB.Pin = GPIO_PIN_2;
 
     GPIO_InitStructureB.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStructureB.Speed = GPIO_SPEED_FREQ_HIGH;
     GPIO_InitStructureB.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStructureB);
 
-    GPIO_InitStructureB.Pin = GPIO_PIN_9;
-    GPIO_InitStructureB.Mode = GPIO_MODE_INPUT;
-    GPIO_InitStructureB.Speed = GPIO_SPEED_FREQ_HIGH;
-    GPIO_InitStructureB.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStructureB);
+    // GPIOA DOUT
+    GPIO_InitTypeDef GPIO_InitStructureA;
+    GPIO_InitStructureA.Pin = GPIO_PIN_15;
+    GPIO_InitStructureA.Mode = GPIO_MODE_INPUT;
+    GPIO_InitStructureA.Speed = GPIO_SPEED_FREQ_HIGH;
+    GPIO_InitStructureA.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStructureA);
 
-//    HAL_GPIO_WritePin(GPIOB, PD_SCK, GPIO_PIN_RESET);        
+    power_up();
+    
+    //    HAL_GPIO_WritePin(GPIOB, PD_SCK, GPIO_PIN_RESET);        
 //    HAL_GPIO_WritePin(GPIOB, PD_SCK, GPIO_PIN_SET);
 //
 //    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_RESET);        
@@ -110,7 +114,7 @@ void HX711::begin(uint16_t dout, uint16_t pd_sck, byte gain) {
 
 bool HX711::is_ready() {
     // return digitalRead(DOUT) == LOW;
-    return HAL_GPIO_ReadPin(GPIOB, DOUT) == LOW;
+    return HAL_GPIO_ReadPin(GPIOA, DOUT) == LOW;
 }
 
 void HX711::set_gain(byte gain) {
@@ -191,7 +195,7 @@ long HX711::read() {
 
 #ifdef IS_FREE_RTOS
         // End of critical section.
-        // portEXIT_CRITICAL(&mux);
+       // portEXIT_CRITICAL(&mux); // TODO why is this disabled?
 
 #elif HAS_ATOMIC_BLOCK
     }
@@ -226,6 +230,7 @@ void HX711::wait_ready(unsigned long delay_ms) {
         // Probably will do no harm on AVR but will feed the Watchdog Timer (WDT) on ESP.
         // https://github.com/bogde/HX711/issues/73
         DWT_Delay_us(1000 * delay_ms); // delay(delay_ms);
+        // TODO what if it is never ready? see wait_ready_timeout()
     }
 }
 

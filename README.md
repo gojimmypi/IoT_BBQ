@@ -1,3 +1,4 @@
+# ToT BBQ
 
 Project for [Making Embedded Systems](https://classpert.com/classpertx/cohorts/making-embedded-systems/dashboard?path_to_locale=en) class.
 
@@ -31,10 +32,20 @@ Components needed include:
 
 Yes, the [ST USB Driver](https://www.st.com/en/development-tools/stsw-link009.html) needs to be installed manually.
 
-# Diagram:
+## Diagram:
 
 ![image](https://user-images.githubusercontent.com/13059545/142352018-6cc0b29a-dc3a-40f1-bdc3-9d5999a4fc22.png)
 
+## Weight Sensor
+
+The HX711 weight sensor is powered with +3.3V and conencted to Arduino Header Pins `D8` (`ARD.D8` == `GPIO_PIN_8` == `PB2`) and `D9` (`GPIO_PIN_9`) located at `CN1` pins 1 and 2, 
+as shown on page 50 of the [B-L475E-IOT01A (UM2153) User manual](https://www.st.com/resource/en/user_manual/um2153-discovery-kit-for-iot-node-multichannel-communication-with-stm32l4-stmicroelectronics.pdf)
+
+![HX711_arduino_header_connection](./images/HX711_arduino_header_connection.png)
+
+
+
+## Additional Resources
 
 See also:
 - [STM32 Discovery Kits](https://www.st.com/en/evaluation-tools/stm32-discovery-kits.html#products)

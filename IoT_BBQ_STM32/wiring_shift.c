@@ -41,10 +41,10 @@ uint8_t shiftIn(uint16_t dataPin, uint16_t clockPin, uint8_t bitOrder) {
         
         if (bitOrder == LSBFIRST)
             //value |= digitalRead(dataPin) << i;
-        value |= HAL_GPIO_ReadPin(GPIOB, dataPin) << i;
+        value |= HAL_GPIO_ReadPin(GPIOA, dataPin) << i;
         
         else
-            value |= HAL_GPIO_ReadPin(GPIOB, dataPin)  << (7 - i);
+            value |= HAL_GPIO_ReadPin(GPIOA, dataPin)  << (7 - i);
         // digitalWrite(clockPin, LOW);
         HAL_GPIO_WritePin(GPIOB, clockPin, GPIO_PIN_RESET);
     }
@@ -70,12 +70,12 @@ void shiftOut(uint16_t dataPin, uint16_t clockPin, uint8_t bitOrder, uint8_t val
     for (i = 0; i < 8; i++) {
         if (bitOrder == LSBFIRST) {
             // digitalWrite(dataPin, val & 1);
-            HAL_GPIO_WritePin(GPIOB, dataPin, PinStateOf(val & 1));
+            HAL_GPIO_WritePin(GPIOA, dataPin, PinStateOf(val & 1));
             val >>= 1;
         }
         else {	
             // digitalWrite(dataPin, (val & 128) != 0);
-            HAL_GPIO_WritePin(GPIOB, dataPin, PinStateOf((val & 128) != 0));
+            HAL_GPIO_WritePin(GPIOA, dataPin, PinStateOf((val & 128) != 0));
             val <<= 1;
         }
 		
