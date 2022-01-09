@@ -66,12 +66,19 @@
   <ItemGroup>
     <ClCompile Include="HX711.cpp" />
     <ClCompile Include="spi_flash.c" />
+    <ClCompile Include="SSD1306\ssd1306.c" />
+    <ClCompile Include="SSD1306\ssd1306_fonts.c" />
+    <ClCompile Include="SSD1306\ssd1306_tests.c" />
     <ClCompile Include="startup.cpp" />
     <ClCompile Include="system_stm32l4xx.c" />
     <ClCompile Include="task_weight_monitor.cpp" />
     <ClCompile Include="wiring_shift.c" />
     <ClCompile Include="_main.c" />
     <ClInclude Include="spi_flash.h" />
+    <ClInclude Include="SSD1306\ssd1306.h" />
+    <ClInclude Include="SSD1306\ssd1306_conf.h" />
+    <ClInclude Include="SSD1306\ssd1306_fonts.h" />
+    <ClInclude Include="SSD1306\ssd1306_tests.h" />
     <ClInclude Include="task_weight_monitor.h" />
     <None Include="stm32.props" />
     <ClCompile Include="$(BSP_ROOT)\STM32L4xxxx\StartupFiles\startup_stm32l475xx.c" />

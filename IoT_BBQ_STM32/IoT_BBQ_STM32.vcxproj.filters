@@ -906,6 +906,15 @@
     <ClCompile Include="spi_flash.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="SSD1306\ssd1306.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="SSD1306\ssd1306_tests.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="SSD1306\ssd1306_fonts.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DWT_STM32_DELAY.h">
@@ -921,6 +930,18 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="spi_flash.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SSD1306\ssd1306_tests.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SSD1306\ssd1306_fonts.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SSD1306\ssd1306_conf.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SSD1306\ssd1306.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>
