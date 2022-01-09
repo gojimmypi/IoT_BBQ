@@ -57,7 +57,7 @@ as shown on page 50 of the [B-L475E-IOT01A (UM2153) User manual](https://www.st.
 
 See Table 4 ARDUINO® connector pinout on page 31 of the [B-L475E-IOT01A (UM2153) User manual](https://www.st.com/resource/en/user_manual/um2153-discovery-kit-for-iot-node-multichannel-communication-with-stm32l4-stmicroelectronics.pdf):
 
-![CN1_connections.png](./imqages/CN1_connections.png)
+![CN1_connections.png](./images/CN1_connections.png)
 
 
 ## Additional Resources
