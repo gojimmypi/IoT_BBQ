@@ -1,4 +1,4 @@
-# ToT BBQ
+# IoT BBQ
 
 Project for [Making Embedded Systems](https://classpert.com/classpertx/cohorts/making-embedded-systems/dashboard?path_to_locale=en) class.
 
@@ -43,6 +43,21 @@ as shown on page 50 of the [B-L475E-IOT01A (UM2153) User manual](https://www.st.
 
 ![HX711_arduino_header_connection](./images/HX711_arduino_header_connection.png)
 
+
+## Display
+
+The SSD1306 display is connected to I2C `SCL/D15` (`GPIO_PIN_15`) and `SDA/D14` (`GPIO_PIN_14`) located at `CN1` pins 9 and 10, 
+as shown on page 50 of the [B-L475E-IOT01A (UM2153) User manual](https://www.st.com/resource/en/user_manual/um2153-discovery-kit-for-iot-node-multichannel-communication-with-stm32l4-stmicroelectronics.pdf)
+
+![SSD1306_arduino_header_connection](./images/SSD1306_arduino_header_connection.png)
+
+## B-L475E-IOT01A Connections
+
+### CN1
+
+See Table 4 ARDUINO® connector pinout on page 31 of the [B-L475E-IOT01A (UM2153) User manual](https://www.st.com/resource/en/user_manual/um2153-discovery-kit-for-iot-node-multichannel-communication-with-stm32l4-stmicroelectronics.pdf):
+
+![CN1_connections.png](./imqages/CN1_connections.png)
 
 
 ## Additional Resources
