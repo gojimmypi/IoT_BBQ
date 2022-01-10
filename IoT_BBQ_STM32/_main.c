@@ -87,6 +87,20 @@ void EXTI15_10_IRQHandler(void)
     HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_13);  // check to see if this is our interrupt. if so clear it and call the HAL_GPIO_EXTI_Callback(GPIO_Pin)
 }
 
+
+void ConfigureI2CPins()
+{
+    GPIO_InitTypeDef GPIO_InitStruct;
+
+    GPIO_InitStruct.Pin = GPIO_PIN_0 | GPIO_PIN_1;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+    GPIO_InitStruct.Pull = GPIO_PULLUP;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
+    GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
+    __GPIOB_CLK_ENABLE();
+    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+}
+
 /**
   * @brief  Main program
   * @param  None
@@ -195,7 +209,11 @@ int main(void)
     HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);    
     
+    // I2C
+    ConfigureI2CPins();
     
+
+
     // create a SwitchState variable to hold the result of out button press 
     GPIO_PinState SwitchState;
     SwitchState = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
