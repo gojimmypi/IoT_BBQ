@@ -69,6 +69,7 @@
     <ClCompile Include="SSD1306\ssd1306.c" />
     <ClCompile Include="SSD1306\ssd1306_fonts.c" />
     <ClCompile Include="SSD1306\ssd1306_tests.c" />
+    <ClCompile Include="SSD1306_demo.cpp" />
     <ClCompile Include="startup.cpp" />
     <ClCompile Include="system_stm32l4xx.c" />
     <ClCompile Include="task_weight_monitor.cpp" />
@@ -79,6 +80,7 @@
     <ClInclude Include="SSD1306\ssd1306_conf.h" />
     <ClInclude Include="SSD1306\ssd1306_fonts.h" />
     <ClInclude Include="SSD1306\ssd1306_tests.h" />
+    <ClInclude Include="SSD1306_demo.h" />
     <ClInclude Include="task_weight_monitor.h" />
     <None Include="stm32.props" />
     <ClCompile Include="$(BSP_ROOT)\STM32L4xxxx\StartupFiles\startup_stm32l475xx.c" />
