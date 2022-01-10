@@ -13,7 +13,7 @@
 
 _BEGIN_STD_C
 
-#include "ssd1306_conf.h"
+#include "SSD1306/ssd1306_conf.h"
 
 #if defined(STM32F0)
 #include "stm32f0xx_hal.h"
@@ -51,7 +51,8 @@ _BEGIN_STD_C
 #endif
 
 #ifndef SSD1306_I2C_ADDR
-#define SSD1306_I2C_ADDR        (0x3C << 1)
+#define SSD1306_I2C_ADDR        (0x3C << 1) // address 78
+//#define SSD1306_I2C_ADDR      (0x3D << 1) // address 7A
 #endif
 
 /* ^^^ I2C config ^^^ */
