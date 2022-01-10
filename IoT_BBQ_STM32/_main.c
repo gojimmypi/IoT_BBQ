@@ -96,8 +96,8 @@ void ConfigureI2CPins()
     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
     GPIO_InitStruct.Pull = GPIO_PULLUP;
     GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
-    GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
-    __GPIOB_CLK_ENABLE();
+    GPIO_InitStruct.Alternate = GPIO_AF4_I2C3;
+    __GPIOC_CLK_ENABLE();
     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 }
 
