@@ -6,7 +6,7 @@ extern "C" {
 
     void GetScaleWeight();
     
-    void SysTick_Handler();
+    //void SysTick_Handler();
     
 #ifdef __cplusplus
 }

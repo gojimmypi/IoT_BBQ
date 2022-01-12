@@ -1,0 +1,12 @@
+/**
+ *
+ * HX711 library for Arduino
+ * https://github.com/bogde/HX711
+ *
+ * MIT License
+ * (c) 2018 Bogdan Necula
+ *
+ * adapted to stm32l4xx_hal 
+ * by gojimmypi 2021
+ *
+**/

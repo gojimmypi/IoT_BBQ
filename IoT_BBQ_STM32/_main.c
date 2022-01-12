@@ -1,37 +1,14 @@
-/**
-******************************************************************************
-* @file    FreeRTOS/FreeRTOS_ThreadCreation/Src/main.c
-* @author  MCD Application Team
-* @version V1.2.2
-* @date    25-May-2015
-* @brief   Main program body
-******************************************************************************
-* @attention
-*
-* <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
-*
-* Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-* You may not use this file except in compliance with the License.
-* You may obtain a copy of the License at:
-*
-*        http://www.st.com/software_license_agreement_liberty_v2
-*
-* Unless required by applicable law or agreed to in writing, software 
-* distributed under the License is distributed on an "AS IS" BASIS, 
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*
-******************************************************************************
-*/
-
 /* Includes ------------------------------------------------------------------*/
 #include <stm32l4xx_hal.h>
 #include <../CMSIS_RTOS/cmsis_os.h>
-#include "startup.h"
-#include "task_weight_monitor.h"
 
-#include "spi_flash.h"
+#include "_Init/startup.h"
+#include "_Init/Init_GPIO.h"
+#include "Tasks/task_weight_monitor.h"
+#include "Flash/Flash_Sim_Demo.h"
+#include "LED/LED.h"
+
+// #include "Flash/Flash_Sim_Demo.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -42,10 +19,6 @@ osThreadId LEDThread1Handle, LEDThread2Handle;
 /* Private function prototypes -----------------------------------------------*/
 static void LED_Thread1(void const *argument);
 static void LED_Thread2(void const *argument);
-
-enum LED_Mode { IsBlinking, AlwaysOn, AlwaysOff };
-
-volatile static enum LED_Mode current_LED_MODE = IsBlinking; // we'll use a button to trigger an interrupt to set LED mode, starting with blinky
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -88,18 +61,6 @@ void EXTI15_10_IRQHandler(void)
 }
 
 
-void ConfigureI2CPins()
-{
-    GPIO_InitTypeDef GPIO_InitStruct;
-
-    GPIO_InitStruct.Pin = GPIO_PIN_0 | GPIO_PIN_1;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-    GPIO_InitStruct.Pull = GPIO_PULLUP;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
-    GPIO_InitStruct.Alternate = GPIO_AF4_I2C3;
-    __GPIOC_CLK_ENABLE();
-    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-}
 
 /**
   * @brief  Main program
@@ -108,6 +69,10 @@ void ConfigureI2CPins()
   */
 int main(void)
 {
+    // run flash simulation demo
+    Flash_Sim_Demo();
+
+
     /* STM32F4xx HAL library initialization:
          - Configure the Flash prefetch, instruction and Data caches
          - Configure the Systick to generate an interrupt each 1 msec
@@ -116,47 +81,6 @@ int main(void)
     */
     HAL_Init();  
 
-    // 
-    // -------------------------------------------------------------------------
-    // flash testing for Exercise 3b
-    // -------------------------------------------------------------------------
-    //
-    
-    // initialize SPI Flash
-    sFLASH_Init();
-
-#ifdef is_spi_flash_simulation
-    uint32_t UsingFlashAddress = 0x1000;
-    uint32_t MaxFlashTestSize  = 0x1FFF;
-    
-    // when writing NULL during simulation, the parameters are actually setup for stating address and max size
-    sFLASH_WriteBuffer(NULL, UsingFlashAddress, MaxFlashTestSize);
-#endif
-    
-    // setup some data
-    uint8_t someData = 42;
-    uint8_t someOtherData = 0x55;
-    
-    uint8_t* otherData = &someOtherData;
-    uint8_t* thisFlashData = &someData;
-    uint32_t thisFlashAddress = 0x1234;
-    uint32_t thisFlashTestSize = 1;
-
-    // sample write
-    sFLASH_WriteBuffer(thisFlashData, thisFlashAddress, thisFlashTestSize);
-
-
-    // sample read
-    sFLASH_ReadBuffer(otherData, thisFlashAddress, thisFlashTestSize);
-    
-    
-    // sample erase
-    sFLASH_EraseBulk();
-
-    
-    // sample read after erase
-    sFLASH_ReadBuffer(thisFlashData, thisFlashAddress, thisFlashTestSize);
-    
 
     // -------------------------------------------------------------------------
     // start of regular app
@@ -250,57 +174,6 @@ void SysTick_Handler(void)
     osSystickHandler();
 }
 
-//
-// Turn the LED on (unless button mode set to always off, or always on)
-//
-static void LED_ON()
-{
-    switch (current_LED_MODE)
-    {
-    case IsBlinking:
-        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-        break;
-
-    case AlwaysOn:
-        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-        break;
-
-    case AlwaysOff:
-        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-        break;
-            
-    default:
-        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-        break;
-    }       
-}
-
-
-//
-// Turn the LED off (unless button mode set to always on, or always off)
-//
-static void LED_OFF()
-{
-    switch (current_LED_MODE)
-    {
-    case IsBlinking:
-        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-        break;
-
-    case AlwaysOn:
-        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-        break;
-        
-    case AlwaysOff:
-        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-        break;
-            
-    default:
-        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-        break;
-
-    }       
-}
 
 /**
   * @brief  Toggle LED1
@@ -313,14 +186,14 @@ static void LED_Thread1(void const *argument)
   
     for (;;)
     {
-        
         switch (current_LED_MODE)
         {
         case IsBlinking:
-            LED_ON(); // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+            LED_ON();
+            STATE_LED_ON(); // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
             osDelay(555);
 		
-            LED_OFF(); // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+            STATE_LED_OFF(); // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
             //osThreadSuspend(LEDThread2Handle);
             osDelay(555);
 		
@@ -332,12 +205,12 @@ static void LED_Thread1(void const *argument)
             break;
 
         case AlwaysOn:
-            LED_ON();      // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+            STATE_LED_ON();      // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
             osDelay(2000); // no sense in runing hard the whole time if we are not blinking
             break;
 
         case AlwaysOff:
-            LED_OFF();     // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+            STATE_LED_OFF();     // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
             //osThreadSuspend(LEDThread2Handle);
             osDelay(2000); // no sense in runing hard the whole time if we are not blinking
             //osThreadResume(LEDThread2Handle);
@@ -412,5 +285,3 @@ void assert_failed(uint8_t* file, uint32_t line)
     }
 }
 #endif
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

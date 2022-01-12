@@ -891,19 +891,16 @@
     <ClCompile Include="wiring_shift.c">
       <Filter>Header files</Filter>
     </ClCompile>
-    <ClCompile Include="startup.cpp">
+    <ClCompile Include="_Init\startup.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
-    <ClCompile Include="HX711.cpp">
+    <ClCompile Include="HX711\HX711.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
-    <ClCompile Include="task_weight_monitor.cpp">
+    <ClCompile Include="Tasks\task_weight_monitor.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
     <ClCompile Include="_main.c">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="spi_flash.c">
       <Filter>Source files</Filter>
     </ClCompile>
     <ClCompile Include="SSD1306\ssd1306.c">
@@ -915,21 +912,36 @@
     <ClCompile Include="SSD1306\ssd1306_fonts.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="SSD1306\SSD1306_demo.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="Flash\spi_flash.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="Flash\Flash_Sim_Demo.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="_Init\Init_GPIO.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="_Init\Init_GPIO_I2C.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="LED\LED.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DWT_STM32_DELAY.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="startup.h">
+    <ClInclude Include="_Init\startup.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="HX711.h">
+    <ClInclude Include="HX711\HX711.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="task_weight_monitor.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
-    <ClInclude Include="spi_flash.h">
+    <ClInclude Include="Tasks\task_weight_monitor.h">
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="SSD1306\ssd1306_tests.h">
@@ -942,6 +954,21 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="SSD1306\ssd1306.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SSD1306\SSD1306_demo.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Flash\spi_flash.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Flash\Flash_Sim_Demo.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="_Init\Init_GPIO.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="LED\LED.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

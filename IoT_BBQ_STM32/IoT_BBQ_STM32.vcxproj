@@ -64,24 +64,37 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="HX711.cpp" />
-    <ClCompile Include="spi_flash.c" />
+    <ClCompile Include="Flash\Flash_Sim_Demo.cpp" />
+    <ClCompile Include="Flash\spi_flash.c" />
+    <ClCompile Include="HX711\HX711.cpp" />
+    <ClCompile Include="LED\LED.cpp" />
     <ClCompile Include="SSD1306\ssd1306.c" />
     <ClCompile Include="SSD1306\ssd1306_fonts.c" />
     <ClCompile Include="SSD1306\ssd1306_tests.c" />
-    <ClCompile Include="SSD1306_demo.cpp" />
-    <ClCompile Include="startup.cpp" />
+    <ClCompile Include="SSD1306\SSD1306_demo.cpp" />
+    <ClCompile Include="_Init\startup.cpp" />
     <ClCompile Include="system_stm32l4xx.c" />
-    <ClCompile Include="task_weight_monitor.cpp" />
+    <ClCompile Include="Tasks\task_weight_monitor.cpp" />
     <ClCompile Include="wiring_shift.c" />
+    <ClCompile Include="_Init\Init_GPIO.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="_Init\Init_GPIO_I2C.cpp" />
     <ClCompile Include="_main.c" />
-    <ClInclude Include="spi_flash.h" />
+    <ClInclude Include="Flash\Flash_Sim_Demo.h" />
+    <ClInclude Include="Flash\spi_flash.h" />
+    <ClInclude Include="LED\LED.h" />
     <ClInclude Include="SSD1306\ssd1306.h" />
     <ClInclude Include="SSD1306\ssd1306_conf.h" />
     <ClInclude Include="SSD1306\ssd1306_fonts.h" />
     <ClInclude Include="SSD1306\ssd1306_tests.h" />
-    <ClInclude Include="SSD1306_demo.h" />
-    <ClInclude Include="task_weight_monitor.h" />
+    <ClInclude Include="SSD1306\SSD1306_demo.h" />
+    <ClInclude Include="Tasks\task_weight_monitor.h" />
+    <ClInclude Include="_Init\Init_GPIO.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <None Include="stm32.props" />
     <ClCompile Include="$(BSP_ROOT)\STM32L4xxxx\StartupFiles\startup_stm32l475xx.c" />
     <None Include="$(BSP_ROOT)\FreeRTOS\License\license.txt" />
@@ -201,8 +214,8 @@
     <ClCompile Include="$(BSP_ROOT)\STM32L4xxxx\STM32L4xx_HAL_Driver\Src\stm32l4xx_ll_utils.c" />
     <ClInclude Include="FreeRTOSConfig.h" />
     <ClInclude Include="DWT_STM32_DELAY.h" />
-    <ClInclude Include="HX711.h" />
-    <ClInclude Include="startup.h" />
+    <ClInclude Include="HX711\HX711.h" />
+    <ClInclude Include="_Init\startup.h" />
     <ClInclude Include="stm32l4xx_hal_conf.h" />
     <ClInclude Include="$(BSP_ROOT)\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.h" />
     <ClInclude Include="$(BSP_ROOT)\FreeRTOS\Source\include\croutine.h" />
