@@ -39,6 +39,11 @@ See  [Project UART code](../IoT_BBQ_STM32/UART/)
 
 ### (f) Implement a state machine
 
+There's currently a prototype [LED STate Machine](https://github.com/gojimmypi/IoT_BBQ/blob/ce44c00152af0a16b26d9a246a799ed7db8553ae/IoT_BBQ_STM32/LED/LED.cpp#L23) 
+with [IsBlinking, AlwaysOn, AlwaysOff](https://github.com/gojimmypi/IoT_BBQ/blob/ce44c00152af0a16b26d9a246a799ed7db8553ae/IoT_BBQ_STM32/LED/LED.h#L14) states.
+
+This project uses the STM32L4XX HAL, for example [here](https://github.com/gojimmypi/IoT_BBQ/blob/ce44c00152af0a16b26d9a246a799ed7db8553ae/IoT_BBQ_STM32/_main.c#L2), 
+and is a mult-threaded application using embedded RTOS (specfically [CMSIS_RTOS](https://arm-software.github.io/CMSIS_5/RTOS2/html/rtos_api2.html)) for example included [here](https://github.com/gojimmypi/IoT_BBQ/blob/ce44c00152af0a16b26d9a246a799ed7db8553ae/IoT_BBQ_STM32/_main.c#L3)
 
 ## List of the tasks to complete for the project
 
