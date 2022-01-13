@@ -82,6 +82,8 @@ See also:
 
 - [Idioms for using C++ in C programs (Part 1 of 2)](http://www.olivierlanglois.net/idioms_for_using_cpp_in_c_programs.html)
 
+- [VS Code Extension: Markdown PDF](https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf)
+
 My original README follows:
 
 # IoT_BBQ
