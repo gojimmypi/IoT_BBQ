@@ -7,6 +7,7 @@
 - [Exercise 3b](./Exercise_3b.md)  See also [Class Materials](https://drive.google.com/drive/folders/1xk9AmmLDqESqimDk_KvxHu6KfzpaYX9M), [spi_flash.h](https://drive.google.com/file/d/12dw-pZiKiK1vi4gv49W1x6np5uzCH_cV/view)
 - [Exercise 4](./Exercise_4.md) 
 - [Exercise 5](./Exercise_5.md) 
+- [Exercise 6](./Exercise_6.md) 
 
 
 
