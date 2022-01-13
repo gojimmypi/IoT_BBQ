@@ -23,17 +23,17 @@ This project leverages the code from [Exercise 4](./Exercise_4.md) that implemen
 
 The peripherals used in the project:
 
-* Load cell (weight sensor) such as the [SparkFun HX711](https://www.sparkfun.com/products/13879). See [Project HX711 code](../IoT_BBQ_STM32/HX711/).
+* Load cell (weight sensor) such as the [SparkFun HX711](https://www.sparkfun.com/products/13879). See [HX711 code](../IoT_BBQ_STM32/HX711/).
 
-* Display: SSD1306 OLED Dual Color (Yellow / Blue) such as [this I2C Serial 12864 on Amazon](https://www.amazon.com/dp/B08KY21SR2/) that includes mbedded Driver IC. See [Project SSD1306 code](../IoT_BBQ_STM32/SSD1306/)
+* Display: SSD1306 OLED Dual Color (Yellow / Blue) such as [this I2C Serial 12864 on Amazon](https://www.amazon.com/dp/B08KY21SR2/) that includes mbedded Driver IC. See [SSD1306 code](../IoT_BBQ_STM32/SSD1306/)
 
 * Temperature Sensor (The onboard device TODO specify)
 
-* Onboard LED: See [Project LED code](../IoT_BBQ_STM32/LED/)
+* Onboard LED: See [LED code](../IoT_BBQ_STM32/LED/)
 
 ### (d) Have serial port output
 
-See  [Project UART code](../IoT_BBQ_STM32/UART/)
+See  [UART code](../IoT_BBQ_STM32/UART/)
 
 ### (e) Implement an algorithmic piece that makes the system interesting
 
@@ -44,8 +44,41 @@ TODO: _interesting_
 There's currently a prototype [LED STate Machine](https://github.com/gojimmypi/IoT_BBQ/blob/ce44c00152af0a16b26d9a246a799ed7db8553ae/IoT_BBQ_STM32/LED/LED.cpp#L23) 
 with [IsBlinking, AlwaysOn, AlwaysOff](https://github.com/gojimmypi/IoT_BBQ/blob/ce44c00152af0a16b26d9a246a799ed7db8553ae/IoT_BBQ_STM32/LED/LED.h#L14) states.
 
+### Not required to use a HAL (but it is encouraged)
+
 This project uses the STM32L4XX HAL, for example [here](https://github.com/gojimmypi/IoT_BBQ/blob/ce44c00152af0a16b26d9a246a799ed7db8553ae/IoT_BBQ_STM32/_main.c#L2), 
-and is a mult-threaded application using embedded RTOS (specfically [CMSIS_RTOS](https://arm-software.github.io/CMSIS_5/RTOS2/html/rtos_api2.html)) for example included [here](https://github.com/gojimmypi/IoT_BBQ/blob/ce44c00152af0a16b26d9a246a799ed7db8553ae/IoT_BBQ_STM32/_main.c#L3)
+and is a mult-threaded application using embedded RTOS (specfically [CMSIS_RTOS](https://arm-software.github.io/CMSIS_5/RTOS2/html/rtos_api2.html)) for example included [here](https://github.com/gojimmypi/IoT_BBQ/blob/ce44c00152af0a16b26d9a246a799ed7db8553ae/IoT_BBQ_STM32/_main.c#L3).
+
+Code that uses the STM32 HAL will need the `#include <stm32l4xx_hal.h>`. Future versions of this codebase should include a hardware conditional include such as [this](https://github.com/gojimmypi/IoT_BBQ/blob/314d03bb8053d09c3730533c384fd499d35e3231/IoT_BBQ_STM32/SSD1306/ssd1306.h#L18) example:
+
+```
+#if defined(STM32F0)
+#include "stm32f0xx_hal.h"
+#elif defined(STM32F1)
+#include "stm32f1xx_hal.h"
+#elif defined(STM32F4)
+#include "stm32f4xx_hal.h"
+#include "stm32f4xx_hal_gpio.h"
+#elif defined(STM32L0)
+#include "stm32l0xx_hal.h"
+#elif defined(STM32L1)
+#include "stm32l1xx_hal.h"
+#elif defined(STM32L4)
+#include "stm32l4xx_hal.h"
+#elif defined(STM32F3)
+#include "stm32f3xx_hal.h"
+#elif defined(STM32H7)
+#include "stm32h7xx_hal.h"
+#elif defined(STM32F7)
+#include "stm32f7xx_hal.h"
+#elif defined(STM32G0)
+#include "stm32g0xx_hal.h"
+#elif defined(STM32G4)
+#include "stm32g4xx_hal.h"
+#else
+#error "Hardware platform not supported."
+#endif
+```
 
 ## List of the tasks to complete for the project
 
