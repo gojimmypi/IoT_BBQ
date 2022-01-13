@@ -2,7 +2,7 @@
 
 ## Put together a preliminary rough draft of your final report.
 
-See the WIP [Final Project Document](./Final_Project.md) and the [supplementary instructions](./Final_Project_Instructions.md).
+See the WIP [Final Project Document](./Final_Project.md) and the [Supplementary Instructions](./Final_Project_Instructions.md).
 
 > This is intended to be a planning exercise, not that you should have your project complete
 (though it makes the report easier to write if you put it in present/past tense instead of putting in
@@ -31,6 +31,7 @@ The [Minimum Project Requirements](./Final_Project.md#Challenges#Minimum-Project
 
 Beyond the requirements for the class, ideas to consider:
 
+* Firebox temperature
 * Solar power
 * LoRa communication
 * Internet conenctivity: web page to view weight, some sort of MQTT publish/subscribe/history.
