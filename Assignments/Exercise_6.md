@@ -16,12 +16,18 @@ The [Final Project Challenges](./Final_Project.md#Challenges) lists tasks that m
 ## Make a list of the tasks you want to complete for the project. 
 
 The [Minimum Project Requirements](./Final_Project.md#Challenges#Minimum-Project-Requirements) should certainly be completed:
-    [(a) Use a Cortex-M processor](./Final_Project.md#a-use-a-cortex-m-processor)
-    [(b) Have a button that causes an interrupt](./Final_Project.md#b-have-a-button-that-causes-an-interrupt)
-	[(c) Use at least three peripherals such as ADC, DAC, PWM LED, Smart LED, LCD, sensor, BLE](./Final_Project.md#c-use-at-least-three-peripherals-such-as-adc-dac-pwm-led-smart-led-lcd-sensor-ble)
-	[(d) Have serial port output](./Final_Project.md#d-have-serial-port-output)
-	[(e) Implement an algorithmic piece that makes the system interesting](./Final_Project.md#e-implement-an-algorithmic-piece-that-makes-the-system-interesting)
-	[(f) Implement a state machine](./Final_Project.md#f-implement-a-state-machine)
+
+[(a) Use a Cortex-M processor](./Final_Project.md#a-use-a-cortex-m-processor)
+
+[(b) Have a button that causes an interrupt](./Final_Project.md#b-have-a-button-that-causes-an-interrupt)
+
+[(c) Use at least three peripherals such as ADC, DAC, PWM LED, Smart LED, LCD, sensor, BLE](./Final_Project.md#c-use-at-least-three-peripherals-such-as-adc-dac-pwm-led-smart-led-lcd-sensor-ble)
+
+[(d) Have serial port output](./Final_Project.md#d-have-serial-port-output)
+
+[(e) Implement an algorithmic piece that makes the system interesting](./Final_Project.md#e-implement-an-algorithmic-piece-that-makes-the-system-interesting)
+
+[(f) Implement a state machine](./Final_Project.md#f-implement-a-state-machine)
 
 Beyond the requirements for the class, ideas to consider:
 
