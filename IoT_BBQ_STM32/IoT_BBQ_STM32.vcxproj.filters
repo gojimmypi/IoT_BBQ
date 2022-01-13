@@ -930,6 +930,9 @@
     <ClCompile Include="LED\LED.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="UART\UART.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DWT_STM32_DELAY.h">
@@ -969,6 +972,9 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="LED\LED.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="UART\UART.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -7,6 +7,7 @@
 #include "Tasks/task_weight_monitor.h"
 #include "Flash/Flash_Sim_Demo.h"
 #include "LED/LED.h"
+#include "UART/UART.h"
 
 // #include "Flash/Flash_Sim_Demo.h"
 
@@ -15,6 +16,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 osThreadId LEDThread1Handle, LEDThread2Handle;
+osThreadId UART_Thread1Handle;
 
 /* Private function prototypes -----------------------------------------------*/
 static void LED_Thread1(void const *argument);
@@ -81,6 +83,7 @@ int main(void)
     */
     HAL_Init();  
 
+    init_UART();
 
     // -------------------------------------------------------------------------
     // start of regular app
@@ -155,12 +158,16 @@ int main(void)
     osThreadDef(LED2, LED_Thread2, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);    
     
   
+    osThreadDef(UART1, UART_Thread1, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
+
     /* Start thread 1 */
     LEDThread1Handle = osThreadCreate(osThread(LED1), NULL);
   
     /* Start thread 2 */
     LEDThread2Handle = osThreadCreate(osThread(LED2), NULL);
   
+    UART_Thread1Handle = osThreadCreate(osThread(UART1), NULL);
+
     /* Start scheduler */
     osKernelStart();
 
@@ -172,7 +179,11 @@ void SysTick_Handler(void)
 {
     HAL_IncTick();
     osSystickHandler();
+
+    HAL_SYSTICK_IRQHandler(); // for UART
 }
+
+
 
 
 /**
