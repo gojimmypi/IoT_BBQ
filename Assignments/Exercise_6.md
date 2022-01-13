@@ -17,7 +17,7 @@ The [Final Project Challenges](./Final_Project.md#Challenges) lists tasks that m
 
 The [Minimum Project Requirements](./Final_Project.md#Challenges#Minimum-Project-Requirements) should certainly be completed:
 
-	[(a) Use a Cortex-M processor](./Final_Project.md#a-use-a-cortex-m-processor)
+	[Use a Cortex-M processor](./Final_Project.md#a-use-a-cortex-m-processor)
 	[(b) Have a button that causes an interrupt](./Final_Project.md#b-have-a-button-that-causes-an-interrupt)
 	[(c) Use at least three peripherals such as ADC, DAC, PWM LED, Smart LED, LCD, sensor, BLE](./Final_Project.md#c-use-at-least-three-peripherals-such-as-adc-dac-pwm-led-smart-led-lcd-sensor-ble)
 	[(d) Have serial port output](./Final_Project.md#d-have-serial-port-output)
