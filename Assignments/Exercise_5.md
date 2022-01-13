@@ -23,4 +23,4 @@ blackjack.py, conwaysgameoflife.py, snailrace.py, zombiebitefight.py,and montyha
 You do not need it to run to play the game but if you do and don’t have python set up,
 you can put them in a new Python notebook at https://colab.research.google.com/
 
-<< [Exercise 4](./Exercise_4.md) -- [Assignments](./README.md) -- [tbd]() >>
+<< [Exercise 4](./Exercise_4.md) -- [Assignments](./README.md) -- [Exercise 5](./Exercise_5.md) >>
