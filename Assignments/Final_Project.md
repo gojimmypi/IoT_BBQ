@@ -2,8 +2,12 @@
 
 This document addresses the [Final Project Instructions](./Final_Project_Instructions.md) for the [Making Embedded Systems](https://lms.classpert.com/classpert-x/courses/making-embedded-systems-wUXIUA) class.
 
-## Minimum Project Requirements
+The objective is to create Propane Tank Weight Sensor System with something considerably more accurate and precise to replace the stock mechanical spring gauge:
 
+![Existing_tank_scale.png](./images/Existing_tank_scale.png)   
+ 
+## Minimum Project Requirements
+ 
 The project must:
 
 ### (a) Use a Cortex-M processor: 
