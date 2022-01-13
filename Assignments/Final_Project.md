@@ -82,8 +82,6 @@ Code that uses the STM32 HAL will need the `#include <stm32l4xx_hal.h>`. Future 
 
 ## List of the tasks to complete for the project
 
-:heavy_check_mark:
-
 - [X] Confirm operational display
 - [X] Confirm operational weight sensor
 - [ ] Show weight value on display
@@ -101,6 +99,21 @@ mechanical issues. It is hoped that modern 3D Printing flexibility will be able 
 Technical implementation difficulties of a new hardware platform are always a concern (the original project was based on the ESP8266 and the LUA language).
 
 Details on some of the challenges:
+
+### External sensors and peripherals
+
+Certainly one of the benefits of having an evaluation board is having the connections "built-in" and sample code readily available. Unfortunately the Discovery Board used did not have a display and the I2C HX711 load cell was of course external, 
+adding the additional challenge of finding and wiring up the I2C connections.
+
+The better part of a day was spent trying to get the SSD1306 Display to work on `I2C1` that the [documentation](https://www.st.com/resource/en/user_manual/um2153-discovery-kit-for-iot-node-multichannel-communication-with-stm32l4-stmicroelectronics.pdf) claims is on `PB8` and `PB9`,
+but it was later learned the STM32CubeIDE shows GPIO pins `PB6` and `PB7` instead:
+
+![I2C1_pin_assignment_conflicting_info.png](./images/I2C1_pin_assignment_conflicting_info.png)
+
+The [SD31306 configureation](../IoT_BBQ_STM32/SSD1306/ssd1306_conf.h) is currently using `I2C3` instead. (See also the [SSD1306 default template](../IoT_BBQ_STM32/SSD1306/ssd1306_conf_template.h))
+
+Lesson learned: always do a simple IO level and control check on GPIO lines before starting somwthing more complex such as I2C communication.
+
 
 ### Mechanical support for weight sensor
 
