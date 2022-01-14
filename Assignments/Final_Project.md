@@ -155,10 +155,12 @@ If any sort of mass-production was desired, there's of course the chip shortage 
 The final project will be delivered as:
 
 (a) Video of the system working as intended (link to mp4 or youtube)  ** TODO **
+
 (b) Write up of the system (PDF or Google docs report). This document.
+
 (c) Link to the code: see [GitHub IoT BBQ STM32 Project](https://github.com/gojimmypi/IoT_BBQ/tree/main/IoT_BBQ_STM32)
 
-## Optionl Bonus
+## Optional Bonus
 
 * Power analysis
 * Firmware update

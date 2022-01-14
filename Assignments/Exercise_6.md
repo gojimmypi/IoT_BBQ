@@ -17,7 +17,7 @@ The [Final Project Challenges](./Final_Project.md#Challenges) lists tasks that m
 
 ## Make a list of the tasks you want to complete for the project. 
 
-The [Minimum Project Requirements](./Final_Project.md#Challenges#Minimum-Project-Requirements) should certainly be completed:
+The [Minimum Project Requirements](./Final_Project.md#Challenges#minimum-project-requirements) should certainly be completed:
 
 [(a) Use a Cortex-M processor](./Final_Project.md#a-use-a-cortex-m-processor)
 
