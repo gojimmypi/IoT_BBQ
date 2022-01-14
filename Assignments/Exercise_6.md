@@ -1,5 +1,7 @@
 # Exercise 6 Review the final project instructions. 
 
+From [classpert file](https://cdn.classpert.com/uploads/36e0ddd5d53853a98b3792ca8a348ff0-419439.pdf):
+
 ## Put together a preliminary rough draft of your final report.
 
 See the WIP [Final Project Document](./Final_Project.md) and the [Supplementary Instructions](./Final_Project_Instructions.md).
