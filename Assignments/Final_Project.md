@@ -118,6 +118,10 @@ The [SSD31306 configuration](../IoT_BBQ_STM32/SSD1306/ssd1306_conf.h) is current
 
 Lesson learned: always do a simple IO level and control check on GPIO lines before starting somwthing more complex such as I2C communication.
 
+### Known library Problems
+
+There's an [open STMicroelectronics/stm32l0xx_hal_driver issue: An I2C NACK during memory address transfer goes undetected](https://github.com/STMicroelectronics/stm32l0xx_hal_driver/issues/3) to be aware of that may impact I2C. 
+This was stumbled upon when encountering a `I2C_WaitOnFlagUntilTimeout` problem, but that was related to the GPIO pin conflict, described above.
 
 ### Mechanical support for weight sensor
 
@@ -154,6 +158,11 @@ The final project will be delivered as:
 (b) Write up of the system (PDF or Google docs report). This document.
 (c) Link to the code: see [GitHub IoT BBQ STM32 Project](https://github.com/gojimmypi/IoT_BBQ/tree/main/IoT_BBQ_STM32)
 
+## Optionl Bonus
+
+* Power analysis
+* Firmware update
+* System profiling
 
 ## References
 
@@ -190,8 +199,11 @@ The final project will be delivered as:
 
 - [Sysprogs VisualGDB Developing STM32 projects with Visual Studio tutorial](https://visualgdb.com/tutorials/arm/stm32/)
 - [Sysprogs VisualGDB Using the STM32 UART interface with HAL](https://visualgdb.com/tutorials/arm/stm32/uart/hal/)
+- [Sysprogs VisualGDB Using the I2C Interface on the STM32 Devices](https://visualgdb.com/tutorials/arm/stm32/i2c/)
 - [NordicPlayground mbed stm32f4xx_hal_uart](https://github.com/NordicPlayground/mbed/blob/master/libraries/mbed/targets/cmsis/TARGET_STM/TARGET_DISCO_F407VG/stm32f4xx_hal_uart.c)
+- [afiskon/stm32-ssd1306 example](https://github.com/afiskon/stm32-ssd1306/blob/master/examples/oled-tester/firmware/i2c/Src/main.c); The [code](https://github.com/afiskon/stm32-ssd1306/tree/master/ssd1306) is [included in this project](../IoT_BBQ_STM32/SSD1306/).
 
 ### Other Related Projects
 
 - [Honeybee Hive Monitoring](https://hackaday.io/project/1741-honeybee-hive-monitoring) - also uses HX711
+- [logicalelegance/midifun](https://github.com/logicalelegance/midifun/tree/master/Core) - sample project naming, directories, organziation.
