@@ -114,7 +114,7 @@ This closeup from the STM32CubeIDE clearly indicates `I2C1` GPIO pins are on `PB
 
 ![I2C1_pin_assignment_conflicting_info_IDE_closeup.png](./images/I2C1_pin_assignment_conflicting_info_IDE_closeup.png)
 
-The [SD31306 configureation](../IoT_BBQ_STM32/SSD1306/ssd1306_conf.h) is currently using `I2C3` instead. (See also the [SSD1306 default template](../IoT_BBQ_STM32/SSD1306/ssd1306_conf_template.h))
+The [SSD31306 configuration](../IoT_BBQ_STM32/SSD1306/ssd1306_conf.h) is currently using `I2C3` instead. (See also the [SSD1306 default template](../IoT_BBQ_STM32/SSD1306/ssd1306_conf_template.h))
 
 Lesson learned: always do a simple IO level and control check on GPIO lines before starting somwthing more complex such as I2C communication.
 
@@ -123,7 +123,14 @@ Lesson learned: always do a simple IO level and control check on GPIO lines befo
 
 I [reached out on Twitter](https://twitter.com/gojimmypi/status/1481711080497823744?s=20) for suggestions on how to mount the load cell. 
 One of the responses is regarding [load cell damage if the propane tank is dropped into place](https://twitter.com/RueNahcMohr/status/1481724026221305861?s=20).
-Another concern is [load cell creep](https://twitter.com/GMahovlic/status/1481724848040775685?s=20) when the tank is left in place for a long period.
+
+Another concern is [load cell creep](https://twitter.com/GMahovlic/status/1481724848040775685?s=20) when the tank is left in place for a long period. 
+
+There's no mention of "load creep" in the [Avia Semicondictor HX711 Datasheet](https://cdn.sparkfun.com/assets/b/f/5/a/e/hx711F_EN.pdf), but that seems like a legitimate concern. There is only
+one instance of the word "creep" on the [Sparkfun Load Cell Amplifier HX711 Breakout Hookup Guide](https://learn.sparkfun.com/tutorials/load-cell-amplifier-hx711-breakout-hookup-guide/all).
+
+Yet another potential challenge pointed out on Twitter is the [temperaturer drift over time](https://twitter.com/ioPush_net/status/1481762159851974660?s=20) of the load cell.
+
 
 ### Enclosure
 
@@ -167,6 +174,7 @@ The final project will be delivered as:
 ### Peripheral Hardware
 
 - [SSD1306 I2C Serial](https://www.amazon.com/dp/B08KY21SR2/)
+- [Sparkfun Load Cell Amplifier HX711 Breakout Hookup Guide](https://learn.sparkfun.com/tutorials/load-cell-amplifier-hx711-breakout-hookup-guide/all)
 - [bogde/HX711](https://github.com/bogde/HX711)
 - [nimaltd/HX711](https://github.com/nimaltd/HX711/blob/master/hx711.c)
 
@@ -182,4 +190,8 @@ The final project will be delivered as:
 
 - [Sysprogs VisualGDB Developing STM32 projects with Visual Studio tutorial](https://visualgdb.com/tutorials/arm/stm32/)
 - [Sysprogs VisualGDB Using the STM32 UART interface with HAL](https://visualgdb.com/tutorials/arm/stm32/uart/hal/)
-= [NordicPlayground mbed stm32f4xx_hal_uart](https://github.com/NordicPlayground/mbed/blob/master/libraries/mbed/targets/cmsis/TARGET_STM/TARGET_DISCO_F407VG/stm32f4xx_hal_uart.c)
+- [NordicPlayground mbed stm32f4xx_hal_uart](https://github.com/NordicPlayground/mbed/blob/master/libraries/mbed/targets/cmsis/TARGET_STM/TARGET_DISCO_F407VG/stm32f4xx_hal_uart.c)
+
+### Other Related Projects
+
+- [Honeybee Hive Monitoring](https://hackaday.io/project/1741-honeybee-hive-monitoring) - also uses HX711
