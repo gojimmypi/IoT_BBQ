@@ -110,6 +110,10 @@ but it was later learned the STM32CubeIDE shows GPIO pins `PB6` and `PB7` instea
 
 ![I2C1_pin_assignment_conflicting_info.png](./images/I2C1_pin_assignment_conflicting_info.png)
 
+This closeup from the STM32CubeIDE clearly indicates `I2C1` GPIO pins are on `PB6` and `PB7`.
+
+![I2C1_pin_assignment_conflicting_info_IDE_closeup.png](./images/I2C1_pin_assignment_conflicting_info_IDE_closeup.png)
+
 The [SD31306 configureation](../IoT_BBQ_STM32/SSD1306/ssd1306_conf.h) is currently using `I2C3` instead. (See also the [SSD1306 default template](../IoT_BBQ_STM32/SSD1306/ssd1306_conf_template.h))
 
 Lesson learned: always do a simple IO level and control check on GPIO lines before starting somwthing more complex such as I2C communication.
@@ -178,3 +182,4 @@ The final project will be delivered as:
 
 - [Sysprogs VisualGDB Developing STM32 projects with Visual Studio tutorial](https://visualgdb.com/tutorials/arm/stm32/)
 - [Sysprogs VisualGDB Using the STM32 UART interface with HAL](https://visualgdb.com/tutorials/arm/stm32/uart/hal/)
+= [NordicPlayground mbed stm32f4xx_hal_uart](https://github.com/NordicPlayground/mbed/blob/master/libraries/mbed/targets/cmsis/TARGET_STM/TARGET_DISCO_F407VG/stm32f4xx_hal_uart.c)
