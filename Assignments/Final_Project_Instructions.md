@@ -1,3 +1,7 @@
+# Final Project Instrukctions.
+
+From [supplied document](https://drive.google.com/file/d/1yAi_6VQNstb2ZfA8rd6qKzKoh7N5YmEZ/view):
+
 Your final project is to design and build a simple system that solves a problem you find
 interesting. The final project is intended to bring together the course topics in a form that can be
 shared with prospective employers.
@@ -65,8 +69,8 @@ The final project will be delivered as:
 (b) Write up of the system (PDF or Google docs report).
 (c) Link to the code
 
-These will be submitted to assignment-submissions in Discord or emailed to Jeff Hurd
-(jeff@classpert.com). Please submit links to all three deliverables as part of one message.
+These will be submitted to assignment-submissions in Discord or emailed to Jeff Hurd. 
+Please submit links to all three deliverables as part of one message.
 Bonus points are available by including one of these:
 
  * An analysis of the power used in the system (expected vs actual)
