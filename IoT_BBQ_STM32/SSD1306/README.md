@@ -17,3 +17,5 @@ The code is based on
 developed by Olivier Van den Eede ( [@4ilo](https://github.com/4ilo) ) in 2016.
 
 There is a [DuyTrandeLion/nrf52-ssd1309](https://github.com/DuyTrandeLion/nrf52-ssd1309) port to nRF52 of this library made by [@DuyTrandeLion](https://github.com/DuyTrandeLion) in 2020.
+
+See also: [Sysprogs VisualGDB Using the I2C Interface on the STM32 Devices](https://visualgdb.com/tutorials/arm/stm32/i2c/)
