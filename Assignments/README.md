@@ -8,7 +8,7 @@
 - [Exercise 4](./Exercise_4.md) 
 - [Exercise 5](./Exercise_5.md) 
 - [Exercise 6](./Exercise_6.md) 
-
+- [Final Project](./Final_Project.md)
 
 
 ## Links
