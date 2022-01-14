@@ -100,7 +100,7 @@ Technical implementation difficulties of a new hardware platform are always a co
 
 Details on some of the challenges:
 
-### External sensors and peripherals
+### - External sensors and peripherals
 
 Certainly one of the benefits of having an evaluation board is having the connections "built-in" and sample code readily available. Unfortunately the Discovery Board used did not have a display and the I2C HX711 load cell was of course external, 
 adding the additional challenge of finding and wiring up the I2C connections.
