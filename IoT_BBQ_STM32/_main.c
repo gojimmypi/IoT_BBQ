@@ -83,70 +83,17 @@ int main(void)
     */
     HAL_Init();  
 
-    init_UART();
+    GPIO_init();    
 
-    // -------------------------------------------------------------------------
-    // start of regular app
-    // -------------------------------------------------------------------------
-    __GPIOA_CLK_ENABLE(); //    __HAL_RCC_GPIOA_CLK_ENABLE();
-    __GPIOB_CLK_ENABLE(); //    __HAL_RCC_GPIOB_CLK_ENABLE();
-    __GPIOC_CLK_ENABLE();
-    __GPIOD_CLK_ENABLE();
+    UART_init();
 
-
-    // Initialize Port A
-    GPIO_InitTypeDef GPIO_InitStructureA;
-
-    GPIO_InitStructureA.Pin = GPIO_PIN_5;
-
-    GPIO_InitStructureA.Mode = GPIO_MODE_OUTPUT_PP;
-    GPIO_InitStructureA.Speed = GPIO_SPEED_FREQ_HIGH;
-    GPIO_InitStructureA.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStructureA);
-
-    
-    // Initialize Port B
-    GPIO_InitTypeDef GPIO_InitStructureB;
-
-    GPIO_InitStructureB.Pin = GPIO_PIN_14 | GPIO_PIN_8;
-
-    GPIO_InitStructureB.Mode = GPIO_MODE_OUTPUT_PP;
-    GPIO_InitStructureB.Speed = GPIO_SPEED_FREQ_HIGH;
-    GPIO_InitStructureB.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStructureB);
-
-    GPIO_InitStructureB.Pin = GPIO_PIN_9;
-    GPIO_InitStructureB.Mode = GPIO_MODE_INPUT;
-    GPIO_InitStructureB.Speed = GPIO_SPEED_FREQ_HIGH;
-    GPIO_InitStructureB.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStructureB);
-    
-    // Initialize Port C
-    GPIO_InitTypeDef GPIO_InitStructureC = { 0 }; 
-
-    GPIO_InitStructureC.Pin = GPIO_PIN_13;
-
-    GPIO_InitStructureC.Mode = GPIO_MODE_IT_FALLING;
-    GPIO_InitStructureC.Speed = GPIO_SPEED_LOW;
-    GPIO_InitStructureC.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOC, &GPIO_InitStructureC);
-    
-
-    /* EXTI interrupt init*/
-    HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);    
-    
-    // I2C
-    ConfigureI2CPins();
-    
 
 
     // create a SwitchState variable to hold the result of out button press 
     GPIO_PinState SwitchState;
+
+    // a couple of lines for debugging / testing
     SwitchState = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
-    
-    
-    
     SwitchState = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
 
     
@@ -157,8 +104,9 @@ int main(void)
     /*  Thread 2 definition */
     osThreadDef(LED2, LED_Thread2, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);    
     
-  
+    /* UART - Serial Port Debug */
     osThreadDef(UART1, UART_Thread1, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
+
 
     /* Start thread 1 */
     LEDThread1Handle = osThreadCreate(osThread(LED1), NULL);
