@@ -31,7 +31,7 @@ extern "C" {
         }
     }
 
-    int init_UART(void)
+    int UART_init(void)
     {
         s_UARTHandle = UART_HandleTypeDef();
 

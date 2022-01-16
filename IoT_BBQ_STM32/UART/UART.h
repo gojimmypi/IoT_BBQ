@@ -9,7 +9,7 @@ extern "C" {
 	
 
 	int UART_VERSION();
-	int init_UART(void);
+	int UART_init(void);
 	void UART_Thread1(void const* argument);
 
 #ifdef __cplusplus
