@@ -1,3 +1,4 @@
+#include <cmsis_os.h>
 /**
  *
  * HX711 library for Arduino
@@ -21,7 +22,8 @@
 #define ARCH_ESPRESSIF (defined(ARDUINO_ARCH_ESP8266) || defined(ARDUINO_ARCH_ESP32))
 
 // Whether we are actually running on FreeRTOS.
-#define IS_FREE_RTOS defined(ARDUINO_ARCH_ESP32)
+#define IS_FREE_RTOS 
+// #define IS_FREE_RTOS (defined(ARDUINO_ARCH_ESP32) || defined(FREERTOS_CONFIG_H))
 
 // Define macro designating whether we're running on a reasonable
 // fast CPU and so should slow down sampling from GPIO.
@@ -81,6 +83,8 @@ HX711::~HX711() {
 
 void HX711::begin(uint16_t dout, uint16_t pd_sck, byte gain) {
 
+    portENTER_CRITICAL();
+    
     PD_SCK = GPIO_PIN_2; //  ARD.D8 = PB2  0x0004
     DOUT = GPIO_PIN_15;  //  ARD.D9 = PA15 0x8000
 
@@ -110,6 +114,8 @@ void HX711::begin(uint16_t dout, uint16_t pd_sck, byte gain) {
 //    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);
     
     set_gain(gain);
+    
+    portEXIT_CRITICAL();
 }
 
 bool HX711::is_ready() {
@@ -160,15 +166,15 @@ long HX711::read() {
     // the sequence between `noInterrupts()` and `interrupts()` calls.
 #ifdef HAS_ATOMIC_BLOCK
     // ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
-
-#elif IS_FREE_RTOS
+    
+// #elif IS_FREE_RTOS
         // Begin of critical section.
         // Critical sections are used as a valid protection method
         // against simultaneous access in vanilla FreeRTOS.
         // Disable the scheduler and call portDISABLE_INTERRUPTS. This prevents
         // context switches and servicing of ISRs during a critical section.
-        portMUX_TYPE mux = portMUX_INITIALIZER_UNLOCKED;
-        portENTER_CRITICAL(&mux);
+        // portMUX_TYPE mux = portMUX_INITIALIZER_UNLOCKED;
+        portENTER_CRITICAL();
 #else
         // Disable interrupts.
         noInterrupts();
@@ -183,19 +189,26 @@ long HX711::read() {
         for (unsigned int i = 0; i < GAIN; i++) {
             HAL_GPIO_WritePin(GPIOB, PD_SCK, GPIO_PIN_SET); // digitalWrite(PD_SCK, HIGH);
             
+            
 #ifdef ARCH_ESPRESSIF
             DWT_Delay_us(1);  // delayMicroseconds(1);
+#else
+            osDelay(1);
 #endif
+
             HAL_GPIO_WritePin(GPIOB, PD_SCK, GPIO_PIN_RESET); // digitalWrite(PD_SCK, LOW);
+
 
 #ifdef ARCH_ESPRESSIF
             DWT_Delay_us(1); // delayMicroseconds(1);
+#else
+            osDelay(1);
 #endif
         }
 
 #ifdef IS_FREE_RTOS
         // End of critical section.
-       // portEXIT_CRITICAL(&mux); // TODO why is this disabled?
+       portEXIT_CRITICAL();  
 
 #elif HAS_ATOMIC_BLOCK
     }

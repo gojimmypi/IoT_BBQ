@@ -933,6 +933,12 @@
     <ClCompile Include="UART\UART.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="Tasks\task_display.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="DISPLAY\DISPLAY.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DWT_STM32_DELAY.h">
@@ -975,6 +981,12 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="UART\UART.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tasks\task_display.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="DISPLAY\DISPLAY.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

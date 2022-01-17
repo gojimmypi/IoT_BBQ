@@ -1,4 +1,5 @@
-
+#pragma once
+#include <cmsis_os.h>
 #include <sys/_stdint.h>
 #include <stm32l4xx_hal.h>
 
@@ -15,7 +16,8 @@
  *
 **/
 #ifndef HX711_h
-     
+#define HX711_h
+
 #define byte uint8_t 
 #define INPUT             0x00
 #define OUTPUT            0x01
