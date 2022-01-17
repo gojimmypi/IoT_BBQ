@@ -42,7 +42,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:/Users/gojimmypi/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/CMSIS_HAL/Device/ST/STM32F1xx/Include;C:/Users/gojimmypi/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc;C:/Users/gojimmypi/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/VendorSamples/F1/Projects/STM3210C_EVAL/Applications/FatFs/FatFs_uSD/Inc;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:/Users/gojimmypi/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/CMSIS_HAL/Device/ST/STM32F1xx/Include;C:/Users/gojimmypi/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc;C:/Users/gojimmypi/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/VendorSamples/F1/Projects/STM3210C_EVAL/Applications/FatFs/FatFs_uSD/Inc;C:/Users/gojimmypi/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/VendorSamples/L4/Drivers/BSP;C:/Users/gojimmypi/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/VendorSamples/L4/Drivers/BSP/B-L475E-IOT01;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>DEBUG=1;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions />
       <CLanguageStandard>
@@ -64,6 +64,10 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="DISPLAY\DISPLAY.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Flash\Flash_Sim_Demo.cpp" />
     <ClCompile Include="Flash\spi_flash.c" />
     <ClCompile Include="HX711\HX711.cpp" />
@@ -72,6 +76,10 @@
     <ClCompile Include="SSD1306\ssd1306_fonts.c" />
     <ClCompile Include="SSD1306\ssd1306_tests.c" />
     <ClCompile Include="SSD1306\SSD1306_demo.cpp" />
+    <ClCompile Include="Tasks\task_display.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="UART\UART.cpp" />
     <ClCompile Include="_Init\startup.cpp" />
     <ClCompile Include="system_stm32l4xx.c" />
@@ -83,6 +91,10 @@
     </ClCompile>
     <ClCompile Include="_Init\Init_GPIO_I2C.cpp" />
     <ClCompile Include="_main.c" />
+    <ClInclude Include="DISPLAY\DISPLAY.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Flash\Flash_Sim_Demo.h" />
     <ClInclude Include="Flash\spi_flash.h" />
     <ClInclude Include="LED\LED.h" />
@@ -91,6 +103,10 @@
     <ClInclude Include="SSD1306\ssd1306_fonts.h" />
     <ClInclude Include="SSD1306\ssd1306_tests.h" />
     <ClInclude Include="SSD1306\SSD1306_demo.h" />
+    <ClInclude Include="Tasks\task_display.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Tasks\task_weight_monitor.h" />
     <ClInclude Include="UART\UART.h" />
     <ClInclude Include="_Init\Init_GPIO.h">
