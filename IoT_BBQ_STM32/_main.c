@@ -8,6 +8,7 @@
 #include "Flash/Flash_Sim_Demo.h"
 #include "LED/LED.h"
 #include "UART/UART.h"
+#include  "DISPLAY/DISPLAY.h"
 
 // #include "Flash/Flash_Sim_Demo.h"
 
@@ -17,6 +18,7 @@
 /* Private variables ---------------------------------------------------------*/
 osThreadId LEDThread1Handle, LEDThread2Handle;
 osThreadId UART_Thread1Handle;
+osThreadId DISPLAY_Thread1Handle;
 
 /* Private function prototypes -----------------------------------------------*/
 static void LED_Thread1(void const *argument);
@@ -107,14 +109,20 @@ int main(void)
     /* UART - Serial Port Debug */
     osThreadDef(UART1, UART_Thread1, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
 
+    osThreadDef(DISPLAY, DISPLAY_Thread1, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
 
+    
     /* Start thread 1 */
     LEDThread1Handle = osThreadCreate(osThread(LED1), NULL);
   
     /* Start thread 2 */
     LEDThread2Handle = osThreadCreate(osThread(LED2), NULL);
   
+    /* UART is on a thread */
     UART_Thread1Handle = osThreadCreate(osThread(UART1), NULL);
+    
+    /* the display in on a thread */
+    DISPLAY_Thread1Handle = osThreadCreate(osThread(DISPLAY), NULL);
 
     /* Start scheduler */
     osKernelStart();
@@ -158,8 +166,8 @@ static void LED_Thread1(void const *argument)
 		
             //osThreadResume(LEDThread2Handle);
         
-            // TODO for now, we call the scale taks during blinks
-            theScaleTask();
+            // TODO for now, we call the scale tasks during blinks
+            theScaleTask(); // TODO move to own thread
 
             break;
 
