@@ -18,6 +18,7 @@ Hardware
 - [Mouser B-L475E-IOT01A1](https://www.mouser.com/ProductDetail/stmicroelectronics/b-l475e-iot01a1/?qs=2m8Gdae5Lr3rq3rcxS2xEg%3D%3D&countrycode=US&currencycode=USD)
 - [Mouser SPBTLE-RF](https://www.mouser.com/ProductDetail/STMicroelectronics/SPBTLE-RF?qs=k5OWtXsTJaq8f%252B3JiZyqyw%3D%3D), [Datasheet](https://www.mouser.com/datasheet/2/389/SGST_S_A0003533199_1-2576929.pdf)
 - [ST B-L475E-IOT01A STM32L4 Discovery kit IoT node](https://www.st.com/en/evaluation-tools/b-l475e-iot01a.html#)
+- [Migrating from STM32L4 and STM32L4+ to STM32L5 Series microcontrollers (AN5138)](https://www.st.com/resource/en/application_note/dm00476869-migrating-from-stm32l4-and-stm32l4-to-stm32l5-series-microcontrollers-stmicroelectronics.pdf)
 
 Specifications
 
@@ -44,6 +45,12 @@ RTOS
 
 - [The FreeRTOS Reference Manual](https://www.freertos.org/fr-content-src/uploads/2018/07/FreeRTOS_Reference_Manual_V10.0.0.pdf)
 - [stackoverflow: What are valid values of `HAL_NVIC_SetPriority()` when using STM32 and FreeRTOS?](https://stackoverflow.com/questions/50243996/what-are-valid-values-of-hal-nvic-setpriority-when-using-stm32-and-freertos)
+
+Debuggers
+
+- [ST-LINK/V2 in-circuit debugger/programmer for STM8 and STM32](https://www.st.com/en/development-tools/st-link-v2.html)
+- [Segger J-Link / J-Trace User Guide](https://www.segger.com/downloads/jlink/UM08001)
+- [Converting ST-LINK On-Board Into a J-Link](https://www.segger.com/products/debug-probes/j-link/models/other-j-links/st-link-on-board/)
 
 Sample Code
 

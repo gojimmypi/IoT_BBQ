@@ -6,6 +6,7 @@ The objective is to create Propane Tank Weight Sensor System with something cons
 
 ![Existing_tank_scale.png](./images/Existing_tank_scale.png)   
  
+
 ## Minimum Project Requirements
  
 The project must:
@@ -13,11 +14,16 @@ The project must:
 ### (a) Use a Cortex-M processor: 
 
 This project is using an STMicro STML4, specifically the [STM32L475VG](https://www.st.com/resource/en/datasheet/stm32l475vg.pdf), 
-part of the [STM32 Ultra Low Power](https://www.st.com/en/microcontrollers-microprocessors/stm32-ultra-low-power-mcus.html) Arm® Cortex®-M4 32-bit MCU+FPU series.
+part of the [STM32 Ultra Low Power](https://www.st.com/en/microcontrollers-microprocessors/stm32-ultra-low-power-mcus.html) Arm® Cortex®-M4 32-bit MCU+FPU series
+found on the  [B-L475E-IOT01A Discovery Board](https://www.st.com/resource/en/user_manual/um2153-discovery-kit-for-iot-node-multichannel-communication-with-stm32l4-stmicroelectronics.pdf).
+
+The prototype uses the [Discovery kit for IoT node](https://www.st.com/resource/en/user_manual/um2153-discovery-kit-for-iot-node-multichannel-communication-with-stm32l4-stmicroelectronics.pdf).
+ 
+
 
 ### (b) Have a button that causes an interrupt
 
-This project leverages the code from [Exercise 4](./Exercise_4.md) that implements an operational mode-switch via interrupt-driven button press code.
+This project leverages the code from [Exercise 4](./Exercise_4.md) that implements an operational mode/state switch via interrupt-driven button press code.
 
 ### (c) Use at least three peripherals such as ADC, DAC, PWM LED, Smart LED, LCD, sensor, BLE
 
@@ -80,16 +86,23 @@ Code that uses the STM32 HAL will need the `#include <stm32l4xx_hal.h>`. Future 
 #endif
 ```
 
+
 ## List of the tasks to complete for the project
 
 - [X] Confirm operational display
 - [X] Confirm operational weight sensor
 - [ ] Show weight value on display
+- [ ] Update docs on new I2C port being used for SSD1306
 - [X] Confirm serial port operation
+- [ ] Implement Serial Rx/Tx
 - [ ] Implement serial debug messages
+- [ ] Sleep serial port when inactive
+- [ ] Implement Sleep / Wake-up
+- [ ] Determine field power source
 - [ ] Design enclosure
 - [ ] Print enclosure
 - [ ] Mount hardware in enclosure
+
 
 ## Challenges
 
@@ -100,7 +113,7 @@ Technical implementation difficulties of a new hardware platform are always a co
 
 Details on some of the challenges:
 
-### - External sensors and peripherals
+### External sensors and peripherals
 
 Certainly one of the benefits of having an evaluation board is having the connections "built-in" and sample code readily available. Unfortunately the Discovery Board used did not have a display and the I2C HX711 load cell was of course external, 
 adding the additional challenge of finding and wiring up the I2C connections.
@@ -144,7 +157,7 @@ The enclosure should probably be weather-proof, and located reasonably far from 
 
 The OLED display is likely not tolerant to hard freeze. 
 
-## Component Availability
+### Component Availability
 
 If any sort of mass-production was desired, there's of course the chip shortage to be concerned about.
 
@@ -160,11 +173,27 @@ The final project will be delivered as:
 
 (c) Link to the code: see [GitHub IoT BBQ STM32 Project](https://github.com/gojimmypi/IoT_BBQ/tree/main/IoT_BBQ_STM32)
 
+
 ## Optional Bonus
 
-* Power analysis
-* Firmware update
-* System profiling
+### Power analysis
+
+Tips learned from Ben in class:
+
+- When powering an embedded device from batteries, say a couple of AA cella, there's likely a voltage drop / fluctuation depending on what
+the processor is doing at any given moment, that may affect things like ADC.
+
+
+
+### Firmware update
+
+TODO
+
+
+### System profiling
+
+TODO
+
 
 ## References
 
@@ -173,7 +202,7 @@ The final project will be delivered as:
 - [STM32 Discovery Kits](https://www.st.com/en/evaluation-tools/stm32-discovery-kits.html#products)
 - [STM32L4 series of ultra-low-power MCUs](https://www.st.com/en/microcontrollers-microprocessors/stm32l4-series.html)
 - [ARM MBED DISCO-L475VG-IOT01A (B-L475E-IOT01A](https://os.mbed.com/platforms/ST-Discovery-L475E-IOT01A/) (this is where the link on the OTG file points)
-- [Mouser B-L475E-IOT01A Data Brief ](https://www.mouser.com/datasheet/2/389/b-l475e-iot01a-1848022.pdf)
+- [Mouser 5 page B-L475E-IOT01A Data Brief ](https://www.mouser.com/datasheet/2/389/b-l475e-iot01a-1848022.pdf)
 - [Mouser Discovery Kit for IoT Node](https://www.mouser.com/pdfdocs/RS7706_IC_STM32L475E-IOT01A1_0517d.pdf) (this is the front and back of the insert card in for the shipped product)
 - [Mouser STMicroelectronics B-L475E-IOT01A Discovery Kit for IoT Node](https://www.mouser.com/new/stmicroelectronics/stm-b-l475e-iot01a-kit/)
 
@@ -204,6 +233,10 @@ The final project will be delivered as:
 - [Sysprogs VisualGDB Using the I2C Interface on the STM32 Devices](https://visualgdb.com/tutorials/arm/stm32/i2c/)
 - [NordicPlayground mbed stm32f4xx_hal_uart](https://github.com/NordicPlayground/mbed/blob/master/libraries/mbed/targets/cmsis/TARGET_STM/TARGET_DISCO_F407VG/stm32f4xx_hal_uart.c)
 - [afiskon/stm32-ssd1306 example](https://github.com/afiskon/stm32-ssd1306/blob/master/examples/oled-tester/firmware/i2c/Src/main.c); The [code](https://github.com/afiskon/stm32-ssd1306/tree/master/ssd1306) is [included in this project](../IoT_BBQ_STM32/SSD1306/).
+- [Sensors STM32CubeL4/Drivers/BSP/B-L475E-IOT01/](https://github.com/STMicroelectronics/STM32CubeL4/tree/master/Drivers/BSP/B-L475E-IOT01)
+
+### Cloud Demo
+- [AWS AWS Cloud demonstration](https://github.com/STMicroelectronics/STM32CubeL4/tree/master/Projects/B-L475E-IOT01A/Demonstrations)
 
 ### Other Related Projects
 
