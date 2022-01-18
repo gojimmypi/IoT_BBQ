@@ -23,7 +23,7 @@ extern "C"
         {
             /* See if we can obtain the semaphore.  If the semaphore is not
             available wait 10 ticks to see if it becomes free. */
-            //if (xSemaphoreTake(xHX711_Semaphore, (TickType_t) 10) == pdTRUE)
+            if (xSemaphoreTake(xHX711_Semaphore, (TickType_t) 10) == pdTRUE)
             {
                 /* We were able to obtain the semaphore and can now access the
                 shared resource. */
@@ -44,9 +44,9 @@ extern "C"
 
                 /* We have finished accessing the shared resource.  Release the
                 semaphore. */
-                //xSemaphoreGive(xHX711_Semaphore);
+                xSemaphoreGive(xHX711_Semaphore);
             }
-            //else
+            else
             {
                 osDelay(1000);
                 /* We could not obtain the semaphore and can therefore not access
