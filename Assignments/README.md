@@ -25,7 +25,17 @@ Specifications
 - [User Manual (57 pages) STM32L4 Discovery kit for the IoT node (B-L475E-IOT01A)](https://www.st.com/resource/en/user_manual/um2153-discovery-kit-for-iot-node-multichannel-communication-with-stm32l4-stmicroelectronics.pdf)
 - [Data brief (4 pages) ST B-L475E-IOT01A](https://www.st.com/resource/en/data_brief/b-l475e-iot01a.pdf) Discovery kit for IoT node, multi-channel communication with STM32L4
 - [STM32L475VG](https://www.st.com/en/microcontrollers-microprocessors/stm32l475vg.html#), [STM32L475xx datasheet (204 pages)](https://www.st.com/resource/en/datasheet/stm32l475vg.pdf)
-- [STM32L475xx Datasheet](https://www.st.com/resource/en/datasheet/stm32l475vg.pdf)
+- [STM32L475xx Datasheet AN4666](https://www.st.com/resource/en/datasheet/stm32l475vg.pdf)
+
+Application Notes
+
+- [Using the STM32F2, STM32F4 and STM32F7 Series DMA controller AN4031](https://www.st.com/content/ccc/resource/technical/document/application_note/27/46/7c/ea/2d/91/40/a9/DM00046011.pdf/files/DM00046011.pdf/jcr:content/translations/en.DM00046011.pdf)
+- [Using the STM32F0/F1/F3/Gx/Lx Series DMA controller AN2548](https://www.st.com/resource/en/application_note/an2548-using-the-stm32f0f1f3gxlx-series-dma-controller-stmicroelectronics.pdf)
+- [Parallel synchronous transmission using GPIO and DMA](https://www.st.com/resource/en/application_note/an4666-parallel-synchronous-transmission-using-gpio-and-dma-stmicroelectronics.pdf)
+
+Examples
+
+- [B-L475E-IOT01A/Examples](https://github.com/STMicroelectronics/STM32CubeL4/tree/master/Projects/B-L475E-IOT01A/Examples) (not many examples)
 
 Peripherals
 
@@ -63,6 +73,16 @@ Sample Code
 - [stackoverflow: STM32 HAL timer interrupt isn't triggered](https://stackoverflow.com/questions/40323461/stm32-hal-timer-interrupt-isnt-triggered)
 - [stackoverflow: STM32F3 Discovery - Implement GPIO-Interrupt](https://stackoverflow.com/questions/40057581/stm32f3-discovery-implement-gpio-interrupt)
 - [STM32-libraries/Drivers/LCD/Adafruit_GFX.h](https://github.com/mindThomas/STM32-libraries/blob/master/Drivers/LCD/Adafruit_GFX.h)
+
+IoT Management Tools
+
+- [What Is IoT Device Management and Why Do You Need It?](https://www.digi.com/blog/post/what-is-iot-device-management)
+- [Memfault - Cloud Debugging and Observability for Your IoT Devices](https://memfault.com/); [Monitoring Fleet Health with Heartbeat Metrics](https://interrupt.memfault.com/blog/device-heartbeat-metrics); [Defensive Programming](https://interrupt.memfault.com/blog/defensive-and-offensive-programming)
+- [Tyler Hoffman on embedded.fm to discuss the issues associated with embedded devices at consumer scale](https://embedded.fm/episodes/390).
+- [Monitor your entire Azure IoT environment with Datadog](https://www.datadoghq.com/dg/monitor/azure-iot/)
+- [ThingsBoard Open-source IoT Platform](https://thingsboard.io/)
+- [Azure IoT](https://azure.microsoft.com/en-us/overview/iot/#overview)
+- [AWS IoT Device Management](https://aws.amazon.com/iot-device-management/)
 
 Other Stuff
 
