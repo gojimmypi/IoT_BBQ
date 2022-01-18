@@ -6,7 +6,6 @@ The objective is to create Propane Tank Weight Sensor System with something cons
 
 ![Existing_tank_scale.png](./images/Existing_tank_scale.png)   
  
-
 ## Minimum Project Requirements
  
 The project must:
@@ -112,6 +111,13 @@ mechanical issues. It is hoped that modern 3D Printing flexibility will be able 
 Technical implementation difficulties of a new hardware platform are always a concern (the original project was based on the ESP8266 and the LUA language).
 
 Details on some of the challenges:
+
+### Minimal Example Code
+
+There is currently relatively little [STM32CubeL4 example code for the B-L475E-IOT01A discovery board](https://github.com/STMicroelectronics/STM32CubeL4/tree/master/Projects/B-L475E-IOT01A/Examples) chosen for this project. 
+Porting code between architectures is beyond the scope of the class.
+
+Furthermore, the HX711 weight sensor interface and SSD1306 display are not built-in on the development board. 
 
 ### External sensors and peripherals
 
