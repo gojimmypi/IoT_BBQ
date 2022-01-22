@@ -61,6 +61,8 @@ extern "C" {
 
         if (HAL_UART_Init(&s_UARTHandle) != HAL_OK)
             asm("bkpt 255");
+        
+        return 0; // TODO catch errors. return non-zero value
     }
 
 #ifdef __cplusplus
