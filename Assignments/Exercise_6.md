@@ -53,4 +53,4 @@ The minimum viable project will be a system that:
 
 Turn in your document or a link to a github document before 9am on Saturday, January 15.
 
-<< [Exercise 5](./Exercise_5.md) -- [Assignments](./README.md) -- [tbd]() >>
+<< [Exercise 5](./Exercise_5.md) -- [Assignments](./README.md) --  [Exercise 7](./Exercise_7.md) >>
