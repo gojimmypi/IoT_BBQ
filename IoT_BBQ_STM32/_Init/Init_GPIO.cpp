@@ -1,9 +1,11 @@
 // 
 // 
 // 
-#include "Init_GPIO.h"
-
 #include <stm32l4xx_hal.h>
+
+#include "Init_GPIO.h"
+#include "LED/LED.h"
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,14 +37,7 @@ void ConfigureI2CPins2()
 
 
         // Initialize Port A
-        GPIO_InitTypeDef GPIO_InitStructureA;
-
-        GPIO_InitStructureA.Pin = GPIO_PIN_5;
-
-        GPIO_InitStructureA.Mode = GPIO_MODE_OUTPUT_PP;
-        GPIO_InitStructureA.Speed = GPIO_SPEED_FREQ_HIGH;
-        GPIO_InitStructureA.Pull = GPIO_NOPULL;
-        HAL_GPIO_Init(GPIOA, &GPIO_InitStructureA);
+        LED_init(); // GPIOA Port 5
 
     
         // Initialize Port B

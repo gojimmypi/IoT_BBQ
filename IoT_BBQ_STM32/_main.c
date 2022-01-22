@@ -33,24 +33,24 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
     if (GPIO_Pin == GPIO_PIN_13)
     {
-        switch (current_LED_MODE)
+        switch (LED_GetMode())
         {
         case IsBlinking:
-            current_LED_MODE = AlwaysOn;
+            LED_SetMode(AlwaysOn);
             HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
             break;
             
         case AlwaysOn:
-            current_LED_MODE = AlwaysOff;
+            LED_SetMode(AlwaysOff);
             HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
             break;
 
         case AlwaysOff:
-            current_LED_MODE = IsBlinking;
+            LED_SetMode(IsBlinking);
             break;
             
         default:
-            current_LED_MODE = IsBlinking;
+            LED_SetMode(IsBlinking);
             break;
         }    
     }
@@ -153,7 +153,7 @@ static void LED_Thread1(void const *argument)
   
     for (;;)
     {
-        switch (current_LED_MODE)
+        switch (LED_GetMode())
         {
         case IsBlinking:
             LED_ON();
@@ -184,7 +184,7 @@ static void LED_Thread1(void const *argument)
             break;
             
         default:
-            current_LED_MODE = IsBlinking;
+            LED_SetMode(IsBlinking);
             break;
         }    
     }
@@ -203,7 +203,7 @@ static void LED_Thread2(void const *argument)
     for (;;)
     {
         int blink_Count = 0;
-        switch (current_LED_MODE)
+        switch (LED_GetMode())
         {
         case IsBlinking:
             blink_Count = 1;

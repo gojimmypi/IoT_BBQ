@@ -4,16 +4,21 @@
 extern "C" {
 #endif
 
+    enum LED_Mode { IsBlinking, AlwaysOn, AlwaysOff };
+
     int LED_VERSION();
 
+    int LED_init();
+    
 	void LED_ON();
 	void LED_OFF();
 	void STATE_LED_OFF();
 	void STATE_LED_ON();
 
-    enum LED_Mode { IsBlinking, AlwaysOn, AlwaysOff };
+    // The "state of an LED is on or off; the "Mode" is one of the LED_Mode enum values
+    enum LED_Mode LED_GetMode();
+    int LED_SetMode(enum LED_Mode NewMode);
 
-    volatile static enum LED_Mode current_LED_MODE = IsBlinking; // we'll use a button to trigger an interrupt to set LED mode, starting with blinky
 
 
 #ifdef __cplusplus
