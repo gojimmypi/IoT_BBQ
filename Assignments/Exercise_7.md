@@ -1,4 +1,4 @@
-# Exercise 7 What an interviewer looks for in reponses.
+# Exercise 7 What an interviewer looks for in responses.
 
 ## Objective
 
