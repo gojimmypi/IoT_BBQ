@@ -36,14 +36,16 @@ void ConfigureI2CPins2()
         __GPIOD_CLK_ENABLE();
 
 
-        // Initialize Port A
+        // Initialize LED1; Port A
         LED_init(); // GPIOA Port 5
 
+        // Initialize LED2
+        LED2_init(); // GPIOB Port 14
     
         // Initialize Port B
         GPIO_InitTypeDef GPIO_InitStructureB;
 
-        GPIO_InitStructureB.Pin = GPIO_PIN_14 | GPIO_PIN_8;
+        GPIO_InitStructureB.Pin = GPIO_PIN_8;
 
         GPIO_InitStructureB.Mode = GPIO_MODE_OUTPUT_PP;
         GPIO_InitStructureB.Speed = GPIO_SPEED_FREQ_HIGH;

@@ -86,6 +86,15 @@ int main(void)
     HAL_Init();  
 
     GPIO_init();    
+    
+    LED2_ON();
+    LED2_OFF();
+
+    LED2_ON();
+    LED2_OFF();
+
+    LED2_ON();
+    LED2_OFF();
 
     UART_init();
 
@@ -223,9 +232,10 @@ static void LED_Thread2(void const *argument)
 
         for (size_t i = 0; i < blink_Count; i++)
         {
-            HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
+            LED2_TOGGLE();
             osDelay(200);
-            HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
+            
+            LED2_TOGGLE();
             osDelay(200);
         }        
         osDelay(2000);

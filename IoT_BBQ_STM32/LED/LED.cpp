@@ -38,15 +38,46 @@ extern "C" {
         GPIO_InitStructureA.Pull = GPIO_NOPULL;
         HAL_GPIO_Init(GPIOA, &GPIO_InitStructureA);
         
-        return 0;
+        return 0; // TODO check for errors
     }
 
+    int LED2_init()
+    {
+        GPIO_InitTypeDef GPIO_InitStructureB;
+
+        GPIO_InitStructureB.Pin = GPIO_PIN_14;
+
+        GPIO_InitStructureB.Mode = GPIO_MODE_OUTPUT_PP;
+        GPIO_InitStructureB.Speed = GPIO_SPEED_FREQ_HIGH;
+        GPIO_InitStructureB.Pull = GPIO_NOPULL;
+        HAL_GPIO_Init(GPIOB, &GPIO_InitStructureB);
+        
+        return 0; // TODO check for errors
+    }
+    
+    
     void LED_ON() {
         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
     }
 
     void LED_OFF() {
         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+    }
+    
+    void LED_TOGGLE() {
+        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+    }
+
+    void LED2_ON() {
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);
+    }
+
+    void LED2_OFF() {
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
+    }
+
+    void LED2_TOGGLE() {
+        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
     }
 
     //
