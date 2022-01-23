@@ -66,7 +66,7 @@ The default setting was to _not_ generare a linker map file.
 
 Only a one instance of `.isr_vector` was found in the solution:
 
-~[isr_vector_project_instances](./images/isr_vector_project_instances.png)
+![isr_vector_project_instances](./images/isr_vector_project_instances.png)
 
 Specifically, in this directory:
 
