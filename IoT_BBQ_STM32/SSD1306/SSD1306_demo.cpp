@@ -172,7 +172,7 @@ void SystemClock_Config(void)
 }
 
 
-/* I2C1 init function */
+/* I2C3 init function */
 static void MX_I2C3_Init(void)
 {
 

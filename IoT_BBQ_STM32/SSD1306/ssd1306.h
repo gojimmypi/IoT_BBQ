@@ -45,7 +45,8 @@ _BEGIN_STD_C
 #include "ssd1306_fonts.h"
 
 /* vvv I2C config vvv */
-
+// Note that we expect to have our SSD1306 configured iin ssd1306_conf.h otherwise these are I2C defaults:
+    
 #ifndef SSD1306_I2C_PORT
 #define SSD1306_I2C_PORT        hi2c1
 #endif
@@ -55,9 +56,9 @@ _BEGIN_STD_C
 //#define SSD1306_I2C_ADDR      (0x3D << 1) // address 7A
 #endif
 
-/* ^^^ I2C config ^^^ */
+/* ^^^ end I2C config ^^^ */
 
-/* vvv SPI config vvv */
+/* vvv begin SPI config vvv */
 
 #ifndef SSD1306_SPI_PORT
 #define SSD1306_SPI_PORT        hspi2
@@ -84,7 +85,7 @@ _BEGIN_STD_C
 #define SSD1306_Reset_Pin       GPIO_PIN_8
 #endif
 
-/* ^^^ SPI config ^^^ */
+/* ^^^ end SPI config ^^^ */
 
 #if defined(SSD1306_USE_I2C)
 extern I2C_HandleTypeDef SSD1306_I2C_PORT;
