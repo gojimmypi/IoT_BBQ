@@ -52,4 +52,4 @@ My best advice for interviewer: help the candidate feel at ease and relaxed.
 My best advice for a candidate: relax. Be yourself.
 
 
-<< [Exercise 6](./Exercise_6.md) -- [Assignments](./README.md) --  [TBD]() >>
+<< [Exercise 6](./Exercise_6.md) -- [Assignments](./README.md) --  [Exercise 8](./Exercise_8.md) >>
