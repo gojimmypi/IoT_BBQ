@@ -28,13 +28,25 @@ This project leverages the code from [Exercise 4](./Exercise_4.md) that implemen
 
 The peripherals used in the project:
 
+#### External:
+
 * Load cell (weight sensor) such as the [SparkFun HX711](https://www.sparkfun.com/products/13879). See [HX711 code](../IoT_BBQ_STM32/HX711/).
 
 * Display: SSD1306 OLED Dual Color (Yellow / Blue) such as [this I2C Serial 12864 on Amazon](https://www.amazon.com/dp/B08KY21SR2/) that includes mbedded Driver IC. See [SSD1306 code](../IoT_BBQ_STM32/SSD1306/)
 
 * Temperature Sensor (The onboard device TODO specify)
 
+#### Internal
+
+* PWM Timers and watchdogs
+
+See Page 44 of the [STM32L475xx Datasheet (DS10969)](https://www.st.com/resource/en/datasheet/stm32l475vg.pdf):
+
+![timers_and_watchdogs_figure3_23](./images/timers_and_watchdogs_figure3_23.png)
+
 * Onboard LED: See [LED code](../IoT_BBQ_STM32/LED/)
+
+![user_LED_schematic](./images/user_LED_schematic.png)
 
 ### (d) Have serial port output
 
@@ -42,7 +54,13 @@ See  [UART code](../IoT_BBQ_STM32/UART/)
 
 ### (e) Implement an algorithmic piece that makes the system interesting
 
+> _Every sensor is a temperature sensor. Some are better than others._ --[Unknown / Elecia White](https://electronics.stackexchange.com/questions/386691/who-said-all-sensors-are-temperature-sensors-but-some-are-better-than-others)
+
+Consider measuring weight over time and temperature. 
+
 TODO: _interesting_
+
+
 
 ### (f) Implement a state machine
 
@@ -200,6 +218,10 @@ TODO
 
 TODO
 
+The Power LED is always on, and needs to be unsoldered to not use it:
+
+![power_LED_schematic](./images/power_LED_schematic.png)
+
 
 ## References
 
@@ -231,15 +253,23 @@ TODO
 - [CMSIS-RTOS2](https://arm-software.github.io/CMSIS_5/RTOS2/html/index.html)
 - [STM32L4 Discovery kit IoT node software](https://www.st.com/en/evaluation-tools/b-l475e-iot01a.html#tools-software)
 - [VS Code Extension: Markdown PDF](https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf)
+- [STM32CubeMX STM32Cube initialization code generator](https://www.st.com/en/development-tools/stm32cubemx.html#get-software)
 
 ### Tutorials and Sample Code
 
 - [Sysprogs VisualGDB Developing STM32 projects with Visual Studio tutorial](https://visualgdb.com/tutorials/arm/stm32/)
 - [Sysprogs VisualGDB Using the STM32 UART interface with HAL](https://visualgdb.com/tutorials/arm/stm32/uart/hal/)
 - [Sysprogs VisualGDB Using the I2C Interface on the STM32 Devices](https://visualgdb.com/tutorials/arm/stm32/i2c/)
+- [Sysprogs VisualGDB Creating Advanced STM32CubeMX-based Projects with VisualGDB](https://visualgdb.com/tutorials/arm/stm32/cube/advanced/)
+- [Sysprogs VisualGDB Using STM32 timers in PWM mode](https://visualgdb.com/tutorials/arm/stm32/pwm/)
 - [NordicPlayground mbed stm32f4xx_hal_uart](https://github.com/NordicPlayground/mbed/blob/master/libraries/mbed/targets/cmsis/TARGET_STM/TARGET_DISCO_F407VG/stm32f4xx_hal_uart.c)
 - [afiskon/stm32-ssd1306 example](https://github.com/afiskon/stm32-ssd1306/blob/master/examples/oled-tester/firmware/i2c/Src/main.c); The [code](https://github.com/afiskon/stm32-ssd1306/tree/master/ssd1306) is [included in this project](../IoT_BBQ_STM32/SSD1306/).
 - [Sensors STM32CubeL4/Drivers/BSP/B-L475E-IOT01/](https://github.com/STMicroelectronics/STM32CubeL4/tree/master/Drivers/BSP/B-L475E-IOT01)
+
+### Video Tutorials
+
+- [Digi-Key Getting Started with STM32 - Timers and Timer Interrupts](https://www.digikey.com/en/maker/projects/getting-started-with-stm32-timers-and-timer-interrupts/d08e6493cefa486fb1e79c43c0b08cc6) by [Shawn Hymel](https://www.digikey.com/en/maker/profiles/72825bdd887a427eaf8d960b6505adac)
+- [STMicroelectronics STM32CubeIDE basics - 05 TIM PWM HAL lab](https://www.youtube.com/watch?v=-AFCcfzK9xc)
 
 ### Cloud Demo
 - [AWS AWS Cloud demonstration](https://github.com/STMicroelectronics/STM32CubeL4/tree/master/Projects/B-L475E-IOT01A/Demonstrations)
