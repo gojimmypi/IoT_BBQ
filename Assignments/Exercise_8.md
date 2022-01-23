@@ -1,4 +1,4 @@
-# Exercise 8 Heap and Atack Pointers
+# Exercise 8 Heap and Stack Pointers
 
 Compile your project code so it prints out the heap pointer and the stack pointer. Print out a global variable address. 
 If you can find it, modify your linker file to swap your uninitialized variables and initialized variables. 
