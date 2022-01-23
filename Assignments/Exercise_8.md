@@ -52,6 +52,14 @@ C:\Users\gojimmypi\STM32Cube\Repository\STM32Cube_FW_L4_V1.17.1\Middlewares\Thir
 
 ## Linker File
 
+The [linker file](./Exercise_8_STM32L475VG_flash.lds), `STM32L475VG_flash.lds` needed to be manually copied to the project directory, as by default it is located in:
+
+```
+C:\Users\gojimmypi\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32L4xxxx\LinkerScripts
+```
+
+![linker_script_copy.png](./images/linker_script_copy.png)
+
 The default setting was to _not_ generare a linker map file.
 
 ![generate_map_file](./images/generate_map_file.png)
@@ -70,13 +78,13 @@ But when seaching all files there were three instances
 
 ![isr_vector_directory_instances](./images/isr_vector_directory_instances.png)
 
-Specifically, in this directory:
+Specifically, `.isr_vector` was found in this directory at line [5,519](https://github.com/gojimmypi/IoT_BBQ/blob/4b319f3829f95a9f9d6610694b39b27357717030/Assignments/Exercise_8_IoT_BBQ_STM32.map#L5519):
 
 ```
 C:\workspace\IoT_BBQ\IoT_BBQ_STM32\VisualGDB\Debug
 ```
 
-The `IoT_BBQ_STM32.map` file is over 7,000 lines long. Additionally, when building the project, any changes manually made are over-written by a fresh generation of the file.
+The [IoT_BBQ_STM32.map](./Exercise_8_IoT_BBQ_STM32.map) file is over 7,000 lines long. Additionally, when building the project, any manually changes are over-written by a fresh generation of the file.
 
 
 ## References:
