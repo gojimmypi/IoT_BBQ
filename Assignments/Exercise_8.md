@@ -18,16 +18,16 @@ which of course is the most recent stack pointer:
         volatile long myStackPointer = (long)((void*)&p);
 ```
 
-VisualGDB has the capability of showing live FreeRTOS environment details:
-
-Here the newly-allocated address of `p` has a value of `0x200013F0`:
+VisualGDB has the capability of showing live FreeRTOS environment details. Here the newly-allocated address of `p` has a value of `0x200013F0`:
 
 ![stack_pointer_example](./images/stack_pointer_example.png)
 
-We can also observe that FreeRTOS apparently has (72-8 = 64) bytes of overhead on the stack, probably for the pre-emptive scheduler. 
-Also shown is the stack starting in this thread at `0x200013e8`. 
+The live watch also helps us with the address of the stack pointer in this FreeRTOS thread: `0x20001418`. A means of determining this value directly from the inside of `[Raw TCB]` has not yet been determined.
 
-The next value of the stack pointer was `0x200013e8` after allocation of `int *q`. (`0x200013F0 - 0x200013e8 = 8` byte change: the size of the `volatile long myStackPointer2`.
+We can also observe that FreeRTOS apparently has (72-8 = 64) bytes of overhead on the stack, probably for the pre-emptive scheduler. 
+Also shown is the stack starting in this thread at `pxTopOfStack = 0x200013c8`. 
+
+The next value of the stack pointer was `0x200013c8` after allocation of `int *q`. (`0x200013F0 - 0x200013e8 = 8` byte change: the size of the `volatile long myStackPointer2`.
 
 ```
     void* p = NULL;
@@ -50,6 +50,38 @@ In particular the [heap_4.c xPortGetFreeHeapSize()](https://github.com/STMicroel
 C:\Users\gojimmypi\STM32Cube\Repository\STM32Cube_FW_L4_V1.17.1\Middlewares\Third_Party\FreeRTOS\Source\portable\MemMang
 ```
 
+## Linker File
+
+The default setting was to _not_ generare a linker map file.
+
+![generate_map_file](./images/generate_map_file.png)
+
+Only a one instance of `.isr_vector` was found in the solution:
+
+~[isr_vector_project_instances](./images/isr_vector_project_instances.png)
+
+Specifically, in this directory:
+
+```
+C:\Users\gojimmypi\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32L4xxxx\StartupFiles
+```
+
+But when seaching all files there were three instances
+
+![isr_vector_directory_instances](./images/isr_vector_directory_instances.png)
+
+Specifically, in this directory:
+
+```
+C:\workspace\IoT_BBQ\IoT_BBQ_STM32\VisualGDB\Debug
+```
+
+The `IoT_BBQ_STM32.map` file is over 7,000 lines long. Additionally, when building the project, any changes manually made are over-written by a fresh generation of the file.
+
+
+## References:
+
+* [VisualGDB Customizing Memory Layout of Embedded Programs with GNU Linker Scripts](https://visualgdb.com/w/tutorials/tag/linker-script/)
 
 
 << [Exercise 7](./Exercise_7.md) -- [Assignments](./README.md) --  [TBD]() >>
