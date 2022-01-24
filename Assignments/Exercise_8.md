@@ -10,7 +10,10 @@ Note: there will be more detailed hints on how to do this as the week goes on. I
 
 ## Result
 
-Here's the heap, stack, and global variable address printed:
+Here's the 
+[stack](https://github.com/gojimmypi/IoT_BBQ/blob/106784c506af993e4949d96c450d91733ee2f3fe/IoT_BBQ_STM32/_main.c#L389), 
+[heap](https://github.com/gojimmypi/IoT_BBQ/blob/106784c506af993e4949d96c450d91733ee2f3fe/IoT_BBQ_STM32/_main.c#L411), 
+and [global variable](https://github.com/gojimmypi/IoT_BBQ/blob/106784c506af993e4949d96c450d91733ee2f3fe/IoT_BBQ_STM32/_main.c#L30) addresses printed out the UART:
 
 ![assignment_8_result.png](./images/assignment_8_result.png)
 
@@ -56,6 +59,17 @@ In particular the [heap_4.c xPortGetFreeHeapSize()](https://github.com/STMicroel
 ```
 C:\Users\gojimmypi\STM32Cube\Repository\STM32Cube_FW_L4_V1.17.1\Middlewares\Third_Party\FreeRTOS\Source\portable\MemMang
 ```
+
+Similar to the [Stack Pointers](https://github.com/gojimmypi/IoT_BBQ/blob/main/Assignments/Exercise_8.md#stack-pointers), the heap pointer is determined by allocating heap space via the RTOS `pvPortMalloc`, see 
+[myHeapPointer](https://github.com/gojimmypi/IoT_BBQ/blob/106784c506af993e4949d96c450d91733ee2f3fe/IoT_BBQ_STM32/_main.c#L411):
+
+```
+myHeapPointer = (long)pvPortMalloc(1); // a non-zero param returns heap pointer
+```
+
+The VisualGDB FreeRTOS Live Watch verified the most recent allocation at address `0x20001ea0` as shown in the putty UART output [result](https://github.com/gojimmypi/IoT_BBQ/blob/main/Assignments/Exercise_8.md#result), above. 
+
+![myHeapPointer_cross_check.png](./images/myHeapPointer_cross_check.png)
 
 ## Linker File
 
