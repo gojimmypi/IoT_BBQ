@@ -45,6 +45,12 @@ Contrary to the Global Watch, the manual watch showed a value and address consis
 
 ![address_memory_swap_oddity_manual_inspection.png](./images/address_memory_swap_oddity_manual_inspection.png)
 
+So which is correct? An [additional programmatic assignment](https://github.com/gojimmypi/IoT_BBQ/blob/688a7cbbd65cedb348adb1562dad32c2918f921b/IoT_BBQ_STM32/_main.c#L457) confirmed the value is indeed `42`: 
+
+```
+volatile int checkValue = myInitializedVariable;
+```
+
 ## Stack Pointers
 
 Variables in functions are stored on the stack. Thank you [stackoverflow for the reminder on how to determine the address of a variable on the stack](https://stackoverflow.com/questions/20059673/print-out-value-of-stack-pointer),
