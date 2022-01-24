@@ -454,7 +454,9 @@ static void PWM_Thread1(void const *argument)
     UART_TxMessageIntValueHex(NotInitMessageHex, bufferLenth, (long)&myNotInitializedVariable);
     UART_TxMessage(CrLf, bufferLenth);
 
-
+    volatile int checkValue = myInitializedVariable;
+    
+    
 //    static char numStr[32];
 //    int_to_string(numStr, 32, 42);
 //    UART_TxMessage(numStr, 32);
