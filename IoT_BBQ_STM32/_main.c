@@ -28,7 +28,8 @@ osThreadId PWM_Thread1Handle;
 
 #define bufferLenth 80
 static uint8_t buffer[bufferLenth] = "Global Variable: Hello World";
-
+static int myNotInitializedVariable;
+static int myInitializedVariable = 42;
 
 /* Private function prototypes -----------------------------------------------*/
 static void LED_Thread1(void const *argument);
@@ -403,6 +404,9 @@ static void PWM_Thread1(void const *argument)
     static uint8_t HeapMessageSizeHex[bufferLenth]  = "Heap Size = 0x";
     static uint8_t HeapMessageFreeHex[bufferLenth]  = "Heap Free = 0x";
  
+    static uint8_t InitMessageHex[bufferLenth]      = "Initialized     = 0x";
+    static uint8_t NotInitMessageHex[bufferLenth]   = "Not Initialized = 0x";
+
     long myHeapSize = configADJUSTED_HEAP_SIZE;
         
     size_t myHeapFreeSize = xPortGetFreeHeapSize();
@@ -435,6 +439,21 @@ static void PWM_Thread1(void const *argument)
     // show free heap free size
     UART_TxMessageIntValueHex(HeapMessageFreeHex, bufferLenth, myHeapFreeSize);
     UART_TxMessage(CrLf, bufferLenth);
+
+    
+    UART_TxMessage(CrLf, bufferLenth);
+    UART_TxMessage(CrLf, bufferLenth);
+    UART_TxMessage(CrLf, bufferLenth);
+    UART_TxMessage(CrLf, bufferLenth);
+
+    // show Initialized Variable Address
+    UART_TxMessageIntValueHex(InitMessageHex, bufferLenth, (long)&myInitializedVariable);
+	UART_TxMessage(CrLf, bufferLenth);
+
+    // show Uninitialized Variable Address
+    UART_TxMessageIntValueHex(NotInitMessageHex, bufferLenth, (long)&myNotInitializedVariable);
+    UART_TxMessage(CrLf, bufferLenth);
+
 
 //    static char numStr[32];
 //    int_to_string(numStr, 32, 42);
