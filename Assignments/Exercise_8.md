@@ -41,7 +41,9 @@ However the Global Live Watch result was unexpected:
 
 ![address_memory_swap_oddity.png](./images/address_memory_swap_oddity.png)
 
-Contrary to the Global Watch, the manual watch showed a value and address consistent with the `putty` output values: `0x20004440 <myInitializedVariable> {0x0000002a}`:
+Contrary to the Global Watch, the manual watch showed a value and address consistent with the `putty` output values: 
+
+`0x20004440 <myInitializedVariable> {0x0000002a}`:
 
 ![address_memory_swap_oddity_manual_inspection.png](./images/address_memory_swap_oddity_manual_inspection.png)
 
