@@ -86,22 +86,6 @@ SECTIONS
 		PROVIDE(__fini_array_end = .);
 	} > FLASH
 
-	.data :
-	{
-		. = ALIGN(4);
-		_sdata = .;
-
-		PROVIDE(__data_start__ = _sdata);
-		*(.data)
-		*(.data*)
-		. = ALIGN(4);
-		_edata = .;
-
-		PROVIDE(__data_end__ = _edata);
-	} > SRAM AT >FLASH
-
-	_sidata = LOADADDR(.data);
-
 	.bss :
 	{
 		. = ALIGN(4);
@@ -116,6 +100,23 @@ SECTIONS
 
 		PROVIDE(__bss_end__ = _ebss);
 	} > SRAM
+
+	_sidata = LOADADDR(.data);
+
+	.data :
+	{
+		. = ALIGN(4);
+		_sdata = .;
+
+		PROVIDE(__data_start__ = _sdata);
+		*(.data)
+		*(.data*)
+		. = ALIGN(4);
+		_edata = .;
+
+		PROVIDE(__data_end__ = _edata);
+	} > SRAM AT >FLASH
+
 
 	PROVIDE(end = .);
 
