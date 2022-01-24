@@ -939,6 +939,27 @@
     <ClCompile Include="DISPLAY\DISPLAY.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="Tasks\state_machine.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="LPS22HB\stm32l475e_iot01_psensor.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\lps22hb\lps22hb.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\psensor.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\tsensor.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\stm32l4xx_hal_msp.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="UART\int_to_string.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DWT_STM32_DELAY.h">
@@ -989,5 +1010,28 @@
     <ClInclude Include="DISPLAY\DISPLAY.h">
       <Filter>Header files</Filter>
     </ClInclude>
+    <ClInclude Include="Tasks\state_machine.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="LPS22HB\stm32l475e_iot01_psensor.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\lps22hb\lps22hb.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\psensor.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\tsensor.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="UART\int_to_string.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <LinkerScript Include="STM32L475VG_flash.lds">
+      <Filter>Source files</Filter>
+    </LinkerScript>
   </ItemGroup>
 </Project>

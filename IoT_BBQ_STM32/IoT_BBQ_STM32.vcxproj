@@ -51,19 +51,31 @@
       </CPPLanguageStandard>
     </ClCompile>
     <Link>
-      <LibrarySearchDirectories>%(Link.LibrarySearchDirectories)</LibrarySearchDirectories>
-      <AdditionalLibraryNames>%(Link.AdditionalLibraryNames)</AdditionalLibraryNames>
-      <AdditionalLinkerInputs>%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
-      <LinkerScript />
+      <LibrarySearchDirectories>;%(Link.LibrarySearchDirectories)</LibrarySearchDirectories>
+      <AdditionalLibraryNames>;%(Link.AdditionalLibraryNames)</AdditionalLibraryNames>
+      <AdditionalLinkerInputs>;%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
+      <LinkerScript>STM32L475VG_flash.lds</LinkerScript>
       <AdditionalOptions />
+      <GenerateMapFile>true</GenerateMapFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <LinkerScript Include="STM32L475VG_flash.lds" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="Common\psensor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Common\stm32l4xx_hal_msp.c" />
+    <ClCompile Include="Common\tsensor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Components\lps22hb\lps22hb.c" />
     <ClCompile Include="DISPLAY\DISPLAY.cpp">
       <SubType>
       </SubType>
@@ -72,11 +84,20 @@
     <ClCompile Include="Flash\spi_flash.c" />
     <ClCompile Include="HX711\HX711.cpp" />
     <ClCompile Include="LED\LED.cpp" />
+    <ClCompile Include="LPS22HB\stm32l475e_iot01_psensor.c" />
     <ClCompile Include="SSD1306\ssd1306.c" />
     <ClCompile Include="SSD1306\ssd1306_fonts.c" />
     <ClCompile Include="SSD1306\ssd1306_tests.c" />
     <ClCompile Include="SSD1306\SSD1306_demo.cpp" />
+    <ClCompile Include="Tasks\state_machine.c">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Tasks\task_display.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="UART\int_to_string.c">
       <SubType>
       </SubType>
     </ClCompile>
@@ -91,6 +112,15 @@
     </ClCompile>
     <ClCompile Include="_Init\Init_GPIO_I2C.cpp" />
     <ClCompile Include="_main.c" />
+    <ClInclude Include="Common\psensor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Common\tsensor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Components\lps22hb\lps22hb.h" />
     <ClInclude Include="DISPLAY\DISPLAY.h">
       <SubType>
       </SubType>
@@ -98,16 +128,25 @@
     <ClInclude Include="Flash\Flash_Sim_Demo.h" />
     <ClInclude Include="Flash\spi_flash.h" />
     <ClInclude Include="LED\LED.h" />
+    <ClInclude Include="LPS22HB\stm32l475e_iot01_psensor.h" />
     <ClInclude Include="SSD1306\ssd1306.h" />
     <ClInclude Include="SSD1306\ssd1306_conf.h" />
     <ClInclude Include="SSD1306\ssd1306_fonts.h" />
     <ClInclude Include="SSD1306\ssd1306_tests.h" />
     <ClInclude Include="SSD1306\SSD1306_demo.h" />
+    <ClInclude Include="Tasks\state_machine.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Tasks\task_display.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="Tasks\task_weight_monitor.h" />
+    <ClInclude Include="UART\int_to_string.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="UART\UART.h" />
     <ClInclude Include="_Init\Init_GPIO.h">
       <SubType>
