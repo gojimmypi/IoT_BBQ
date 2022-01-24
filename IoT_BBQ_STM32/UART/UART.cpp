@@ -1,5 +1,8 @@
 #include "../UART/UART.h"
+
 #include <stm32l4xx_hal.h>
+#include "int_to_string.h"
+
 // #include <stm32_hal_legacy.h>
 
 #ifdef __cplusplus
@@ -19,7 +22,70 @@ extern "C" {
     //    HAL_SYSTICK_IRQHandler();
     //}
     static UART_HandleTypeDef s_UARTHandle = UART_HandleTypeDef();
+    
+    int UART_TxMessage(uint8_t *pData, uint16_t Size )
+    {
+        HAL_StatusTypeDef TxResult = HAL_OK;
+        
+        // see if our message is a zero terminated string, shorter than the max Size
+        uint16_t FoundSize = Size;
+        for (size_t i = 0; i < Size; i++)
+        {
+            if (pData[i] == 0)
+            {
+                FoundSize = i;
+                break;
+            }
+        }
 
+        TxResult = HAL_UART_Transmit(&s_UARTHandle, pData, FoundSize, HAL_MAX_DELAY);
+        
+        if(TxResult == HAL_OK)
+        {
+            return 0;
+        }
+        else
+        {
+            return TxResult;
+        } 
+            
+    }
+
+    const uint16_t NUM_STR_LEN = 32;
+    int UART_TxMessageIntValue(uint8_t *pData, uint16_t Size, long Value)
+    {
+        HAL_StatusTypeDef TxResult = HAL_UART_Transmit(&s_UARTHandle, pData, Size, HAL_MAX_DELAY);
+        if (TxResult == HAL_OK)
+        {
+            static char numStr[NUM_STR_LEN];
+            int_to_string(numStr, NUM_STR_LEN, Value);
+            UART_TxMessage((uint8_t*)numStr, 32);
+
+            return 0;
+        }
+        else
+        {
+            return TxResult;
+        } 
+    }
+
+    int UART_TxMessageIntValueHex(uint8_t *pData, uint16_t Size, long Value)
+    {
+        HAL_StatusTypeDef TxResult = HAL_UART_Transmit(&s_UARTHandle, pData, Size, HAL_MAX_DELAY);
+        if (TxResult == HAL_OK)
+        {
+            static char numStr[NUM_STR_LEN];
+
+            int_to_hex(numStr, Value);
+            UART_TxMessage((uint8_t*)numStr, 32);
+            return 0;
+        }
+        else
+        {
+            return TxResult;
+        } 
+    }
+    
     void UART_Thread1(void const* argument) {
         (void)argument;
 
