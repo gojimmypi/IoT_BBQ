@@ -37,7 +37,8 @@ The live watch also helps us with the address of the stack pointer in this FreeR
 We can also observe that FreeRTOS apparently has (72-8 = 64) bytes of overhead on the stack, probably for the pre-emptive scheduler. 
 Also shown is the stack starting in this thread at `pxTopOfStack = 0x200013c8`. 
 
-The next value of the stack pointer was `0x200013c8` after allocation of `int *q`. (`0x200013F0 - 0x200013e8 = 8`) byte change: the size of the `volatile long myStackPointer2`.
+The next value of the stack pointer was `0x200013c8` after [allocation](https://github.com/gojimmypi/IoT_BBQ/blob/106784c506af993e4949d96c450d91733ee2f3fe/IoT_BBQ_STM32/_main.c#L392)
+of `int *q`. (`0x200013F0 - 0x200013e8 = 8`) byte change: the size of the `volatile long myStackPointer2`.
 
 ```
     void* p = NULL;
