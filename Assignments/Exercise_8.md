@@ -17,6 +17,33 @@ and [global variable](https://github.com/gojimmypi/IoT_BBQ/blob/106784c506af993e
 
 ![assignment_8_result.png](./images/assignment_8_result.png)
 
+Given two global variables, one [initialized](https://github.com/gojimmypi/IoT_BBQ/blob/d6a782fa75ff63185452af4ad6737e4db91b9b61/IoT_BBQ_STM32/_main.c#L32) with a value of `42`
+and the other [not initialized](https://github.com/gojimmypi/IoT_BBQ/blob/d6a782fa75ff63185452af4ad6737e4db91b9b61/IoT_BBQ_STM32/_main.c#L31):
+
+```
+static int myNotInitializedVariable;
+static int myInitializedVariable = 42;
+```
+The default addresses are shown:
+
+![address_memory_default.png](./images/address_memory_default.png)
+
+Confirmed by VisualGDB Lobal Live Watch:
+
+![address_memory_default_confirmed.png](./images/address_memory_default_confirmed.png)
+
+Upon [swapping uninitialized variables and initialized variables](https://github.com/gojimmypi/IoT_BBQ/commit/176007658a9f9f787b2cf8d68e74c16a196d13ef#diff-947cad9d8806e1f3e06bc4a751f2f9b4ca05367b64068dfc15ac1904fc2d4890)
+the new addresses were observed:
+
+![address_memory_swap.png](./images/address_memory_swap.png)
+
+However the Global Live Watch result was unexpected:
+
+![address_memory_swap_oddity.png](./images/address_memory_swap_oddity.png)
+
+Contrary to the Global Watch, the manual watch showed a value and address consistent with the `putty` output values: `0x20004440 <myInitializedVariable> {0x0000002a}`:
+
+![address_memory_swap_oddity_manual_inspection.png](./images/address_memory_swap_oddity_manual_inspection.png)
 
 ## Stack Pointers
 
@@ -94,6 +121,9 @@ No local `LinkerScriptGenerator*.*`files were found.
 
 The linker file is [configured to save the heap in SRAM](https://github.com/gojimmypi/IoT_BBQ/blob/90c0f3c8a2cc72bcf0247367f3cc2642e352d556/Assignments/Exercise_8_STM32L475VG_flash.lds#L129), 
 as is the [stack](https://github.com/gojimmypi/IoT_BBQ/blob/90c0f3c8a2cc72bcf0247367f3cc2642e352d556/Assignments/Exercise_8_STM32L475VG_flash.lds#L131).
+
+The [.bss](https://en.wikipedia.org/wiki/.bss) section _contains statically allocated variables that are declared but have not been assigned a value yet_. The 
+[default](https://github.com/gojimmypi/IoT_BBQ/blob/0237a7ca264606b2d083d45d6de9c52a415f4bcd/Assignments/Exercise_8_STM32L475VG_flash.lds#L118) saves this data in SRAM.
 
 
 TODO: where is uninitialized data defined in the linker file?
