@@ -172,6 +172,11 @@ one instance of the word "creep" on the [Sparkfun Load Cell Amplifier HX711 Brea
 
 Yet another potential challenge pointed out on Twitter is the [temperaturer drift over time](https://twitter.com/ioPush_net/status/1481762159851974660?s=20) of the load cell.
 
+### Physical Room
+
+There's relatively limited room for the tank: so little, that there's a hole in the bottom of the cabinet to help with maneuvering when replacing a fresh tank:
+
+![existing_tank_bottom_cabinet_hole.png](./images/existing_tank_bottom_cabinet_hole.png)
 
 ### Enclosure
 
@@ -248,12 +253,13 @@ The Power LED is always on, and needs to be unsoldered to not use it:
 
 ### Development Environment
 
-- [Visual Studio 2019](https://docs.microsoft.com/en-us/visualstudio/releases/2019/release-notes)
-- [Sysprogs VisualGDB Extension](https://visualgdb.com/)
+- Microsoft [Visual Studio 2019](https://docs.microsoft.com/en-us/visualstudio/releases/2019/release-notes)
+- Sysprogs [VisualGDB Extension](https://visualgdb.com/)
 - [CMSIS-RTOS2](https://arm-software.github.io/CMSIS_5/RTOS2/html/index.html)
-- [STM32L4 Discovery kit IoT node software](https://www.st.com/en/evaluation-tools/b-l475e-iot01a.html#tools-software)
+- ST [STM32L4 Discovery kit IoT node software](https://www.st.com/en/evaluation-tools/b-l475e-iot01a.html#tools-software)
 - [VS Code Extension: Markdown PDF](https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf)
-- [STM32CubeMX STM32Cube initialization code generator](https://www.st.com/en/development-tools/stm32cubemx.html#get-software)
+- ST [STM32CubeMX STM32Cube initialization code generator](https://www.st.com/en/development-tools/stm32cubemx.html#get-software)
+- ST [Description of STM32L4/L4+ HAL and low-layer drivers - UM1884](https://www.st.com/resource/en/user_manual/dm00173145-description-of-stm32l4l4-hal-and-lowlayer-drivers-stmicroelectronics.pdf)
 
 ### Tutorials and Sample Code
 
@@ -270,6 +276,10 @@ The Power LED is always on, and needs to be unsoldered to not use it:
 
 - [Digi-Key Getting Started with STM32 - Timers and Timer Interrupts](https://www.digikey.com/en/maker/projects/getting-started-with-stm32-timers-and-timer-interrupts/d08e6493cefa486fb1e79c43c0b08cc6) by [Shawn Hymel](https://www.digikey.com/en/maker/profiles/72825bdd887a427eaf8d960b6505adac)
 - [STMicroelectronics STM32CubeIDE basics - 05 TIM PWM HAL lab](https://www.youtube.com/watch?v=-AFCcfzK9xc)
+
+### Programming
+
+- [AVR035: Efficient C Coding for AVR](https://ww1.microchip.com/downloads/en/Appnotes/doc1497.pdf)
 
 ### Cloud Demo
 - [AWS AWS Cloud demonstration](https://github.com/STMicroelectronics/STM32CubeL4/tree/master/Projects/B-L475E-IOT01A/Demonstrations)
