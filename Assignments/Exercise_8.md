@@ -24,11 +24,11 @@ and the other [not initialized](https://github.com/gojimmypi/IoT_BBQ/blob/d6a782
 static int myNotInitializedVariable;
 static int myInitializedVariable = 42;
 ```
-The default addresses are shown:
+The global addresses for each of the above variable are shown here, the messages sent out of the UART and received by `putty`:
 
 ![address_memory_default.png](./images/address_memory_default.png)
 
-Confirmed by VisualGDB Lobal Live Watch:
+Those addresses are confirmed by VisualGDB Lobal Live Watch:
 
 ![address_memory_default_confirmed.png](./images/address_memory_default_confirmed.png)
 
@@ -63,11 +63,13 @@ which of course is the most recent stack pointer:
         volatile long myStackPointer = (long)((void*)&p);
 ```
 
+The address of the _next_ variable on the stack would be the current stack pointer plus the size of the latest object (or pointer) that was pushed onto the stack.
+
 VisualGDB has the capability of showing live FreeRTOS environment details. Here the newly-allocated address of `p` has a value of `0x200013F0`:
 
 ![stack_pointer_example](./images/stack_pointer_example.png)
 
-The live watch also helps us with the address of the stack pointer in this FreeRTOS thread: `0x20001418`. A means of determining this value directly from the inside of `[Raw TCB]` has not yet been determined.
+The live watch also helps us with the address of the stack pointer in this FreeRTOS thread: `0x20001418`. A means of determining this value directly from the inside of `[Raw TCB]` (shown above) has not yet been determined.
 
 We can also observe that FreeRTOS apparently has (72-8 = 64) bytes of overhead on the stack, probably for the pre-emptive scheduler. 
 Also shown is the stack starting in this thread at `pxTopOfStack = 0x200013c8`. 
@@ -85,6 +87,8 @@ of `int *q`. (`0x200013F0 - 0x200013e8 = 8`) byte change: the size of the `volat
     int* r = (int*)0xAD;
     volatile long myStackPointer3 = (long)((void*)&r);
 ```
+
+Unlike the stack, subsequent heap addresses may not be easily predictable, particularly when the heap becomes fragmented.
 
 ## Heap Size and Pointers
 
@@ -168,7 +172,10 @@ The [IoT_BBQ_STM32.map](./Exercise_8_IoT_BBQ_STM32.map) file is over 7,000 lines
 
 ## References:
 
-* [VisualGDB Customizing Memory Layout of Embedded Programs with GNU Linker Scripts](https://visualgdb.com/w/tutorials/tag/linker-script/)
-
+* VisualGDB [Customizing Memory Layout of Embedded Programs with GNU Linker Scripts](https://visualgdb.com/tutorials/arm/linkerscripts/)
+* FreeRTOS [Memory allocation implementations included in the RTOS source code download](https://www.freertos.org/a00111.html)
+* Stackoverflow [Print out value of stack pointer](https://stackoverflow.com/questions/20059673/print-out-value-of-stack-pointer)
+* ST Community [How to check stack and heap usage during run time.](https://community.st.com/s/question/0D50X00009XkWiq/how-to-check-stack-and-heap-usage-during-run-time)
+* ST [Description of STM32L4/L4+ HAL and low-layer drivers - UM1884](https://www.st.com/resource/en/user_manual/dm00173145-description-of-stm32l4l4-hal-and-lowlayer-drivers-stmicroelectronics.pdf)
 
 << [Exercise 7](./Exercise_7.md) -- [Assignments](./README.md) --  [TBD]() >>
