@@ -411,7 +411,7 @@ static void PWM_Thread1(void const *argument)
         
     size_t myHeapFreeSize = xPortGetFreeHeapSize();
    
-    volatile long myHeapPointer = pvPortMalloc(0); // this returns a NULL pointer
+    volatile long myHeapPointer = (long)pvPortMalloc(0); // this returns a NULL pointer
     myHeapPointer = (long)pvPortMalloc(1); // a non-zero param returns heap pointer
 
     UART_init();
