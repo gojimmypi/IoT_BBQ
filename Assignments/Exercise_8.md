@@ -28,7 +28,7 @@ The global addresses for each of the above variable are shown here, the messages
 
 ![address_memory_default.png](./images/address_memory_default.png)
 
-Those addresses are confirmed by VisualGDB Lobal Live Watch:
+Those addresses are confirmed by VisualGDB Global Live Watch:
 
 ![address_memory_default_confirmed.png](./images/address_memory_default_confirmed.png)
 
