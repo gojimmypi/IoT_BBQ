@@ -54,7 +54,8 @@
       <LibrarySearchDirectories>;%(Link.LibrarySearchDirectories)</LibrarySearchDirectories>
       <AdditionalLibraryNames>;%(Link.AdditionalLibraryNames)</AdditionalLibraryNames>
       <AdditionalLinkerInputs>;%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
-      <LinkerScript>STM32L475VG_flash.lds</LinkerScript>
+      <LinkerScript>
+      </LinkerScript>
       <AdditionalOptions />
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
