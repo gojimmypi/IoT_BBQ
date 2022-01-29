@@ -44,7 +44,7 @@ static void PWM_Thread1(void const *argument);
 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-    if (GPIO_Pin == GPIO_PIN_13)
+    if (GPIO_Pin == GPIO_PIN_13) // GPIOC
     {
         switch (LED_GetMode())
         {
@@ -141,12 +141,20 @@ void pwm_SystemClock_Config(void)
 
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 
+
+// see startup_stm32l475xx.c 
+void TIM2_IRQHandler()
+{
+    // this handler is the one that actually calls the callbacks
+    HAL_TIM_IRQHandler(&htim2);
+}
+
 /**
   * @brief TIM2 Initialization Function
   * @param None
   * @retval None
   */
-static void MX_TIM2_Init(void)
+static void pwm_MX_TIM2_Init(void)
 {
 
     /* USER CODE BEGIN TIM2_Init 0 */
@@ -163,7 +171,8 @@ static void MX_TIM2_Init(void)
     htim2.Instance = TIM2;
     htim2.Init.Prescaler = 0;
     htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-    htim2.Init.Period = 4294967295;
+    // htim2.Init.Period = 4294967295;
+    htim2.Init.Period = 500;
     htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
     htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
     if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
@@ -230,10 +239,18 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     // Check which version of the timer triggered this callback and toggle LED
     if (htim == &htim2)
     {
-        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+        // HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
     }
 }
 
+void PWM_PulseFinishedCallback(TIM_HandleTypeDef* htim)
+{
+    // Check which version of the timer triggered this callback and toggle LED
+    if (htim == &htim2)
+    {
+        // HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+    }
+}
 
 int pwm_main(void)
 {    int32_t CH1_DC = 0;
@@ -242,7 +259,8 @@ int pwm_main(void)
     pwm_SystemClock_Config();
     pwm_MX_GPIO_Init();
     MX_TIM2_Init();
-    
+
+
     // HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
     HAL_TIM_Base_Start_IT(&htim2);
     
@@ -304,7 +322,7 @@ int main(void)
 
     pwm_SystemClock_Config();
     pwm_MX_GPIO_Init();
-    MX_TIM2_Init();
+    pwm_MX_TIM2_Init();
     
     //HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
     HAL_TIM_Base_Start_IT(&htim2);
@@ -341,6 +359,7 @@ int main(void)
     LEDThread2Handle = osThreadCreate(osThread(LED2), NULL);
   
     /* UART is on a thread */
+    // TODO loopback currently disabled; this thread does nothing!
     UART_Thread1Handle = osThreadCreate(osThread(UART1), NULL);
     
     /* the display in on a thread */
@@ -349,8 +368,20 @@ int main(void)
     /* our PWM */
     PWM_Thread1Handle = osThreadCreate(osThread(PWM), NULL);
 
+
+    // Callbacks disabled
+    // htim2.PWM_PulseFinishedCallback = PWM_PulseFinishedCallback;
+    // htim2.PeriodElapsedCallback = HAL_TIM_PeriodElapsedCallback;
+
+    // you can use interrupt priorities of 5 to 15 for your interrupts if they make FreeRTOS API calls
+    HAL_NVIC_SetPriority(TIM2_IRQn, 15, 14);
+    
+    // ssd1306_TestFPS() in ssd1306_tests.c and this interrupt enabled causes a hard fault!
+    HAL_NVIC_EnableIRQ(TIM2_IRQn);
+
     /* Start scheduler */
     osKernelStart();
+
 
     /* We should never get here as control is now taken by the scheduler */
     for (;;) ;
@@ -477,10 +508,16 @@ static void PWM_Thread1(void const *argument)
   
     for (;;)
     {
-            
+        static uint8_t ThisTimerMessage[bufferLenth] = "Timer = 0x";
+
         while (1)
         {
-            osDelay(10);
+            int timerValue = __HAL_TIM_GET_COUNTER(&htim2);
+
+            // UART_TxMessageIntValueHex(ThisTimerMessage, bufferLenth, (long)htim2.Instance->CNT);
+            UART_TxMessageIntValueHex(ThisTimerMessage, bufferLenth, (long)timerValue);
+            UART_TxMessage(CrLf, bufferLenth);
+            osDelay(2000);
 //            while (CH1_DC < 65535)
 //            {
 //                TIM2->CCR1 = CH1_DC;
