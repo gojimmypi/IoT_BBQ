@@ -42,7 +42,7 @@ void ConfigureI2CPins2()
         // Initialize LED2
         LED2_init(); // GPIOB Port 14
     
-        // Initialize Port B
+        // Initialize Port B - OLD HX711, not used TODO cleanup
         GPIO_InitTypeDef GPIO_InitStructureB;
 
         GPIO_InitStructureB.Pin = GPIO_PIN_8;
@@ -57,7 +57,9 @@ void ConfigureI2CPins2()
         GPIO_InitStructureB.Speed = GPIO_SPEED_FREQ_HIGH;
         GPIO_InitStructureB.Pull = GPIO_NOPULL;
         HAL_GPIO_Init(GPIOB, &GPIO_InitStructureB);
-    
+
+
+
         // Initialize Port C
         GPIO_InitTypeDef GPIO_InitStructureC = { 0 }; 
 
