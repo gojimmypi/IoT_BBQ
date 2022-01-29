@@ -53,6 +53,39 @@ as shown on page 50 of the [B-L475E-IOT01A (UM2153) User manual](https://www.st.
 
 ## B-L475E-IOT01A Connections
 
+HX711
+- PD_SCK = GPIO_PIN_2; //  ARD.D8 = PB2  0x0004
+- DOUT = GPIO_PIN_15;  //  ARD.D9 = PA15 0x8000
+
+GPIO_init; old HX711
+- GPIOB GPIO_PIN_8
+- GPIOB GPIO_PIN_9
+
+
+HAL_TIM_MspPostInit
+- GPIOA / GPIO_PIN_0
+
+LED
+- GPIOA GPIO_PIN_5;
+- GPIOB GPIO_PIN_14;
+
+SSD1306
+- DC GPIOB GPIO_PIN_14
+- Reset GPIOA GPIO_PIN_8
+- 
+
+Button
+- GPIOC, GPIO_PIN_13  (interrupt)
+
+pwm_MX_GPIO_Init
+- GPIOA GPIO_PIN_8
+
+ConfigureI2CPins
+- GPIOC GPIO_PIN_0 
+- GPIOC GPIO_PIN_1
+
+
+
 ### CN1
 
 See Table 4 ARDUINO® connector pinout on page 31 of the [B-L475E-IOT01A (UM2153) User manual](https://www.st.com/resource/en/user_manual/um2153-discovery-kit-for-iot-node-multichannel-communication-with-stm32l4-stmicroelectronics.pdf):
