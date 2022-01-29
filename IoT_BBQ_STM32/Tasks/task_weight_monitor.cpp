@@ -35,7 +35,7 @@ extern "C"
                 }
                 else 
                 {
-                    scale.begin(GPIO_PIN_9, GPIO_PIN_8);
+                    scale.begin(GPIO_PIN_9, GPIO_PIN_8); // TODO params not current used! hard coded
                     IsInitialized = true;
                 }
                 
