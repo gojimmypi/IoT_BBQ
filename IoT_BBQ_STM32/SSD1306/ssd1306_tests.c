@@ -208,7 +208,10 @@ void ssd1306_TestFPS() {
 
     char buff[64];
     fps = (float)fps / ((end - start) / 1000.0);
-    snprintf(buff, sizeof(buff), "~%d FPS", fps);
+    
+    // limited stack! snprintf causes stack overflow when stack thread is only 512 
+    // needs at least 584 bytes
+    // snprintf(buff, sizeof(buff), "~%d FPS", fps);
    
     ssd1306_Fill(White);
     ssd1306_SetCursor(2, 2);
@@ -296,7 +299,7 @@ void ssd1306_TestAll() {
         IsInitialized = 1;
     }
     
-    // ssd1306_TestFPS(); // this causes hard fault!
+    ssd1306_TestFPS(); // this causes hard fault!
     
     osDelay(xDelay); 
     ssd1306_TestBorder();
