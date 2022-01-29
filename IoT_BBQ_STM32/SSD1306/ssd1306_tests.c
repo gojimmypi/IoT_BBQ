@@ -1,3 +1,5 @@
+#include <../CMSIS_RTOS/cmsis_os.h>
+
 #include <string.h>
 #include <stdio.h>
 #include "SSD1306/ssd1306.h"
@@ -169,6 +171,11 @@ void ssd1306_TestFonts() {
 }
 
 void ssd1306_TestFPS() {
+    //
+    // WARNING this still caused hard fault in RTOS!!
+    //
+    const TickType_t xLoopDelay = 1 / portTICK_PERIOD_MS;
+
     ssd1306_Fill(White);
    
     uint32_t start = HAL_GetTick();
@@ -192,9 +199,12 @@ void ssd1306_TestFPS() {
 
         fps++;
         end = HAL_GetTick();
+        osDelay(xLoopDelay); // yield to RTOS
     } while((end - start) < 5000);
    
-    HAL_Delay(5000);
+    const TickType_t xDelay = 500 / portTICK_PERIOD_MS;
+    osDelay(xDelay);
+    // HAL_Delay(5000); fault!
 
     char buff[64];
     fps = (float)fps / ((end - start) / 1000.0);
@@ -259,40 +269,60 @@ void ssd1306_TestPolyline() {
 
 void ssd1306_TestDrawBitmap()
 {
+    const TickType_t xDelay = 3000 / portTICK_PERIOD_MS;
+
     ssd1306_Fill(White);
     ssd1306_DrawBitmap(0,0,garfield_128x64,128,64,Black);
     ssd1306_UpdateScreen();
-    HAL_Delay(3000);
+    osDelay(xDelay);
+    
     ssd1306_Fill(Black);
     ssd1306_DrawBitmap(32,0,github_logo_64x64,64,64,White);
     ssd1306_UpdateScreen();
-    HAL_Delay(3000);
+    osDelay(xDelay);
+    
     ssd1306_Fill(White);
     ssd1306_DrawBitmap(32,0,github_logo_64x64,64,64,Black);
     ssd1306_UpdateScreen();
 }
 
+static int IsInitialized = 0x0;
+
 void ssd1306_TestAll() {
-    ssd1306_Init();
-    ssd1306_TestFPS();
-    HAL_Delay(3000);
+    const TickType_t xDelay = 500 / portTICK_PERIOD_MS;
+
+    if (IsInitialized == 0) {
+        ssd1306_Init();
+        IsInitialized = 1;
+    }
+    
+    // ssd1306_TestFPS(); // this causes hard fault!
+    
+    osDelay(xDelay); 
     ssd1306_TestBorder();
     ssd1306_TestFonts();
-    HAL_Delay(3000);
+    osDelay(xDelay);
+    
     ssd1306_Fill(Black);
     ssd1306_TestRectangle();
     ssd1306_TestLine();
-    HAL_Delay(3000);
+    osDelay(xDelay);
+    
     ssd1306_Fill(Black);
     ssd1306_TestPolyline();
-    HAL_Delay(3000);
+    osDelay(xDelay);
+
     ssd1306_Fill(Black);
     ssd1306_TestArc();
-    HAL_Delay(3000);
+    osDelay(xDelay);
+
     ssd1306_Fill(Black);
     ssd1306_TestCircle();
-    HAL_Delay(3000);
+    osDelay(xDelay);
+
     ssd1306_TestDrawBitmap();
-    HAL_Delay(3000);
+    osDelay(xDelay);
+    osDelay(xDelay);
+
 }
 
