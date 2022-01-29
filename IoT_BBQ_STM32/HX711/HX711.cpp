@@ -86,6 +86,7 @@ void HX711::begin(uint16_t dout, uint16_t pd_sck, byte gain) {
     // FreeRTOS API functions must not be called from within a critical section.
     portENTER_CRITICAL();
     
+    // TODO don't override!
     PD_SCK = GPIO_PIN_2; //  ARD.D8 = PB2  0x0004
     DOUT = GPIO_PIN_15;  //  ARD.D9 = PA15 0x8000
 
