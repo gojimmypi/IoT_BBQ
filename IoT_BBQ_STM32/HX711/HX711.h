@@ -33,8 +33,8 @@ private:
     uint16_t PD_SCK; // Power Down and Serial Clock Input Pin
     uint16_t DOUT; // Serial Data Output Pin
     byte GAIN; // amplification factor
-    long OFFSET = 0; // used for tare weight
-    float SCALE = 1; // used to return weight in grams, kg, ounces, whatever
+    long OFFSET = 0xffffbfda; // used for tare weight
+    float SCALE = 104; // used to return weight in grams, kg, ounces, whatever
 
 public:
 
@@ -62,7 +62,7 @@ public:
     // set the gain factor; takes effect only after a call to read()
     // channel A can be set for a 128 or 64 gain; channel B has a fixed 32 gain
     // depending on the parameter, the channel is also set to either A or B
-    void set_gain(byte gain = 128);
+    void set_gain(byte gain = 64);
 
     // waits for the chip to be ready and returns a reading
     long read();
