@@ -8,9 +8,9 @@
 #include "Flash/Flash_Sim_Demo.h"
 #include "LED/LED.h"
 #include "UART/UART.h"
-#include  "DISPLAY/DISPLAY.h"
-#include  "UART/int_to_string.h"
-#include <stm32l4xx_hal.h>
+#include "DISPLAY/DISPLAY.h"
+#include "UART/int_to_string.h"
+#include "Tasks/state_machine.h"
 
 // #include "common/stm32l4xx_hal_msp.h"
 
@@ -320,12 +320,16 @@ int main(void)
 
 
 
-    pwm_SystemClock_Config();
-    pwm_MX_GPIO_Init();
-    pwm_MX_TIM2_Init();
+    if (1 == 2)
+    {
+        pwm_SystemClock_Config();
+        pwm_MX_GPIO_Init();
+        pwm_MX_TIM2_Init();
     
-    //HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
-    HAL_TIM_Base_Start_IT(&htim2);
+        //HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+        HAL_TIM_Base_Start_IT(&htim2);
+        
+    }
 
     
     // create a SwitchState variable to hold the result of out button press 
@@ -335,7 +339,7 @@ int main(void)
     SwitchState = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
     SwitchState = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
 
-    
+    SetAppState(Running);
 
     /* Thread 1 definition */
     osThreadDef(LED1, LED_Thread1, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
@@ -348,7 +352,7 @@ int main(void)
 
     osThreadDef(DISPLAY, DISPLAY_Thread1, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
 
-    osThreadDef(PWM, PWM_Thread1, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
+    // osThreadDef(PWM, PWM_Thread1, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
 
     
     
@@ -366,7 +370,7 @@ int main(void)
     DISPLAY_Thread1Handle = osThreadCreate(osThread(DISPLAY), NULL);
 
     /* our PWM */
-    PWM_Thread1Handle = osThreadCreate(osThread(PWM), NULL);
+    // PWM_Thread1Handle = osThreadCreate(osThread(PWM), NULL);
 
 
     // Callbacks disabled
