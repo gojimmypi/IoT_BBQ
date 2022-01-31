@@ -20,16 +20,16 @@ extern "C" {
     //
     // Get the current application state
     //
-    enum AppState GetCurrentAppState()
+    enum AppState GetAppState()
     {
         enum AppState TheValue;
         
         // FreeRTOS API functions must not be called from within a critical section.
-        portENTER_CRITICAL();
+        // portENTER_CRITICAL();
         
         TheValue = current_app_state;
 
-        portEXIT_CRITICAL();
+        // portEXIT_CRITICAL();
 
         return TheValue;
         
@@ -40,11 +40,11 @@ extern "C" {
     //
     int SetAppState(enum AppState NewState)
     {
-        portENTER_CRITICAL();
+        // portENTER_CRITICAL();
         
         current_app_state = NewState;
 
-        portEXIT_CRITICAL();
+        // portEXIT_CRITICAL();
 
         return 0; // TODO check for error, return non-zero
     }

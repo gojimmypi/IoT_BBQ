@@ -13,8 +13,8 @@ extern "C" {
     enum AppState { Startup, Running, Demo, Sleeping, Error };
 
     
-    enum AppState GetCurrentAppState();
-
+    enum AppState GetAppState();
+    int SetAppState(enum AppState NewState);
 
 #ifdef __cplusplus
 }
