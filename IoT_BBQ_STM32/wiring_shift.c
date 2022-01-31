@@ -1,3 +1,5 @@
+#include <cmsis_os.h>
+
 /*
   wiring_shift.c - shiftOut() function
   Part of Arduino - http://www.arduino.cc/
@@ -25,6 +27,8 @@
 
 #include <sys/_stdint.h>
 #include <stm32l4xx_hal.h>
+#include "DWT_STM32_DELAY.h"
+
 #define HIGH 0x1
 #define LOW  0x0
 #define LSBFIRST 0
@@ -34,20 +38,28 @@
 uint8_t shiftIn(uint16_t dataPin, uint16_t clockPin, uint8_t bitOrder) {
     uint8_t value = 0;
     uint8_t i;
-
+    static int TimingDelay = 1;
+    portENTER_CRITICAL();
     for (i = 0; i < 8; ++i) {
-        //digitalWrite(clockPin, HIGH);
-        HAL_GPIO_WritePin(GPIOB, clockPin, GPIO_PIN_SET);
+        
+        // clock high
+        HAL_GPIO_WritePin(GPIOB, clockPin, GPIO_PIN_SET); // Clock = Gray //digitalWrite(clockPin, HIGH);
+        DWT_Delay_us(1);
         
         if (bitOrder == LSBFIRST)
-            //value |= digitalRead(dataPin) << i;
-        value |= HAL_GPIO_ReadPin(GPIOA, dataPin) << i;
-        
-        else
+        {
+            value |= HAL_GPIO_ReadPin(GPIOA, dataPin) << i; //value |= digitalRead(dataPin) << i;
+        }
+        else 
+        {
             value |= HAL_GPIO_ReadPin(GPIOA, dataPin)  << (7 - i);
-        // digitalWrite(clockPin, LOW);
-        HAL_GPIO_WritePin(GPIOB, clockPin, GPIO_PIN_RESET);
+        }
+        
+        // clock low
+        HAL_GPIO_WritePin(GPIOB, clockPin, GPIO_PIN_RESET); // digitalWrite(clockPin, LOW);
+        DWT_Delay_us(1);
     }
+    portEXIT_CRITICAL();
     return value;
 }
 
@@ -67,6 +79,7 @@ void shiftOut(uint16_t dataPin, uint16_t clockPin, uint8_t bitOrder, uint8_t val
 {
     uint8_t i;
 
+    portENTER_CRITICAL();
     for (i = 0; i < 8; i++) {
         if (bitOrder == LSBFIRST) {
             // digitalWrite(dataPin, val & 1);
@@ -79,9 +92,8 @@ void shiftOut(uint16_t dataPin, uint16_t clockPin, uint8_t bitOrder, uint8_t val
             val <<= 1;
         }
 		
-        //digitalWrite(clockPin, HIGH);
-        //digitalWrite(clockPin, LOW);		
-        HAL_GPIO_WritePin(GPIOB, clockPin, GPIO_PIN_SET);
-        HAL_GPIO_WritePin(GPIOB, clockPin, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOB, clockPin, GPIO_PIN_SET);   //digitalWrite(clockPin, HIGH);
+        HAL_GPIO_WritePin(GPIOB, clockPin, GPIO_PIN_RESET); //digitalWrite(clockPin, LOW);	
     }
+    portEXIT_CRITICAL();
 }
