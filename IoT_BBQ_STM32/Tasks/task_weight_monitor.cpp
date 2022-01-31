@@ -12,12 +12,12 @@ extern "C"
     
     // SemaphoreHandle_t xHX711_Semaphore = NULL;
     SemaphoreHandle_t xHX711_Semaphore = xSemaphoreCreateMutex();
-    static double t = 0;
+    static long TheScaleWeight = 0;
     static bool IsInitialized = false;
     
     static HX711 scale; 
     
-    void GetScaleWeight()
+    long GetScaleWeight()
     {
         if (xHX711_Semaphore != NULL)
         {
@@ -35,11 +35,32 @@ extern "C"
                 }
                 else 
                 {
-                    scale.begin(GPIO_PIN_9, GPIO_PIN_8); // TODO params not current used! hard coded
+                    scale.power_down();
+                    osDelay(5000);
+                    scale.begin(0, 0); // TODO params not current used! hard coded
                     IsInitialized = true;
+
+                    // calibrate
+                    int DoCalibrate = 0;
+                    if (DoCalibrate == 1)
+                    {
+                        scale.set_scale();
+                    
+                        // Step 2 Call tare() with no parameter.
+                        scale.tare();
+
+                        // Step 3 Place a known weight on the scale and call get_units(10).
+                        float a = scale.get_units(10);
+
+                        // Divide the result in step 3 to your known weight.You should get about the parameter you need to pass to set_scale().
+                        float theValue = a / 2;
+                    
+                        scale.set_scale(theValue);
+                        }
+                    // Step 1 Call set_scale() with no parameter.
                 }
                 
-                t = scale.read_average(2);
+                TheScaleWeight = scale.get_units(10);
 
 
                 /* We have finished accessing the shared resource.  Release the
@@ -52,9 +73,13 @@ extern "C"
                 /* We could not obtain the semaphore and can therefore not access
                 the shared resource safely. */
             }
-        }        
+        }  
+        else
+        {
+            // TODO how did we end up here? xHX711_Semaphore should never be null
+        }
 
-        return;
+        return TheScaleWeight;
     }
 
     void theScaleTask()

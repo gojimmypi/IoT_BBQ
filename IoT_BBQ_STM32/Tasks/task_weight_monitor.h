@@ -9,7 +9,8 @@ extern "C"
     void theScaleTask();
 
     extern SemaphoreHandle_t xHX711_Semaphore;
-
+    long GetScaleWeight();
+    
 
 #ifdef __cplusplus
 }
