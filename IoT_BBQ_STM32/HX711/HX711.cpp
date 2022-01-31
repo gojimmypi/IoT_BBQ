@@ -84,11 +84,12 @@ HX711::~HX711() {
 void HX711::begin(uint16_t dout, uint16_t pd_sck, byte gain) {
 
     // FreeRTOS API functions must not be called from within a critical section.
-    portENTER_CRITICAL();
+    // portENTER_CRITICAL();
     
     // TODO don't override!
-    PD_SCK = GPIO_PIN_2; //  ARD.D8 = PB2  0x0004
-    DOUT = GPIO_PIN_15;  //  ARD.D9 = PA15 0x8000
+    PD_SCK = GPIO_PIN_2; //  ARD.D8 = PB2  0x0004 Gray
+    DOUT = GPIO_PIN_15;  //  ARD.D9 = PA15 0x8000 White
+    
 
     // pinMode(PD_SCK, OUTPUT);
     GPIO_InitTypeDef GPIO_InitStructureB;
@@ -96,7 +97,7 @@ void HX711::begin(uint16_t dout, uint16_t pd_sck, byte gain) {
 
     GPIO_InitStructureB.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStructureB.Speed = GPIO_SPEED_FREQ_HIGH;
-    GPIO_InitStructureB.Pull = GPIO_NOPULL;
+    GPIO_InitStructureB.Pull = GPIO_PULLDOWN;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStructureB);
 
     // GPIOA DOUT
@@ -104,7 +105,7 @@ void HX711::begin(uint16_t dout, uint16_t pd_sck, byte gain) {
     GPIO_InitStructureA.Pin = GPIO_PIN_15;
     GPIO_InitStructureA.Mode = GPIO_MODE_INPUT;
     GPIO_InitStructureA.Speed = GPIO_SPEED_FREQ_HIGH;
-    GPIO_InitStructureA.Pull = GPIO_NOPULL;
+    GPIO_InitStructureA.Pull = GPIO_PULLDOWN;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStructureA);
 
     power_up();
@@ -117,7 +118,7 @@ void HX711::begin(uint16_t dout, uint16_t pd_sck, byte gain) {
     
     set_gain(gain);
     
-    portEXIT_CRITICAL();
+    // portEXIT_CRITICAL();
 }
 
 bool HX711::is_ready() {
@@ -166,26 +167,28 @@ long HX711::read() {
     // state after the sequence completes, insuring that the entire read-and-gain-set
     // sequence is not interrupted.  The macro has a few minor advantages over bracketing
     // the sequence between `noInterrupts()` and `interrupts()` calls.
-#ifdef HAS_ATOMIC_BLOCK
-    // ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
-    
-// #elif IS_FREE_RTOS
-        // Begin of critical section.
-        // Critical sections are used as a valid protection method
-        // against simultaneous access in vanilla FreeRTOS.
-        // Disable the scheduler and call portDISABLE_INTERRUPTS. This prevents
-        // context switches and servicing of ISRs during a critical section.
-        // portMUX_TYPE mux = portMUX_INITIALIZER_UNLOCKED;
-        portENTER_CRITICAL();
-#else
-        // Disable interrupts.
-        noInterrupts();
-#endif
+//#ifdef HAS_ATOMIC_BLOCK
+//    // ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
+//    
+//// #elif IS_FREE_RTOS
+//        // Begin of critical section.
+//        // Critical sections are used as a valid protection method
+//        // against simultaneous access in vanilla FreeRTOS.
+//        // Disable the scheduler and call portDISABLE_INTERRUPTS. This prevents
+//        // context switches and servicing of ISRs during a critical section.
+//        // portMUX_TYPE mux = portMUX_INITIALIZER_UNLOCKED;
+//        // portENTER_CRITICAL();
+//#else
+//        // Disable interrupts.
+//        noInterrupts();
+//#endif
 
         // Pulse the clock pin 24 times to read the data.
         data[2] = SHIFTIN_WITH_SPEED_SUPPORT(DOUT, PD_SCK, MSBFIRST);
         data[1] = SHIFTIN_WITH_SPEED_SUPPORT(DOUT, PD_SCK, MSBFIRST);
         data[0] = SHIFTIN_WITH_SPEED_SUPPORT(DOUT, PD_SCK, MSBFIRST);
+
+        portENTER_CRITICAL();
 
         // Set the channel and the gain factor for the next reading using the clock pin.
         for (unsigned int i = 0; i < GAIN; i++) {
@@ -193,7 +196,7 @@ long HX711::read() {
             
             
 #ifdef ARCH_ESPRESSIF
-            DWT_Delay_us(1);  // delayMicroseconds(1);
+            DWT_Delay_us(2);  // delayMicroseconds(1);
 #else
             osDelay(1);
 #endif
@@ -202,23 +205,24 @@ long HX711::read() {
 
 
 #ifdef ARCH_ESPRESSIF
-            DWT_Delay_us(1); // delayMicroseconds(1);
+            DWT_Delay_us(2); // delayMicroseconds(1);
 #else
             osDelay(1);
 #endif
         }
+        portEXIT_CRITICAL();    
 
-#ifdef IS_FREE_RTOS
-        // End of critical section.
-       portEXIT_CRITICAL();  
-
-#elif HAS_ATOMIC_BLOCK
-    }
-
-#else
-    // Enable interrupts again.
-    interrupts();
-#endif
+//#ifdef IS_FREE_RTOS
+//        // End of critical section.
+//       // portEXIT_CRITICAL();  
+//
+//#elif HAS_ATOMIC_BLOCK
+//    }
+//
+//#else
+//    // Enable interrupts again.
+//    interrupts();
+//#endif
 
     // Replicate the most significant bit to pad out a 32-bit signed integer
     if (data[2] & 0x80) {
@@ -244,7 +248,7 @@ void HX711::wait_ready(unsigned long delay_ms) {
     while (!is_ready()) {
         // Probably will do no harm on AVR but will feed the Watchdog Timer (WDT) on ESP.
         // https://github.com/bogde/HX711/issues/73
-        DWT_Delay_us(1000 * delay_ms); // delay(delay_ms);
+        DWT_Delay_us(1000 * delay_ms); // TODO make RTOS friendly delay(delay_ms);
         // TODO what if it is never ready? see wait_ready_timeout()
     }
 }
@@ -321,10 +325,17 @@ long HX711::get_offset() {
 
 void HX711::power_down() {
     
+    portENTER_CRITICAL();
     HAL_GPIO_WritePin(GPIOB, PD_SCK, GPIO_PIN_RESET); // digitalWrite(PD_SCK, LOW);
+    DWT_Delay_us(2);
     HAL_GPIO_WritePin(GPIOB, PD_SCK, GPIO_PIN_SET); // digitalWrite(PD_SCK, HIGH);
+    DWT_Delay_us(2); 
+    portEXIT_CRITICAL();        
 }
 
 void HX711::power_up() {
+    // clock is low during power up mode
+    portENTER_CRITICAL();
     HAL_GPIO_WritePin(GPIOB, PD_SCK, GPIO_PIN_RESET); // digitalWrite(PD_SCK, LOW);
+    portEXIT_CRITICAL(); 
 }
