@@ -42,11 +42,11 @@ extern "C" {
         return dest;
     }
 
+    
     // based on code from https://stackoverflow.com/questions/3464194/how-can-i-convert-an-integer-to-a-hexadecimal-string-in-c
-    char *int_to_hex(char *dest, unsigned long n)
+    char *int_to_base(char *dest, unsigned long n, int base)
     {
         char *outbuf = dest;
-        const int base = 16;
         int i = 12;
         int j = 0;
 
@@ -65,6 +65,20 @@ extern "C" {
         return dest;
     }
 
+    char *int_to_hex(char *dest, unsigned long n)
+    {
+        return int_to_base(dest, n, 16);
+    }
+
+    char *int_to_dec(char *dest, unsigned long n)
+    {
+        return int_to_base(dest, n, 10);
+    } 
+    
+    char *int_to_bin(char *dest, unsigned long n)
+    {
+        return int_to_base(dest, n, 2);
+    }
 
 #ifdef __cplusplus
 }
