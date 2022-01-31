@@ -1,7 +1,7 @@
 #include <../CMSIS_RTOS/cmsis_os.h>
 
 #include <string.h>
-#include <stdio.h>
+// #include <stdio.h>
 #include "SSD1306/ssd1306.h"
 #include "SSD1306/ssd1306_tests.h"
 
@@ -204,7 +204,6 @@ void ssd1306_TestFPS() {
    
     const TickType_t xDelay = 500 / portTICK_PERIOD_MS;
     osDelay(xDelay);
-    // HAL_Delay(5000); fault!
 
     char buff[64];
     fps = (float)fps / ((end - start) / 1000.0);
@@ -299,7 +298,7 @@ void ssd1306_TestAll() {
         IsInitialized = 1;
     }
     
-    ssd1306_TestFPS(); // this causes hard fault!
+    ssd1306_TestFPS();
     
     osDelay(xDelay); 
     ssd1306_TestBorder();
