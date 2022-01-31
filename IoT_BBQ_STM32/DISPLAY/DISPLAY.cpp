@@ -33,7 +33,7 @@ extern "C" {
             case Running:
                 ssd1306_Fill(Black);
                 CurrentTankWeight = GetScaleWeight();
-                UART_TxMessageIntValueHex(WeightMessage, bufferLenth, CurrentTankWeight);
+                UART_TxMessageIntValue(WeightMessage, bufferLenth, CurrentTankWeight);
                 UART_TxMessage(CrLf, bufferLenth);
                 osDelay(xDelay); 
                 
