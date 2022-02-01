@@ -960,6 +960,21 @@
     <ClCompile Include="UART\int_to_string.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="Common\stm32l475e_iot01.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="HTS221\stm32l475e_iot01_tsensor.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="HTS221\stm32l475e_iot01_hsensor.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\hts221.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\hsensor.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DWT_STM32_DELAY.h">
@@ -1028,10 +1043,17 @@
     <ClInclude Include="UART\int_to_string.h">
       <Filter>Header files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <LinkerScript Include="STM32L475VG_flash.lds">
-      <Filter>Source files</Filter>
-    </LinkerScript>
+    <ClInclude Include="HTS221\stm32l475e_iot01_tsensor.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="HTS221\stm32l475e_iot01_hsensor.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\hts221.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\hsensor.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

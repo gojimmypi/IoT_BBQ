@@ -60,19 +60,25 @@
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <LinkerScript Include="STM32L475VG_flash.lds" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="Common\hsensor.c">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Common\psensor.cpp">
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Common\stm32l475e_iot01.c" />
     <ClCompile Include="Common\stm32l4xx_hal_msp.c" />
     <ClCompile Include="Common\tsensor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Components\hts221.c">
       <SubType>
       </SubType>
     </ClCompile>
@@ -85,6 +91,8 @@
     <ClCompile Include="Flash\spi_flash.c" />
     <ClCompile Include="HX711\HX711.cpp" />
     <ClCompile Include="LED\LED.cpp" />
+    <ClCompile Include="HTS221\stm32l475e_iot01_hsensor.c" />
+    <ClCompile Include="HTS221\stm32l475e_iot01_tsensor.c" />
     <ClCompile Include="LPS22HB\stm32l475e_iot01_psensor.c" />
     <ClCompile Include="SSD1306\ssd1306.c" />
     <ClCompile Include="SSD1306\ssd1306_fonts.c" />
@@ -113,11 +121,19 @@
     </ClCompile>
     <ClCompile Include="_Init\Init_GPIO_I2C.cpp" />
     <ClCompile Include="_main.c" />
+    <ClInclude Include="Common\hsensor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Common\psensor.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="Common\tsensor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Components\hts221.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -129,7 +145,9 @@
     <ClInclude Include="Flash\Flash_Sim_Demo.h" />
     <ClInclude Include="Flash\spi_flash.h" />
     <ClInclude Include="LED\LED.h" />
+    <ClInclude Include="HTS221\stm32l475e_iot01_hsensor.h" />
     <ClInclude Include="LPS22HB\stm32l475e_iot01_psensor.h" />
+    <ClInclude Include="HTS221\stm32l475e_iot01_tsensor.h" />
     <ClInclude Include="SSD1306\ssd1306.h" />
     <ClInclude Include="SSD1306\ssd1306_conf.h" />
     <ClInclude Include="SSD1306\ssd1306_fonts.h" />
