@@ -230,6 +230,11 @@ The Power LED is always on, and needs to be unsoldered to not use it:
 
 ## References
 
+### Mechanical
+
+- Wikipedia [Propane](https://en.wikipedia.org/wiki/Propane)
+- Statasys Grabcad Community [Propane Tank](https://grabcad.com/library/propane-tank)
+
 ### Core Hardware
 
 - [STM32 Discovery Kits](https://www.st.com/en/evaluation-tools/stm32-discovery-kits.html#products)
@@ -257,18 +262,20 @@ The Power LED is always on, and needs to be unsoldered to not use it:
 - Sysprogs [VisualGDB Extension](https://visualgdb.com/)
 - [CMSIS-RTOS2](https://arm-software.github.io/CMSIS_5/RTOS2/html/index.html)
 - ST [STM32L4 Discovery kit IoT node software](https://www.st.com/en/evaluation-tools/b-l475e-iot01a.html#tools-software)
-- [VS Code Extension: Markdown PDF](https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf)
 - ST [STM32CubeMX STM32Cube initialization code generator](https://www.st.com/en/development-tools/stm32cubemx.html#get-software)
+- ST [STM32Cube MCU Package for STM32L4 series and STM32L4 Plus series (HAL, Low-Layer APIs and CMSIS, USB, TouchSensing, File system, RTOS)](https://www.st.com/en/embedded-software/stm32cubel4.html#tools-software)
 - ST [Description of STM32L4/L4+ HAL and low-layer drivers - UM1884](https://www.st.com/resource/en/user_manual/dm00173145-description-of-stm32l4l4-hal-and-lowlayer-drivers-stmicroelectronics.pdf)
+
 
 ### Tutorials and Sample Code
 
-- [Sysprogs VisualGDB Developing STM32 projects with Visual Studio tutorial](https://visualgdb.com/tutorials/arm/stm32/)
-- [Sysprogs VisualGDB Using the STM32 UART interface with HAL](https://visualgdb.com/tutorials/arm/stm32/uart/hal/)
-- [Sysprogs VisualGDB Using the I2C Interface on the STM32 Devices](https://visualgdb.com/tutorials/arm/stm32/i2c/)
-- [Sysprogs VisualGDB Creating Advanced STM32CubeMX-based Projects with VisualGDB](https://visualgdb.com/tutorials/arm/stm32/cube/advanced/)
-- [Sysprogs VisualGDB Using STM32 timers in PWM mode](https://visualgdb.com/tutorials/arm/stm32/pwm/)
-- [NordicPlayground mbed stm32f4xx_hal_uart](https://github.com/NordicPlayground/mbed/blob/master/libraries/mbed/targets/cmsis/TARGET_STM/TARGET_DISCO_F407VG/stm32f4xx_hal_uart.c)
+- Sysprogs VisualGDB [Developing STM32 projects with Visual Studio tutorial](https://visualgdb.com/tutorials/arm/stm32/)
+- Sysprogs VisualGDB [Using the STM32 UART interface with HAL](https://visualgdb.com/tutorials/arm/stm32/uart/hal/)
+- Sysprogs VisualGDB [Using the I2C Interface on the STM32 Devices](https://visualgdb.com/tutorials/arm/stm32/i2c/)
+- Sysprogs VisualGDB [Creating Advanced STM32CubeMX-based Projects with VisualGDB](https://visualgdb.com/tutorials/arm/stm32/cube/advanced/)
+- Sysprogs VisualGDB [Controlling STM32 Hardware Timers using HAL](https://visualgdb.com/tutorials/arm/stm32/timers/hal/)
+- Sysprogs VisualGDB [Using STM32 timers in PWM mode](https://visualgdb.com/tutorials/arm/stm32/pwm/)
+- NordicPlayground [mbed stm32f4xx_hal_uart](https://github.com/NordicPlayground/mbed/blob/master/libraries/mbed/targets/cmsis/TARGET_STM/TARGET_DISCO_F407VG/stm32f4xx_hal_uart.c)
 - [afiskon/stm32-ssd1306 example](https://github.com/afiskon/stm32-ssd1306/blob/master/examples/oled-tester/firmware/i2c/Src/main.c); The [code](https://github.com/afiskon/stm32-ssd1306/tree/master/ssd1306) is [included in this project](../IoT_BBQ_STM32/SSD1306/).
 - [Sensors STM32CubeL4/Drivers/BSP/B-L475E-IOT01/](https://github.com/STMicroelectronics/STM32CubeL4/tree/master/Drivers/BSP/B-L475E-IOT01)
 
@@ -284,7 +291,13 @@ The Power LED is always on, and needs to be unsoldered to not use it:
 ### Cloud Demo
 - [AWS AWS Cloud demonstration](https://github.com/STMicroelectronics/STM32CubeL4/tree/master/Projects/B-L475E-IOT01A/Demonstrations)
 
+### Utilities
+
+- [VS Code Extension: Markdown PDF](https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf)
+
 ### Other Related Projects
 
 - [Honeybee Hive Monitoring](https://hackaday.io/project/1741-honeybee-hive-monitoring) - also uses HX711
 - [logicalelegance/midifun](https://github.com/logicalelegance/midifun/tree/master/Core) - sample project naming, directories, organziation.
+
+
