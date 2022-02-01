@@ -11,6 +11,10 @@
 #include "DISPLAY/DISPLAY.h"
 #include "UART/int_to_string.h"
 #include "Tasks/state_machine.h"
+#include "LPS22HB/stm32l475e_iot01_psensor.h"
+#include "HTS221/stm32l475e_iot01_hsensor.h"
+#include "HTS221/stm32l475e_iot01_tsensor.h"
+
 
 // #include "common/stm32l4xx_hal_msp.h"
 
@@ -252,13 +256,14 @@ void PWM_PulseFinishedCallback(TIM_HandleTypeDef* htim)
     }
 }
 
+// not use; for reference only!
 int pwm_main(void)
 {    int32_t CH1_DC = 0;
  
     HAL_Init();
     pwm_SystemClock_Config();
     pwm_MX_GPIO_Init();
-    MX_TIM2_Init();
+    pwm_MX_TIM2_Init();
 
 
     // HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
@@ -318,9 +323,34 @@ int main(void)
 
     UART_init();
 
+    static uint8_t CrLf[bufferLenth] = "\n\r";
 
+    if (BSP_PSENSOR_Init() == PSENSOR_OK)
+   {
+//        float thisValue = BSP_PSENSOR_ReadPressure();
+//        static uint8_t Message[bufferLenth] = "Pressure = ";
+//        UART_TxMessageIntValue(Message, bufferLenth, (long)thisValue);
+//        UART_TxMessage(CrLf, bufferLenth);
+//        
+   }
+    
+   if (BSP_HSENSOR_Init() == HSENSOR_OK)
+   {
+//        float thisValue = BSP_HSENSOR_ReadHumidity();
+//        static uint8_t Message[bufferLenth] = "Humidity = ";
+//        UART_TxMessageIntValue(Message, bufferLenth, (long)thisValue);
+//        UART_TxMessage(CrLf, bufferLenth);
+   }
 
-    if (1 == 2)
+   if (BSP_TSENSOR_Init() == TSENSOR_OK)
+   {
+//        float thisValue = BSP_TSENSOR_ReadTemp();
+//        static uint8_t Message[bufferLenth] = "Temperature = ";
+//        UART_TxMessageIntValue(Message, bufferLenth, (long)thisValue);
+//        UART_TxMessage(CrLf, bufferLenth);
+   }
+
+    if (1 == 1)
     {
         pwm_SystemClock_Config();
         pwm_MX_GPIO_Init();
@@ -352,7 +382,7 @@ int main(void)
 
     osThreadDef(DISPLAY, DISPLAY_Thread1, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
 
-    // osThreadDef(PWM, PWM_Thread1, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
+    osThreadDef(PWM, PWM_Thread1, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
 
     
     
@@ -370,7 +400,7 @@ int main(void)
     DISPLAY_Thread1Handle = osThreadCreate(osThread(DISPLAY), NULL);
 
     /* our PWM */
-    // PWM_Thread1Handle = osThreadCreate(osThread(PWM), NULL);
+    PWM_Thread1Handle = osThreadCreate(osThread(PWM), NULL);
 
 
     // Callbacks disabled
@@ -510,9 +540,14 @@ static void PWM_Thread1(void const *argument)
     int32_t CH1_DC = 0;
  
   
+    static uint8_t PressureMessage[bufferLenth] = "Pressure = ";
+    static uint8_t HumidityMessage[bufferLenth] = "Humidity = ";
+    static uint8_t TemperatureMessage[bufferLenth] = "Temperature = ";    
+    static uint8_t ThisTimerMessage[bufferLenth] = "Timer = 0x";
+    float thisValue;
+    
     for (;;)
     {
-        static uint8_t ThisTimerMessage[bufferLenth] = "Timer = 0x";
 
         while (1)
         {
@@ -521,7 +556,28 @@ static void PWM_Thread1(void const *argument)
             // UART_TxMessageIntValueHex(ThisTimerMessage, bufferLenth, (long)htim2.Instance->CNT);
             UART_TxMessageIntValueHex(ThisTimerMessage, bufferLenth, (long)timerValue);
             UART_TxMessage(CrLf, bufferLenth);
+
+            portENTER_CRITICAL();
+            // thisValue = BSP_PSENSOR_ReadPressure(); enable this to cause hard fault in next osDelay
+            portEXIT_CRITICAL();   
+            
+//            UART_TxMessageIntValue(PressureMessage, bufferLenth, (long)thisValue);
+//            UART_TxMessage(CrLf, bufferLenth);
             osDelay(2000);
+            
+//            thisValue = BSP_HSENSOR_ReadHumidity();
+//            UART_TxMessageIntValue(HumidityMessage, bufferLenth, (long)thisValue);
+//            UART_TxMessage(CrLf, bufferLenth);
+//            
+//            portENTER_CRITICAL();
+//            thisValue = BSP_TSENSOR_ReadTemp();
+//            portEXIT_CRITICAL();   
+//            
+//            UART_TxMessageIntValue(TemperatureMessage, bufferLenth, (long)thisValue);
+//            UART_TxMessage(CrLf, bufferLenth);
+//            
+//            osDelay(2000);
+            
 //            while (CH1_DC < 65535)
 //            {
 //                TIM2->CCR1 = CH1_DC;
