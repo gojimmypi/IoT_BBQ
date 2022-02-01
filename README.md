@@ -96,23 +96,39 @@ See Table 4 ARDUINO® connector pinout on page 31 of the [B-L475E-IOT01A (UM2153
 ## Additional Resources
 
 See also:
+
+### Mechanical
+
+- Statasys Grabcad Community [Propane Tank](https://grabcad.com/library/propane-tank)
+
+## Electronics
+
 - [STM32 Discovery Kits](https://www.st.com/en/evaluation-tools/stm32-discovery-kits.html#products)
 - [ST-LINK, ST-LINK/V2, ST-LINK/V2-1, STLINK-V3 USB driver signed for Windows7, Windows8, Windows10](https://www.st.com/content/my_st_com/en/products/development-tools/software-development-tools/stm32-software-development-tools/stm32-utilities/stsw-link009.license=1637530388106.product=STSW-LINK009.version=2.0.2.html)
 - [ARM MBED DISCO-L475VG-IOT01A (B-L475E-IOT01A](https://os.mbed.com/platforms/ST-Discovery-L475E-IOT01A/) (this is where the link on the OTG file points)
-- [VisualGDB Developing STM32 projects with Visual Studio tutorial](https://visualgdb.com/tutorials/arm/stm32/)
-- [STM32L4 Discovery kit IoT node software](https://www.st.com/en/evaluation-tools/b-l475e-iot01a.html#tools-software)
-- [STM32L4 series of ultra-low-power MCUs](https://www.st.com/en/microcontrollers-microprocessors/stm32l4-series.html)
 - [Mouser B-L475E-IOT01A Data Brief ](https://www.mouser.com/datasheet/2/389/b-l475e-iot01a-1848022.pdf)
 - [Mouser Discovery Kit for IoT Node](https://www.mouser.com/pdfdocs/RS7706_IC_STM32L475E-IOT01A1_0517d.pdf) (this is the front and back of the insert card in for the shipped product)
 - [Mouser STMicroelectronics B-L475E-IOT01A Discovery Kit for IoT Node](https://www.mouser.com/new/stmicroelectronics/stm-b-l475e-iot01a-kit/)
+
+
+### Development
+
+- [STM32Cube MCU Package for STM32L4 series and STM32L4 Plus series (HAL, Low-Layer APIs and CMSIS, USB, TouchSensing, File system, RTOS)](https://www.st.com/en/embedded-software/stm32cubel4.html#tools-software)
+- [VisualGDB Developing STM32 projects with Visual Studio tutorial](https://visualgdb.com/tutorials/arm/stm32/)
+- [STM32L4 Discovery kit IoT node software](https://www.st.com/en/evaluation-tools/b-l475e-iot01a.html#tools-software)
+- [STM32L4 series of ultra-low-power MCUs](https://www.st.com/en/microcontrollers-microprocessors/stm32l4-series.html)
 - [The FreeRTOS™ Reference Manual](https://www.freertos.org/fr-content-src/uploads/2018/07/FreeRTOS_Reference_Manual_V10.0.0.pdf)
-- []()
-- []()
+
+### Example Code
+
 - [bogde/HX711](https://github.com/bogde/HX711)
 - [nimaltd/HX711](https://github.com/nimaltd/HX711/blob/master/hx711.c)
 - [ODriveRobotics Samnple Code](https://github.com/odriverobotics/ODrive/blob/master/Firmware/Drivers/STM32/stm32_system.h)
 - [RTOS Thread Management](https://www.keil.com/pack/doc/CMSIS/RTOS/html/group__CMSIS__RTOS__ThreadMgmt.html)
 
+### Coding Reference
+
+- Microchip [AVR035: Efficient C Coding for AVR](https://ww1.microchip.com/downloads/en/Appnotes/doc1497.pdf)
 - [Idioms for using C++ in C programs (Part 1 of 2)](http://www.olivierlanglois.net/idioms_for_using_cpp_in_c_programs.html)
 
 - [VS Code Extension: Markdown PDF](https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf)
