@@ -326,13 +326,17 @@ int main(void)
     static uint8_t CrLf[bufferLenth] = "\n\r";
 
     if (BSP_PSENSOR_Init() == PSENSOR_OK)
-   {
-//        float thisValue = BSP_PSENSOR_ReadPressure();
-//        static uint8_t Message[bufferLenth] = "Pressure = ";
-//        UART_TxMessageIntValue(Message, bufferLenth, (long)thisValue);
-//        UART_TxMessage(CrLf, bufferLenth);
-//        
-   }
+    {
+        //        float thisValue = BSP_PSENSOR_ReadPressure();
+        //        static uint8_t Message[bufferLenth] = "Pressure = ";
+        //        UART_TxMessageIntValue(Message, bufferLenth, (long)thisValue);
+        //        UART_TxMessage(CrLf, bufferLenth);
+        //        
+    }
+    else
+    {
+        while (1) ;
+    }
     
    if (BSP_HSENSOR_Init() == HSENSOR_OK)
    {
@@ -341,7 +345,12 @@ int main(void)
 //        UART_TxMessageIntValue(Message, bufferLenth, (long)thisValue);
 //        UART_TxMessage(CrLf, bufferLenth);
    }
+    else
+    {
+        while (1) ;
+    }
 
+    
    if (BSP_TSENSOR_Init() == TSENSOR_OK)
    {
 //        float thisValue = BSP_TSENSOR_ReadTemp();
@@ -349,6 +358,14 @@ int main(void)
 //        UART_TxMessageIntValue(Message, bufferLenth, (long)thisValue);
 //        UART_TxMessage(CrLf, bufferLenth);
    }
+    else
+    {
+        while (1) ;
+    }
+
+    HAL_NVIC_DisableIRQ(DISCOVERY_I2Cx_ER_IRQn);
+    HAL_NVIC_DisableIRQ(DISCOVERY_I2Cx_EV_IRQn);
+    
 
     if (1 == 1)
     {
@@ -558,7 +575,11 @@ static void PWM_Thread1(void const *argument)
             UART_TxMessage(CrLf, bufferLenth);
 
             portENTER_CRITICAL();
-            // thisValue = BSP_PSENSOR_ReadPressure(); enable this to cause hard fault in next osDelay
+            HAL_NVIC_EnableIRQ(DISCOVERY_I2Cx_EV_IRQn);
+            HAL_NVIC_EnableIRQ(DISCOVERY_I2Cx_ER_IRQn);
+            thisValue = BSP_PSENSOR_ReadPressure(); // enable this to cause hard fault in next osDelay
+            HAL_NVIC_DisableIRQ(DISCOVERY_I2Cx_ER_IRQn);
+            HAL_NVIC_DisableIRQ(DISCOVERY_I2Cx_EV_IRQn);
             portEXIT_CRITICAL();   
             
 //            UART_TxMessageIntValue(PressureMessage, bufferLenth, (long)thisValue);
