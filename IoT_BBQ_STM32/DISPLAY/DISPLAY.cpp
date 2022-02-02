@@ -9,6 +9,10 @@
 #include "Tasks/task_weight_monitor.h"
 #include "DISPLAY/DISPLAY.h"
 
+#include "LPS22HB/stm32l475e_iot01_psensor.h"
+#include "HTS221/stm32l475e_iot01_hsensor.h"
+#include "HTS221/stm32l475e_iot01_tsensor.h"
+
 #ifdef __cplusplus
 
 extern "C" {
@@ -26,13 +30,32 @@ extern "C" {
         static uint8_t WeightMessage[bufferLenth] = "Weight = ";
         static uint8_t CrLf[bufferLenth] = "\n\r";
        
+        static uint8_t PressureMessage[bufferLenth] = "Pressure = ";
+        static uint8_t HumidityMessage[bufferLenth] = "Humidity = ";
+        static uint8_t TemperatureMessage[bufferLenth] = "Temperature = ";    
+        static uint8_t ThisTimerMessage[bufferLenth] = "Timer = 0x";
+        float CurrentPressureValue = 0;
+        
         for (;;)
         {
             switch (GetAppState())
             {
             case Running:
                 ssd1306_Fill(Black);
+                
+//                portENTER_CRITICAL(); // this wrapper causes a hard fault upon exit
                 CurrentTankWeight = GetScaleWeight();
+//                portEXIT_CRITICAL();  
+
+                osDelay(xDelay);
+                
+                portENTER_CRITICAL();
+                CurrentPressureValue = BSP_PSENSOR_ReadPressure(); 
+                portEXIT_CRITICAL();  
+                
+                UART_TxMessageIntValue(PressureMessage, bufferLenth, (long)CurrentPressureValue);
+                UART_TxMessage(CrLf, bufferLenth);
+
                 UART_TxMessageIntValue(WeightMessage, bufferLenth, CurrentTankWeight);
                 UART_TxMessage(CrLf, bufferLenth);
                 osDelay(xDelay); 
