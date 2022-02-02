@@ -321,8 +321,6 @@ int main(void)
     LED2_ON();
     LED2_OFF();
 
-    UART_init();
-
     static uint8_t CrLf[bufferLenth] = "\n\r";
 
     if (BSP_PSENSOR_Init() == PSENSOR_OK)
@@ -363,8 +361,8 @@ int main(void)
         while (1) ;
     }
 
-    HAL_NVIC_DisableIRQ(DISCOVERY_I2Cx_ER_IRQn);
-    HAL_NVIC_DisableIRQ(DISCOVERY_I2Cx_EV_IRQn);
+//    HAL_NVIC_DisableIRQ(DISCOVERY_I2Cx_ER_IRQn);
+//    HAL_NVIC_DisableIRQ(DISCOVERY_I2Cx_EV_IRQn);
     
 
     if (1 == 1)
@@ -388,6 +386,10 @@ int main(void)
 
     SetAppState(Running);
 
+    // See https://www.freertos.org/RTOS-Cortex-M3-M4.html
+    // but where is our NVIC_PriorityGroupConfig?
+    // NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
+    
     /* Thread 1 definition */
     osThreadDef(LED1, LED_Thread1, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
   
@@ -429,6 +431,8 @@ int main(void)
     
     // ssd1306_TestFPS() in ssd1306_tests.c and this interrupt enabled causes a hard fault!
     HAL_NVIC_EnableIRQ(TIM2_IRQn);
+
+    UART_init();
 
     /* Start scheduler */
     osKernelStart();
@@ -477,7 +481,7 @@ static void PWM_Thread1(void const *argument)
     int* r = (int*)0xBEAD;
     volatile long myStackPointer3 = (long)((void*)&r);
         
-    static uint8_t CrLf[bufferLenth] = "\n\r";
+   static uint8_t CrLf[bufferLenth] = "\n\r";
        
     static uint8_t StackMessage[bufferLenth]        = "Stack     = ";
     static uint8_t StackMessageHex[bufferLenth]     = "Stack     = 0x";
@@ -568,22 +572,26 @@ static void PWM_Thread1(void const *argument)
 
         while (1)
         {
-            int timerValue = __HAL_TIM_GET_COUNTER(&htim2);
-
-            // UART_TxMessageIntValueHex(ThisTimerMessage, bufferLenth, (long)htim2.Instance->CNT);
-            UART_TxMessageIntValueHex(ThisTimerMessage, bufferLenth, (long)timerValue);
-            UART_TxMessage(CrLf, bufferLenth);
+//            int timerValue = __HAL_TIM_GET_COUNTER(&htim2);
+//
+//            // UART_TxMessageIntValueHex(ThisTimerMessage, bufferLenth, (long)htim2.Instance->CNT);
+//            UART_TxMessageIntValueHex(ThisTimerMessage, bufferLenth, (long)timerValue);
+//            UART_TxMessage(CrLf, bufferLenth);
+            
+//            osDelay(2000);  // This causes a hard fault!
+            static const TickType_t xDelay = 2000 / portTICK_PERIOD_MS;
+            osDelay(xDelay);  // this does NOT cause a hard fault
 
             portENTER_CRITICAL();
-            HAL_NVIC_EnableIRQ(DISCOVERY_I2Cx_EV_IRQn);
-            HAL_NVIC_EnableIRQ(DISCOVERY_I2Cx_ER_IRQn);
+//            HAL_NVIC_EnableIRQ(DISCOVERY_I2Cx_EV_IRQn);
+//            HAL_NVIC_EnableIRQ(DISCOVERY_I2Cx_ER_IRQn);
             thisValue = BSP_PSENSOR_ReadPressure(); // enable this to cause hard fault in next osDelay
-            HAL_NVIC_DisableIRQ(DISCOVERY_I2Cx_ER_IRQn);
-            HAL_NVIC_DisableIRQ(DISCOVERY_I2Cx_EV_IRQn);
+//            HAL_NVIC_DisableIRQ(DISCOVERY_I2Cx_ER_IRQn);
+//            HAL_NVIC_DisableIRQ(DISCOVERY_I2Cx_EV_IRQn);
             portEXIT_CRITICAL();   
             
-//            UART_TxMessageIntValue(PressureMessage, bufferLenth, (long)thisValue);
-//            UART_TxMessage(CrLf, bufferLenth);
+            UART_TxMessageIntValue(PressureMessage, bufferLenth, (long)thisValue);
+            UART_TxMessage(CrLf, bufferLenth);
             osDelay(2000);
             
 //            thisValue = BSP_HSENSOR_ReadHumidity();
@@ -629,6 +637,36 @@ static void LED_Thread1(void const *argument)
   
     for (;;)
     {
+        static const TickType_t xDelay = 500 / portTICK_PERIOD_MS;
+        static long CurrentTankWeight = 0;
+        // static const int bufferLenth = 20;
+        static uint8_t WeightMessage[bufferLenth] = "1 Weight = ";
+        static uint8_t CrLf[bufferLenth] = "\n\r";
+       
+        static uint8_t PressureMessage[bufferLenth] = "1 Pressure = ";
+        static uint8_t HumidityMessage[bufferLenth] = "1 Humidity = ";
+        static uint8_t TemperatureMessage[bufferLenth] = "1 Temperature = ";    
+        static uint8_t ThisTimerMessage[bufferLenth] = "1 Timer = 0x";
+        float CurrentPressureValue = 0;
+        
+        // portENTER_CRITICAL(); // this wrapper causes a hard fault upon exit
+        CurrentTankWeight = GetScaleWeight();
+        // portEXIT_CRITICAL();  
+
+        osDelay(xDelay);
+                
+        portENTER_CRITICAL();
+        CurrentPressureValue = BSP_PSENSOR_ReadPressure(); 
+        portEXIT_CRITICAL();  
+                
+        UART_TxMessageIntValue(PressureMessage, bufferLenth, (long)CurrentPressureValue);
+        UART_TxMessage(CrLf, bufferLenth);
+
+        UART_TxMessageIntValue(WeightMessage, bufferLenth, CurrentTankWeight);
+        UART_TxMessage(CrLf, bufferLenth);
+        osDelay(xDelay); 
+        
+        
         switch (LED_GetMode())
         {
         case IsBlinking:
