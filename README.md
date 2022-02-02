@@ -84,7 +84,10 @@ ConfigureI2CPins
 - GPIOC GPIO_PIN_0 
 - GPIOC GPIO_PIN_1
 
+Pressure, Humidity, Temperature Sensors I2C. See [line 364 of stm32l475e_iot01.c](https://github.com/STMicroelectronics/STM32CubeL4/blob/5e1553e07706491bd11f4edd304e093b6e4b83a4/Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01.c#L364):
 
+- SCL = GPIOB GPIO_PIN_10
+- SDA = GPIOB GPIO_PIN_11
 
 ### CN1
 
