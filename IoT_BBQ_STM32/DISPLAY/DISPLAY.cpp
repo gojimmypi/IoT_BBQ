@@ -26,14 +26,13 @@ extern "C" {
         (void)argument;
         static const TickType_t xDelay = 500 / portTICK_PERIOD_MS;
         static long CurrentTankWeight = 0;
-        static const int bufferLenth = 20;
-        static uint8_t WeightMessage[bufferLenth] = "Weight = ";
-        static uint8_t CrLf[bufferLenth] = "\n\r";
+        static uint8_t WeightMessage[] = "Weight = ";
+        static uint8_t CrLf[] = "\n\r";
        
-        static uint8_t PressureMessage[bufferLenth] = "Pressure = ";
-        static uint8_t HumidityMessage[bufferLenth] = "Humidity = ";
-        static uint8_t TemperatureMessage[bufferLenth] = "Temperature = ";    
-        static uint8_t ThisTimerMessage[bufferLenth] = "Timer = 0x";
+        static uint8_t PressureMessage[] = "Pressure = ";
+        static uint8_t HumidityMessage[] = "Humidity = ";
+        static uint8_t TemperatureMessage[] = "Temperature = ";    
+        static uint8_t ThisTimerMessage[] = "Timer = 0x";
         float CurrentPressureValue = 0;
         
         for (;;)
@@ -51,13 +50,13 @@ extern "C" {
                 
                 portENTER_CRITICAL();
                 CurrentPressureValue = BSP_PSENSOR_ReadPressure(); 
-                portEXIT_CRITICAL();  
                 
-                UART_TxMessageIntValue(PressureMessage, bufferLenth, (long)CurrentPressureValue);
-                UART_TxMessage(CrLf, bufferLenth);
+                UART_TxMessageIntValue(PressureMessage, sizeof(PressureMessage), (long)CurrentPressureValue);
+                UART_TxMessage(CrLf, sizeof(CrLf));
 
-                UART_TxMessageIntValue(WeightMessage, bufferLenth, CurrentTankWeight);
-                UART_TxMessage(CrLf, bufferLenth);
+                UART_TxMessageIntValue(WeightMessage, sizeof(WeightMessage), CurrentTankWeight);
+                UART_TxMessage(CrLf, sizeof(CrLf));
+                portEXIT_CRITICAL();  
                 osDelay(xDelay); 
                 
                 break;
