@@ -60,7 +60,7 @@ extern "C" {
         if (TxResult == HAL_OK)
         {
             static char numStr[NUM_STR_LEN];
-            int_to_string(numStr, NUM_STR_LEN, Value);
+            int_to_dec(numStr, Value);
             UART_TxMessage((uint8_t*)numStr, 32);
 
             return 0;
