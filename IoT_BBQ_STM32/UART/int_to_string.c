@@ -9,41 +9,10 @@ extern "C" {
         return 1;
     }
 
-    // https://stackoverflow.com/questions/8257714/how-to-convert-an-int-to-string-in-c
-    static char *int_to_string_helper(char *dest, size_t n, long x) {
-        if (n == 0) {
-            return NULL;
-        }
-        if (x <= -10) {
-            dest = int_to_string_helper(dest, n - 1, x / 10);
-            if (dest == NULL) return NULL;
-        }
-        *dest = (char)('0' - x % 10);
-        return dest + 1;
-    }
-
-    char *int_to_string(char *dest, size_t n, long x) {
-        char *p = dest;
-        if (n == 0) {
-            return NULL;
-        }
-        n--;
-        if (x < 0) {
-            if (n == 0) return NULL;
-            n--;
-            *p++ = '-';
-        }
-        else {
-            x = -x;
-        }
-        p = int_to_string_helper(p, n, x);
-        if (p == NULL) return NULL;
-        *p = 0;
-        return dest;
-    }
-
-    
+   
     // based on code from https://stackoverflow.com/questions/3464194/how-can-i-convert-an-integer-to-a-hexadecimal-string-in-c
+    // see also           https://stackoverflow.com/questions/8257714/how-to-convert-an-int-to-string-in-c
+    // see also https://github.com/kevmuret/libhex/blob/master/hex.c
     char *int_to_base(char *dest, unsigned long n, int base)
     {
         char *outbuf = dest;
