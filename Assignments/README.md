@@ -38,6 +38,7 @@ Application Notes
 Examples
 
 - [B-L475E-IOT01A/Examples](https://github.com/STMicroelectronics/STM32CubeL4/tree/master/Projects/B-L475E-IOT01A/Examples) (not many examples)
+- [STM32CubeL4/Projects/B-L475E-IOT01A/Examples/BSP/Src/](https://github.com/STMicroelectronics/STM32CubeL4/tree/master/Projects/B-L475E-IOT01A/Examples/BSP/Src)
 
 Peripherals
 
@@ -51,10 +52,13 @@ mbed
 Visual GDB
 
 - [Creating Advanced STM32CubeMX-based Projects with VisualGDB](https://visualgdb.com/tutorials/arm/stm32/cube/advanced/)
-
+- [Controlling STM32 Hardware Timers using HAL](https://visualgdb.com/tutorials/arm/stm32/timers/hal/)
+- [Using STM32 timers in PWM mode](https://visualgdb.com/tutorials/arm/stm32/pwm/)
 
 RTOS
 
+- [CMSIS-RTOS2 Documentation](https://arm-software.github.io/CMSIS_5/RTOS2/html/index.html)
+- GitHub [CMSIS Version 5](https://github.com/ARM-software/CMSIS_5)
 - [The FreeRTOS Reference Manual](https://www.freertos.org/fr-content-src/uploads/2018/07/FreeRTOS_Reference_Manual_V10.0.0.pdf)
 - [stackoverflow: What are valid values of `HAL_NVIC_SetPriority()` when using STM32 and FreeRTOS?](https://stackoverflow.com/questions/50243996/what-are-valid-values-of-hal-nvic-setpriority-when-using-stm32-and-freertos)
 
@@ -88,6 +92,7 @@ IoT Management Tools
 
 Other Stuff
 
+- wikipedia [.bss block starting symbol](https://en.wikipedia.org/wiki/.bss)
 - [pinout](https://pinout.readthedocs.io/en/latest/)
 - [cmocka unit testing framework for C with support for mock objects](https://cmocka.org/)
 - [asciiflow.com](https://asciiflow.com/#/)
