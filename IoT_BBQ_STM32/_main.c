@@ -30,8 +30,7 @@ osThreadId DISPLAY_Thread1Handle;
 
 osThreadId PWM_Thread1Handle;
 
-#define bufferLenth 80
-static uint8_t buffer[bufferLenth] = "Global Variable: Hello World";
+static uint8_t buffer[] = "Global Variable: Hello World";
 static int myNotInitializedVariable;
 static int myInitializedVariable = 42;
 
@@ -321,7 +320,7 @@ int main(void)
     LED2_ON();
     LED2_OFF();
 
-    static uint8_t CrLf[bufferLenth] = "\n\r";
+    static uint8_t CrLf[] = "\n\r";
 
     if (BSP_PSENSOR_Init() == PSENSOR_OK)
     {
@@ -481,17 +480,17 @@ static void PWM_Thread1(void const *argument)
     int* r = (int*)0xBEAD;
     volatile long myStackPointer3 = (long)((void*)&r);
         
-   static uint8_t CrLf[bufferLenth] = "\n\r";
+   static uint8_t CrLf[] = "\n\r";
        
-    static uint8_t StackMessage[bufferLenth]        = "Stack     = ";
-    static uint8_t StackMessageHex[bufferLenth]     = "Stack     = 0x";
-    static uint8_t HeapMessageHex[bufferLenth]      = "Heap      = 0x";
+    static uint8_t StackMessage[]        = "Stack     = ";
+    static uint8_t StackMessageHex[]     = "Stack     = 0x";
+    static uint8_t HeapMessageHex[]      = "Heap      = 0x";
 
-    static uint8_t HeapMessageSizeHex[bufferLenth]  = "Heap Size = 0x";
-    static uint8_t HeapMessageFreeHex[bufferLenth]  = "Heap Free = 0x";
+    static uint8_t HeapMessageSizeHex[]  = "Heap Size = 0x";
+    static uint8_t HeapMessageFreeHex[]  = "Heap Free = 0x";
  
-    static uint8_t InitMessageHex[bufferLenth]      = "Initialized     = 0x";
-    static uint8_t NotInitMessageHex[bufferLenth]   = "Not Initialized = 0x";
+    static uint8_t InitMessageHex[]      = "Initialized     = 0x";
+    static uint8_t NotInitMessageHex[]   = "Not Initialized = 0x";
 
     long myHeapSize = configADJUSTED_HEAP_SIZE;
         
@@ -500,45 +499,45 @@ static void PWM_Thread1(void const *argument)
     volatile long myHeapPointer = (long)pvPortMalloc(0); // this returns a NULL pointer
     myHeapPointer = (long)pvPortMalloc(1); // a non-zero param returns heap pointer
 
-    UART_init();
+    // UART_init();
     
     // Print global variable buffer
-    UART_TxMessage(buffer, bufferLenth);
-    UART_TxMessage(CrLf, bufferLenth);
+    UART_TxMessage(buffer, sizeof(buffer));
+    UART_TxMessage(CrLf, sizeof(CrLf));
 
     // show decimal value of Stack pointer
-    UART_TxMessageIntValue(StackMessage, bufferLenth, myStackPointer);
-    UART_TxMessage(CrLf, bufferLenth);
+    UART_TxMessageIntValue(StackMessage, sizeof(StackMessage), myStackPointer);
+    UART_TxMessage(CrLf, sizeof(CrLf));
 
     // show hex value of current stack pointer
-    UART_TxMessageIntValueHex(StackMessageHex, bufferLenth, myStackPointer);
-    UART_TxMessage(CrLf, bufferLenth);
+    UART_TxMessageIntValueHex(StackMessageHex, sizeof(StackMessageHex), myStackPointer);
+    UART_TxMessage(CrLf, sizeof(CrLf));
 
     // show hex value of current heap pointer (xstart is static, not available)
-    UART_TxMessageIntValueHex(HeapMessageHex, bufferLenth, myHeapPointer);
-    UART_TxMessage(CrLf, bufferLenth);
+    UART_TxMessageIntValueHex(HeapMessageHex, sizeof(HeapMessageHex), myHeapPointer);
+    UART_TxMessage(CrLf, sizeof(CrLf));
 
     // show hex value of current heap size
-    UART_TxMessageIntValueHex(HeapMessageSizeHex, bufferLenth, myHeapSize);
-    UART_TxMessage(CrLf, bufferLenth);
+    UART_TxMessageIntValueHex(HeapMessageSizeHex, sizeof(HeapMessageSizeHex), myHeapSize);
+    UART_TxMessage(CrLf, sizeof(CrLf));
 
     // show free heap free size
-    UART_TxMessageIntValueHex(HeapMessageFreeHex, bufferLenth, myHeapFreeSize);
-    UART_TxMessage(CrLf, bufferLenth);
+    UART_TxMessageIntValueHex(HeapMessageFreeHex, sizeof(HeapMessageFreeHex), myHeapFreeSize);
+    UART_TxMessage(CrLf, sizeof(CrLf));
 
     
-    UART_TxMessage(CrLf, bufferLenth);
-    UART_TxMessage(CrLf, bufferLenth);
-    UART_TxMessage(CrLf, bufferLenth);
-    UART_TxMessage(CrLf, bufferLenth);
+    UART_TxMessage(CrLf, sizeof(CrLf));
+    UART_TxMessage(CrLf, sizeof(CrLf));
+    UART_TxMessage(CrLf, sizeof(CrLf));
+    UART_TxMessage(CrLf, sizeof(CrLf));
 
     // show Initialized Variable Address
-    UART_TxMessageIntValueHex(InitMessageHex, bufferLenth, (long)&myInitializedVariable);
-	UART_TxMessage(CrLf, bufferLenth);
+    UART_TxMessageIntValueHex(InitMessageHex, sizeof(InitMessageHex), (long)&myInitializedVariable);
+    UART_TxMessage(CrLf, sizeof(CrLf));
 
     // show Uninitialized Variable Address
-    UART_TxMessageIntValueHex(NotInitMessageHex, bufferLenth, (long)&myNotInitializedVariable);
-    UART_TxMessage(CrLf, bufferLenth);
+    UART_TxMessageIntValueHex(NotInitMessageHex, sizeof(NotInitMessageHex), (long)&myNotInitializedVariable);
+    UART_TxMessage(CrLf, sizeof(CrLf));
 
     volatile int checkValue = myInitializedVariable;
     
@@ -561,10 +560,10 @@ static void PWM_Thread1(void const *argument)
     int32_t CH1_DC = 0;
  
   
-    static uint8_t PressureMessage[bufferLenth] = "Pressure = ";
-    static uint8_t HumidityMessage[bufferLenth] = "Humidity = ";
-    static uint8_t TemperatureMessage[bufferLenth] = "Temperature = ";    
-    static uint8_t ThisTimerMessage[bufferLenth] = "Timer = 0x";
+    static uint8_t PressureMessage[] = "Pressure = ";
+    static uint8_t HumidityMessage[] = "Humidity = ";
+    static uint8_t TemperatureMessage[] = "Temperature = ";    
+    static uint8_t ThisTimerMessage[] = "Timer = 0x";
     float thisValue;
     
     for (;;)
@@ -590,8 +589,8 @@ static void PWM_Thread1(void const *argument)
 //            HAL_NVIC_DisableIRQ(DISCOVERY_I2Cx_EV_IRQn);
             portEXIT_CRITICAL();   
             
-            UART_TxMessageIntValue(PressureMessage, bufferLenth, (long)thisValue);
-            UART_TxMessage(CrLf, bufferLenth);
+            UART_TxMessageIntValue(PressureMessage, sizeof(PressureMessage), (long)thisValue);
+            UART_TxMessage(CrLf, sizeof(CrLf));
             osDelay(2000);
             
 //            thisValue = BSP_HSENSOR_ReadHumidity();
@@ -640,13 +639,13 @@ static void LED_Thread1(void const *argument)
         static const TickType_t xDelay = 500 / portTICK_PERIOD_MS;
         static long CurrentTankWeight = 0;
         // static const int bufferLenth = 20;
-        static uint8_t WeightMessage[bufferLenth] = "1 Weight = ";
-        static uint8_t CrLf[bufferLenth] = "\n\r";
+        static uint8_t WeightMessage[] = "1 Weight = ";
+        static uint8_t CrLf[] = "\n\r";
        
-        static uint8_t PressureMessage[bufferLenth] = "1 Pressure = ";
-        static uint8_t HumidityMessage[bufferLenth] = "1 Humidity = ";
-        static uint8_t TemperatureMessage[bufferLenth] = "1 Temperature = ";    
-        static uint8_t ThisTimerMessage[bufferLenth] = "1 Timer = 0x";
+        static uint8_t PressureMessage[] = "1 Pressure = ";
+        static uint8_t HumidityMessage[] = "1 Humidity = ";
+        static uint8_t TemperatureMessage[] = "1 Temperature = ";    
+        static uint8_t ThisTimerMessage[] = "1 Timer = 0x";
         float CurrentPressureValue = 0;
         
         // portENTER_CRITICAL(); // this wrapper causes a hard fault upon exit
@@ -659,11 +658,11 @@ static void LED_Thread1(void const *argument)
         CurrentPressureValue = BSP_PSENSOR_ReadPressure(); 
         portEXIT_CRITICAL();  
                 
-        UART_TxMessageIntValue(PressureMessage, bufferLenth, (long)CurrentPressureValue);
-        UART_TxMessage(CrLf, bufferLenth);
+        UART_TxMessageIntValue(PressureMessage, sizeof(PressureMessage), (long)CurrentPressureValue);
+        UART_TxMessage(CrLf, sizeof(CrLf));
 
-        UART_TxMessageIntValue(WeightMessage, bufferLenth, CurrentTankWeight);
-        UART_TxMessage(CrLf, bufferLenth);
+        UART_TxMessageIntValue(WeightMessage, sizeof(WeightMessage), CurrentTankWeight);
+        UART_TxMessage(CrLf, sizeof(CrLf));
         osDelay(xDelay); 
         
         
