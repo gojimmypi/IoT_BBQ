@@ -51,12 +51,13 @@ extern "C" {
                 portENTER_CRITICAL();
                 CurrentPressureValue = BSP_PSENSOR_ReadPressure(); 
                 
+                portEXIT_CRITICAL();  
+                
                 UART_TxMessageIntValue(PressureMessage, sizeof(PressureMessage), (long)CurrentPressureValue);
                 UART_TxMessage(CrLf, sizeof(CrLf));
 
                 UART_TxMessageIntValue(WeightMessage, sizeof(WeightMessage), CurrentTankWeight);
                 UART_TxMessage(CrLf, sizeof(CrLf));
-                portEXIT_CRITICAL();  
                 osDelay(xDelay); 
                 
                 break;
