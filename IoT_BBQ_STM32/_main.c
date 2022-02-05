@@ -463,10 +463,125 @@ void SysTick_Handler(void)
 ///* Index into the ucHeap array. */
 //static size_t xNextFreeByte = (size_t) 0;
 
+// How many bits are one in a given 32-bit uint?
+
+static size_t BitCount(uint32_t n)
+{
+    size_t res = 0;
+    uint32_t pos = 1; // ensure this is the same bit size as parameter!
+    for (size_t i = 0; i < 32; i++)
+    {
+        // if the and operation is non-zero, we found a 1 bit
+        if (n & pos)
+        {
+            res++;  
+        }
+        
+        // get ready to look at the next bit position
+        pos = (pos << 1);
+
+        // no sensee in continuing if we found the answer
+        if (pos > n)
+        {
+            break;
+        }
+    }
+    return res;
+}
+
+static size_t BitCountLeadingZeros(uint32_t n)
+{
+    const int BitsToCount = 32;
+    size_t res = 0;
+    uint32_t pos = 1; // ensure this is the same bit size as parameter!
+    
+    for (size_t i = 0; i < BitsToCount; i++)
+    {
+        // get ready to look at the next bit position
+        pos = (pos << 1);
+
+        // no sensee in continuing if we found the answer (in this case the mask is larger than our inspection number
+        if (pos > n)
+        {
+            res = (i + 1); // zero based, so we need to add one
+            break;
+        }
+    }
+    
+    // if we actually found leading zeros, the quantity is the total number of bits minus the position where we stopped looking
+    if (res)
+    {
+        res = BitsToCount - res;  
+    }
+    
+    return res;
+}
+
+/*
+    On [-1000..+1000] range with 0.001 step average error is: +/- 0.000011, max error: +/- 0.000060
+    On [-100..+100] range with 0.001 step average error is:   +/- 0.000009, max error: +/- 0.000034
+    On [-10..+10] range with 0.001 step average error is:     +/- 0.000009, max error: +/- 0.000030
+    Error distribution ensures there's no discontinuity.
+*/
+
+const double PI          = 3.141592653589793;
+const double HALF_PI     = 1.570796326794897;
+const double DOUBLE_PI   = 6.283185307179586;
+const double SIN_CURVE_A = 0.0415896;
+const double SIN_CURVE_B = 0.00129810625032;
+
+double cos1(double x) {
+    if (x < 0) {
+        int q = -x / DOUBLE_PI;
+        q += 1;
+        double y = q * DOUBLE_PI;
+        x = -(x - y);
+    }
+    if (x >= DOUBLE_PI) {
+        int q = x / DOUBLE_PI;
+        double y = q * DOUBLE_PI;
+        x = x - y;
+    }
+    int s = 1;
+    if (x >= PI) {
+        s = -1;
+        x -= PI;
+    }
+    if (x > HALF_PI) {
+        x = PI - x;
+        s = -s;
+    }
+    double z = x * x;
+    double r = z * (z * (SIN_CURVE_A - SIN_CURVE_B * z) - 0.5) + 1.0;
+    if (r > 1.0) r = r - 2.0;
+    if (s > 0) return r;
+    else return -r;
+}
+
+double sin1(double x) {
+    return cos1(x - HALF_PI);
+}
 
 
 static void PWM_Thread1(void const *argument)
 {
+    int n;
+    n = BitCount(0xF); // 4
+    n = BitCount(0x0); // 0
+    n = BitCount(0x1); // 1
+    n = BitCount(21);  // 3
+    n = BitCount(0xFFFF);  // 16
+    n = BitCount(0xFF000000); // 8
+    n = BitCount(0xFFFFFFFF); // 32
+
+    n = BitCountLeadingZeros(0xF); // 28
+    n = BitCountLeadingZeros(0x0); // an interesting case that "0" is not counted in the other 31 digits of leading zeros
+    n = BitCountLeadingZeros(0x1); // also 31
+    n = BitCountLeadingZeros(21);  // 27 leading zeros for 10101
+    n = BitCountLeadingZeros(0xFFFF); // 16
+    n = BitCountLeadingZeros(0xFF000000); // 0
+    n = BitCountLeadingZeros(0xFFFFFFFF); // 0
+    
     // long thisStackSize = __process_stack_size__; // this does not work (why??)
         
     // see https://stackoverflow.com/questions/20059673/print-out-value-of-stack-pointer
