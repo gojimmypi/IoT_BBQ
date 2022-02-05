@@ -178,4 +178,5 @@ The [IoT_BBQ_STM32.map](./Exercise_8_IoT_BBQ_STM32.map) file is over 7,000 lines
 * ST Community [How to check stack and heap usage during run time.](https://community.st.com/s/question/0D50X00009XkWiq/how-to-check-stack-and-heap-usage-during-run-time)
 * ST [Description of STM32L4/L4+ HAL and low-layer drivers - UM1884](https://www.st.com/resource/en/user_manual/dm00173145-description-of-stm32l4l4-hal-and-lowlayer-drivers-stmicroelectronics.pdf)
 
-<< [Exercise 7](./Exercise_7.md) -- [Assignments](./README.md) --  [TBD]() >>
+<< [Exercise 7](./Exercise_7.md) -- [Assignments](./README.md) --  [Exercise 9](./Exercise_9.md) >>
+ 
