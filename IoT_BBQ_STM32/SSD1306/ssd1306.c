@@ -69,9 +69,54 @@ SSD1306_Error_t ssd1306_FillBuffer(uint8_t* buf, uint32_t len) {
     return ret;
 }
 
+
+static void MX_GPIO_Init(void)
+{
+
+
+    /* GPIO Ports Clock Enable */
+    __HAL_RCC_GPIOC_CLK_ENABLE();
+    __HAL_RCC_GPIOH_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+
+ 
+}
+
+/* I2C3 init function */
+static void MX_I2C3_Init(void)
+{
+
+    SSD1306_I2C_PORT.Instance = I2C3;
+    SSD1306_I2C_PORT.Init.Timing = 0x00000E14; // 100kHz
+    SSD1306_I2C_PORT.Init.OwnAddress1 = 0; // SSD1306_I2C_ADDR;
+//    hi2c1.Init.ClockSpeed = 400000;
+//    hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
+    // hi2c1.Init.OwnAddress1 = 0;
+    SSD1306_I2C_PORT.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+    SSD1306_I2C_PORT.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+    SSD1306_I2C_PORT.Init.OwnAddress2 = 0;
+    SSD1306_I2C_PORT.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+    SSD1306_I2C_PORT.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+    SSD1306_I2C_PORT.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+
+    __I2C3_CLK_ENABLE();
+
+    if (HAL_I2C_Init(&SSD1306_I2C_PORT) != HAL_OK)
+    {
+        _Error_Handler(__FILE__, __LINE__);
+    }
+
+
+
+}
+
 // Initialize the oled screen
 void ssd1306_Init(void) {
     // Reset OLED
+    MX_GPIO_Init();
+    MX_I2C3_Init();
+    
     ssd1306_Reset();
 
     // Wait for the screen to boot
