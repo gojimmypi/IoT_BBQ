@@ -14,6 +14,8 @@
 #include "HTS221/stm32l475e_iot01_tsensor.h"
 
 #ifdef __cplusplus
+#include <SSD1306/ssd1306_tests.h>
+#include <UART/int_to_string.h>
 
 extern "C" {
 #endif
@@ -21,12 +23,15 @@ extern "C" {
     int DISPLAY_VERSION() {
         return 1;
     }
+    
+    static int IsInitialized = 0x0;
 
+    
     void DISPLAY_Thread1(void const* argument) {
         (void)argument;
         static const TickType_t xDelay = 500 / portTICK_PERIOD_MS;
         static long CurrentTankWeight = 0;
-        static uint8_t WeightMessage[] = "Weight = ";
+        static uint8_t WeightMessage[] = "Weight";
         static uint8_t CrLf[] = "\n\r";
        
         static uint8_t PressureMessage[] = "Pressure = ";
@@ -34,6 +39,15 @@ extern "C" {
         static uint8_t TemperatureMessage[] = "Temperature = ";    
         static uint8_t ThisTimerMessage[] = "Timer = 0x";
         float CurrentPressureValue = 0;
+        
+        char * msg; 
+
+        if (IsInitialized == 0) {
+            ssd1306_Init();
+            IsInitialized = 1;
+            ssd1306_TestFonts();
+        }
+    
         
         for (;;)
         {
@@ -52,6 +66,20 @@ extern "C" {
                 CurrentPressureValue = BSP_PSENSOR_ReadPressure(); 
                 
                 portEXIT_CRITICAL();  
+                
+                ssd1306_SetCursor(2, 2);
+                msg = (char *)&WeightMessage;
+                ssd1306_WriteString(msg, Font_11x18, White);
+                
+                ssd1306_SetCursor(2, 22);
+                
+                static char numStr[32];
+                int_to_dec(numStr, CurrentTankWeight);
+                msg =  (char *)&numStr;
+                
+                ssd1306_WriteString(msg, Font_11x18, White);
+                
+                ssd1306_UpdateScreen();
                 
                 UART_TxMessageIntValue(PressureMessage, sizeof(PressureMessage), (long)CurrentPressureValue);
                 UART_TxMessage(CrLf, sizeof(CrLf));
