@@ -57,6 +57,7 @@
       <AdditionalLinkerInputs>;%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
       <AdditionalOptions />
       <GenerateMapFile>true</GenerateMapFile>
+      <LinkerScript>STM32L475VG_flash.lds</LinkerScript>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
@@ -474,5 +475,8 @@
     <None Include="IoT_BBQ_STM32-Debug.vgdbsettings" />
     <None Include="IoT_BBQ_STM32-Release.vgdbsettings" />
     <None Include="stm32.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <LinkerScript Include="STM32L475VG_flash.lds" />
   </ItemGroup>
 </Project>
