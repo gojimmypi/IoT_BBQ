@@ -55,8 +55,6 @@
       <LibrarySearchDirectories>;%(Link.LibrarySearchDirectories)</LibrarySearchDirectories>
       <AdditionalLibraryNames>;%(Link.AdditionalLibraryNames)</AdditionalLibraryNames>
       <AdditionalLinkerInputs>;%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
-      <LinkerScript>
-      </LinkerScript>
       <AdditionalOptions />
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
@@ -122,6 +120,16 @@
     </ClCompile>
     <ClCompile Include="_Init\Init_GPIO_I2C.cpp" />
     <ClCompile Include="_main.c" />
+    <ClCompile Include="_main_interrupt.c" />
+    <ClCompile Include="_main_LED_Thread1.c">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="_main_LED_Thread2.c">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="_main_pwm_thread.c" />
     <ClInclude Include="Common\globals.h" />
     <ClInclude Include="Common\hsensor.h">
       <SubType>
@@ -173,6 +181,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="_main_LED_Thread1.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="_main_LED_Thread2.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="_main_pwm_thread.h" />
     <None Include="stm32.props" />
     <ClCompile Include="$(BSP_ROOT)\STM32L4xxxx\StartupFiles\startup_stm32l475xx.c" />
     <None Include="$(BSP_ROOT)\FreeRTOS\License\license.txt" />

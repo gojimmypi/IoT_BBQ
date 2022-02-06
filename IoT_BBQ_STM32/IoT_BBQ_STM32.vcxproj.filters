@@ -975,6 +975,18 @@
     <ClCompile Include="Common\hsensor.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="_main_interrupt.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="_main_pwm_thread.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="_main_LED_Thread1.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="_main_LED_Thread2.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DWT_STM32_DELAY.h">
@@ -1058,5 +1070,19 @@
     <ClInclude Include="Common\globals.h">
       <Filter>Header files</Filter>
     </ClInclude>
+    <ClInclude Include="_main_pwm_thread.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="_main_LED_Thread1.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="_main_LED_Thread2.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <LinkerScript Include="STM32L475VG_flash.lds">
+      <Filter>Source files</Filter>
+    </LinkerScript>
   </ItemGroup>
 </Project>
