@@ -7,7 +7,8 @@ ENTRY(Reset_Handler)
 
 MEMORY
 {
-	FLASH (RX) : ORIGIN = 0x08000000, LENGTH = 1M
+	FLASH (RX) : ORIGIN = 0x08000000, LENGTH = 999K
+	DATA (RWX) : ORIGIN = 0x800FFC00, LENGTH = 1K
 	SRAM (RWX) : ORIGIN = 0x20000000, LENGTH = 96K
 	RAM2 (RWX) : ORIGIN = 0x10000000, LENGTH = 32K
 }
@@ -40,6 +41,13 @@ SECTIONS
 		_etext = .;
 
 	} > FLASH
+
+	 .user_data :
+    {
+      . = ALIGN(4);
+       KEEP(*(.user_data))
+      . = ALIGN(4);
+    } > DATA
 
 	.ARM.extab :
 	{
