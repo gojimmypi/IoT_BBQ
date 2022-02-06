@@ -24,6 +24,9 @@ extern "C"
     
     long GetScaleWeight()
     {
+        long tempScaleWeight = 0;
+        int DoCalibrate = 0;
+        
         /* We were able to obtain the semaphore and can now access the
         shared resource. */
 
@@ -42,7 +45,6 @@ extern "C"
             _IsInitialized = true;
 
             // calibrate
-            int DoCalibrate = 0;
             if (DoCalibrate == 1)
             {
                 scale.set_scale();
@@ -65,10 +67,10 @@ extern "C"
         {
             /* See if we can obtain the semaphore.  If the semaphore is not
             available wait 10 ticks to see if it becomes free. */
+            tempScaleWeight = scale.get_units(10);
             if (xSemaphoreTake(xHX711_Semaphore, (TickType_t) 10) == pdTRUE)
             {
-                TheScaleWeight = scale.get_units(10);
-
+                TheScaleWeight = tempScaleWeight;
 
                 /* We have finished accessing the shared resource.  Release the
                 semaphore. */
