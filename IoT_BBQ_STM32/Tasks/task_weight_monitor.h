@@ -6,8 +6,6 @@ extern "C"
 {
 #endif
 
-    void theScaleTask();
-
     extern SemaphoreHandle_t xHX711_Semaphore;
     long GetScaleWeight();
     

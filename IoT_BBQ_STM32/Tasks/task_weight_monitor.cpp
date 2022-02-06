@@ -76,8 +76,8 @@ extern "C"
                 xSemaphoreGive(xHX711_Semaphore);
             }
             else
-            {
-                osDelay(1000);
+            { 
+                osDelay((TickType_t)(1000 / portTICK_PERIOD_MS));
                 /* We could not obtain the semaphore and can therefore not access
                 the shared resource safely. */
             }
@@ -87,17 +87,10 @@ extern "C"
             // TODO how did we end up here? xHX711_Semaphore should never be null
         }
 
+
         return TheScaleWeight;
     }
 
-    void theScaleTask()
-    {
-        while (1)
-        {
-            GetScaleWeight();
-            osDelay(555);
-        }
-    }
 
 #ifdef __cplusplus
 }
