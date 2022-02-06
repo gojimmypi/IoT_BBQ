@@ -24,11 +24,11 @@ extern "C" {
         enum AppState TheValue;
         
         // FreeRTOS API functions must not be called from within a critical section.
-        // portENTER_CRITICAL();
+        portENTER_CRITICAL();
         
         TheValue = current_app_state;
 
-        // portEXIT_CRITICAL();
+        portEXIT_CRITICAL();
 
         return TheValue;
         
