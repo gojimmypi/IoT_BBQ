@@ -697,12 +697,9 @@ static void PWM_Thread1(void const *argument)
             osDelay(xDelay);  // this does NOT cause a hard fault
 
             portENTER_CRITICAL();
-//            HAL_NVIC_EnableIRQ(DISCOVERY_I2Cx_EV_IRQn);
-//            HAL_NVIC_EnableIRQ(DISCOVERY_I2Cx_ER_IRQn);
-            thisValue = BSP_PSENSOR_ReadPressure(); // enable this to cause hard fault in next osDelay
-//            HAL_NVIC_DisableIRQ(DISCOVERY_I2Cx_ER_IRQn);
-//            HAL_NVIC_DisableIRQ(DISCOVERY_I2Cx_EV_IRQn);
-            portEXIT_CRITICAL();   
+            // TODO consider mutex instead
+            thisValue = BSP_PSENSOR_ReadPressure();
+            portEXIT_CRITICAL();
             
             UART_TxMessageIntValue(PressureMessage, sizeof(PressureMessage), (long)thisValue);
             UART_TxMessage(CrLf, sizeof(CrLf));
@@ -749,29 +746,27 @@ static void LED_Thread1(void const *argument)
 {
     (void) argument;
   
+    static const TickType_t xDelay = 500 / portTICK_PERIOD_MS;
+    static long CurrentTankWeight = 0;
+    // static const int bufferLenth = 20;
+    static uint8_t WeightMessage[] = "1 Weight = ";
+    static uint8_t CrLf[] = "\n\r";
+       
+    static uint8_t PressureMessage[] = "1 Pressure = ";
+    static uint8_t HumidityMessage[] = "1 Humidity = ";
+    static uint8_t TemperatureMessage[] = "1 Temperature = ";    
+    static uint8_t ThisTimerMessage[] = "1 Timer = 0x";
+    float CurrentPressureValue = 0;
+
     for (;;)
     {
-        static const TickType_t xDelay = 500 / portTICK_PERIOD_MS;
-        static long CurrentTankWeight = 0;
-        // static const int bufferLenth = 20;
-        static uint8_t WeightMessage[] = "1 Weight = ";
-        static uint8_t CrLf[] = "\n\r";
-       
-        static uint8_t PressureMessage[] = "1 Pressure = ";
-        static uint8_t HumidityMessage[] = "1 Humidity = ";
-        static uint8_t TemperatureMessage[] = "1 Temperature = ";    
-        static uint8_t ThisTimerMessage[] = "1 Timer = 0x";
-        float CurrentPressureValue = 0;
-        
-        // portENTER_CRITICAL(); // this wrapper causes a hard fault upon exit
         CurrentTankWeight = GetScaleWeight();
-        // portEXIT_CRITICAL();  
 
-        osDelay(xDelay);
-                
+        // this is the only place we read pressure
         portENTER_CRITICAL();
+        // TODO consider mutex instead
         CurrentPressureValue = BSP_PSENSOR_ReadPressure(); 
-        portEXIT_CRITICAL();  
+        portEXIT_CRITICAL(); 
                 
         UART_TxMessageIntValue(PressureMessage, sizeof(PressureMessage), (long)CurrentPressureValue);
         UART_TxMessage(CrLf, sizeof(CrLf));
