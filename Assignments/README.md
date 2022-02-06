@@ -39,10 +39,16 @@ Examples
 
 - [B-L475E-IOT01A/Examples](https://github.com/STMicroelectronics/STM32CubeL4/tree/master/Projects/B-L475E-IOT01A/Examples) (not many examples)
 - [STM32CubeL4/Projects/B-L475E-IOT01A/Examples/BSP/Src/](https://github.com/STMicroelectronics/STM32CubeL4/tree/master/Projects/B-L475E-IOT01A/Examples/BSP/Src)
+- Digi-Key [Getting Started with STM32 - Timers and Timer Interrupts](https://www.digikey.com/en/maker/projects/getting-started-with-stm32-timers-and-timer-interrupts/d08e6493cefa486fb1e79c43c0b08cc6)
 
 Peripherals
 
 - [Inventek Systems ISM43362-M3G-L44-E/U Serial-to-WiFi Module](https://www.inventeksys.com/ism4336-m3g-l44-e-embedded-serial-to-wifi-module/), [ISM43362-M3G-L44 Datasheet](http://www.inventeksys.com/wp-content/uploads/ISM43362_M3G_L44_Functional_Spec.pdf)
+
+GPIO
+- [STM32 Understanding GPIO Settings](https://electronics.stackexchange.com/questions/156930/stm32-understanding-gpio-settings)
+
+- [FreeRTOS: osDelay vs HAL_delay](https://stackoverflow.com/questions/42276313/freertos-osdelay-vs-hal-delay)
 
 mbed
 
@@ -54,6 +60,8 @@ Visual GDB
 - [Creating Advanced STM32CubeMX-based Projects with VisualGDB](https://visualgdb.com/tutorials/arm/stm32/cube/advanced/)
 - [Controlling STM32 Hardware Timers using HAL](https://visualgdb.com/tutorials/arm/stm32/timers/hal/)
 - [Using STM32 timers in PWM mode](https://visualgdb.com/tutorials/arm/stm32/pwm/)
+- sysprogs github [visualgdb/ARM tutorials](https://github.com/sysprogs/tutorials/tree/master/visualgdb/ARM)
+- [sysprogs/BSPTools](https://github.com/sysprogs/BSPTools)
 
 RTOS
 
@@ -61,6 +69,8 @@ RTOS
 - GitHub [CMSIS Version 5](https://github.com/ARM-software/CMSIS_5)
 - [The FreeRTOS Reference Manual](https://www.freertos.org/fr-content-src/uploads/2018/07/FreeRTOS_Reference_Manual_V10.0.0.pdf)
 - [stackoverflow: What are valid values of `HAL_NVIC_SetPriority()` when using STM32 and FreeRTOS?](https://stackoverflow.com/questions/50243996/what-are-valid-values-of-hal-nvic-setpriority-when-using-stm32-and-freertos)
+- FreeRTOS [Memory Management](https://www.freertos.org/a00111.html)
+- STM32CubeL4 FreeRTOS [xPortGetFreeHeapSize](https://github.com/STMicroelectronics/STM32CubeL4/blob/master/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c#L315)
 
 Debuggers
 
@@ -89,6 +99,11 @@ IoT Management Tools
 - [ThingsBoard Open-source IoT Platform](https://thingsboard.io/)
 - [Azure IoT](https://azure.microsoft.com/en-us/overview/iot/#overview)
 - [AWS IoT Device Management](https://aws.amazon.com/iot-device-management/)
+
+Hard Faulkts
+
+- [How to debug a HardFault on an ARM Cortex-M MCU](https://interrupt.memfault.com/blog/cortex-m-fault-debug#fn:8)
+- [Slides from live class](https://drive.google.com/file/d/11M6Tn6bw0GAD549te2_HMGIEa5ajErI1/view?usp=sharing)
 
 Other Stuff
 
