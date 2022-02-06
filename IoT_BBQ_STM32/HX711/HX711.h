@@ -1,5 +1,6 @@
 #pragma once
-#include <cmsis_os.h>
+#include "Common/globals.h"
+
 #include <sys/_stdint.h>
 #include <stm32l4xx_hal.h>
 

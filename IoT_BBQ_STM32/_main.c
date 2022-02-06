@@ -1,6 +1,6 @@
 /* Includes ------------------------------------------------------------------*/
+#include "Common/globals.h"
 #include <stm32l4xx_hal.h>
-#include <../CMSIS_RTOS/cmsis_os.h>
 
 #include "_Init/startup.h"
 #include "_Init/Init_GPIO.h"

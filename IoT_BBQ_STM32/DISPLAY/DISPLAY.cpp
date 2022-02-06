@@ -1,6 +1,5 @@
-#include <cmsis_os.h>
-
 #include "DISPLAY.h"
+#include "Common/globals.h"
 #include <stm32l4xx_hal.h>
 #include <SSD1306/ssd1306.h>
 #include <SSD1306/SSD1306_demo.h>
@@ -31,7 +30,7 @@ extern "C" {
         (void)argument;
         static const TickType_t xDelay = 500 / portTICK_PERIOD_MS;
         static long CurrentTankWeight = 0;
-        static uint8_t WeightMessage[] = "Weight";
+        static uint8_t WeightMessage[] = "Weight ";
         static uint8_t CrLf[] = "\n\r";
        
         static uint8_t PressureMessage[] = "Pressure = ";

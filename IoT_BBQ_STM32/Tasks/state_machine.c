@@ -1,8 +1,7 @@
-#include <cmsis_os.h>
-
 // 
 // 
 // 
+#include "Common/globals.h"
 
 #include "state_machine.h"
 #include <stm32l4xx_hal.h>

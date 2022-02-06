@@ -1055,5 +1055,8 @@
     <ClInclude Include="Common\hsensor.h">
       <Filter>Header files</Filter>
     </ClInclude>
+    <ClInclude Include="Common\globals.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

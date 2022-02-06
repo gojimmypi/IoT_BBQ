@@ -1,5 +1,4 @@
-#include <cmsis_os.h>
-
+#include "Common/globals.h"
 
 #ifdef __cplusplus
 

@@ -1,3 +1,4 @@
+#include "Common/globals.h"
 #include "SSD1306/ssd1306.h"
 #include <math.h>
 #include <stdlib.h>
@@ -113,14 +114,19 @@ static void MX_I2C3_Init(void)
 
 // Initialize the oled screen
 void ssd1306_Init(void) {
-    // Reset OLED
+    // initialize hardware
     MX_GPIO_Init();
     MX_I2C3_Init();
     
+    // Reset OLED
     ssd1306_Reset();
 
     // Wait for the screen to boot
-    HAL_Delay(100);
+#ifdef IS_FREE_RTOS
+    osDelay((TickType_t)(100 / portTICK_PERIOD_MS)); 
+# else    
+    HAL_Delay(1000);
+#endif
 
     // Init OLED
     ssd1306_SetDisplayOn(0); //display off

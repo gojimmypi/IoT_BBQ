@@ -121,6 +121,7 @@
     </ClCompile>
     <ClCompile Include="_Init\Init_GPIO_I2C.cpp" />
     <ClCompile Include="_main.c" />
+    <ClInclude Include="Common\globals.h" />
     <ClInclude Include="Common\hsensor.h">
       <SubType>
       </SubType>

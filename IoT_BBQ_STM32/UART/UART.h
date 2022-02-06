@@ -1,11 +1,13 @@
 #pragma once
+#include "Common/globals.h"
+
+#include <stm32l4xx_hal.h>
+#include <stm32_hal_legacy.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <stm32l4xx_hal.h>
-#include <stm32_hal_legacy.h>
 	
 
 	int UART_VERSION();

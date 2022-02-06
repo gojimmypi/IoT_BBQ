@@ -1,4 +1,3 @@
-#include <../CMSIS_RTOS/cmsis_os.h>
 #include "../UART/UART.h"
 
 #include <stm32l4xx_hal.h>

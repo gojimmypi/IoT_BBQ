@@ -1,4 +1,3 @@
-#include <cmsis_os.h>
 /**
  *
  * HX711 library for Arduino
@@ -16,8 +15,7 @@
 #include "wiring_shift.c"
 
 // Whether we are actually running on FreeRTOS.
-#define IS_FREE_RTOS 
-// #define IS_FREE_RTOS (defined(ARDUINO_ARCH_ESP32) || defined(FREERTOS_CONFIG_H))
+// #define IS_FREE_RTOS moved to common/globals
 
 // Define macro designating whether we're running on a reasonable
 // fast CPU and so should slow down sampling from GPIO.

@@ -1,4 +1,4 @@
-#include <cmsis_os.h>
+#include "Common/globals.h"
 
 /*
   wiring_shift.c - shiftOut() function
