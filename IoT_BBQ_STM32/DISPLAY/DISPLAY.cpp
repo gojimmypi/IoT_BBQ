@@ -54,30 +54,25 @@ extern "C" {
             switch (GetAppState())
             {
             case Running:
-                ssd1306_Fill(Black);
                 
-//                portENTER_CRITICAL(); // this wrapper causes a hard fault upon exit
                 CurrentTankWeight = GetScaleWeight();
-//                portEXIT_CRITICAL();  
 
                 osDelay(xDelay);
                 
-                portENTER_CRITICAL();
                 CurrentPressureValue = BSP_PSENSOR_ReadPressure(); 
                 
-                portEXIT_CRITICAL();  
-                
-                ssd1306_SetCursor(2, 2);
+                // the blue section of screen starts at y=16
+                ssd1306_Fill(Black);
+                ssd1306_SetCursor(40, 16);
                 msg = (char *)&WeightMessage;
                 ssd1306_WriteString(msg, Font_11x18, White);
                 
-                ssd1306_SetCursor(2, 22);
-                
+                // the 0-15 yellow + 18 blue font + 7 spacing = 40
+                ssd1306_SetCursor(60, 38);
                 static char numStr[32];
                 int_to_dec(numStr, CurrentTankWeight);
                 msg =  (char *)&numStr;
-                
-                ssd1306_WriteString(msg, Font_11x18, White);
+                ssd1306_WriteString(msg, Font_16x26, White);
                 
                 ssd1306_UpdateScreen();
                 
