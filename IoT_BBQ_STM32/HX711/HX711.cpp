@@ -94,8 +94,17 @@ void HX711::begin(uint16_t dout, uint16_t pd_sck, byte gain) {
 }
 
 bool HX711::is_ready() {
-    // return digitalRead(DOUT) == LOW;
-    return HAL_GPIO_ReadPin(GPIOA, DOUT) == LOW;
+    
+#ifdef IS_FREE_RTOS
+    portENTER_CRITICAL();
+#endif
+    // TODO we won't always be on GPIOA
+    bool res = HAL_GPIO_ReadPin(GPIOA, DOUT) == LOW; // return digitalRead(DOUT) == LOW;
+
+#ifdef IS_FREE_RTOS
+    portEXIT_CRITICAL();  
+#endif
+    return res;
 }
 
 void HX711::set_gain(byte gain) {
@@ -166,7 +175,7 @@ long HX711::read() {
 #ifdef ARCH_ESPRESSIF
             DWT_Delay_us(2);  // WARNING! Hard, non-RTOS Delay // delayMicroseconds(1);
 #else
-            osDelay(1);
+            DWT_Delay_us(1);
 #endif
 
             HAL_GPIO_WritePin(GPIOB, PD_SCK, GPIO_PIN_RESET); // digitalWrite(PD_SCK, LOW);
@@ -175,12 +184,12 @@ long HX711::read() {
 #ifdef ARCH_ESPRESSIF
             DWT_Delay_us(2); // WARNING! Hard, non-RTOS Delay // delayMicroseconds(1);
 #else
-            osDelay(1);
+            DWT_Delay_us(1);
 #endif
         }
 #ifdef IS_FREE_RTOS
    // End of critical section.
-   portEXIT_CRITICAL();  
+   portEXIT_CRITICAL();
     
 #else
 // Enable interrupts again.
@@ -212,7 +221,7 @@ void HX711::wait_ready(unsigned long delay_ms) {
         // Probably will do no harm on AVR but will feed the Watchdog Timer (WDT) on ESP.
         // https://github.com/bogde/HX711/issues/73
         
-        osDelay((TickType_t)(1000 / portTICK_PERIOD_MS));
+        osDelay((TickType_t)(10 / portTICK_PERIOD_MS));
         // TODO what if it is never ready? see wait_ready_timeout()
     }
 }
@@ -295,12 +304,12 @@ void HX711::power_down() {
     DWT_Delay_us(2); // WARNING! Hard non-RTOS delay
     HAL_GPIO_WritePin(GPIOB, PD_SCK, GPIO_PIN_SET); // digitalWrite(PD_SCK, HIGH);
     DWT_Delay_us(2); // WARNING! Hard, non-RTOS Delay
-    portEXIT_CRITICAL();        
+    portEXIT_CRITICAL();
 }
 
 void HX711::power_up() {
     // clock is low during power up mode
     portENTER_CRITICAL();
     HAL_GPIO_WritePin(GPIOB, PD_SCK, GPIO_PIN_RESET); // digitalWrite(PD_SCK, LOW);
-    portEXIT_CRITICAL(); 
+    portEXIT_CRITICAL();
 }
