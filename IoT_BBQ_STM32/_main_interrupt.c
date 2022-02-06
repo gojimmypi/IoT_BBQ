@@ -14,6 +14,7 @@ void SysTick_Handler(void)
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
+    // reminder we are already in an interrupt handler, so we don't need to portENTER_CRITICAL()
     if (GPIO_Pin == GPIO_PIN_13) // GPIOC
     {
         switch (LED_GetMode())
