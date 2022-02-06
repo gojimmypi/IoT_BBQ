@@ -786,29 +786,21 @@ static void LED_Thread1(void const *argument)
         case IsBlinking:
             LED_ON();
             STATE_LED_ON(); // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-            osDelay(555);
+            osDelay((TickType_t)(555 / portTICK_PERIOD_MS));
 		
             STATE_LED_OFF(); // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-            //osThreadSuspend(LEDThread2Handle);
-            osDelay(555);
-		
-            //osThreadResume(LEDThread2Handle);
-        
-            // TODO for now, we call the scale tasks during blinks
-            theScaleTask(); // TODO move to own thread
+            osDelay((TickType_t)(555 / portTICK_PERIOD_MS));
 
             break;
 
         case AlwaysOn:
             STATE_LED_ON();      // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-            osDelay(2000); // no sense in runing hard the whole time if we are not blinking
+            osDelay((TickType_t)(1000 / portTICK_PERIOD_MS)); // no sense in runing hard the whole time if we are not blinking
             break;
 
         case AlwaysOff:
             STATE_LED_OFF();     // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-            //osThreadSuspend(LEDThread2Handle);
-            osDelay(2000); // no sense in runing hard the whole time if we are not blinking
-            //osThreadResume(LEDThread2Handle);
+            osDelay((TickType_t)(1000 / portTICK_PERIOD_MS)); // no sense in runing hard the whole time if we are not blinking
             break;
             
         default:
@@ -852,14 +844,14 @@ static void LED_Thread2(void const *argument)
         for (size_t i = 0; i < blink_Count; i++)
         {
             LED2_TOGGLE();
-            osDelay(200);
+            osDelay((TickType_t)(200 / portTICK_PERIOD_MS));
             
             LED2_TOGGLE();
-            osDelay(200);
+            osDelay((TickType_t)(200 / portTICK_PERIOD_MS));
         }        
-        osDelay(2000);
+        osDelay((TickType_t)(2000 / portTICK_PERIOD_MS));
     }
-    osDelay(2000);
+    osDelay((TickType_t)(2000 / portTICK_PERIOD_MS));
 }
 
 #ifdef  USE_FULL_ASSERT
