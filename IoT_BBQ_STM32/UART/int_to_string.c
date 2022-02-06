@@ -18,6 +18,15 @@ extern "C" {
         char *outbuf = dest;
         int i = 12;
         int j = 0;
+        int m = 0;
+        
+        // check to see if we have a negative number
+        // we'll check the high bit by shiftinh a 1 over by 1 minus the number of bytes in our log (typically 4) by 3 bits (which multiplies by 8). (e.g. 32-1)
+        if (n & ((unsigned long)(1 << ((sizeof(n) << 3) - 1))))
+        {
+            n = -n;
+            m = 1;
+        }
 
         do {
             outbuf[i] = "0123456789ABCDEF"[n % base];
@@ -26,10 +35,17 @@ extern "C" {
         } while (n > 0);
 
 
+        // see if we need to add the minus sign
+        if (m)
+        {
+            outbuf[j++] = '-';
+        }
+
         while (++i < 13) {
             outbuf[j++] = outbuf[i];
         }
 
+        // zero terminated string
         outbuf[j] = 0;
         return dest;
     }
