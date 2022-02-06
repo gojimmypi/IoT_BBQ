@@ -30,7 +30,6 @@ osThreadId DISPLAY_Thread1Handle;
 
 osThreadId PWM_Thread1Handle;
 /* Private function prototypes -----------------------------------------------*/
-static void LED_Thread1(void const *argument);
 static void LED_Thread2(void const *argument);
 
 /* Private functions ---------------------------------------------------------*/
