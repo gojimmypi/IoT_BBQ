@@ -15,6 +15,7 @@
 #include "HTS221/stm32l475e_iot01_hsensor.h"
 #include "HTS221/stm32l475e_iot01_tsensor.h"
 #include "_main_pwm_thread.h"
+#include "_main_LED_Thread1.h"
 
 // #include "common/stm32l4xx_hal_msp.h"
 
