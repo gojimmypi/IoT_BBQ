@@ -26,6 +26,31 @@ extern "C" {
     static int IsInitialized = 0x0;
 
     
+    void PrintCentered(int value)
+    {
+        char numStr[32];
+        int_to_dec(numStr, value);
+        char * msg =  (char *)&numStr;
+                
+        int ct = 0;
+        int w = 0;
+        while ((msg[ct] != '\0') && (ct < 32) && (w < SSD1306_WIDTH))
+        {
+            ct++;
+            w += Font_16x26.FontWidth; // our font is 16x26 + 4 pixels of space
+        } 
+                   
+        int x_pos = ((SSD1306_WIDTH >> 1) - (w >> 1)) > 0 ? ((SSD1306_WIDTH >> 1) - (w >> 1)) : 0; 
+        
+        // TODO test
+        x_pos = ((SSD1306_WIDTH >> 1) - (w >> 1)) > 0 ? ((SSD1306_WIDTH >> 1) - (w >> 1)) : 0;
+                
+        ssd1306_SetCursor(x_pos, 38);
+                
+        ssd1306_WriteString(msg, Font_16x26, White);
+        
+    }
+    
     void DISPLAY_Thread1(void const* argument) {
         (void)argument;
         static const TickType_t xDelay = 500 / portTICK_PERIOD_MS;
@@ -67,19 +92,15 @@ extern "C" {
                 ssd1306_WriteString(msg, Font_11x18, White);
                 
                 // the 0-15 yellow + 18 blue font + 7 spacing = 40
-                ssd1306_SetCursor(60, 38);
-                static char numStr[32];
-                int_to_dec(numStr, CurrentTankWeight);
-                msg =  (char *)&numStr;
-                ssd1306_WriteString(msg, Font_16x26, White);
+                PrintCentered(CurrentTankWeight);
                 
                 ssd1306_UpdateScreen();
                 
-                UART_TxMessageIntValue(PressureMessage, sizeof(PressureMessage), (long)CurrentPressureValue);
-                UART_TxMessage(CrLf, sizeof(CrLf));
-
-                UART_TxMessageIntValue(WeightMessage, sizeof(WeightMessage), CurrentTankWeight);
-                UART_TxMessage(CrLf, sizeof(CrLf));
+//                UART_TxMessageIntValue(PressureMessage, sizeof(PressureMessage), (long)CurrentPressureValue);
+//                UART_TxMessage(CrLf, sizeof(CrLf));
+//
+//                UART_TxMessageIntValue(WeightMessage, sizeof(WeightMessage), CurrentTankWeight);
+//                UART_TxMessage(CrLf, sizeof(CrLf));
                 osDelay(xDelay); 
                 
                 break;
