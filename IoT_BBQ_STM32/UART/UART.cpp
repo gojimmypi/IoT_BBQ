@@ -23,6 +23,7 @@ extern "C" {
     //    HAL_SYSTICK_IRQHandler();
     //}
     static UART_HandleTypeDef s_UARTHandle = UART_HandleTypeDef();
+    SemaphoreHandle_t xUART_Semaphore = xSemaphoreCreateMutex();
     
     int UART_TxMessage(uint8_t *pData, uint16_t Size )
     {
@@ -39,7 +40,21 @@ extern "C" {
             }
         }
 
-        TxResult = HAL_UART_Transmit(&s_UARTHandle, pData, FoundSize, HAL_MAX_DELAY);
+        if (xSemaphoreTake(xUART_Semaphore, (TickType_t) 10) == pdTRUE)
+        {
+            TxResult = HAL_UART_Transmit(&s_UARTHandle, pData, FoundSize, HAL_MAX_DELAY);
+ 
+            /* We have finished accessing the shared resource.  Release the
+            semaphore. */
+            xSemaphoreGive(xUART_Semaphore);
+        }
+        else
+        { 
+            osDelay((TickType_t)(1000 / portTICK_PERIOD_MS));
+            /* We could not obtain the semaphore and can therefore not access
+            the shared resource safely. */
+        }
+        
         
         if(TxResult == HAL_OK)
         {
@@ -55,7 +70,8 @@ extern "C" {
     const uint16_t NUM_STR_LEN = 32;
     int UART_TxMessageIntValue(uint8_t *pData, uint16_t Size, long Value)
     {
-        HAL_StatusTypeDef TxResult = HAL_UART_Transmit(&s_UARTHandle, pData, Size, HAL_MAX_DELAY);
+        //HAL_StatusTypeDef TxResult = HAL_UART_Transmit(&s_UARTHandle, pData, Size, HAL_MAX_DELAY);
+        int TxResult = UART_TxMessage(pData, Size);
         if (TxResult == HAL_OK)
         {
             static char numStr[NUM_STR_LEN];
@@ -72,7 +88,8 @@ extern "C" {
 
     int UART_TxMessageIntValueHex(uint8_t *pData, uint16_t Size, long Value)
     {
-        HAL_StatusTypeDef TxResult = HAL_UART_Transmit(&s_UARTHandle, pData, Size, HAL_MAX_DELAY);
+        //HAL_StatusTypeDef TxResult = HAL_UART_Transmit(&s_UARTHandle, pData, Size, HAL_MAX_DELAY);
+        int TxResult = UART_TxMessage(pData, Size);
         if (TxResult == HAL_OK)
         {
             static char numStr[NUM_STR_LEN];
