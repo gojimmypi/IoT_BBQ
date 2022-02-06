@@ -206,47 +206,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     }
 }
 
-void PWM_PulseFinishedCallback(TIM_HandleTypeDef* htim)
-{
-    // Check which version of the timer triggered this callback and toggle LED
-    if (htim == &htim2)
-    {
-        // HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-    }
-}
-
-// not use; for reference only!
-int pwm_main(void)
-{    int32_t CH1_DC = 0;
- 
-    HAL_Init();
-    pwm_SystemClock_Config();
-    pwm_MX_GPIO_Init();
-    pwm_MX_TIM2_Init();
-
-
-    // HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
-    HAL_TIM_Base_Start_IT(&htim2);
-    
-    while (1)
-    {
-        while (CH1_DC < 65535)
-        {
-            TIM2->CCR1 = CH1_DC;
-            CH1_DC += 70;
-            // osDelay(555);
-        }
-        while (CH1_DC > 0)
-        {
-            TIM2->CCR1 = CH1_DC;
-            CH1_DC -= 70;
-            // osDelay(555);
-        }
-    }
-
-}
-
-
 
 /**
   * @brief  Main program
