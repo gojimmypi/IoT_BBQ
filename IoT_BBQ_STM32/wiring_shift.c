@@ -35,16 +35,16 @@
 #define MSBFIRST 1
 
 
+// WARNING: wrap calling function in portENTER_CRITICAL / portEXIT_CRITICAL
 uint8_t shiftIn(uint16_t dataPin, uint16_t clockPin, uint8_t bitOrder) {
     uint8_t value = 0;
     uint8_t i;
     static int TimingDelay = 1;
-    portENTER_CRITICAL();
     for (i = 0; i < 8; ++i) {
         
         // clock high
         HAL_GPIO_WritePin(GPIOB, clockPin, GPIO_PIN_SET); // Clock = Gray //digitalWrite(clockPin, HIGH);
-        DWT_Delay_us(1);
+        DWT_Delay_us(1); // WARNING! Hard, non-RTOS Delay
         
         if (bitOrder == LSBFIRST)
         {
@@ -57,9 +57,8 @@ uint8_t shiftIn(uint16_t dataPin, uint16_t clockPin, uint8_t bitOrder) {
         
         // clock low
         HAL_GPIO_WritePin(GPIOB, clockPin, GPIO_PIN_RESET); // digitalWrite(clockPin, LOW);
-        DWT_Delay_us(1);
+        DWT_Delay_us(1); // WARNING! Hard, non-RTOS Delay
     }
-    portEXIT_CRITICAL();
     return value;
 }
 
@@ -79,7 +78,6 @@ void shiftOut(uint16_t dataPin, uint16_t clockPin, uint8_t bitOrder, uint8_t val
 {
     uint8_t i;
 
-    portENTER_CRITICAL();
     for (i = 0; i < 8; i++) {
         if (bitOrder == LSBFIRST) {
             // digitalWrite(dataPin, val & 1);
@@ -95,5 +93,4 @@ void shiftOut(uint16_t dataPin, uint16_t clockPin, uint8_t bitOrder, uint8_t val
         HAL_GPIO_WritePin(GPIOB, clockPin, GPIO_PIN_SET);   //digitalWrite(clockPin, HIGH);
         HAL_GPIO_WritePin(GPIOB, clockPin, GPIO_PIN_RESET); //digitalWrite(clockPin, LOW);	
     }
-    portEXIT_CRITICAL();
 }
