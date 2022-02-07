@@ -137,6 +137,11 @@ Porting code between architectures is beyond the scope of the class.
 
 Furthermore, the HX711 weight sensor interface and SSD1306 display are not built-in on the development board. 
 
+### Mistakes in Example Code
+
+I submitted [STM32CubeL4/issues/61](https://github.com/STMicroelectronics/STM32CubeL4/issues/61) and [PR #60](https://github.com/STMicroelectronics/STM32CubeL4/pull/60) 
+to fix a problem in an example where there Source Address was the same as the Destination. (not only uninteresting, but failed with error)
+
 ### External sensors and peripherals
 
 Certainly one of the benefits of having an evaluation board is having the connections "built-in" and sample code readily available. Unfortunately the Discovery Board used did not have a display and the I2C HX711 load cell was of course external, 
@@ -279,6 +284,7 @@ The Power LED is always on, and needs to be unsoldered to not use it:
 - NordicPlayground [mbed stm32f4xx_hal_uart](https://github.com/NordicPlayground/mbed/blob/master/libraries/mbed/targets/cmsis/TARGET_STM/TARGET_DISCO_F407VG/stm32f4xx_hal_uart.c)
 - [afiskon/stm32-ssd1306 example](https://github.com/afiskon/stm32-ssd1306/blob/master/examples/oled-tester/firmware/i2c/Src/main.c); The [code](https://github.com/afiskon/stm32-ssd1306/tree/master/ssd1306) is [included in this project](../IoT_BBQ_STM32/SSD1306/).
 - [Sensors STM32CubeL4/Drivers/BSP/B-L475E-IOT01/](https://github.com/STMicroelectronics/STM32CubeL4/tree/master/Drivers/BSP/B-L475E-IOT01)
+- github [akospasztor/stm32-bootloader](https://github.com/akospasztor/stm32-bootloader)
 
 ### Video Tutorials
 
@@ -288,6 +294,10 @@ The Power LED is always on, and needs to be unsoldered to not use it:
 ### Programming
 
 - [AVR035: Efficient C Coding for AVR](https://ww1.microchip.com/downloads/en/Appnotes/doc1497.pdf)
+
+### Coding Standards
+
+- Wayback Machine [GSFC C/C++ Coding Standards](http://web.archive.org/web/20090412090730/http://software.gsfc.nasa.gov/assetsbytype.cfm?TypeAsset=Standard) NASA Goddard Space Flight Center
 
 ### Cloud Demo
 - [AWS AWS Cloud demonstration](https://github.com/STMicroelectronics/STM32CubeL4/tree/master/Projects/B-L475E-IOT01A/Demonstrations)
