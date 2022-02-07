@@ -6,6 +6,8 @@
 #include "_Init/Init_GPIO.h"
 #include "Tasks/task_weight_monitor.h"
 #include "Flash/Flash_Sim_Demo.h"
+#include "Flash/spi_flash.h"
+
 #include "LED/LED.h"
 #include "UART/UART.h"
 #include "DISPLAY/DISPLAY.h"
@@ -125,6 +127,10 @@ double sin1(double x) {
 
 void PWM_Thread1(void const *argument)
 {
+    
+    flash_test();
+
+
     int n;
     n = BitCount(0xF); // 4
     n = BitCount(0x0); // 0
