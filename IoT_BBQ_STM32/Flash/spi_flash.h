@@ -27,7 +27,7 @@
   */
 
 
-#define is_spi_flash_simulation
+// #define is_spi_flash_simulation
 
 
 
@@ -116,6 +116,8 @@ extern "C" {
     void sFLASH_WriteEnable(void);
     void sFLASH_WaitForWriteEnd(void);
 
+    void flash_test();
+    
 #ifdef __cplusplus
 }
 #endif
