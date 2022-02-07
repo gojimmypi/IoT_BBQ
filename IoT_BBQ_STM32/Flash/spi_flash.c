@@ -171,7 +171,7 @@ void flash_test()
     // see https://stackoverflow.com/questions/44443619/how-to-write-read-to-flash-on-stm32f4-cortex-m4
     // see https://github.com/gojimmypi/IoT_BBQ/commit/95d8862e57ac7b4acde8f23305d0a0f8d061411a#diff-947cad9d8806e1f3e06bc4a751f2f9b4ca05367b64068dfc15ac1904fc2d4890
     // see https://github.com/STMicroelectronics/STM32CubeL4/issues/61
-    __attribute__((__section__(".user_data")))  static const uint64_t Data64_To_Prog[FLASH_ROW_SIZE] = {
+    __attribute__((__section__(".user_data")))  static const uint64_t Data64_In_Flash[FLASH_ROW_SIZE] = {
   0x1212121212121212, 0x1111111111111111, 0x2222222222222222, 0x3333333333333333,
   0x4444444444444444, 0x5555555555555555, 0x6666666666666666, 0x7777777777777777,
   0x8888888888888888, 0x9999999999999999, 0xAAAAAAAAAAAAAAAA, 0xBBBBBBBBBBBBBBBB,
@@ -221,6 +221,7 @@ void flash_test()
           /* Infinite loop */
             while (1)
             {
+                // TODO
                 HAL_Delay(1000);
             }
         }  
@@ -239,6 +240,7 @@ void flash_test()
                User can add here some code to deal with this error */
             while (1)
             {
+                // TODO
                 HAL_Delay(1000);
             }
         }
@@ -270,7 +272,7 @@ void flash_test()
         {
             data64 = *(__IO uint64_t *)Address;
     
-            if (data64 != Data64_To_Prog[data_index])
+            if (data64 != Data64_In_Flash[data_index])
             {
                 MemoryProgramStatus++;
             }
@@ -287,6 +289,7 @@ void flash_test()
     else
     {
         /* Error detected. Switch on LED2*/
+        // TODO
         while (1) ;
     }
 }
