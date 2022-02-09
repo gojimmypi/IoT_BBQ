@@ -8,7 +8,7 @@ ENTRY(Reset_Handler)
 MEMORY
 {
 	FLASH (RX) : ORIGIN = 0x08000000, LENGTH = 996K
-	DATA (RWX) : ORIGIN = 0x080FF000, LENGTH = 4K
+	FDATA (R)  : ORIGIN = 0x080FF000, LENGTH = 4K
 	SRAM (RWX) : ORIGIN = 0x20000000, LENGTH = 96K
 	RAM2 (RWX) : ORIGIN = 0x10000000, LENGTH = 32K
 }
@@ -42,12 +42,32 @@ SECTIONS
 
 	} > FLASH
 
-	 .user_data :
+	/* 
+
+	this next section added to default linker for saving user data in the non-volatile flash. 
+
+	for default linker script, see: $(BSP_ROOT)/STM32L4xxxx/LinkerScripts/STM32L475VG_flash.lds
+
+	the NOLOAD will prevent flash from being overwritten at firmware update time
+
+	note address of FDATA in MEMORY section, above.
+
+	FLASH_CONFIG in code the contains flash data; see struct FlashConfig
+
+	CACHE_CONFIG contains a copy of flash and is updated at runtime and later writen to flash
+
+	*/
+
+	.flash_user_data (NOLOAD) :
     {
-      . = ALIGN(4);
-       KEEP(*(.user_data))
-      . = ALIGN(4);
-    } > DATA
+        . = ALIGN(4);
+		_fdata = .;
+		PROVIDE(__flash_data_start__ = _fdata);
+        KEEP(*(.flash_user_data))
+        KEEP(*(.flash_user_data*))
+        . = ALIGN(4);
+		PROVIDE(__flash_data_end__ = .);
+    } > FDATA
 
 	.ARM.extab :
 	{
