@@ -26,7 +26,8 @@
 #define MSBFIRST 1
 #define HIGH 0x1
 #define LOW  0x0
-
+#define DEFAULT_OFFSET 0xffffbfda
+#define DEFAULT_SCALE 104
 class HX711
 {
 
@@ -34,8 +35,8 @@ private:
     uint16_t PD_SCK; // Power Down and Serial Clock Input Pin
     uint16_t DOUT; // Serial Data Output Pin
     byte GAIN; // amplification factor
-    long OFFSET = 0xffffbfda; // used for tare weight
-    float SCALE = 104; // used to return weight in grams, kg, ounces, whatever
+    long OFFSET = DEFAULT_OFFSET; // used for tare weight
+    float SCALE = DEFAULT_SCALE; // used to return weight in grams, kg, ounces, whatever
 
 public:
 
