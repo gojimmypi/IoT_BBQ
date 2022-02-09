@@ -3,18 +3,37 @@
 
 #include "LED/LED.h"
 
+volatile static int ButtonPressFound = 0;
+volatile static int ButtonLongPressFound = 0;
+
+volatile static GPIO_PinState ButtonState;
+
 void SysTick_Handler(void)
 {
     HAL_IncTick();
     osSystickHandler();
-
     HAL_SYSTICK_IRQHandler(); // for UART
+    
+    // TODO we should move this long button press logic to a thread for performance reasons. (we don't really need to check on EVERY systick)
+    ButtonState = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
+    
+    if (ButtonPressFound && (ButtonState == GPIO_PIN_SET))
+    {
+        int thisTick = HAL_GetTick();
+        if ((thisTick - ButtonPressFound) > 1000)
+        {
+            ButtonLongPressFound = 1;
+        }
+        ButtonPressFound = 0;
+    }
 }
 
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-    // reminder we are already in an interrupt handler, so we don't need to portENTER_CRITICAL()
+    ButtonPressFound =  HAL_GetTick();
+    
+    // reminder we are already in an interrupt handler from EXTI15_10_IRQHandler(), so we don't need to portENTER_CRITICAL()
     if (GPIO_Pin == GPIO_PIN_13) // GPIOC
     {
         switch (LED_GetMode())
