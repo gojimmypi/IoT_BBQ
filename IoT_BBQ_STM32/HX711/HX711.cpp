@@ -14,12 +14,21 @@
 #include "DWT_STM32_DELAY.h"
 #include "wiring_shift.c"
 
+#define USE_FLASH_CONFIG
+
+
+
 // Whether we are actually running on FreeRTOS.
 // #define IS_FREE_RTOS moved to common/globals
 
 // Define macro designating whether we're running on a reasonable
 // fast CPU and so should slow down sampling from GPIO.
 #define FAST_CPU 
+
+
+#ifdef USE_FLASH_CONFIG
+#include "Flash/flash_config.h"
+#endif // USE_FLASH_CONFIG
 
 
 //#if FAST_CPU
@@ -46,8 +55,19 @@
 //    return value;
 //}
 
-
 HX711::HX711() {
+    
+#ifdef USE_FLASH_CONFIG
+    OFFSET = DeviceFlashConfig()->SCALE_OFFSET;
+    
+    uint32_t c = DeviceCacheConfig()->SCALE_OFFSET; // TODO remove this test of cache
+    if (FlashNeedsUpdate() > 0)
+    {
+        // TODO check for save errors
+        SaveDeviceConfig();
+    }
+#endif // USE_FLASH_CONFIG
+
 }
 
 HX711::~HX711() {
@@ -82,7 +102,7 @@ void HX711::begin(uint16_t dout, uint16_t pd_sck, byte gain) {
 
     power_up();
     
-    //    HAL_GPIO_WritePin(GPIOB, PD_SCK, GPIO_PIN_RESET);        
+//    HAL_GPIO_WritePin(GPIOB, PD_SCK, GPIO_PIN_RESET);        
 //    HAL_GPIO_WritePin(GPIOB, PD_SCK, GPIO_PIN_SET);
 //
 //    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_RESET);        
@@ -290,6 +310,12 @@ float HX711::get_scale() {
 }
 
 void HX711::set_offset(long offset) {
+
+#ifdef USE_FLASH_CONFIG
+    // TODO update config
+    // DeviceCacheConfig()->SCALE_OFFSET = offset;
+#endif // USE_FLASH_CONFIG
+
     OFFSET = offset;
 }
 
