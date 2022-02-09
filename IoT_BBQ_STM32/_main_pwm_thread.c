@@ -127,10 +127,6 @@ double sin1(double x) {
 
 void PWM_Thread1(void const *argument)
 {
-    
-    flash_test();
-
-
     int n;
     n = BitCount(0xF); // 4
     n = BitCount(0x0); // 0
