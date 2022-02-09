@@ -87,6 +87,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Flash\flash_config.c" />
     <ClCompile Include="Flash\Flash_Sim_Demo.cpp" />
     <ClCompile Include="Flash\spi_flash.c" />
     <ClCompile Include="HX711\HX711.cpp" />
@@ -153,6 +154,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Flash\flash_config.h" />
     <ClInclude Include="Flash\Flash_Sim_Demo.h" />
     <ClInclude Include="Flash\spi_flash.h" />
     <ClInclude Include="LED\LED.h" />

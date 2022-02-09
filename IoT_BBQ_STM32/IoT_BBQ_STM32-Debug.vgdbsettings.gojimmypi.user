@@ -27,12 +27,50 @@
       </NestedVariableSettingsCollection>
     </NestedLiveVariables>
     <Suggestions>
-      <HardwareRegisterFilters />
+      <HardwareRegisterFilters>
+        <string>LR</string>
+        <string>FSR</string>
+        <string>UFSR</string>
+        <string>cfsr</string>
+      </HardwareRegisterFilters>
     </Suggestions>
     <LiveVariablePreferences>
       <ViewMode>SpecificVariables</ViewMode>
       <FavoritesOnly>false</FavoritesOnly>
     </LiveVariablePreferences>
-    <HardwareRegisters />
+    <HardwareRegisters>
+      <HardwareRegisterRecord>
+        <Name>ARM Cortex M4.CFSR</Name>
+        <State>
+          <IsFavorite>false</IsFavorite>
+          <IsLive>false</IsLive>
+          <LastUsed>132882081191451124</LastUsed>
+        </State>
+      </HardwareRegisterRecord>
+      <HardwareRegisterRecord>
+        <Name>ARM Cortex M4.CFSR.BFARVALID</Name>
+        <State>
+          <IsFavorite>false</IsFavorite>
+          <IsLive>false</IsLive>
+          <LastUsed>132882081243669551</LastUsed>
+        </State>
+      </HardwareRegisterRecord>
+      <HardwareRegisterRecord>
+        <Name>ARM Cortex M4.CFSR.PRECISERR</Name>
+        <State>
+          <IsFavorite>false</IsFavorite>
+          <IsLive>false</IsLive>
+          <LastUsed>132882440733831091</LastUsed>
+        </State>
+      </HardwareRegisterRecord>
+      <HardwareRegisterRecord>
+        <Name>lr</Name>
+        <State>
+          <IsFavorite>false</IsFavorite>
+          <IsLive>false</IsLive>
+          <LastUsed>132885151020671728</LastUsed>
+        </State>
+      </HardwareRegisterRecord>
+    </HardwareRegisters>
   </DebugPreferences>
 </VisualGDBUserPreferences>

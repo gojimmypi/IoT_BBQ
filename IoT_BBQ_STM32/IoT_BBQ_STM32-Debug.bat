@@ -17,6 +17,8 @@ echo lps22hb.c
 c:\SysGCC\arm-eabi\bin\arm-none-eabi-gcc.exe @"VisualGDB/Debug/Components/lps22hb/lps22hb.gcc.rsp" || exit 1
 echo DISPLAY.cpp
 c:\SysGCC\arm-eabi\bin\arm-none-eabi-g++.exe @"VisualGDB/Debug/DISPLAY/DISPLAY.gcc.rsp" || exit 1
+echo flash_config.c
+c:\SysGCC\arm-eabi\bin\arm-none-eabi-gcc.exe @"VisualGDB/Debug/Flash/flash_config.gcc.rsp" || exit 1
 echo Flash_Sim_Demo.cpp
 c:\SysGCC\arm-eabi\bin\arm-none-eabi-g++.exe @"VisualGDB/Debug/Flash/Flash_Sim_Demo.gcc.rsp" || exit 1
 echo spi_flash.c
@@ -61,6 +63,14 @@ echo Init_GPIO_I2C.cpp
 c:\SysGCC\arm-eabi\bin\arm-none-eabi-g++.exe @"VisualGDB/Debug/_Init/Init_GPIO_I2C.gcc.rsp" || exit 1
 echo _main.c
 c:\SysGCC\arm-eabi\bin\arm-none-eabi-gcc.exe @"VisualGDB/Debug/_main.gcc.rsp" || exit 1
+echo _main_interrupt.c
+c:\SysGCC\arm-eabi\bin\arm-none-eabi-gcc.exe @"VisualGDB/Debug/_main_interrupt.gcc.rsp" || exit 1
+echo _main_LED_Thread1.c
+c:\SysGCC\arm-eabi\bin\arm-none-eabi-gcc.exe @"VisualGDB/Debug/_main_LED_Thread1.gcc.rsp" || exit 1
+echo _main_LED_Thread2.c
+c:\SysGCC\arm-eabi\bin\arm-none-eabi-gcc.exe @"VisualGDB/Debug/_main_LED_Thread2.gcc.rsp" || exit 1
+echo _main_pwm_thread.c
+c:\SysGCC\arm-eabi\bin\arm-none-eabi-gcc.exe @"VisualGDB/Debug/_main_pwm_thread.gcc.rsp" || exit 1
 echo startup_stm32l475xx.c
 c:\SysGCC\arm-eabi\bin\arm-none-eabi-gcc.exe @"VisualGDB/Debug/__BSP_ROOT__/STM32L4xxxx/StartupFiles/startup_stm32l475xx.gcc.rsp" || exit 1
 echo croutine.c
