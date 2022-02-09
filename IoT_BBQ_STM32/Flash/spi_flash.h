@@ -43,6 +43,16 @@ extern "C" {
 #include "stm32l4xx.h" // edited from stm32f2xx
 
     /* Exported types ------------------------------------------------------------*/
+    struct FlashConfig
+    {
+        // WARNING maintain size and order of existing elements to ensure firmware upgrades do not corrupt prevously saved values
+        const uint32_t FLASH_START;
+        const uint8_t MajorVersion;
+        const uint8_t MinorVersion;
+        uint32_t SCALE_OFFSET;
+        const uint64_t Data64_In_Flash[0x20];       
+    };
+
     /* Exported constants --------------------------------------------------------*/
 
     /* M25P SPI Flash supported commands */

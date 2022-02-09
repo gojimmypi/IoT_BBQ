@@ -5,16 +5,31 @@
 #include <string.h>
 
 // see https://github.com/STMicroelectronics/STM32CubeL4/blob/f93a2f74f8e9912405dbf1a297b6df0c423eddf2/Projects/32L4R9IDISCOVERY/Examples/FLASH/FLASH_EraseProgram/Inc/main.h
-#define ADDR_FLASH_PAGE_255   ((uint32_t)0x080FF000) /* Base @ of Page 255, 4 Kbytes this is the last 4K of 1MB flash: 1048576 - 4096 = 1044480 ; 0x100000 - 0x01000  = FF000 */
 
-// define is_spi_flash_simulation when we don't actually have an spi_flash to play with
+// See linker file:
+//
+//        .flash_user_data :
+//        {
+//            . = ALIGN(4);
+//            _fdata =.;
+//            PROVIDE(__flash_data_start__ = _fdata);
+//            KEEP(*(.user_data))
+//            .= ALIGN(4);
+//            PROVIDE(__flash_data_end__ =.);
+//        } > DATA
+extern int __flash_data_start__;
+extern int __flash_data_end__;
+#define ADDR_FLASH_DATA_START   ((uint32_t)&(__flash_data_start__)) /* Base @ of Page 255, 4 Kbytes this is the last 4K of 1MB flash: 1048576 - 4096 = 1044480 ; 0x100000 - 0x01000  = FF000 */
+#define ADDR_FLASH_DATA_END     ((uint32_t)&(__flash_data_end__))   
+
 #define FLASH_ROW_SIZE          64
 
     /* !!! Be careful the user area should be in another bank than the code !!! */
-#define FLASH_USER_START_ADDR   ADDR_FLASH_PAGE_255   /* Start @ of user Flash area */
-#define FLASH_USER_END_ADDR     FLASH_USER_START_ADDR + 0x0FFF       /* End @ of user Flash area */
+//#define FLASH_USER_START_ADDR   ADDR_FLASH_PAGE_255   /* Start @ of user Flash area */
+//#define FLASH_USER_END_ADDR     FLASH_USER_START_ADDR + 0x0FFF       /* End @ of user Flash area */
 
 
+// define is_spi_flash_simulation when we don't actually have an spi_flash to play with
 #ifdef is_spi_flash_simulation
 
 static uint8_t* SimulatedFlash = NULL;
@@ -150,14 +165,36 @@ static uint32_t GetBank(uint32_t Addr)
     return bank;
 }
 
+__attribute__((__section__(".flash_user_data"))) static const struct FlashConfig FLASH_CONFIG;
+
+        
+static struct FlashConfig CACHE_CONFIG;
+
 void flash_test()
 {
-    
     /* Private typedef -----------------------------------------------------------*/
     /* Private define ------------------------------------------------------------*/
 
     /* Private macro -------------------------------------------------------------*/
     /* Private variables ---------------------------------------------------------*/
+    
+    /*
+     
+    .flash_user_data :
+    {
+        _fdata =.;
+
+        PROVIDE(__flash_data_start__ = _fdata);
+
+        . = ALIGN(4);
+        KEEP(*(.flash_user_data))
+        .= ALIGN(4);
+    } > DATA
+    
+    */    
+    
+    uint32_t a = (uint32_t) &(__flash_data_start__); // this is the beginning address of flash memory. see linker file for FDATA
+    uint32_t b = (uint32_t) &(__flash_data_end__);   // this is the end of used flash memory, NOT the end of allocated flash
     uint32_t BankNumber = 0;
     uint32_t Address = 0, PAGEError = 0;
     __IO uint32_t MemoryProgramStatus = 0;
@@ -171,15 +208,7 @@ void flash_test()
     // see https://stackoverflow.com/questions/44443619/how-to-write-read-to-flash-on-stm32f4-cortex-m4
     // see https://github.com/gojimmypi/IoT_BBQ/commit/95d8862e57ac7b4acde8f23305d0a0f8d061411a#diff-947cad9d8806e1f3e06bc4a751f2f9b4ca05367b64068dfc15ac1904fc2d4890
     // see https://github.com/STMicroelectronics/STM32CubeL4/issues/61
-    __attribute__((__section__(".user_data")))  static const uint64_t Data64_In_Flash[FLASH_ROW_SIZE] = {
-  0x1212121212121212, 0x1111111111111111, 0x2222222222222222, 0x3333333333333333,
-  0x4444444444444444, 0x5555555555555555, 0x6666666666666666, 0x7777777777777777,
-  0x8888888888888888, 0x9999999999999999, 0xAAAAAAAAAAAAAAAA, 0xBBBBBBBBBBBBBBBB,
-  0xCCCCCCCCCCCCCCCC, 0xDDDDDDDDDDDDDDDD, 0xEEEEEEEEEEEEEEEE, 0xFFFFFFFFFFFFFFFF,
-  0x0011001100110011, 0x2233223322332233, 0x4455445544554455, 0x6677667766776677,
-  0x8899889988998899, 0xAABBAABBAABBAABB, 0xCCDDCCDDCCDDCCDD, 0xEEFFEEFFEEFFEEFF,
-  0x2200220022002200, 0x3311331133113311, 0x6644664466446644, 0x7755775577557755,
-  0xAA88AA88AA88AA88, 0xBB99BB99BB99BB99, 0xEECCEECCEECCEECC, 0xFFDDFFDDFFDDFFDD};
+     
 
     static const uint64_t NewData[FLASH_ROW_SIZE] = {
   0x1313113131313131, 0x1111111111111111, 0x2222222222222222, 0x3333333333333333,
@@ -189,14 +218,23 @@ void flash_test()
   0x0011001100110011, 0x2233223322332233, 0x4455445544554455, 0x6677667766776677,
   0x8899889988998899, 0xAABBAABBAABBAABB, 0xCCDDCCDDCCDDCCDD, 0xEEFFEEFFEEFFEEFF,
   0x2200220022002200, 0x3311331133113311, 0x6644664466446644, 0x7755775577557755,
-  0xAA88AA88AA88AA88, 0xBB99BB99BB99BB99, 0xEECCEECCEECCEECC, 0xFFDDFFDDFFDDFFDD};
+  0xAA88AA88AA88AA88, 0xBB99BB99BB99BB99, 0xEECCEECCEECCEECC, 0xFFDDFFDDFFDDFFDD,
+  0x2200220022002200, 0x3311331133113311, 0x6644664466446644, 0x7755775577557755,
+  0x3688AA88AA88AA88, 0x3699BB99BB99BB99, 0x38CCEECCEECCEECC, 0x39DDFFDDFFDDFFDD,
+  0x1313113131313131, 0x1111111111111111, 0x2222222222222222, 0x3333333333333333,
+  0x4444444444444444, 0x5555555555555555, 0x6666666666666666, 0x7777777777777777,
+  0x8888888888888888, 0x9999999999999999, 0xAAAAAAAAAAAAAAAA, 0xBBBBBBBBBBBBBBBB,
+  0xCCCCCCCCCCCCCCCC, 0xDDDDDDDDDDDDDDDD, 0xEEEEEEEEEEEEEEEE, 0xFFFFFFFFFFFFFFFF,
+  0x0011001100110011, 0x2233223322332233, 0x4455445544554455, 0x6677667766776677,
+  0x8899889988998899, 0xAABBAABBAABBAABB, 0xCCDDCCDDCCDDCCDD, 0xEEFFEEFFEEFFEEFF,
+    };
     
-    uint32_t src_addr = (uint32_t)NewData;
+    uint32_t src_addr = (uint32_t)&CACHE_CONFIG;
     uint8_t data_index = 0;
     
 /* Private function prototypes -----------------------------------------------*/
-    
-    
+    memcpy((uint32_t *)&CACHE_CONFIG, (uint32_t *)&FLASH_CONFIG, sizeof(FLASH_CONFIG));
+    CACHE_CONFIG.SCALE_OFFSET = (uint32_t)0xffffbfda;
         HAL_FLASH_Unlock();
 
         /* Erase the user Flash area
@@ -206,7 +244,7 @@ void flash_test()
         __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_OPTVERR); 
 
         /* Get the bank */
-        BankNumber = GetBank(FLASH_USER_START_ADDR);
+        BankNumber = GetBank(ADDR_FLASH_DATA_START);
 
         /* Fill EraseInit structure*/
         EraseInitStruct.TypeErase = FLASH_TYPEERASE_MASSERASE;
@@ -226,9 +264,9 @@ void flash_test()
             }
         }  
     
-    Address = FLASH_USER_START_ADDR;
-
-    while (Address < (FLASH_USER_END_ADDR - (FLASH_ROW_SIZE*sizeof(uint64_t))))
+    Address = ADDR_FLASH_DATA_START;
+    
+    while (Address <= (ADDR_FLASH_DATA_END))
     {
         if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_FAST, Address, (uint64_t)src_addr) == HAL_OK)
         {
@@ -241,18 +279,8 @@ void flash_test()
             while (1)
             {
                 // TODO
-                HAL_Delay(1000);
+                // HAL_Delay(1000);
             }
-        }
-    }
-
-    if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_FAST_AND_LAST, Address, (uint64_t)src_addr) != HAL_OK)
-    {
-        /* Error occurred while writing data in Flash memory.
-           User can add here some code to deal with this error */
-        while (1)
-        {
-            HAL_Delay(1000);
         }
     }
 
@@ -263,16 +291,21 @@ void flash_test()
     /* Check if the programmed data is OK
         MemoryProgramStatus = 0: data programmed correctly
         MemoryProgramStatus != 0: number of words not programmed correctly ******/
-    Address = FLASH_USER_START_ADDR;
+    Address = ADDR_FLASH_DATA_START;
     MemoryProgramStatus = 0x0;
 
-    while (Address < FLASH_USER_END_ADDR)
+    while (Address < ADDR_FLASH_DATA_END)
     {
         for (data_index = 0; data_index < FLASH_ROW_SIZE; data_index++)
         {
             data64 = *(__IO uint64_t *)Address;
     
-            if (data64 != Data64_In_Flash[data_index])
+            if (data64 != FLASH_CONFIG.Data64_In_Flash[data_index])
+            {
+                MemoryProgramStatus++;
+            }
+            
+            if ((data_index < FLASH_ROW_SIZE) && (NewData[data_index] !=  FLASH_CONFIG.Data64_In_Flash[data_index]))
             {
                 MemoryProgramStatus++;
             }
@@ -290,7 +323,7 @@ void flash_test()
     {
         /* Error detected. Switch on LED2*/
         // TODO
-        while (1) ;
+        int a = MemoryProgramStatus;
     }
 }
 
