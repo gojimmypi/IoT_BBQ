@@ -251,7 +251,7 @@ int main(void)
     }
     else
     {
-        while (1) ;
+        // while (1) ; //TODO fix
     }
     
    if (BSP_HSENSOR_Init() == HSENSOR_OK)
@@ -263,7 +263,7 @@ int main(void)
    }
     else
     {
-        while (1) ;
+        // while (1) ;  //TODO fix
     }
 
     
@@ -276,7 +276,7 @@ int main(void)
    }
     else
     {
-        while (1) ;
+        // while (1) ;  //TODO fix
     }
 
 //    HAL_NVIC_DisableIRQ(DISCOVERY_I2Cx_ER_IRQn);
