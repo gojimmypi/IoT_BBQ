@@ -34,6 +34,17 @@ extern "C" {
         
     };
     
+    int IsAppStateChange(enum AppState FromState)
+    {
+        int res = 0;
+        
+        portENTER_CRITICAL();
+        res = !(current_app_state == FromState);
+        portEXIT_CRITICAL();
+
+        return res;
+    }
+    
     //
     // Set new application state
     //
@@ -42,7 +53,7 @@ extern "C" {
         // portENTER_CRITICAL();
         
         current_app_state = NewState;
-
+        
         // portEXIT_CRITICAL();
 
         return 0; // TODO check for error, return non-zero

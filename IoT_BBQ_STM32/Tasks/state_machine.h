@@ -10,12 +10,12 @@ extern "C" {
 
     int state_machine_VERSION();
 
-    enum AppState { Startup, Running, Demo, Sleeping, Error };
+    enum AppState { Startup = 0, Running, Demo, Sleeping, Tare, Error };
 
     
     enum AppState GetAppState();
     int SetAppState(enum AppState NewState);
-
+    int IsAppStateChange(enum AppState FromState);
 #ifdef __cplusplus
 }
 #endif     
