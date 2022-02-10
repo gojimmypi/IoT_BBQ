@@ -109,6 +109,22 @@ extern "C" {
         
         for (;;)
         {
+            GPIO_PinState ButtonState;
+            TickType_t xButtonDelay = (100 / portTICK_PERIOD_MS);
+            int t = 0;
+            do {
+                ButtonState = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
+                osDelay(xButtonDelay);
+                t++;
+            } while ((ButtonState == GPIO_PIN_RESET) && (t <= 21));
+        
+            // did we wait more than 2 seconds?
+            if (t >=  20)
+            {
+                SetAppState(Tare);
+            }
+            
+            
             switch (GetAppState())
             {
             case Running:
