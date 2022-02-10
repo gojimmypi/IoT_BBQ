@@ -1,6 +1,8 @@
 @echo off
 REM Run this file to build the project outside of the IDE.
 REM WARNING: if using a different machine, copy the .rsp files together with this script.
+echo button.cpp
+c:\SysGCC\arm-eabi\bin\arm-none-eabi-g++.exe @"VisualGDB/Debug/BUTTON/button.gcc.rsp" || exit 1
 echo hsensor.c
 c:\SysGCC\arm-eabi\bin\arm-none-eabi-gcc.exe @"VisualGDB/Debug/Common/hsensor.gcc.rsp" || exit 1
 echo psensor.cpp
