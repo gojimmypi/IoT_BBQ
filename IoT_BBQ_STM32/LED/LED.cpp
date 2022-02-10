@@ -1,3 +1,4 @@
+#include "Common/globals.h"
 #include "../LED/LED.h"
 #include <stm32l4xx_hal.h>
 #include <Tasks/state_machine.h>
@@ -22,6 +23,21 @@ extern "C" {
     
     int LED_SetMode(LED_Mode NewState)
     {
+//        GPIO_PinState ButtonState;
+//        TickType_t xButtonDelay = (100 / portTICK_PERIOD_MS);
+//        int t = 0;
+//        do {
+//            ButtonState = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
+//            osDelay(xButtonDelay);
+//            t++;
+//        } while ((ButtonState == GPIO_PIN_SET) || (t <= 30));
+//        
+//        // did we wait more than 2 seconds?
+//        if (t >  25)
+//        {
+//            SetAppState(Tare);
+//        }
+
         // TODO RTOS wrap
         __current_LED_MODE = NewState;
         
