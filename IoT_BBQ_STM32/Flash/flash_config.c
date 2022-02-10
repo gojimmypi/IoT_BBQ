@@ -62,7 +62,17 @@ extern "C" {
     static int IsInitialized = 0;
 
     // instead of a global variable, we have this function for a struct pointer to our device config    
-    struct FlashConfig* DeviceCacheConfig()
+
+    // by default we just return the current cache of the flash config (we don't read from flash every time for performance)
+    // see below for optional update-time save option
+//    struct FlashConfig* DeviceCacheConfig()
+//    {
+//        return DeviceFlashConfig(NoSave);
+//    };
+
+    // when passing a WithSave paramter, the cach will also be written to flash before returning
+    // be aware of performance penalty when doing this frequently
+    struct FlashConfig* DeviceCacheConfig(DeviceConfigSaveOption SaveOption) 
     {
         if (IsInitialized)
         {
@@ -73,7 +83,7 @@ extern "C" {
             // copy the config in flash to our writable cache config
             memcpy((uint32_t *)&CACHE_CONFIG, (uint32_t *)&FLASH_CONFIG, sizeof(FLASH_CONFIG));
 
-            if (CACHE_CONFIG.MajorVersion == (uint8_t)(-1))
+            if (CACHE_CONFIG.MajorVersion <= (uint8_t)(0) )
             {
                 // if we find all 0xFF in flash, then we assume the flash was erased, but never written
             
@@ -91,6 +101,14 @@ extern "C" {
             }
             IsInitialized = 1;
         }
+
+        // optional write to flash as requested, but only if needed:
+        if ((SaveOption == WithSave) && FlashNeedsUpdate())
+        {
+            SaveDeviceConfig();
+        }
+        
+        // return the result: a struct pointer to the cache of device config in RAM (which is a copy of read-only flash) 
         return (struct FlashConfig *)&CACHE_CONFIG;
     };
 

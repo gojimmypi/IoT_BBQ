@@ -41,6 +41,7 @@ extern "C" {
 #define FlashConfigMajorVersion 1
 #define FlashConfigMinorVersion 0
     
+    // we'll typically have exactly two instances of this struct: one that points to Flash, the other than points to a cache RAM copy
     struct FlashConfig
     {
         // WARNING maintain size and order of existing elements to ensure firmware upgrades do not corrupt saved values
@@ -51,8 +52,16 @@ extern "C" {
         const uint64_t Data64_In_Flash[0x20];       
     };
    
+    typedef enum {
+        NoSave   = 0,
+        WithSave
+    } DeviceConfigSaveOption;
+    
+    // the values read directly from Flash
     struct FlashConfig* DeviceFlashConfig(); // read-only values directly from Flash
-    struct FlashConfig* DeviceCacheConfig(); // pointer to updatable cache item (needs to be saved to flash!)
+
+    // cache in RAM of flash values
+    struct FlashConfig* DeviceCacheConfig(DeviceConfigSaveOption SaveOption); // pointer to updatable cache item (needs to be saved to flash!)
 
     uint32_t FlashNeedsUpdate(); // returns how many bytes in our cache do not match flash (any non-zero result means we need to save)
     HAL_StatusTypeDef SaveDeviceConfig();
