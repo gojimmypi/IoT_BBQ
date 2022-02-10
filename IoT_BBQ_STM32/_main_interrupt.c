@@ -1,10 +1,11 @@
 #include "Common/globals.h"
+#include "Tasks/state_machine.h"
 #include <stm32l4xx_hal.h>
 
 #include "LED/LED.h"
 
 volatile static int ButtonPressFound = 0;
-volatile static int ButtonLongPressFound = 0;
+volatile static int ButtonLongPressFound = 0; // TODO are we going to use this or not?
 
 volatile static GPIO_PinState ButtonState;
 
@@ -22,6 +23,7 @@ void SysTick_Handler(void)
         int thisTick = HAL_GetTick();
         if ((thisTick - ButtonPressFound) > 1000)
         {
+            SetAppState(Tare);
             ButtonLongPressFound = 1;
         }
         ButtonPressFound = 0;
