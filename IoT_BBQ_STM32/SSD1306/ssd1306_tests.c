@@ -1,5 +1,5 @@
 #include "Common/globals.h"
-
+#include "Tasks/state_machine.h"
 #include <string.h>
 // #include <stdio.h>
 #include "SSD1306/ssd1306.h"
@@ -179,6 +179,9 @@ void ssd1306_TestFPS() {
     //
     // WARNING this still caused hard fault in RTOS!!
     //
+    
+    enum AppState StartingAppState = GetAppState();
+    
     const TickType_t xLoopDelay = 1 / portTICK_PERIOD_MS;
 
     ssd1306_Fill(White);
@@ -199,13 +202,15 @@ void ssd1306_TestFPS() {
         ssd1306_UpdateScreen();
        
         char ch = message[0];
-        memmove(message, message+1, sizeof(message)-2);
-        message[sizeof(message)-2] = ch;
+        memmove(message, message + 1, sizeof(message) - 2);
+        message[sizeof(message) - 2] = ch;
 
         fps++;
         end = HAL_GetTick();
+
         osDelay(xLoopDelay); // yield to RTOS
-    } while((end - start) < 5000);
+       
+    } while (((end - start) < 5000) && !IsAppStateChange(StartingAppState)); //TODO fix;
    
     const TickType_t xDelay = 500 / portTICK_PERIOD_MS;
     osDelay(xDelay);
@@ -276,17 +281,22 @@ void ssd1306_TestPolyline() {
 
 void ssd1306_TestDrawBitmap()
 {
+    enum AppState StartingAppState = GetAppState();
     const TickType_t xDelay = 3000 / portTICK_PERIOD_MS;
 
     ssd1306_Fill(White);
     ssd1306_DrawBitmap(0,0,garfield_128x64,128,64,Black);
     ssd1306_UpdateScreen();
+
     osDelay(xDelay);
+    if (IsAppStateChange(StartingAppState)) { return; }
     
     ssd1306_Fill(Black);
     ssd1306_DrawBitmap(32,0,github_logo_64x64,64,64,White);
     ssd1306_UpdateScreen();
+
     osDelay(xDelay);
+    if (IsAppStateChange(StartingAppState)) { return; }
     
     ssd1306_Fill(White);
     ssd1306_DrawBitmap(32,0,github_logo_64x64,64,64,Black);
@@ -294,9 +304,11 @@ void ssd1306_TestDrawBitmap()
 }
 
 static int IsInitialized = 0x0;
-
 void ssd1306_TestAll() {
+    enum AppState StartingAppState = GetAppState();
     const TickType_t xDelay = 500 / portTICK_PERIOD_MS;
+    
+    if (IsAppStateChange(StartingAppState)) { return; }
 
     if (IsInitialized == 0) {
         ssd1306_Init();
@@ -306,30 +318,43 @@ void ssd1306_TestAll() {
     ssd1306_TestFPS();
     
     osDelay(xDelay); 
+    if (IsAppStateChange(StartingAppState)) { return; }
+
     ssd1306_TestBorder();
     ssd1306_TestFonts();
+
     osDelay(xDelay);
+    if (IsAppStateChange(StartingAppState)) { return; }
     
     ssd1306_Fill(Black);
     ssd1306_TestRectangle();
     ssd1306_TestLine();
+ 
     osDelay(xDelay);
+    if (IsAppStateChange(StartingAppState)) { return; }
     
     ssd1306_Fill(Black);
     ssd1306_TestPolyline();
+
     osDelay(xDelay);
+    if (IsAppStateChange(StartingAppState)) { return; }
 
     ssd1306_Fill(Black);
     ssd1306_TestArc();
+
     osDelay(xDelay);
+    if (IsAppStateChange(StartingAppState)) { return; }
 
     ssd1306_Fill(Black);
     ssd1306_TestCircle();
+
     osDelay(xDelay);
+    if (IsAppStateChange(StartingAppState)) { return; }
 
     ssd1306_TestDrawBitmap();
+
     osDelay(xDelay);
-    osDelay(xDelay);
+    if (IsAppStateChange(StartingAppState)) { return; }
 
 }
 
