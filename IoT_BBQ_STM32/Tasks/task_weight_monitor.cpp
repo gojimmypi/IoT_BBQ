@@ -22,6 +22,30 @@ extern "C"
         return _IsInitialized;
     }
     
+    int DoScaleTare()
+    {
+        int res = 0;
+        if (_IsInitialized)
+        {
+            scale.tare();
+//            if (xSemaphoreTake(xHX711_Semaphore, (TickType_t) 10) == pdTRUE)
+//            {
+//
+//                /* We have finished accessing the shared resource.  Release the
+//                semaphore. */
+//                xSemaphoreGive(xHX711_Semaphore);
+//            }
+//            else
+//            { 
+//                osDelay((TickType_t)(1000 / portTICK_PERIOD_MS));
+//                /* We could not obtain the semaphore and can therefore not access
+//                the shared resource safely. */
+//            }
+            
+        }
+        return res;
+    }
+    
     long GetScaleWeight()
     {
         long tempScaleWeight = 0;
