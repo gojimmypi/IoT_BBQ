@@ -25,8 +25,40 @@ extern "C" {
     
     static int IsInitialized = 0x0;
 
+    static const int ValuePositionY = 38;
+    static const int LabelPositionY = 16;
     
-    void PrintCentered(int value)
+    // Labels are Font_11x18 at display row 36
+    void PrintLabelCenteredAt(int x_pos, char * msg)
+    {
+        ssd1306_SetCursor(x_pos, LabelPositionY);
+        ssd1306_WriteString(msg, Font_11x18, White);
+    }    
+    
+    void PrintLabelCentered(char * msg)
+    {
+        int ct = 0;
+        int w = 0;
+        while ((msg[ct] != '\0') && (ct < 32) && (w < SSD1306_WIDTH))
+        {
+            ct++;
+            w += Font_11x18.FontWidth;
+        } 
+                   
+        int x_pos = ((SSD1306_WIDTH >> 1) - (w >> 1)) > 0 ? ((SSD1306_WIDTH >> 1) - (w >> 1)) : 0; 
+
+        PrintLabelCenteredAt(x_pos, msg); 
+    }
+    
+    
+    // Values are Font_16x26 at display row 38
+    void PrintValueCenteredAt(int x_pos, char * msg)
+    {
+        ssd1306_SetCursor(x_pos, ValuePositionY);
+        ssd1306_WriteString(msg, Font_16x26, White);
+    }
+    
+    void PrintValueCentered(int value)
     {
         char numStr[32];
         int_to_dec(numStr, value);
@@ -37,7 +69,7 @@ extern "C" {
         while ((msg[ct] != '\0') && (ct < 32) && (w < SSD1306_WIDTH))
         {
             ct++;
-            w += Font_16x26.FontWidth; // our font is 16x26 + 4 pixels of space
+            w += Font_16x26.FontWidth; 
         } 
                    
         int x_pos = ((SSD1306_WIDTH >> 1) - (w >> 1)) > 0 ? ((SSD1306_WIDTH >> 1) - (w >> 1)) : 0; 
@@ -45,9 +77,10 @@ extern "C" {
         // TODO test
         x_pos = ((SSD1306_WIDTH >> 1) - (w >> 1)) > 0 ? ((SSD1306_WIDTH >> 1) - (w >> 1)) : 0;
                 
-        ssd1306_SetCursor(x_pos, 38);
-                
-        ssd1306_WriteString(msg, Font_16x26, White);
+        PrintValueCenteredAt(x_pos, msg);
+//        ssd1306_SetCursor(x_pos, 38);
+//                
+//        ssd1306_WriteString(msg, Font_16x26, White);
         
     }
     
@@ -55,13 +88,14 @@ extern "C" {
         (void)argument;
         static const TickType_t xDelay = 500 / portTICK_PERIOD_MS;
         static long CurrentTankWeight = 0;
-        static uint8_t WeightMessage[] = "Weight ";
+        static uint8_t WeightMessage[] = "Weight";
         static uint8_t CrLf[] = "\n\r";
        
-        static uint8_t PressureMessage[] = "Pressure = ";
-        static uint8_t HumidityMessage[] = "Humidity = ";
-        static uint8_t TemperatureMessage[] = "Temperature = ";    
-        static uint8_t ThisTimerMessage[] = "Timer = 0x";
+        static uint8_t TareMessage[] = "Tare";
+        static uint8_t PressureMessage[] = "Pressure";
+        static uint8_t HumidityMessage[] = "Humidity";
+        static uint8_t TemperatureMessage[] = "Temperature";    
+        static uint8_t ThisTimerMessage[] = "Timer";
         float CurrentPressureValue = 0;
         
         char * msg; 
@@ -87,12 +121,12 @@ extern "C" {
                 
                 // the blue section of screen starts at y=16
                 ssd1306_Fill(Black);
-                ssd1306_SetCursor(40, 16);
-                msg = (char *)&WeightMessage;
-                ssd1306_WriteString(msg, Font_11x18, White);
                 
                 // the 0-15 yellow + 18 blue font + 7 spacing = 40
-                PrintCentered(CurrentTankWeight);
+
+                PrintLabelCentered((char *)&WeightMessage);
+                
+                PrintValueCentered(CurrentTankWeight);
                 
                 ssd1306_UpdateScreen();
                 
@@ -103,6 +137,17 @@ extern "C" {
 //                UART_TxMessage(CrLf, sizeof(CrLf));
                 osDelay(xDelay); 
                 
+                break;
+            
+            case Tare :
+                DoScaleTare();
+                ssd1306_Fill(Black);
+                PrintLabelCentered((char *)&TareMessage);
+                PrintValueCentered(CurrentTankWeight);
+                ssd1306_UpdateScreen();
+
+                osDelay(xDelay);
+                SetAppState(Running);
                 break;
                 
             case Demo:
