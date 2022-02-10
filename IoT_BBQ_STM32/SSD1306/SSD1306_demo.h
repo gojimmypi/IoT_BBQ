@@ -4,8 +4,7 @@
 extern "C" {
 #endif
 
-	//
-	void ssd1306_TestAll();
+	// void ssd1306_TestAll();
 	void SSD1306_test();
 	void _Error_Handler(char* file, int line);
 

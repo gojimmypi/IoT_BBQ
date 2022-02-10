@@ -33,22 +33,22 @@ void SSD1306_test_init() {
     // HAL_GPIO_WritePin(I2C_Led_GPIO_Port, I2C_Led_Pin, GPIO_PIN_RESET);
 }
 
-void SSD1306_test_loop() {
-    // Blue button pressed - repeast the test
-    // if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_RESET) {
-        // Indicate that test is running
-        // HAL_GPIO_WritePin(I2C_Led_GPIO_Port, I2C_Led_Pin, GPIO_PIN_SET);
-
-        ssd1306_TestAll();
-
-        // HAL_GPIO_WritePin(SPI_Led_GPIO_Port, SPI_Led_Pin, GPIO_PIN_RESET);
-        // HAL_GPIO_WritePin(I2C_Led_GPIO_Port, I2C_Led_Pin, GPIO_PIN_RESET);
-    // }
-
-    // Blink an LED
-    // HAL_GPIO_TogglePin(I2C_Led_GPIO_Port, I2C_Led_Pin);
-    // HAL_Delay(150);
-}
+//void SSD1306_test_loop() {
+//    // Blue button pressed - repeast the test
+//    // if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_RESET) {
+//        // Indicate that test is running
+//        // HAL_GPIO_WritePin(I2C_Led_GPIO_Port, I2C_Led_Pin, GPIO_PIN_SET);
+//
+//        ssd1306_TestAll();
+//
+//        // HAL_GPIO_WritePin(SPI_Led_GPIO_Port, SPI_Led_Pin, GPIO_PIN_RESET);
+//        // HAL_GPIO_WritePin(I2C_Led_GPIO_Port, I2C_Led_Pin, GPIO_PIN_RESET);
+//    // }
+//
+//    // Blink an LED
+//    // HAL_GPIO_TogglePin(I2C_Led_GPIO_Port, I2C_Led_Pin);
+//    // HAL_Delay(150);
+//}
 
 /* USER CODE END 0 */
 
@@ -102,9 +102,8 @@ void SSD1306_test()
     /* Infinite loop */
     /* USER CODE BEGIN WHILE */
     SSD1306_test_init();
-    while (1)
     {
-        SSD1306_test_loop();
+        // SSD1306_test_loop();
         /* USER CODE END WHILE */
 
         /* USER CODE BEGIN 3 */
