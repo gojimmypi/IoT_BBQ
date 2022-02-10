@@ -58,9 +58,9 @@
 HX711::HX711() {
     
 #ifdef USE_FLASH_CONFIG
-    OFFSET = DeviceFlashConfig()->SCALE_OFFSET;
-    
-    uint32_t c = DeviceCacheConfig()->SCALE_OFFSET; // TODO remove this test of cache
+    // read from Flash directly as we only new this at initialization time
+    OFFSET = DeviceCacheConfig(NoSave)->SCALE_OFFSET;
+
     if (FlashNeedsUpdate() > 0)
     {
         // TODO check for save errors
@@ -76,7 +76,7 @@ HX711::~HX711() {
 void HX711::begin(uint16_t dout, uint16_t pd_sck, byte gain) {
 
     // FreeRTOS API functions must not be called from within a critical section.
-    // portENTER_CRITICAL();
+    portENTER_CRITICAL();
     
     // TODO don't override!
     PD_SCK = GPIO_PIN_2; //  ARD.D8 = PB2  0x0004 Gray
@@ -99,6 +99,7 @@ void HX711::begin(uint16_t dout, uint16_t pd_sck, byte gain) {
     GPIO_InitStructureA.Speed = GPIO_SPEED_FREQ_HIGH;
     GPIO_InitStructureA.Pull = GPIO_PULLDOWN;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStructureA);
+    portEXIT_CRITICAL();
 
     power_up();
     
@@ -110,7 +111,6 @@ void HX711::begin(uint16_t dout, uint16_t pd_sck, byte gain) {
     
     set_gain(gain);
     
-    // portEXIT_CRITICAL();
 }
 
 bool HX711::is_ready() {
@@ -283,7 +283,8 @@ long HX711::read_average(byte times) {
         // Probably will do no harm on AVR but will feed the Watchdog Timer (WDT) on ESP.
         // https://github.com/bogde/HX711/issues/73
         // 
-        DWT_Delay_us(1); // WARNING! Hard, non-RTOS Delay
+        // DWT_Delay_us(1); // WARNING! Hard, non-RTOS Delay
+        osDelay((TickType_t)(1));
     }
     return sum / times;
 }
@@ -312,8 +313,10 @@ float HX711::get_scale() {
 void HX711::set_offset(long offset) {
 
 #ifdef USE_FLASH_CONFIG
-    // TODO update config
-    // DeviceCacheConfig()->SCALE_OFFSET = offset;
+
+    // if Flash is enabled, update both the RAM cache as save to Flash
+    DeviceCacheConfig(WithSave)->SCALE_OFFSET = offset;
+
 #endif // USE_FLASH_CONFIG
 
     OFFSET = offset;
