@@ -1,9 +1,11 @@
-#include "DISPLAY.h"
 #include "Common/globals.h"
 #include <stm32l4xx_hal.h>
 #include <SSD1306/ssd1306.h>
 #include <SSD1306/SSD1306_demo.h>
-#include <UART/UART.h>
+
+#include "DISPLAY.h"
+#include "BUTTON/button.h"
+#include "UART/UART.h"
 #include "Tasks/state_machine.h"
 #include "Tasks/task_weight_monitor.h"
 #include "DISPLAY/DISPLAY.h"
@@ -109,21 +111,8 @@ extern "C" {
         
         for (;;)
         {
-            GPIO_PinState ButtonState;
-            TickType_t xButtonDelay = (100 / portTICK_PERIOD_MS);
-            int t = 0;
-            do {
-                ButtonState = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
-                osDelay(xButtonDelay);
-                t++;
-            } while ((ButtonState == GPIO_PIN_RESET) && (t <= 21));
-        
-            // did we wait more than 2 seconds?
-            if (t >=  20)
-            {
-                SetAppState(Tare);
-            }
-            
+            // a longpress may change current app state
+            CheckForLongPress();
             
             switch (GetAppState())
             {
@@ -168,6 +157,7 @@ extern "C" {
                 
             case Demo:
             default:
+                // be sure to exit promptly during longpress
                 ssd1306_TestAll();
                 break;
             }
