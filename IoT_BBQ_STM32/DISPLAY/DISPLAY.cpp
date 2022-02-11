@@ -106,6 +106,8 @@ extern "C" {
             ssd1306_Init();
             IsInitialized = 1;
             ssd1306_TestFonts();
+            ScaleInit();
+
         }
     
         
