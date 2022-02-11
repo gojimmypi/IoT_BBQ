@@ -57,6 +57,8 @@ extern "C" {
         WithSave
     } DeviceConfigSaveOption;
     
+    int SetScaleOffset(uint32_t new_scale_offset);
+    
     // the values read directly from Flash
     struct FlashConfig* DeviceFlashConfig(); // read-only values directly from Flash
 

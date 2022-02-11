@@ -51,7 +51,10 @@ extern "C" {
 
     /*Variable used for Erase procedure*/
 
-
+    int SetScaleOffset(uint32_t new_scale_offset)
+    {
+        CACHE_CONFIG.SCALE_OFFSET = new_scale_offset;
+    }
     
     struct FlashConfig* DeviceFlashConfig()
     {
@@ -102,8 +105,8 @@ extern "C" {
             IsInitialized = 1;
         }
 
-        // optional write to flash as requested, but only if needed:
-        if ((SaveOption == WithSave) && FlashNeedsUpdate())
+        // optional write to flash as requested
+        if (SaveOption == WithSave)
         {
             SaveDeviceConfig();
         }
