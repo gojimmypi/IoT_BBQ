@@ -193,9 +193,12 @@ void ssd1306_TestFPS() {
    
     ssd1306_SetCursor(2,0);
     ssd1306_WriteString("Testing...", Font_11x18, Black);
+    if (IsAppStateChange(StartingAppState)) { return; }
+    
     ssd1306_SetCursor(2, 18*2);
     ssd1306_WriteString("0123456789A", Font_11x18, Black);
-   
+    if (IsAppStateChange(StartingAppState)) { return; }
+    
     do {
         ssd1306_SetCursor(2, 18);
         ssd1306_WriteString(message, Font_11x18, Black);
@@ -287,14 +290,16 @@ void ssd1306_TestDrawBitmap()
     ssd1306_Fill(White);
     ssd1306_DrawBitmap(0,0,garfield_128x64,128,64,Black);
     ssd1306_UpdateScreen();
-
+    if (IsAppStateChange(StartingAppState)) { return; }
+    
     osDelay(xDelay);
     if (IsAppStateChange(StartingAppState)) { return; }
     
     ssd1306_Fill(Black);
     ssd1306_DrawBitmap(32,0,github_logo_64x64,64,64,White);
     ssd1306_UpdateScreen();
-
+    if (IsAppStateChange(StartingAppState)) { return; }
+    
     osDelay(xDelay);
     if (IsAppStateChange(StartingAppState)) { return; }
     
@@ -320,7 +325,7 @@ void ssd1306_TestAll() {
     osDelay(xDelay); 
     if (IsAppStateChange(StartingAppState)) { return; }
 
-    ssd1306_TestBorder();
+    // ssd1306_TestBorder();
     ssd1306_TestFonts();
 
     osDelay(xDelay);
