@@ -61,11 +61,11 @@ HX711::HX711() {
     // read from Flash directly as we only new this at initialization time
     OFFSET = DeviceCacheConfig(NoSave)->SCALE_OFFSET;
 
-    if (FlashNeedsUpdate() > 0)
-    {
-        // TODO check for save errors
-        SaveDeviceConfig();
-    }
+//    if (FlashNeedsUpdate() > 0)
+//    {
+//        // TODO check for save errors
+//        SaveDeviceConfig();
+//    }
 #endif // USE_FLASH_CONFIG
 
 }
@@ -313,13 +313,12 @@ float HX711::get_scale() {
 void HX711::set_offset(long offset) {
 
 #ifdef USE_FLASH_CONFIG
-
     // if Flash is enabled, update both the RAM cache as save to Flash
-    DeviceCacheConfig(WithSave)->SCALE_OFFSET = offset;
-
+    SetScaleOffset( offset);
 #endif // USE_FLASH_CONFIG
 
     OFFSET = offset;
+    SaveDeviceConfig();
 }
 
 long HX711::get_offset() {
