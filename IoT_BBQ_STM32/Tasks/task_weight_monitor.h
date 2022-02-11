@@ -10,7 +10,7 @@ extern "C"
     
     int DoScaleTare();
     long GetScaleWeight();
-    
+    int ScaleInit();
     int GetScaleIsInitialized();
 
 #ifdef __cplusplus

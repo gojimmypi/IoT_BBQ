@@ -27,23 +27,35 @@ extern "C"
         int res = 0;
         if (_IsInitialized)
         {
-            scale.tare();
-//            if (xSemaphoreTake(xHX711_Semaphore, (TickType_t) 10) == pdTRUE)
-//            {
-//
-//                /* We have finished accessing the shared resource.  Release the
-//                semaphore. */
-//                xSemaphoreGive(xHX711_Semaphore);
-//            }
-//            else
-//            { 
-//                osDelay((TickType_t)(1000 / portTICK_PERIOD_MS));
-//                /* We could not obtain the semaphore and can therefore not access
-//                the shared resource safely. */
-//            }
+            if (xSemaphoreTake(xHX711_Semaphore, (TickType_t) 10) == pdTRUE)
+            {
+
+                scale.tare();
+                    /* We have finished accessing the shared resource.  Release the
+                semaphore. */
+                xSemaphoreGive(xHX711_Semaphore);
+            }
+            else
+            { 
+                osDelay((TickType_t)(1000 / portTICK_PERIOD_MS));
+                /* We could not obtain the semaphore and can therefore not access
+                the shared resource safely. */
+            }
             
         }
         return res;
+    }
+    
+    int ScaleInit()
+    {
+        scale.power_down();
+        osDelay(1000);
+            
+        scale.begin(0, 0); // TODO params not current used! hard coded
+
+        _IsInitialized = true;
+        
+        return 0; 
     }
     
     long GetScaleWeight()
@@ -61,13 +73,8 @@ extern "C"
         }
         else 
         {
-            scale.power_down();
-            osDelay(5000);
+            ScaleInit();
             
-            scale.begin(0, 0); // TODO params not current used! hard coded
-
-            _IsInitialized = true;
-
             // calibrate
             if (DoCalibrate == 1)
             {
