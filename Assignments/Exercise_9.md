@@ -205,4 +205,4 @@ This is an interesting implementation. It would likely be slower than a lookup t
 
 
 
-<< [Exercise 8](./Exercise_8.md) -- [Assignments](./README.md) --  [TBD]() >>
+<< [Exercise 8](./Exercise_8.md) -- [Assignments](./README.md) --  [Exercise 10](./Exercise_10.md) >>
