@@ -18,16 +18,23 @@ Here's a diagram of the Power Analysis Setup:
 
 ![power_mangement_component_map.png](./images/power_mangement_component_map.png)
 
+See my [blog](https://gojimmypi.github.io/ppk2-power-analysis/) for additional Power Analysis setup information.
 
 ## What are the different states the device can be in?
 
-Wordy can be on (display showing) or sleeping (processor asleep, accelerometer set interrupt/wake it).
+That various sleep modes (and all the other HAL details) are discussed in the 2,600+ page [UM1884 PWR Firmware driver API description](https://www.st.com/resource/en/user_manual/dm00173145-description-of-stm32l4l4-hal-and-lowlayer-drivers-stmicroelectronics.pdf) guide. There are 8 main Power Modes and several sub-modes  summarized in [this STM32L4 Power Presentation](https://www.st.com/content/ccc/resource/training/technical/product_training/ce/57/a3/86/7a/3d/4d/87/STM32L4_System_Power.pdf/files/STM32L4_System_Power.pdf/jcr:content/translations/en.STM32L4_System_Power.pdf):
+
+![STM32L4_power_modes.png](./images/STM32L4_power_modes.png)
 
 ## How much will your device be in each state?
-My goal is for the ring to be on for 5-10s every five minutes. Sometimes it will be on more, as I play with it a lot. More often it will be sleeping, such as left on a table overnight.
+
+My goal is to have two main power modes: `On` and `Deep Sleep`. The `On` mode requires a whopping 120mA. I've not yet determined how to successfully put my device into sleep mode.
 
 ## How much current is used in each state?
 Using a DVM in current sensing mode to measure the current in each state.
+
+See [UM1884 Description of STM32L4/L4+ HAL and low-layer drivers](https://www.st.com/resource/en/user_manual/dm00173145-description-of-stm32l4l4-hal-and-lowlayer-drivers-stmicroelectronics.pdf) for information on `HAL_PWR_EnterSLEEPMode()`.
+
 
 Curiously, even when paused in the debugger, there's a fluctuation in power:
 
