@@ -76,6 +76,31 @@ If using a Blue Pill, there's considerably lower power requirements:
 
 ![blue_pill_power.png](./images/blue_pill_power.png)
 
+Zooming out on the time scale, we see that the LED blinky has a noticable effect on the power profile:
+
+![blue_pill_power_blinky.png](./images/blue_pill_power_blinky.png)
+
+Leaving the Green LED off, and unsoldering the red power LED, we can likely get the device current down to about 25mA during run mode.
+
+This STM32 Blue Pill is using the [STM32F103C8T6](https://www.st.com/en/microcontrollers-microprocessors/stm32f103c8.html) "Mainstream Performance line, Arm Cortex-M3". 
+The observed current is certainly in line with the [datasheet](https://www.st.com/resource/en/datasheet/stm32f103c8.pdf) specifications:
+
+![STM32F103C8T6_run_mode_current.png](./images/STM32F103C8T6_run_mode_current.png)
+
+Relatively small sleep current:
+
+![STM32F103C8T6_sleep_mode_current.png](./images/STM32F103C8T6_sleep_mode_current.png)
+
+Stop and standby current in the uA range:
+
+![STM32F103C8T6_stop_standby_mode_current.png](./images/STM32F103C8T6_stop_standby_mode_current.png) 
+
+If the display is only on for a total of a minute or so, with mostly stop current levels when the BBQ is not in use for sometimes weeks at a time, 
+battery life will be quite reasonable.
+
+If there's only 5uA of current in stop mode, a 40mA hour battey could keep the device alive for up to 8,000 hours, or nearly a year. Actual battery life and voltage retention
+over time will vary depending on battery age, quality, and ambient temperature.
+
 
 ## Additional Information
 
