@@ -68,7 +68,13 @@ These peripherals, many of which are unused for this project, also consume power
 
 At 120mA draw, not very long. The dev board likely won't even power on!
 
+This particular board was chosen for the Wi-Fi capabilities and many interesting peripherals built-in. Unless power is pulled to the BBQ Grill, there's an unreasonable amount of power needed
+from basic batteries. Consideration will be given to forego the Wi-Fi capabilities, port the code to a [Blue Pill](https://hackaday.com/2021/01/20/blue-pill-vs-black-pill-transitioning-from-stm32f103-to-stm32f411/), 
+and use a battery or perhaps solar power. At this point, the only feature implemented that will not be avilable is the baromatric sensor.
 
+If using a Blue Pill, there's considerably lower power requirements:
+
+![blue_pill_power.png](./images/blue_pill_power.png)
 
 
 ## Additional Information
