@@ -14,7 +14,11 @@ Turn in a link to your power worksheet to Discord #assignment-submission by 9am 
 > "_only ST-LINK circuit has the power before USB enumeration, because the host PC only provides 100 mA to the board at that time. During the USB enumeration_"
 -- [UM2153](https://www.st.com/resource/en/user_manual/um2153-discovery-kit-for-iot-node-multichannel-communication-with-stm32l4-stmicroelectronics.pdf) section 7.4 Power supply.
 
-Here's a diagram of the Power Analysis Setup:
+I started [Power Analysis Day](https://twitter.com/gojimmypi/status/1492178884883746820?s=20&t=vy_CMO37vpjmfwYx7sZaPw) with my backup board:
+ 
+![PPK3_power_analysis.png](./images/PPK3_power_analysis.png)
+
+Here's a diagram of the full Power Analysis Setup:
 
 ![power_mangement_component_map.png](./images/power_mangement_component_map.png)
 
@@ -111,7 +115,8 @@ or the board may not be powered correctly. From page 17 of [UM2153](https://www.
 
 ### Power Tree
 
-From page 18 of [UM2153](https://www.st.com/resource/en/user_manual/um2153-discovery-kit-for-iot-node-multichannel-communication-with-stm32l4-stmicroelectronics.pdf)
+From page 18 of [UM2153](https://www.st.com/resource/en/user_manual/um2153-discovery-kit-for-iot-node-multichannel-communication-with-stm32l4-stmicroelectronics.pdf):
+
 ![power_tree.png](./images/power_tree.png)
 
 
