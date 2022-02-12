@@ -31,17 +31,18 @@ That various sleep modes (and all the other HAL details) are discussed in the 2,
 My goal is to have two main power modes: `On` and `Deep Sleep`. The `On` mode requires a whopping 120mA. I've not yet determined how to successfully put my device into sleep mode.
 
 ## How much current is used in each state?
-Using a DVM in current sensing mode to measure the current in each state.
+
+I used a [Nordic Power Profile Kit](https://www.nordicsemi.com/Products/Development-hardware/Power-Profiler-Kit-2) to measure board power.
 
 See [UM1884 Description of STM32L4/L4+ HAL and low-layer drivers](https://www.st.com/resource/en/user_manual/dm00173145-description-of-stm32l4l4-hal-and-lowlayer-drivers-stmicroelectronics.pdf) for information on `HAL_PWR_EnterSLEEPMode()`.
 
 
 Curiously, even when paused in the debugger, there's a fluctuation in power:
 
-![power_fluctuation_during_debug_pause.png](./image/power_fluctuation_during_debug_pause.png)
+![power_fluctuation_during_debug_pause.png](./images/power_fluctuation_during_debug_pause.png)
 
 
-These peripherals, many of which are unused for this project, consume power (most are assumed in "off" low power state unless initialized.
+These peripherals, many of which are unused for this project, also consume power (most are assumed in "off" low power state unless initialized, but they may need to be manualyl turned off).
 
 * SPBTLE-RF Bluetooth
 
@@ -64,7 +65,11 @@ These peripherals, many of which are unused for this project, consume power (mos
 * LED indicator lights (9x of them)
 
 ## How long will the device last given a 40mAh battery?
-4.983660131
+
+At 120mA draw, not very long. The dev board likely won't even power on!
+
+
+
 
 ## Additional Information
 
