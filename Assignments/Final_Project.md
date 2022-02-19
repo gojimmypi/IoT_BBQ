@@ -23,7 +23,7 @@ The prototype uses the [Discovery kit for IoT node](https://www.st.com/resource/
 ### (b) Have a button that causes an interrupt
 
 This project leverages the code from [Exercise 4](./Exercise_4.md) that implements an operational mode/state switch via interrupt-driven button press code.
-There's [some button code](../IoT_BBQ_STM32/HX711/BUTTON) as well as the [interrupt handler](../IoT_BBQ_STM32/_main_interrupt.c) that deals with 
+There's a small [button library](../IoT_BBQ_STM32/HX711/BUTTON) as well as the [interrupt handler](../IoT_BBQ_STM32/_main_interrupt.c) that deals with 
 button presses and system state changes.
 
 ### (c) Use at least three peripherals such as ADC, DAC, PWM LED, Smart LED, LCD, sensor, BLE
@@ -39,6 +39,10 @@ The peripherals used in the project:
 * Temperature Sensor (The onboard device TODO specify)
 
 #### Internal
+
+* Onboard LED: See [LED code](../IoT_BBQ_STM32/LED/)
+
+![user_LED_schematic](./images/user_LED_schematic.png)
 
 * The built-in STM32L475 Flash is used to save tare weight offset. (see [code](../IoT_BBQ_STM32/Flash/)). 
 There's a [check for button long press](../IoT_BBQ_STM32/BUTTON/button.cpp)
@@ -62,7 +66,7 @@ MEMORY
 }
 ```
 The Flash configuration is mapped to the [static const struct FlashConfig FLASH_CONFIG](https://github.com/gojimmypi/IoT_BBQ/blob/16c2e625e0a9bc0637c29e78947d009f5d849b26/IoT_BBQ_STM32/Flash/flash_config.c#L47)
-in Flash memory, alone with a copy of an updatable cache in RAM:
+in Flash memory, along with a copy in an updatable RAM cache value:
 
 ```
     // FLASH_CONFIG is the data actually on the flash. See DeviceFlashConfig()
@@ -74,7 +78,7 @@ in Flash memory, alone with a copy of an updatable cache in RAM:
 
  
 
-* The on-board [LPS22HB barometric sensor](https://www.st.com/en/mems-and-sensors/lps22hb.html) was used in this project. (see [code](../IoT_BBQ_STM32/LPS22HB/README.md))
+* The on-board [LPS22HB barometric sensor](https://www.st.com/en/mems-and-sensors/lps22hb.html) was used in this project (see [code](../IoT_BBQ_STM32/LPS22HB/README.md)).
 Currently the pressure reading is sent to the UART in the [RTOS LED Thread #11](../IoT_BBQ_STM32/_main_LED_Thread1.c). To make things interesting from a
 multi-threadced RTOS perspective, the pressure is also read in the experimental [PWM Thread](../IoT_BBQ_STM32/_main_pwm_thread.c). 
 
@@ -87,13 +91,21 @@ See Page 44 of the [STM32L475xx Datasheet (DS10969)](https://www.st.com/resource
 
 ![timers_and_watchdogs_figure3_23](./images/timers_and_watchdogs_figure3_23.png)
 
-* Onboard LED: See [LED code](../IoT_BBQ_STM32/LED/)
-
-![user_LED_schematic](./images/user_LED_schematic.png)
 
 ### (d) Have serial port output
 
-See  [UART code](../IoT_BBQ_STM32/UART/)
+See  [UART code](../IoT_BBQ_STM32/UART/). Several of the RTOS threads send data to the UART, 
+including the [main LED Thread1](https://github.com/gojimmypi/IoT_BBQ/blob/200882b131afad40577f094373feec7bd9153e3a/IoT_BBQ_STM32/_main_LED_Thread1.c#L54)
+and the [experimental PWN Thread](https://github.com/gojimmypi/IoT_BBQ/blob/200882b131afad40577f094373feec7bd9153e3a/IoT_BBQ_STM32/_main_pwm_thread.c#L266).
+
+An [RTOS-safe semaphore wrapper](https://github.com/gojimmypi/IoT_BBQ/blob/200882b131afad40577f094373feec7bd9153e3a/IoT_BBQ_STM32/UART/UART.cpp#L43) 
+was created around the `HAL_UART_Transmit` 
+found in the [STMicroelectronics / stm32l4xx_hal_driver / stm32l4xx_hal_uart.c](https://github.com/STMicroelectronics/stm32l4xx_hal_driver/blob/master/Src/stm32l4xx_hal_uart.c).
+
+Sample UART output at startup:
+
+![UART_sample.png](./images/UART_sample.png)
+
 
 ### (e) Implement an algorithmic piece that makes the system interesting
 
