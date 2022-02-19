@@ -20,6 +20,8 @@ The code is a multi-threaded FreeRTOS embedded application.
 
 ### Describe the parts you wrote in some detail (maybe 3-5 sentences per module)
 
+
+
 ### Describe code you re-used from other sources, including the licenses for those
 
 This project was created using the [Sysprogs VisualGDB Extension](https://visualgdb.com/?features=embedded) for [Visual Studio 2019](https://docs.microsoft.com/en-us/visualstudio/releases/2019/release-notes).
@@ -47,12 +49,16 @@ but the [license File is now blank](https://github.com/STMicroelectronics/STM32C
 * [UART](https://github.com/gojimmypi/IoT_BBQ/tree/main/IoT_BBQ_STM32/UART) created for this project, MIT license. Uses [stm32l4xx_hal.h](https://github.com/STMicroelectronics/STM32CubeL4/blob/master/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h) 
 assumed to still be [BSD 3-Clause license](https://github.com/STMicroelectronics/STM32CubeL4/blob/d023c0d560ace11509f9b761c8913a9e48fcf194/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c#L27)
 
+Additional thanks to Elecia White (the Making Embedded Systems Instructor) for the code review, in particular to help find the cause of those nasty Hard Faults.
+Also thanks to the class mentors Erin, Daniel, Thomas, and Jeff... as well as all my classmates on the discord channel. A lot of smart and creative people 
+with all sorts of interesting ideas!
+
 ## Diagram(s) of the architecture
 
 
 ## Build instructions
 
-To build in Visual Studio,
+#### Build in Visual Studio
 
 
 Open the Visual Studio Solution File called [IoT_BBQ_STM32.sln](https://github.com/gojimmypi/IoT_BBQ/blob/main/IoT_BBQ_STM32/IoT_BBQ_STM32.sln). 
@@ -64,7 +70,19 @@ To build and upload code, simply click the green `VisualGDB Debugger` button:
 
 ![VisualGDB_Debugger_Button.png](./images/VisualGDB_Debugger_Button.png)
 
+If the build was successful, the code will be send to the board:
+
+![VisualGDB_build_and_upload.png](./images/VisualGDB_build_and_upload.png)
+
+#### Build from Command-Line
+
 If the STM32 toolchain is installed (for Windows) there's also an auto-generated [batch file](https://github.com/gojimmypi/IoT_BBQ/blob/main/IoT_BBQ_STM32/IoT_BBQ_STM32-Debug.bat) to build from command-line.
+
+```
+
+```
+
+See also [Project Readme Build Instructions](https://github.com/gojimmypi/IoT_BBQ/tree/main/IoT_BBQ_STM32#build-from-a-batch-file)
 
 
 ### How to build the system (including the toolchain(s))
@@ -73,10 +91,16 @@ The only toolchain required for this project is the [VisualGDB Extension](https:
 
 ### Hardware
 
+
+
 ### Software
+
+The source code can be downloaded from [GitHub gojimmypi/IoT_BBQ](https://github.com/gojimmypi/IoT_BBQ). The only other software needed is Visual Studio and
+VisualGDB (and an internet connection, as VissualGDB will download and install toolchains and libraries as needed.) 
 
 ### How you debugged and tested the system
 
+All of the development and debugging was completed in Visual Studio using breakpoints and the single-step-debugging features.
 
 ## Future
 
