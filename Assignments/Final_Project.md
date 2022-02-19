@@ -38,6 +38,19 @@ The peripherals used in the project:
 
 #### Internal
 
+* The onboard Flash is used to save tare weight offset. (see [code](../IoT_BBQ_STM32/Flash/README.md)). There's a [check for button long press](../IoT_BBQ_STM32/BUTTON/button.cpp)
+in the [RTOS Display Thread](../IoT_BBQ_STM32/DISPLAY/DISPLAY.cpp). Upon detecting a button long press, the display thread is paused and a new system `Tare` state
+is assigned. Upon [entering the Tare State](https://github.com/gojimmypi/IoT_BBQ/blob/c9316d246b56a14a15f69095f7e19a288091ab0c/IoT_BBQ_STM32/DISPLAY/DISPLAY.cpp#L149) the
+the display is cleared, the message "Tare" is dispalyed, and the calculated [offset](https://github.com/gojimmypi/IoT_BBQ/blob/c9316d246b56a14a15f69095f7e19a288091ab0c/IoT_BBQ_STM32/HX711/HX711.cpp#L315) 
+is [saved to flash via SaveDeviceConfig()](https://github.com/gojimmypi/IoT_BBQ/blob/c9316d246b56a14a15f69095f7e19a288091ab0c/IoT_BBQ_STM32/Flash/flash_config.c#L227) 
+from the [DoScaleTare() task](https://github.com/gojimmypi/IoT_BBQ/blob/c9316d246b56a14a15f69095f7e19a288091ab0c/IoT_BBQ_STM32/Tasks/task_weight_monitor.cpp#L25).
+
+ 
+
+* The on-board [LPS22HB barometric sensor](https://www.st.com/en/mems-and-sensors/lps22hb.html) was used in this project. (see [code](../IoT_BBQ_STM32/LPS22HB/README.md))
+Currently the pressure reading is sent to the UART in the [RTOS LED Thread #11](../IoT_BBQ_STM32/_main_LED_Thread1.c). To make things interesting from a
+multi-threadced RTOS perspective, the pressure is also read in the experimental [PWM Thread](../IoT_BBQ_STM32/_main_pwm_thread.c). 
+
 * PWM Timers and watchdogs
 
 See Page 44 of the [STM32L475xx Datasheet (DS10969)](https://www.st.com/resource/en/datasheet/stm32l475vg.pdf):
