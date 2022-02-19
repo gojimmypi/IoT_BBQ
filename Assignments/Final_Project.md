@@ -38,7 +38,7 @@ The peripherals used in the project:
 
 #### Internal
 
-* The onboard Flash is used to save tare weight offset. (see [code](../IoT_BBQ_STM32/Flash/)). 
+* The built-in STM32L475 Flash is used to save tare weight offset. (see [code](../IoT_BBQ_STM32/Flash/)). 
 There's a [check for button long press](../IoT_BBQ_STM32/BUTTON/button.cpp)
 in the [RTOS Display Thread](../IoT_BBQ_STM32/DISPLAY/DISPLAY.cpp), [here](https://github.com/gojimmypi/IoT_BBQ/blob/f53dc77e12903428f3710e6ed0a09f64ed9e8a7e/IoT_BBQ_STM32/DISPLAY/DISPLAY.cpp#L117). 
 Upon detecting a button long press, the display thread is paused and a new system `Tare` state
@@ -47,6 +47,29 @@ the the display is cleared, the message "Tare" is displayed, and the calculated 
 is [saved to flash via SaveDeviceConfig()](https://github.com/gojimmypi/IoT_BBQ/blob/c9316d246b56a14a15f69095f7e19a288091ab0c/IoT_BBQ_STM32/Flash/flash_config.c#L227) 
 from the [DoScaleTare() task](https://github.com/gojimmypi/IoT_BBQ/blob/c9316d246b56a14a15f69095f7e19a288091ab0c/IoT_BBQ_STM32/Tasks/task_weight_monitor.cpp#L25).
 
+See the [customized linker file](https://github.com/gojimmypi/IoT_BBQ/blob/16c2e625e0a9bc0637c29e78947d009f5d849b26/IoT_BBQ_STM32/STM32L475VG_flash.lds#L45)
+that placed Flash memory starting at `FDATA` = `0x080FF000`
+
+```
+MEMORY
+{
+	FLASH (RX) : ORIGIN = 0x08000000, LENGTH = 996K
+	FDATA (R)  : ORIGIN = 0x080FF000, LENGTH = 4K
+	SRAM (RWX) : ORIGIN = 0x20000000, LENGTH = 96K
+	RAM2 (RWX) : ORIGIN = 0x10000000, LENGTH = 32K
+}
+```
+The Flash configuration is mapped to the [static const struct FlashConfig FLASH_CONFIG](https://github.com/gojimmypi/IoT_BBQ/blob/16c2e625e0a9bc0637c29e78947d009f5d849b26/IoT_BBQ_STM32/Flash/flash_config.c#L47)
+in Flash memory, alone with a copy of an updatable cache in RAM:
+
+```
+    // FLASH_CONFIG is the data actually on the flash. See DeviceFlashConfig()
+    __attribute__((__section__(".flash_user_data"))) static const struct FlashConfig FLASH_CONFIG;
+
+    // CACHE_CONFIG is the runtime, updatable copy of the config. See DeviceCacheConfig()
+    static struct FlashConfig CACHE_CONFIG;
+```
+
  
 
 * The on-board [LPS22HB barometric sensor](https://www.st.com/en/mems-and-sensors/lps22hb.html) was used in this project. (see [code](../IoT_BBQ_STM32/LPS22HB/README.md))
@@ -54,6 +77,9 @@ Currently the pressure reading is sent to the UART in the [RTOS LED Thread #11](
 multi-threadced RTOS perspective, the pressure is also read in the experimental [PWM Thread](../IoT_BBQ_STM32/_main_pwm_thread.c). 
 
 * PWM Timers and watchdogs
+
+There are some experiments with STM32 PWM in the [PWM Thread](../IoT_BBQ_STM32/_main_pwm_thread.c), but this was done only for educational purposes
+and will be removed from the final project.
 
 See Page 44 of the [STM32L475xx Datasheet (DS10969)](https://www.st.com/resource/en/datasheet/stm32l475vg.pdf):
 
