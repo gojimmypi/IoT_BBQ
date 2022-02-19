@@ -1,6 +1,6 @@
 #Investigate project board
 
-Exercise 3a for [Making Embedded Systems](https://classpert.com/classpertx/cohorts/making-embedded-systems/dashboard?path_to_locale=en) class. 
+Exercise 3a for [Making Embedded Systems](https://lms.classpert.com/classpertx/courses/making-embedded-systems/cohort) class. 
 
 Look at the documents for the board you are considering for your final project (or any 
 [ST Discovery Board](https://www.st.com/en/evaluation-tools/stm32-discovery-kits.html#products)), draw the hardware block diagram for the board. For peripherals, note the

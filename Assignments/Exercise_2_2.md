@@ -1,6 +1,6 @@
 # Read Mbed Code, Make Diagram
 
-Exercise 2.2 for [Making Embedded Systems](https://classpert.com/classpertx/cohorts/making-embedded-systems/dashboard?path_to_locale=en) class. 
+Exercise 2.2 for [Making Embedded Systems](https://lms.classpert.com/classpertx/courses/making-embedded-systems/cohort) class. 
 
 
 Read mbed code, make diagram

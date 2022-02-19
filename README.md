@@ -1,6 +1,6 @@
 # IoT BBQ
 
-Project for [Making Embedded Systems](https://classpert.com/classpertx/cohorts/making-embedded-systems/dashboard?path_to_locale=en) class.
+Project for [Making Embedded Systems](https://lms.classpert.com/classpertx/courses/making-embedded-systems/cohort) class.
 
 See [Assignments](./Assignments/README.md)
 
