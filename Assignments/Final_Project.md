@@ -38,8 +38,8 @@ The peripherals used in the project:
 
 #### Internal
 
-* The onboard Flash is used to save tare weight offset. (see [code](../IoT_BBQ_STM32/Flash/README.md)). 
-* There's a [check for button long press](../IoT_BBQ_STM32/BUTTON/button.cpp)
+* The onboard Flash is used to save tare weight offset. (see [code](../IoT_BBQ_STM32/Flash/)). 
+There's a [check for button long press](../IoT_BBQ_STM32/BUTTON/button.cpp)
 in the [RTOS Display Thread](../IoT_BBQ_STM32/DISPLAY/DISPLAY.cpp), [here](https://github.com/gojimmypi/IoT_BBQ/blob/f53dc77e12903428f3710e6ed0a09f64ed9e8a7e/IoT_BBQ_STM32/DISPLAY/DISPLAY.cpp#L117). 
 Upon detecting a button long press, the display thread is paused and a new system `Tare` state
 is assigned. Upon [entering the Tare State](https://github.com/gojimmypi/IoT_BBQ/blob/c9316d246b56a14a15f69095f7e19a288091ab0c/IoT_BBQ_STM32/DISPLAY/DISPLAY.cpp#L149) 
