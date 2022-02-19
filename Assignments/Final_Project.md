@@ -275,9 +275,10 @@ Instructions to build can be found in the [solution directory README](../IoT_BBQ
 
 Tips learned from Ben in class:
 
-- When powering an embedded device from batteries, say a couple of AA cella, there's likely a voltage drop / fluctuation depending on what
+- When powering an embedded device from batteries, say a couple of AA cells, there's likely a voltage drop / fluctuation depending on what
 the processor is doing at any given moment, that may affect things like ADC.
 
+See also the [PPK2 Power Analysis Setup Notes(https://gojimmypi.github.io/ppk2-power-analysis/).
 
 
 ### Firmware update
