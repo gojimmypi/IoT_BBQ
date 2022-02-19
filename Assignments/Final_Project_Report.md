@@ -124,7 +124,18 @@ Self assessment of the project: for each criteria, choose a score (1, 2, 3) ande
 Have you gone beyond the base requirements? How so?
 
 
-| Criteria      | 1 - Needs Improvement | 2 - Meets Expectations | 3 - Exceeds Expectations |
-| ------------- | ------------- | ------------- | ------------- | 
-| Project meets minimum project goals  | Content   |Content   |Content   |
-| Completeness of deliverables         | Content   |Content   |Content   |
+| Criteria                              | 1 - Needs Improvement | 2 - Meets Expectations | 3 - Exceeds Expectations |
+| -------------                         | -------------         | -------------          | ------------- | 
+| Project meets minimum project goals   | Content               | Content               | Content   |
+| Completeness of deliverables          | Content               | Content               | Content   |
+| Clear intentions and working code     | Content               | Content               | Content   |
+| Reusing code                          | Content               | Content               | Content   |
+| Originality and scope of goals        | Content               | Content               | Content   |
+| Self-assessment 
+  (Mentor category only)                | Content               | Content               | Content   |
+| Bonus: Power analysis, 
+firmware update,
+or system profiling                     | Content               | Content               | Content   |
+! Bonus:
+Version control
+was used.                               | Content               | Content               | Content   |
