@@ -119,13 +119,14 @@ TODO: _interesting_
 
 ### (f) Implement a state machine
 
-There's currently a prototype [LED STate Machine](https://github.com/gojimmypi/IoT_BBQ/blob/ce44c00152af0a16b26d9a246a799ed7db8553ae/IoT_BBQ_STM32/LED/LED.cpp#L23) 
+There's currently a prototype [LED State Machine](https://github.com/gojimmypi/IoT_BBQ/blob/ce44c00152af0a16b26d9a246a799ed7db8553ae/IoT_BBQ_STM32/LED/LED.cpp#L23) 
 with [IsBlinking, AlwaysOn, AlwaysOff](https://github.com/gojimmypi/IoT_BBQ/blob/ce44c00152af0a16b26d9a246a799ed7db8553ae/IoT_BBQ_STM32/LED/LED.h#L14) states.
 
 ### Not required to use a HAL (but it is encouraged)
 
-This project uses the STM32L4XX HAL, for example [here](https://github.com/gojimmypi/IoT_BBQ/blob/ce44c00152af0a16b26d9a246a799ed7db8553ae/IoT_BBQ_STM32/_main.c#L2), 
-and is a mult-threaded application using embedded RTOS (specfically [CMSIS_RTOS](https://arm-software.github.io/CMSIS_5/RTOS2/html/rtos_api2.html)) for example included [here](https://github.com/gojimmypi/IoT_BBQ/blob/ce44c00152af0a16b26d9a246a799ed7db8553ae/IoT_BBQ_STM32/_main.c#L3).
+This project uses the [STM32L4XX HAL](https://github.com/STMicroelectronics/stm32l4xx_hal_driver), 
+for example [here](https://github.com/gojimmypi/IoT_BBQ/blob/ce44c00152af0a16b26d9a246a799ed7db8553ae/IoT_BBQ_STM32/_main.c#L2), 
+and is a multi-threaded application using embedded RTOS (specfically [CMSIS_RTOS](https://arm-software.github.io/CMSIS_5/RTOS2/html/rtos_api2.html)) for example included [here](https://github.com/gojimmypi/IoT_BBQ/blob/ce44c00152af0a16b26d9a246a799ed7db8553ae/IoT_BBQ_STM32/_main.c#L3).
 
 Code that uses the STM32 HAL will need the `#include <stm32l4xx_hal.h>`. Future versions of this codebase should include a hardware conditional include such as [this](https://github.com/gojimmypi/IoT_BBQ/blob/314d03bb8053d09c3730533c384fd499d35e3231/IoT_BBQ_STM32/SSD1306/ssd1306.h#L18) example:
 
@@ -163,15 +164,15 @@ Code that uses the STM32 HAL will need the `#include <stm32l4xx_hal.h>`. Future 
 
 - [X] Confirm operational display
 - [X] Confirm operational weight sensor
-- [ ] Show weight value on display
+- [X] Show weight value on display
 - [ ] Update docs on new I2C port being used for SSD1306
 - [X] Confirm serial port operation
-- [ ] Implement Serial Rx/Tx
-- [ ] Implement serial debug messages
+- [X] Implement Serial Rx/Tx
+- [X] Implement serial debug messages
 - [ ] Sleep serial port when inactive
 - [ ] Implement Sleep / Wake-up
 - [ ] Determine field power source
-- [ ] Design enclosure
+- [X] Design enclosure
 - [ ] Print enclosure
 - [ ] Mount hardware in enclosure
 
@@ -250,7 +251,11 @@ The OLED display is likely not tolerant to hard freeze.
 
 If any sort of mass-production was desired, there's of course the chip shortage to be concerned about.
 
+### Hard Faults
 
+Any list of challenges would not be complete without of course my Hard Faults! 
+
+![hard_fault_roadmap.png](./images/hard_fault_roadmap.png)
 
 ## Deliverables
 
