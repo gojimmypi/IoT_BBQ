@@ -23,6 +23,8 @@ The prototype uses the [Discovery kit for IoT node](https://www.st.com/resource/
 ### (b) Have a button that causes an interrupt
 
 This project leverages the code from [Exercise 4](./Exercise_4.md) that implements an operational mode/state switch via interrupt-driven button press code.
+There's [some button code](../IoT_BBQ_STM32/HX711/BUTTON) as well as the [interrupt handler](../IoT_BBQ_STM32/_main_interrupt.c) that deals with 
+button presses and system state changes.
 
 ### (c) Use at least three peripherals such as ADC, DAC, PWM LED, Smart LED, LCD, sensor, BLE
 
