@@ -47,8 +47,6 @@ The [LED1 Thread](https://github.com/gojimmypi/IoT_BBQ/blob/main/IoT_BBQ_STM32/_
 * `IsBlinking` - one blink
 * `AlwaysOn` - two blinks
 * `AlwaysOff` - three blinks
-
-
 <br/><br/>
 
 
@@ -59,18 +57,15 @@ to the UART about every 1.35 seconds. An odd number was chosen to ensure pseudo-
 with other messages.
 
 ![Hello_UART.png](./images/Hello_UART.png)
-
-
-
 <br/><br/>
+
 
 #### DISPLAY Thread
 
 The [Display Thread](https://github.com/gojimmypi/IoT_BBQ/blob/main/IoT_BBQ_STM32/DISPLAY/DISPLAY.cpp) is where the scale is monitored and the value dispalyed on the screen.
 There's also a small state machine monitoring for a button long press to then tare the scale and save the offset value to flash.
-
-
 <br/><br/>
+
 
 #### PWM Thread
 
@@ -81,7 +76,6 @@ After some initial code experiments, the thread runs in a loop sending barometri
 Code Explorer View of [main()](https://github.com/gojimmypi/IoT_BBQ/blob/main/IoT_BBQ_STM32/_main.c)
 
 ![main_code_explorer.png](./images/main_code_explorer.png)
-
 <br/><br/>
 
 
