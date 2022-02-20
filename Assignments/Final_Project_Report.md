@@ -89,7 +89,7 @@ To build and upload code, simply click the green `VisualGDB Debugger` button:
 
 ![VisualGDB_Debugger_Button.png](./images/VisualGDB_Debugger_Button.png)
 
-If the build was successful, the code will be send to the board:
+If the build was successful, the code will be sent to the board:
 
 ![VisualGDB_build_and_upload.png](./images/VisualGDB_build_and_upload.png)
 <br/><br/>
@@ -110,6 +110,20 @@ See also [Project Readme Build Instructions](https://github.com/gojimmypi/IoT_BB
 ### How to build the system (including the toolchain(s))
 
 The only toolchain required for this project is the [VisualGDB Extension](https://visualgdb.com/). See the [Developing STM32 projects with Visual Studio](https://visualgdb.com/tutorials/arm/stm32/)
+
+These settings are included the project solution file but included here for reference:
+
+Project Config Step 1:
+![VisualGDB_STM32_project_config](../images/VisualGDB_STM32_project_config.png)
+
+Project Config Step 2:
+![VisualGDB_STM32_project_config_step2](../images/VisualGDB_STM32_project_config_step2.png)
+
+Project Config Step 3:
+![VisualGDB_STM32_project_config_step3](../images/VisualGDB_STM32_project_config_step3.png)
+
+
+
 <br/><br/>
 
 
@@ -126,12 +140,34 @@ The only toolchain required for this project is the [VisualGDB Extension](https:
 
 The source code can be downloaded from [GitHub gojimmypi/IoT_BBQ](https://github.com/gojimmypi/IoT_BBQ). The only other software needed is Visual Studio and
 VisualGDB (and an internet connection, as VissualGDB will download and install toolchains and libraries as needed.) 
+
+
+
 <br/><br/>
 
 
 ### How you debugged and tested the system
 
-All of the development and debugging was completed in Visual Studio using breakpoints and the single-step-debugging features.
+All of the development and debugging was completed in Visual Studio using breakpoints and the single-step-debugging features available from the VisualGDB extension.
+
+Single-step inspection:
+
+![HAL_GPIO_ReadPin_code_snippet.png](./images/HAL_GPIO_ReadPin_code_snippet.png)
+
+Heap pointer check:
+
+![myHeapPointer_cross_check.png](./images/myHeapPointer_cross_check.png)
+
+Memory address inspection:
+
+![address_memory_swap_oddity.png](./images/address_memory_swap_oddity.png)
+
+Breakpoints, code explorer, and other system monitoring features were quite helpful:
+
+![hard_fault_detail.png](./images/hard_fault_roadmap.png)
+
+
+
 <br/><br/>
 
 
