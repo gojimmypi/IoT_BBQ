@@ -11,7 +11,7 @@
 - [Exercise 7](./Exercise_7.md) 
 - [Exercise 8](./Exercise_9.md) 
 - [Exercise 9](Exercise_9.md)
-- [Final Project](./Final_Project.md)
+- [Final Project](./Final_Project.md) and [Final Project Report](./Final_Project_Report.md)
 
 
 ## Links
