@@ -19,11 +19,13 @@ found on the  [B-L475E-IOT01A Discovery Board](https://www.st.com/resource/en/us
 ## Software description
 
 The application is written in C/C++ and targets the STM32 ARM Platform. 
+<br/><br/>
 
 
 ### Describe the code in general
 
 The code is a multi-threaded FreeRTOS embedded application.
+<br/><br/>
 
 
 ### Describe the parts you wrote in some detail (maybe 3-5 sentences per module)
@@ -38,6 +40,7 @@ The main code repository can be found at [github.com/gojimmypi/IoT_BBQ/tree/main
 
 * [UART](https://github.com/gojimmypi/IoT_BBQ/tree/main/IoT_BBQ_STM32/UART) created for this project, MIT license. Uses [stm32l4xx_hal.h](https://github.com/STMicroelectronics/STM32CubeL4/blob/master/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h) 
 assumed to still be [BSD 3-Clause license](https://github.com/STMicroelectronics/STM32CubeL4/blob/d023c0d560ace11509f9b761c8913a9e48fcf194/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c#L27)
+<br/><br/>
 
 
 ### Describe code you re-used from other sources, including the licenses for those
@@ -60,13 +63,18 @@ but the [license File is now blank](https://github.com/STMicroelectronics/STM32C
 Additional thanks to Elecia White (the Making Embedded Systems Instructor) for the code review, in particular to help find the cause of those nasty Hard Faults.
 Also thanks to the class mentors Erin, Daniel, Thomas, and Jeff... as well as all my classmates on the discord channel. A lot of smart and creative people 
 with all sorts of interesting ideas!
+<br/><br/>
 
 ## Diagram(s) of the architecture
+
+TODO
+<br/><br/>
 
 
 ## Build Instructions
 
 There are two options for building: the GUI from Visual Studio and a command-line batch file, both on Windows.
+<br/><br/>
 
 
 #### Build in Visual Studio
@@ -84,6 +92,8 @@ To build and upload code, simply click the green `VisualGDB Debugger` button:
 If the build was successful, the code will be send to the board:
 
 ![VisualGDB_build_and_upload.png](./images/VisualGDB_build_and_upload.png)
+<br/><br/>
+
 
 #### Build from Command-Line
 
@@ -94,11 +104,14 @@ If the STM32 toolchain is installed (for Windows) there's also an auto-generated
 ```
 
 See also [Project Readme Build Instructions](https://github.com/gojimmypi/IoT_BBQ/tree/main/IoT_BBQ_STM32#build-from-a-batch-file)
+<br/><br/>
 
 
 ### How to build the system (including the toolchain(s))
 
 The only toolchain required for this project is the [VisualGDB Extension](https://visualgdb.com/). See the [Developing STM32 projects with Visual Studio](https://visualgdb.com/tutorials/arm/stm32/)
+<br/><br/>
+
 
 ### Hardware
 
@@ -106,26 +119,34 @@ The only toolchain required for this project is the [VisualGDB Extension](https:
 - [SSD1306 I2C Serial](https://www.amazon.com/dp/B08KY21SR2/)
 - [Sparkfun Load Cell Amplifier HX711](https://www.sparkfun.com/products/13879?_ga=2.84341273.1032917369.1645317851-1685161029.1637878826)
 - [Adafuit Strain Gauge Load Cell - 4 Wires - 20Kg](https://www.adafruit.com/product/4543)
+<br/><br/>
 
 
 ### Software
 
 The source code can be downloaded from [GitHub gojimmypi/IoT_BBQ](https://github.com/gojimmypi/IoT_BBQ). The only other software needed is Visual Studio and
 VisualGDB (and an internet connection, as VissualGDB will download and install toolchains and libraries as needed.) 
+<br/><br/>
+
 
 ### How you debugged and tested the system
 
 All of the development and debugging was completed in Visual Studio using breakpoints and the single-step-debugging features.
+<br/><br/>
+
 
 ## Future
 
 Although the discovery board was convenient from a _getting started_ perspective, it is also massive and power hungry.
 The next steps are to port this project to a [Blue Pill]().
+<br/><br/>
+
 
 ## What would be needed to get this project ready for production?
 
 Key to a production deployment would be an _enclosure_ and some way to have them mass-produced. For large-scale production, some means of
 mass-programming the devices would be needed. It would not be practical to manually plug in a million boards and program them each one at a time.
+<br/><br/>
 
 
 ## How would you extend this project to do something more? Are there other features you’d like? How would you go about adding them?
@@ -137,6 +158,7 @@ I have some [LoRa experience](https://gojimmypi.github.io/tag/lora/) and plan to
 There are also plans for including a firebox temperature sensor, specifically the MAX6675 Module + K Type Thermocouple Temperature 
 as described in the [original README](https://github.com/gojimmypi/IoT_BBQ/blob/main/README.md#iot_bbq) from a few years back 
 when I created something for the ESP8266.
+<br/><br/>
 
 ## Grading
 
@@ -157,5 +179,6 @@ Have you gone beyond the base requirements? How so?
 
 
 * I created the video footage of the project in action on my phone and took all the pictures, but the final consolidated video was assembled and subtitled by someone else. Thank you!!!
+<br/><br/>
  
 See the Class Assignment [additional links](https://github.com/gojimmypi/IoT_BBQ/tree/main/Assignments#links) for other resources.
