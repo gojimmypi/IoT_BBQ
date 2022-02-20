@@ -64,6 +64,10 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="BUTTON\button.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Common\hsensor.c">
       <SubType>
       </SubType>
@@ -132,6 +136,11 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="_main_pwm_thread.c" />
+    <ClCompile Include="_main_UART_Thread1.c" />
+    <ClInclude Include="BUTTON\button.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Common\globals.h" />
     <ClInclude Include="Common\hsensor.h">
       <SubType>
@@ -193,6 +202,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="_main_pwm_thread.h" />
+    <ClInclude Include="_main_UART_Thread1.h" />
     <None Include="stm32.props" />
     <ClCompile Include="$(BSP_ROOT)\STM32L4xxxx\StartupFiles\startup_stm32l475xx.c" />
     <None Include="$(BSP_ROOT)\FreeRTOS\License\license.txt" />

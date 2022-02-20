@@ -990,6 +990,12 @@
     <ClCompile Include="Flash\flash_config.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="BUTTON\button.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="_main_UART_Thread1.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DWT_STM32_DELAY.h">
@@ -1083,6 +1089,12 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="Flash\flash_config.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="BUTTON\button.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="_main_UART_Thread1.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

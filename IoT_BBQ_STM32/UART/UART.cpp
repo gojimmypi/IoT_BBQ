@@ -104,20 +104,6 @@ extern "C" {
         } 
     }
     
-    void UART_Thread1(void const* argument) {
-        (void)argument;
-        const TickType_t xDelay = 500 / portTICK_PERIOD_MS;
-        static uint8_t buffer[1];
-        for (;;)
-        {
-            // TODO need to implement mutex
-            //HAL_UART_Receive(&s_UARTHandle, buffer, sizeof(buffer), HAL_MAX_DELAY);
-            //HAL_UART_Transmit(&s_UARTHandle, buffer, sizeof(buffer), HAL_MAX_DELAY);
-            
-            // don't starve RTOS. yield with delay:
-            osDelay(xDelay);
-        }
-    }
 
     int UART_init(void)
     {

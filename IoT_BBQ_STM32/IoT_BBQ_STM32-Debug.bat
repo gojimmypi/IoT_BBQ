@@ -73,6 +73,8 @@ echo _main_LED_Thread2.c
 c:\SysGCC\arm-eabi\bin\arm-none-eabi-gcc.exe @"VisualGDB/Debug/_main_LED_Thread2.gcc.rsp" || exit 1
 echo _main_pwm_thread.c
 c:\SysGCC\arm-eabi\bin\arm-none-eabi-gcc.exe @"VisualGDB/Debug/_main_pwm_thread.gcc.rsp" || exit 1
+echo _main_UART_Thread1.c
+c:\SysGCC\arm-eabi\bin\arm-none-eabi-gcc.exe @"VisualGDB/Debug/_main_UART_Thread1.gcc.rsp" || exit 1
 echo startup_stm32l475xx.c
 c:\SysGCC\arm-eabi\bin\arm-none-eabi-gcc.exe @"VisualGDB/Debug/__BSP_ROOT__/STM32L4xxxx/StartupFiles/startup_stm32l475xx.gcc.rsp" || exit 1
 echo croutine.c

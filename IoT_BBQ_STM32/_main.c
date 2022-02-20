@@ -218,8 +218,14 @@ int main(void)
     
     // run flash simulation demo
     Flash_Sim_Demo();
-
-
+    
+//    HAL_SuspendTick();
+//    HAL_PWR_EnableSleepOnExit();
+//    
+//    // see https://www.st.com/resource/en/user_manual/dm00173145-description-of-stm32l4l4-hal-and-lowlayer-drivers-stmicroelectronics.pdf
+//    HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI);
+//    HAL_ResumeTick();
+    
     /* STM32F4xx HAL library initialization:
          - Configure the Flash prefetch, instruction and Data caches
          - Configure the Systick to generate an interrupt each 1 msec
@@ -241,6 +247,7 @@ int main(void)
 
     static uint8_t CrLf[] = "\n\r";
 
+   
     if (BSP_PSENSOR_Init() == PSENSOR_OK)
     {
         //        float thisValue = BSP_PSENSOR_ReadPressure();
@@ -330,19 +337,13 @@ int main(void)
     LEDThread2Handle = osThreadCreate(osThread(LED2), NULL);
   
     /* UART is on a thread */
-    // TODO loopback currently disabled; this thread does nothing!
     UART_Thread1Handle = osThreadCreate(osThread(UART1), NULL);
     
     /* the display in on a thread */
     DISPLAY_Thread1Handle = osThreadCreate(osThread(DISPLAY), NULL);
 
-    /* our PWM */
+    /* our PWM and experiments */
     PWM_Thread1Handle = osThreadCreate(osThread(PWM), NULL);
-
-
-    // Callbacks disabled
-    // htim2.PWM_PulseFinishedCallback = PWM_PulseFinishedCallback;
-    // htim2.PeriodElapsedCallback = HAL_TIM_PeriodElapsedCallback;
 
     // you can use interrupt priorities of 5 to 15 for your interrupts if they make FreeRTOS API calls
     HAL_NVIC_SetPriority(TIM2_IRQn, 15, 14);
