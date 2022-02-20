@@ -124,18 +124,13 @@ Self assessment of the project: for each criteria, choose a score (1, 2, 3) ande
 Have you gone beyond the base requirements? How so?
 
 
-| Criteria                              | 1 - Needs Improvement | 2 - Meets Expectations | 3 - Exceeds Expectations |
-| -------------                         | -------------         | -------------          | ------------- | 
-| Project meets minimum project goals   | Content               | Content               | Content   |
-| Completeness of deliverables          | Content               | Content               | Content   |
-| Clear intentions and working code     | Content               | Content               | Content   |
-| Reusing code                          | Content               | Content               | Content   |
-| Originality and scope of goals        | Content               | Content               | Content   |
-| Self-assessment 
-  (Mentor category only)                | Content               | Content               | Content   |
-| Bonus: Power analysis, 
-firmware update,
-or system profiling                     | Content               | Content               | Content   |
-! Bonus:
-Version control
-was used.                               | Content               | Content               | Content   |
+| Criteria                                                       | 1 - Needs Improvement  | 2 - Meets Expectations                       | 3 - Exceeds Expectations |
+| -------------                                                  | -------------          | -------------                                | ------------- | 
+| Project meets minimum project goals                            |                        | 2+ Basic State Machine, additional sensors, well documented, no serial commands   |    |
+| Completeness of deliverables                                   |                        |                                              | Readable code, [each point addressed](https://github.com/gojimmypi/IoT_BBQ/blob/main/Assignments/Final_Project.md), video   |
+| Clear intentions and working code                              |                        | 2+ System works as decribed                  | (not as professionally polished as I'd like)   |
+| Reusing code                                                   |                        |                                              | [License summary](https://github.com/gojimmypi/IoT_BBQ/blob/main/Assignments/Final_Project_Report.md#describe-the-code-in-general) and [Build Info](https://github.com/gojimmypi/IoT_BBQ/blob/main/Assignments/Final_Project_Report.md#build-instructions)    |
+| Originality and scope of goals                                 |                        |                                              | This is clearly an awesome Propane Tank Weight Project! ;)   |
+| Self-assessment   (Mentor category only)                       |                        |   n/a                                        |          |
+| Bonus: Power analysis, firmware update, or system profiling    |                        |                                              | [Power Analysis](https://github.com/gojimmypi/IoT_BBQ/blob/main/Assignments/Final_Project.md#power-analysis) also  [shared on Twitter](https://twitter.com/gojimmypi/status/1492178884883746820?s=20&t=MRzHRuswJXuYwHc56WS9yQ)       |
+! Bonus: Version control was used.                               |                        |                                              | [hundreds of commits](https://github.com/gojimmypi/IoT_BBQ/commits/main)   |
