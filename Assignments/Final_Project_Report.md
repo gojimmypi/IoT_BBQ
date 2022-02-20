@@ -94,6 +94,10 @@ The only toolchain required for this project is the [VisualGDB Extension](https:
 
 ### Hardware
 
+- [Mouser B-L475E-IOT01A1](https://www.mouser.com/ProductDetail/stmicroelectronics/b-l475e-iot01a1/?qs=2m8Gdae5Lr3rq3rcxS2xEg%3D%3D&countrycode=US&currencycode=USD)
+- [SSD1306 I2C Serial](https://www.amazon.com/dp/B08KY21SR2/)
+- [Sparkfun Load Cell Amplifier HX711](https://www.sparkfun.com/products/13879?_ga=2.84341273.1032917369.1645317851-1685161029.1637878826)
+- [Adafuit Strain Gauge Load Cell - 4 Wires - 20Kg](https://www.adafruit.com/product/4543)
 
 
 ### Software
@@ -117,6 +121,14 @@ mass-programming the devices would be needed. It would not be practical to manua
 
 
 ## How would you extend this project to do something more? Are there other features you’d like? How would you go about adding them?
+
+I chose the this particular IoT Discovery board for the WiFi capabilities. As it turns out, the power consumption is simply way too high
+for battery operation.  Our grill is located a bit far from the house; I certainly don't want to run an extension cord. 
+I have some [LoRa experience](https://gojimmypi.github.io/tag/lora/) and plan to see if I can get that working with an MQTT server.
+
+There are also plans for including a firebox temperature sensor, specifically the MAX6675 Module + K Type Thermocouple Temperature 
+as described in the [original README](https://github.com/gojimmypi/IoT_BBQ/blob/main/README.md#iot_bbq) from a few years back 
+when I created something for the ESP8266.
 
 ## Grading
 
