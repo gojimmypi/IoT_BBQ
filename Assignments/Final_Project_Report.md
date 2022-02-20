@@ -2,14 +2,18 @@
 
 This Final Project Report is a supplement to the [Final Project Minimum Project Requirement Detail](./Final_Project.md).
 An embedded microscontroller was used to create a propane tank weight measurement system. 
+[Source code](https://github.com/gojimmypi/IoT_BBQ/tree/main/IoT_BBQ_STM32) is available on GitHub.
 
-See also the [YouTube Video](https://youtu.be/YIoqKTbCUQQ).
+See also the [YouTube Video](https://youtu.be/YIoqKTbCUQQ):
 
+[![you_tube_preview.jpg](./images/youtube_preview.jpg)](https://youtu.be/YIoqKTbCUQQ)
 <br/><br/>
 
 ## Application Description
 
-This application is an embedded controller to monitor grill propane tank weight.
+This application is an embedded controller to monitor grill propane tank weight to replace the existing mechanical spring scale:
+
+![Existing_tank_scale.png](./images/Existing_tank_scale.png)
 <br/><br/>
 
 ## Hardware Description
@@ -27,7 +31,57 @@ The application is written in C/C++ and targets the STM32 ARM Platform.
 
 ### Describe the code in general
 
-The code is a multi-threaded FreeRTOS embedded application.
+The code is a multi-threaded FreeRTOS embedded application. There are 5 threads names LED1, LED2, UART1, DISPLAY, and PWM.
+
+#### LED1 Thread
+
+The [LED1 Thread](https://github.com/gojimmypi/IoT_BBQ/blob/main/IoT_BBQ_STM32/_main_LED_Thread1.c) is a simple state machine and controls LED1 (blinky, on, or off).
+This thread also sends pressure reading and scale weight text to the UART.
+<br/><br/>
+
+
+#### LED2 Thread
+
+The [LED1 Thread](https://github.com/gojimmypi/IoT_BBQ/blob/main/IoT_BBQ_STM32/_main_LED_Thread2.c) monitors the state machine and blinks LED2 depending on the current state:
+
+* `IsBlinking` - one blink
+* `AlwaysOn` - two blinks
+* `AlwaysOff` - three blinks
+
+
+<br/><br/>
+
+
+#### UART1 Thread
+
+Just to test RTOS concurrency (and hard fault avoidance!) the [UART1 Thread]() sends a "Hello UART1" message
+to the UART about every 1.35 seconds. An odd number was chosen to ensure pseudo-random conflicts in timing
+with other messages.
+
+~[Hello_UART.png](./images/Hello_UART.png)
+
+
+
+<br/><br/>
+
+#### DISPLAY Thread
+
+The [Display Thread](https://github.com/gojimmypi/IoT_BBQ/blob/main/IoT_BBQ_STM32/DISPLAY/DISPLAY.cpp) is where the scale is monitored and the value dispalyed on the screen.
+There's also a small state machine monitoring for a button long press to then tare the scale and save the offset value to flash.
+
+
+<br/><br/>
+
+#### PWM Thread
+
+The [PWM thread](https://github.com/gojimmypi/IoT_BBQ/blob/main/IoT_BBQ_STM32/_main_pwm_thread.c) is included only for "interesting" experiements and is not required for basic functionality.
+
+After some initial code experiments, the thread runs in a loop sending barometric pressure reading to the UART every 2 seconds.
+
+Code Explorer View of [main()](https://github.com/gojimmypi/IoT_BBQ/blob/main/IoT_BBQ_STM32/_main.c)
+
+![main_code_explorer.png](./images/main_code_explorer.png)
+
 <br/><br/>
 
 
@@ -112,7 +166,8 @@ See also [Project Readme Build Instructions](https://github.com/gojimmypi/IoT_BB
 
 ### How to build the system (including the toolchain(s))
 
-The only toolchain required for this project is the [VisualGDB Extension](https://visualgdb.com/). See the [Developing STM32 projects with Visual Studio](https://visualgdb.com/tutorials/arm/stm32/)
+The only toolchain required for this project is the [VisualGDB Extension](https://visualgdb.com/). 
+See the [Developing STM32 projects with Visual Studio](https://visualgdb.com/tutorials/arm/stm32/) walk-through.
 
 These settings are included the project solution file but included here for reference:
 
@@ -135,10 +190,16 @@ See above for the [build instructions](https://github.com/gojimmypi/IoT_BBQ/blob
 
 ### Hardware
 
-- [Mouser B-L475E-IOT01A1](https://www.mouser.com/ProductDetail/stmicroelectronics/b-l475e-iot01a1/?qs=2m8Gdae5Lr3rq3rcxS2xEg%3D%3D&countrycode=US&currencycode=USD)
-- [SSD1306 I2C Serial](https://www.amazon.com/dp/B08KY21SR2/)
-- [Sparkfun Load Cell Amplifier HX711](https://www.sparkfun.com/products/13879?_ga=2.84341273.1032917369.1645317851-1685161029.1637878826)
-- [Adafuit Strain Gauge Load Cell - 4 Wires - 20Kg](https://www.adafruit.com/product/4543)
+- Mouser [ST B-L475E-IOT01A1](https://www.mouser.com/ProductDetail/stmicroelectronics/b-l475e-iot01a1/?qs=2m8Gdae5Lr3rq3rcxS2xEg%3D%3D&countrycode=US&currencycode=USD)
+- Amazon [SSD1306 I2C Serial](https://www.amazon.com/dp/B08KY21SR2/)
+- Sparkfun [Load Cell Amplifier HX711](https://www.sparkfun.com/products/13879?_ga=2.84341273.1032917369.1645317851-1685161029.1637878826)
+- Adafruit [Strain Gauge Load Cell - 4 Wires - 20Kg](https://www.adafruit.com/product/4543)
+
+Hardware wiring diagram:
+
+![wiring_diagram.png](./images/wiring_diagram.png)
+
+
 <br/><br/>
 
 
