@@ -2,12 +2,19 @@
 
 This Final Project Report is a supplement to the [Final Project Minimum Project Requirement Detail](./Final_Project.md).
 An embedded microscontroller was used to create a propane tank weaigh measurement system. 
+<br/><br/>
 
 ## Application Description
 
+This application is an embedded controller to monitor grill propane tank weight.
+<br/><br/>
 
 ## Hardware Description
 
+This project uses the [STM32L475VG](https://www.st.com/resource/en/datasheet/stm32l475vg.pdf), 
+part of the [STM32 Ultra Low Power](https://www.st.com/en/microcontrollers-microprocessors/stm32-ultra-low-power-mcus.html) Arm Cortex-M4 32-bit MCU+FPU series
+found on the  [B-L475E-IOT01A Discovery Board](https://www.st.com/resource/en/user_manual/um2153-discovery-kit-for-iot-node-multichannel-communication-with-stm32l4-stmicroelectronics.pdf).
+<br/><br/>
 
 ## Software description
 
@@ -17,6 +24,7 @@ The application is written in C/C++ and targets the STM32 ARM Platform.
 ### Describe the code in general
 
 The code is a multi-threaded FreeRTOS embedded application.
+
 
 ### Describe the parts you wrote in some detail (maybe 3-5 sentences per module)
 
@@ -138,11 +146,11 @@ Have you gone beyond the base requirements? How so?
 
 | Criteria                                                       | 1 - Needs Improvement  | 2 - Meets Expectations                       | 3 - Exceeds Expectations |
 | -------------                                                  | -------------          | -------------                                | ------------- | 
-| Project meets minimum project goals                            |                        | 2+ [Basic State Machine](https://github.com/gojimmypi/IoT_BBQ/blob/cc7372a3d11caf1aeab8de3807fefd8d7b27aa1b/IoT_BBQ_STM32/LED/LED.cpp#L125), additional sensors, well documented. No serial commands   |    |
+| Project meets minimum project goals                            |                        | 2+ [Basic State Machine](https://github.com/gojimmypi/IoT_BBQ/blob/cc7372a3d11caf1aeab8de3807fefd8d7b27aa1b/IoT_BBQ_STM32/LED/LED.cpp#L125), additional sensors [LPS22HB](https://github.com/gojimmypi/IoT_BBQ/tree/main/IoT_BBQ_STM32/LPS22HB), [HX711](https://github.com/gojimmypi/IoT_BBQ/tree/main/IoT_BBQ_STM32/HX711), well documented. No serial commands   |    |
 | Completeness of deliverables                                   |                        |                                              | Readable code, [each point addressed](https://github.com/gojimmypi/IoT_BBQ/blob/main/Assignments/Final_Project.md), video   |
-| Clear intentions and working code                              |                        | 2+ System works as decribed                  | (not as professionally polished as I'd like)   |
+| Clear intentions and working code                              |                        | 2+ System works as decribed                  | (docs not as professionally polished as I'd like)   |
 | Reusing code                                                   |                        |                                              | [License summary](https://github.com/gojimmypi/IoT_BBQ/blob/main/Assignments/Final_Project_Report.md#describe-the-code-in-general) and [Build Info](https://github.com/gojimmypi/IoT_BBQ/blob/main/Assignments/Final_Project_Report.md#build-instructions)    |
-| Originality and scope of goals                                 |                        |                                              | This is clearly an awesome Propane Tank Weight Project! ;)   |
+| Originality and scope of goals                                 |                        |                                              | This is clearly an awesome Propane Tank Weight Project! ;) The scope of goals was appropriately challenging yet reasonable for the class.  |
 | Self-assessment   (Mentor category only)                       |                        |   n/a                                        |          |
 | Bonus: Power analysis, firmware update, or system profiling    |                        |                                              | [Power Analysis](https://github.com/gojimmypi/IoT_BBQ/blob/main/Assignments/Final_Project.md#power-analysis) also  [shared on Twitter](https://twitter.com/gojimmypi/status/1492178884883746820?s=20&t=MRzHRuswJXuYwHc56WS9yQ)       |
 ! Bonus: Version control was used.                               |                        |                                              | [hundreds of commits](https://github.com/gojimmypi/IoT_BBQ/commits/main)   |
@@ -150,3 +158,4 @@ Have you gone beyond the base requirements? How so?
 
 * I created the video footage of the project in action on my phone and took all the pictures, but the final consolidated video was assembled and subtitled by someone else. Thank you!!!
  
+See the Class Assignment [additional links](https://github.com/gojimmypi/IoT_BBQ/tree/main/Assignments#links) for other resources.
