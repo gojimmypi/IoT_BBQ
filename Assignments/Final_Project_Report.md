@@ -58,7 +58,7 @@ Just to test RTOS concurrency (and hard fault avoidance!) the [UART1 Thread]() s
 to the UART about every 1.35 seconds. An odd number was chosen to ensure pseudo-random conflicts in timing
 with other messages.
 
-~[Hello_UART.png](./images/Hello_UART.png)
+![Hello_UART.png](./images/Hello_UART.png)
 
 
 
