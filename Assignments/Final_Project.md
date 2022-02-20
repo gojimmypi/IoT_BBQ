@@ -261,9 +261,9 @@ Any list of challenges would not be complete without of course my Hard Faults!
 
 The final project will be delivered as:
 
-(a) Video of the system working as intended (link to mp4 or youtube)  ** TODO **
+(a) Video of the system working as intended. See [https://youtu.be/YIoqKTbCUQQ](https://youtu.be/YIoqKTbCUQQ)
 
-(b) Write up of the system (PDF or Google docs report). This document.
+(b) Write up of the system (PDF or Google docs report). This document and [Final Propject Report](./Final_Project_Report.md)
 
 (c) Link to the code: see [GitHub IoT BBQ STM32 Project](https://github.com/gojimmypi/IoT_BBQ/tree/main/IoT_BBQ_STM32).
 

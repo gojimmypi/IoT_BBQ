@@ -13,6 +13,7 @@
 - [Exercise 9](Exercise_9.md)
 - [Final Project](./Final_Project.md) and [Final Project Report](./Final_Project_Report.md)
 
+[Final Project Video](https://youtu.be/YIoqKTbCUQQ)
 
 ## Links
 

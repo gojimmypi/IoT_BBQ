@@ -1,7 +1,10 @@
 # Final Project Report
 
 This Final Project Report is a supplement to the [Final Project Minimum Project Requirement Detail](./Final_Project.md).
-An embedded microscontroller was used to create a propane tank weaigh measurement system. 
+An embedded microscontroller was used to create a propane tank weight measurement system. 
+
+See also the [YouTube Video](https://youtu.be/YIoqKTbCUQQ).
+
 <br/><br/>
 
 ## Application Description
@@ -114,15 +117,18 @@ The only toolchain required for this project is the [VisualGDB Extension](https:
 These settings are included the project solution file but included here for reference:
 
 Project Config Step 1:
+
 ![VisualGDB_STM32_project_config](../images/VisualGDB_STM32_project_config.png)
 
 Project Config Step 2:
+
 ![VisualGDB_STM32_project_config_step2](../images/VisualGDB_STM32_project_config_step2.png)
 
 Project Config Step 3:
+
 ![VisualGDB_STM32_project_config_step3](../images/VisualGDB_STM32_project_config_step3.png)
 
-
+See above for the [build instructions](https://github.com/gojimmypi/IoT_BBQ/blob/main/Assignments/Final_Project_Report.md#build-instructions).
 
 <br/><br/>
 
@@ -205,7 +211,7 @@ Have you gone beyond the base requirements? How so?
 | Criteria                                                       | 1 - Needs Improvement  | 2 - Meets Expectations                       | 3 - Exceeds Expectations |
 | -------------                                                  | -------------          | -------------                                | ------------- | 
 | Project meets minimum project goals                            |                        | 2+ [Basic State Machine](https://github.com/gojimmypi/IoT_BBQ/blob/cc7372a3d11caf1aeab8de3807fefd8d7b27aa1b/IoT_BBQ_STM32/LED/LED.cpp#L125), additional sensors [LPS22HB](https://github.com/gojimmypi/IoT_BBQ/tree/main/IoT_BBQ_STM32/LPS22HB), [HX711](https://github.com/gojimmypi/IoT_BBQ/tree/main/IoT_BBQ_STM32/HX711), well documented. No serial commands   |    |
-| Completeness of deliverables                                   |                        |                                              | Readable code, [each point addressed](https://github.com/gojimmypi/IoT_BBQ/blob/main/Assignments/Final_Project.md), video   |
+| Completeness of deliverables                                   |                        |                                              | Readable code, [each point addressed](https://github.com/gojimmypi/IoT_BBQ/blob/main/Assignments/Final_Project.md), [video](https://youtu.be/YIoqKTbCUQQ)   |
 | Clear intentions and working code                              |                        | 2+ System works as decribed                  | (docs not as professionally polished as I'd like)   |
 | Reusing code                                                   |                        |                                              | [License summary](https://github.com/gojimmypi/IoT_BBQ/blob/main/Assignments/Final_Project_Report.md#describe-the-code-in-general) and [Build Info](https://github.com/gojimmypi/IoT_BBQ/blob/main/Assignments/Final_Project_Report.md#build-instructions)    |
 | Originality and scope of goals                                 |                        |                                              | This is clearly an awesome Propane Tank Weight Project! ;) The scope of goals was appropriately challenging yet reasonable for the class.  |
