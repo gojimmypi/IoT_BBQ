@@ -119,4 +119,4 @@ Other Stuff
 - [Basic Concepts in Interrupts](https://web.sonoma.edu/users/f/farahman/sonoma/courses/es310/310_arm/lectures/Chapter_11_Interrupts_ARM.pdf) from [EE 310/310L: Microprocessors and System Design - Introducing ARM](https://web.sonoma.edu/users/f/farahman/sonoma/courses/es310/310_arm/)
 - [STM32Cube initialization code generator](https://www.st.com/en/development-tools/stm32cubemx.html?icmp=stm32cubemx_pron_pr-stm32cubef2_apr2014&sc=stm32cube-pr2#documentation),  specifically [STM32 configuration and initialization C code generation](https://www.st.com/resource/en/data_brief/stm32cubemx.pdf)
 - [hackaday stm32cubemx makes makefiles](https://hackaday.com/2017/07/15/stm32cubemx-makes-makefiles/)
-- [godbolt.org](godbolt.org)
+- [godbolt.org](https://godbolt.org/)
