@@ -120,13 +120,13 @@ mass-programming the devices would be needed. It would not be practical to manua
 
 ## Grading
 
-Self assessment of the project: for each criteria, choose a score (1, 2, 3) andexplain your reason for the score in 1-2 sentences.
+Self assessment of the project: for each criteria, choose a score (1, 2, 3) and explain your reason for the score in 1-2 sentences.
 Have you gone beyond the base requirements? How so?
 
 
 | Criteria                                                       | 1 - Needs Improvement  | 2 - Meets Expectations                       | 3 - Exceeds Expectations |
 | -------------                                                  | -------------          | -------------                                | ------------- | 
-| Project meets minimum project goals                            |                        | 2+ Basic State Machine, additional sensors, well documented, no serial commands   |    |
+| Project meets minimum project goals                            |                        | 2+ [Basic State Machine](https://github.com/gojimmypi/IoT_BBQ/blob/cc7372a3d11caf1aeab8de3807fefd8d7b27aa1b/IoT_BBQ_STM32/LED/LED.cpp#L125), additional sensors, well documented. No serial commands   |    |
 | Completeness of deliverables                                   |                        |                                              | Readable code, [each point addressed](https://github.com/gojimmypi/IoT_BBQ/blob/main/Assignments/Final_Project.md), video   |
 | Clear intentions and working code                              |                        | 2+ System works as decribed                  | (not as professionally polished as I'd like)   |
 | Reusing code                                                   |                        |                                              | [License summary](https://github.com/gojimmypi/IoT_BBQ/blob/main/Assignments/Final_Project_Report.md#describe-the-code-in-general) and [Build Info](https://github.com/gojimmypi/IoT_BBQ/blob/main/Assignments/Final_Project_Report.md#build-instructions)    |
@@ -134,3 +134,7 @@ Have you gone beyond the base requirements? How so?
 | Self-assessment   (Mentor category only)                       |                        |   n/a                                        |          |
 | Bonus: Power analysis, firmware update, or system profiling    |                        |                                              | [Power Analysis](https://github.com/gojimmypi/IoT_BBQ/blob/main/Assignments/Final_Project.md#power-analysis) also  [shared on Twitter](https://twitter.com/gojimmypi/status/1492178884883746820?s=20&t=MRzHRuswJXuYwHc56WS9yQ)       |
 ! Bonus: Version control was used.                               |                        |                                              | [hundreds of commits](https://github.com/gojimmypi/IoT_BBQ/commits/main)   |
+
+
+* I created the video footage of the project in action on my phone and took all the pictures, but the final consolidated video was assembled and subtitled by someone else. Thank you!!!
+ 
