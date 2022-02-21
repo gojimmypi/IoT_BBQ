@@ -31,7 +31,7 @@ The application is written in C/C++ and targets the STM32 ARM Platform.
 
 ### Describe the code in general
 
-The code is a multi-threaded FreeRTOS embedded application. There are 5 threads names LED1, LED2, UART1, DISPLAY, and PWM.
+The code is a multi-threaded FreeRTOS embedded application. There are 5 threads named LED1, LED2, UART1, DISPLAY, and PWM.
 
 #### LED1 Thread
 
