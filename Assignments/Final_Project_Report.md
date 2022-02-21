@@ -57,6 +57,15 @@ to the UART about every 1.35 seconds. An odd number was chosen to ensure pseudo-
 with other messages.
 
 ![Hello_UART.png](./images/Hello_UART.png)
+
+This particular screen snip (above) is interesting. Note the seemingly stray "105" value. Apparetly this where the thread tried to grab a mutex to use the UART, but it was not available
+on a timely basis, so it skipped thhe entire "1 weight" part of the message. Recall this occurs in [two steps](https://github.com/gojimmypi/IoT_BBQ/blob/29255d7aa78ec70aa6fd3b76e06db336202eda09/IoT_BBQ_STM32/_main_LED_Thread1.c#L57):
+
+```
+        UART_TxMessageIntValue(WeightMessage, sizeof(WeightMessage), CurrentTankWeight);
+        // (RTOS Thread swtich occured around here)
+        UART_TxMessage(CrLf, sizeof(CrLf));
+```
 <br/><br/>
 
 
@@ -118,7 +127,9 @@ with all sorts of interesting ideas!
 
 ## Diagram(s) of the architecture
 
-TODO
+Show below is the basic diagram of the architecture. The network feature has not yet been implemented:
+
+![iot_bbq_block_diagram.png](./images/iot_bbq_block_diagram.png)
 <br/><br/>
 
 
