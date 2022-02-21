@@ -71,7 +71,7 @@ on a timely basis, so it skipped the entire "1 weight" part of the message. Reca
 
 #### DISPLAY Thread
 
-The [Display Thread](https://github.com/gojimmypi/IoT_BBQ/blob/main/IoT_BBQ_STM32/DISPLAY/DISPLAY.cpp) is where the scale is monitored and the value dispalyed on the screen.
+The [Display Thread](https://github.com/gojimmypi/IoT_BBQ/blob/main/IoT_BBQ_STM32/DISPLAY/DISPLAY.cpp) is where the scale is monitored and the value displayed on the screen.
 There's also a small state machine monitoring for a button long press to then tare the scale and save the offset value to flash.
 <br/><br/>
 
