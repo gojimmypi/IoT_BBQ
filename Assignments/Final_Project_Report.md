@@ -257,7 +257,7 @@ mass-programming the devices would be needed. It would not be practical to manua
 <br/><br/>
 
 
-## How would you extend this project to do something more? Are there other features you’d like? How would you go about adding them?
+## How would you extend this project to do something more? Are there other features you'd like? How would you go about adding them?
 
 I chose this particular IoT Discovery board for the WiFi capabilities. As it turns out, the power consumption is simply way too high
 for battery operation.  Our grill is located a bit far from the house; I certainly don't want to run an extension cord. 
