@@ -39,14 +39,7 @@ For more information, see [Final Project](../Assignments/Final_Project.md).
 
 Testing the new [Include diagrams in your Markdown files with Mermaid](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/) feature:
 
-```mermaid
-  graph TD;
-      A-->B;
-      A-->C;
-      B-->D;
-      C-->D;
-```
-
+# Main
 
 ```mermaid
 graph TD
@@ -69,6 +62,8 @@ graph TD
     LED1_default --> ShowWeight
     PWM -->|One| D[experiments]
 ```
+
+# Overall System
 
 ```mermaid
 graph TD
@@ -114,6 +109,7 @@ graph TD
 
 ```  
 
+# Threads
 
 ```mermaid
 graph TD
@@ -125,6 +121,7 @@ graph TD
     B --> PWM[PWM]
 ```
 
+# LED1
 
 ```mermaid
 graph TD
