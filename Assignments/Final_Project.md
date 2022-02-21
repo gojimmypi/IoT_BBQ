@@ -34,7 +34,7 @@ The peripherals used in the project:
 
 * Load cell (weight sensor) such as the [SparkFun HX711](https://www.sparkfun.com/products/13879). See [HX711 code](../IoT_BBQ_STM32/HX711/).
 
-* Display: SSD1306 OLED Dual Color (Yellow / Blue) such as [this I2C Serial 12864 on Amazon](https://www.amazon.com/dp/B08KY21SR2/) that includes mbedded Driver IC. See [SSD1306 code](../IoT_BBQ_STM32/SSD1306/)
+* Display: SSD1306 OLED Dual Color (Yellow / Blue) such as [this I2C Serial 12864 on Amazon](https://www.amazon.com/dp/B08KY21SR2/) that includes embedded Driver IC. See [SSD1306 code](../IoT_BBQ_STM32/SSD1306/)
 
 * Temperature Sensor (The onboard device TODO specify)
 
@@ -49,7 +49,7 @@ There's a [check for button long press](../IoT_BBQ_STM32/BUTTON/button.cpp)
 in the [RTOS Display Thread](../IoT_BBQ_STM32/DISPLAY/DISPLAY.cpp), [here](https://github.com/gojimmypi/IoT_BBQ/blob/f53dc77e12903428f3710e6ed0a09f64ed9e8a7e/IoT_BBQ_STM32/DISPLAY/DISPLAY.cpp#L117). 
 Upon detecting a button long press, the display thread is paused and a new system `Tare` state
 is assigned. Upon [entering the Tare State](https://github.com/gojimmypi/IoT_BBQ/blob/c9316d246b56a14a15f69095f7e19a288091ab0c/IoT_BBQ_STM32/DISPLAY/DISPLAY.cpp#L149) 
-the the display is cleared, the message "Tare" is displayed, and the calculated [offset](https://github.com/gojimmypi/IoT_BBQ/blob/c9316d246b56a14a15f69095f7e19a288091ab0c/IoT_BBQ_STM32/HX711/HX711.cpp#L315) 
+the display is cleared, the message "Tare" is displayed, and the calculated [offset](https://github.com/gojimmypi/IoT_BBQ/blob/c9316d246b56a14a15f69095f7e19a288091ab0c/IoT_BBQ_STM32/HX711/HX711.cpp#L315) 
 is [saved to flash via SaveDeviceConfig()](https://github.com/gojimmypi/IoT_BBQ/blob/c9316d246b56a14a15f69095f7e19a288091ab0c/IoT_BBQ_STM32/Flash/flash_config.c#L227) 
 from the [DoScaleTare() task](https://github.com/gojimmypi/IoT_BBQ/blob/c9316d246b56a14a15f69095f7e19a288091ab0c/IoT_BBQ_STM32/Tasks/task_weight_monitor.cpp#L25).
 
@@ -80,7 +80,7 @@ in Flash memory, along with a copy in an updatable RAM cache value:
 
 * The on-board [LPS22HB barometric sensor](https://www.st.com/en/mems-and-sensors/lps22hb.html) was used in this project (see [code](../IoT_BBQ_STM32/LPS22HB/README.md)).
 Currently the pressure reading is sent to the UART in the [RTOS LED Thread #11](../IoT_BBQ_STM32/_main_LED_Thread1.c). To make things interesting from a
-multi-threadced RTOS perspective, the pressure is also read in the experimental [PWM Thread](../IoT_BBQ_STM32/_main_pwm_thread.c). 
+multi-threaded RTOS perspective, the pressure is also read in the experimental [PWM Thread](../IoT_BBQ_STM32/_main_pwm_thread.c). 
 
 * PWM Timers and watchdogs
 
@@ -214,7 +214,7 @@ This closeup from the STM32CubeIDE clearly indicates `I2C1` GPIO pins are on `PB
 
 The [SSD31306 configuration](../IoT_BBQ_STM32/SSD1306/ssd1306_conf.h) is currently using `I2C3` instead. (See also the [SSD1306 default template](../IoT_BBQ_STM32/SSD1306/ssd1306_conf_template.h))
 
-Lesson learned: always do a simple IO level and control check on GPIO lines before starting somwthing more complex such as I2C communication.
+Lesson learned: always do a simple IO level and control check on GPIO lines before starting something more complex such as I2C communication.
 
 ### Known library Problems
 
