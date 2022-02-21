@@ -23,7 +23,7 @@ The prototype uses the [Discovery kit for IoT node](https://www.st.com/resource/
 ### (b) Have a button that causes an interrupt
 
 This project leverages the code from [Exercise 4](./Exercise_4.md) that implements an operational mode/state switch via interrupt-driven button press code.
-There's a small [button library](../IoT_BBQ_STM32/HX711/BUTTON) as well as the [interrupt handler](../IoT_BBQ_STM32/_main_interrupt.c) that deals with 
+There's a small [button library](../IoT_BBQ_STM32/HX711/BUTTON/) as well as the [interrupt handler](../IoT_BBQ_STM32/_main_interrupt.c) that deals with 
 button presses and system state changes.
 
 ### (c) Use at least three peripherals such as ADC, DAC, PWM LED, Smart LED, LCD, sensor, BLE
@@ -263,7 +263,7 @@ The final project will be delivered as:
 
 (a) Video of the system working as intended. See [https://youtu.be/YIoqKTbCUQQ](https://youtu.be/YIoqKTbCUQQ)
 
-(b) Write up of the system (PDF or Google docs report). This document and [Final Propject Report](./Final_Project_Report.md)
+(b) Write up of the system (PDF or Google docs report). This document and [Final Project Report](./Final_Project_Report.md). There's also a [Final Propect Report PDF](./Final_Project_Report.pdf) and [Final Propject PDF](./Final_Project.pdf) .
 
 (c) Link to the code: see [GitHub IoT BBQ STM32 Project](https://github.com/gojimmypi/IoT_BBQ/tree/main/IoT_BBQ_STM32).
 

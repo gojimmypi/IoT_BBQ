@@ -1,4 +1,4 @@
-# Final Project Instrukctions.
+# Final Project Instructions.
 
 From [supplied document](https://drive.google.com/file/d/1yAi_6VQNstb2ZfA8rd6qKzKoh7N5YmEZ/view):
 
