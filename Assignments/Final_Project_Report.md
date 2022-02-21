@@ -58,8 +58,8 @@ with other messages.
 
 ![Hello_UART.png](./images/Hello_UART.png)
 
-This particular screen snip (above) is interesting. Note the seemingly stray "105" value. Apparetly this where the thread tried to grab a mutex to use the UART, but it was not available
-on a timely basis, so it skipped thhe entire "1 weight" part of the message. Recall this occurs in [two steps](https://github.com/gojimmypi/IoT_BBQ/blob/29255d7aa78ec70aa6fd3b76e06db336202eda09/IoT_BBQ_STM32/_main_LED_Thread1.c#L57):
+This particular screen snip (above) is interesting. Note the seemingly stray "105" value. Apparently this is where the thread tried to grab a mutex to use the UART, but one was not available
+on a timely basis, so it skipped the entire "1 weight" part of the message. Recall this occurs in [two steps](https://github.com/gojimmypi/IoT_BBQ/blob/29255d7aa78ec70aa6fd3b76e06db336202eda09/IoT_BBQ_STM32/_main_LED_Thread1.c#L57):
 
 ```
         UART_TxMessageIntValue(WeightMessage, sizeof(WeightMessage), CurrentTankWeight);
