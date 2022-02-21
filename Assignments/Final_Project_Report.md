@@ -259,7 +259,7 @@ mass-programming the devices would be needed. It would not be practical to manua
 
 ## How would you extend this project to do something more? Are there other features you’d like? How would you go about adding them?
 
-I chose the this particular IoT Discovery board for the WiFi capabilities. As it turns out, the power consumption is simply way too high
+I chose this particular IoT Discovery board for the WiFi capabilities. As it turns out, the power consumption is simply way too high
 for battery operation.  Our grill is located a bit far from the house; I certainly don't want to run an extension cord. 
 I have some [LoRa experience](https://gojimmypi.github.io/tag/lora/) and plan to see if I can get that working with an MQTT server.
 
