@@ -290,3 +290,7 @@ Have you gone beyond the base requirements? How so?
 <br/><br/>
  
 See the Class Assignment [additional links](https://github.com/gojimmypi/IoT_BBQ/tree/main/Assignments#links) for other resources.
+
+# Final Project Submission
+
+See [Final Project Submission](./Final_Project_Submission.md)

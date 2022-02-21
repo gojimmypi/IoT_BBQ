@@ -15,7 +15,11 @@
 
 [Final Project Video](https://youtu.be/YIoqKTbCUQQ)
 
-## Links
+# Final Project Submission
+
+See [Final Project Submission](./Final_Project_Submission.md)
+
+# Links
 
 Hardware
 - [STM32L4 Series](https://www.st.com/en/microcontrollers-microprocessors/stm32l4-series.html)

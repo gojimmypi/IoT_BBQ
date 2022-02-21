@@ -372,4 +372,6 @@ The Power LED is always on, and needs to be unsoldered to not use it:
 - [Honeybee Hive Monitoring](https://hackaday.io/project/1741-honeybee-hive-monitoring) - also uses HX711
 - [logicalelegance/midifun](https://github.com/logicalelegance/midifun/tree/master/Core) - sample project naming, directories, organziation.
 
+# Final Project Submission
 
+See [Final Project Submission](./Final_Project_Submission.md)

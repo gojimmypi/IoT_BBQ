@@ -10,10 +10,12 @@ Propane Tank Weight Msasurement System
 
 ## (b) Write up of the system (PDF or Google docs report). 
 
-[Final Project Report](./Final_Project_Report.md) also as ([PDF](./Final_Project_Report.pdf))
+[Final Project Report](./Final_Project_Report.md) also as ([PDF](./Final_Project_Report.pdf)) (addresses the [Report Section of Final Project Instructions](https://github.com/gojimmypi/IoT_BBQ/blob/main/Assignments/Final_Project_Instructions.md#report))
 
-[Final Project](./Final_Project.md) also as ([PDF](./Final_Project.pdf))
+[Final Project](./Final_Project.md) also as ([PDF](./Final_Project.pdf)) (addresses the [Final Project Instructions](./Final_Project_Instructions.md))
 
 
-## (c) Link to the code: see [GitHub IoT BBQ STM32 Project](https://github.com/gojimmypi/IoT_BBQ/tree/main/IoT_BBQ_STM32).
+## (c) Link to the code: 
+
+Source code can be found at [GitHub IoT BBQ STM32 Project](https://github.com/gojimmypi/IoT_BBQ/tree/main/IoT_BBQ_STM32).
 
