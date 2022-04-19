@@ -1,6 +1,6 @@
 # Making Embedded Systems Project Submission.
 
-Propane Tank Weight Msasurement System
+Propane Tank Weight Measurement System
 
 ## (a) Video of the system working as intended.
 
